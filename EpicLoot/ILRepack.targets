@@ -7,7 +7,7 @@
             <InputAssemblies Include="$(OutputPath)\Newtonsoft.Json.dll" />
             <InputAssemblies Include="$(OutputPath)\AugaAPI.dll" />
             <LibraryPath Include="$(OutputPath)" />
-            <LibraryPath Include="G:\Steam\steamapps\common\Valheim\valheim_Data\Managed" />
+            <LibraryPath Include="E:\Games\Steam\steamapps\common\Valheim\valheim_Data\Managed" />
         </ItemGroup>
         <ILRepack Parallel="true" DebugInfo="true" Internalize="true" InputAssemblies="@(InputAssemblies)" OutputFile="$(TargetPath)" TargetKind="SameAsPrimaryAssembly" LibraryPath="@(LibraryPath)" />
     </Target>

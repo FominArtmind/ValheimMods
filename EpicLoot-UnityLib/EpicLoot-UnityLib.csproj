@@ -38,6 +38,7 @@
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="netstandard" />
     <Reference Include="0Harmony">
       <HintPath>M:\Code\VapokModBase\References\BepInEx\5.4.1901\BepInEx\core\0Harmony.dll</HintPath>
     </Reference>
