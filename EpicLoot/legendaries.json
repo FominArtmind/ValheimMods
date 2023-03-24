@@ -2,6 +2,1557 @@
   // Legendary Items
   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   "LegendaryItems": [
+// Belts
+    {
+        "ID": "JourneyBelt",
+        "Name": "$mod_epicloot_l_journey_belt",
+        "Description": "$mod_epicloot_l_journey_belt_desc",
+        "Requirements": {
+            "AllowedItemNames": [ "LeatherBelt" ]
+        },
+        "SelectionWeight": 3500,
+        "GuaranteedEffectCount": 5,
+        "GuaranteedMagicEffects": [
+            { "Type": "IncreaseStamina", "Values": { "MinValue": 25, "MaxValue": 35, "Increment": 5 } },
+            { "Type": "AddMovementSkills", "Values": { "MinValue": 10, "MaxValue": 15, "Increment": 1 } },
+            { "Type": "ModifyMovementSpeed", "Values": { "MinValue": 5, "MaxValue": 7, "Increment": 1 } },
+            { "Type": "ModifySprintStaminaUse", "Values": { "MinValue": 25, "MaxValue": 35, "Increment": 1 } },
+            { "Type": "Luck", "Values": { "MinValue": 15, "MaxValue": 17, "Increment": 1 } }
+        ]
+    },
+    {
+        "ID": "BlessedTourniquet",
+        "Name": "$mod_epicloot_l_blessed_tourniquet",
+        "Description": "$mod_epicloot_l_blessed_tourniquet_desc",
+        "Requirements": {
+            "AllowedItemNames": [ "LeatherBelt" ]
+        },
+        "SelectionWeight": 3000,
+        "GuaranteedEffectCount": 4,
+        "GuaranteedMagicEffects": [
+            { "Type": "IncreaseHealth", "Values": { "MinValue": 20, "MaxValue": 25, "Increment": 5 } },
+            { "Type": "AddHealthRegen", "Values": { "MinValue": 3.5, "MaxValue": 4.5, "Increment": 0.5 } },
+            { "Type": "ModifyHealthRegen", "Values": { "MinValue": 40, "MaxValue": 60, "Increment": 1 } },
+            { "Type": "ModifyHealthRegenLowHealth", "Values": { "MinValue": 85, "MaxValue": 115, "Increment": 5 } },
+            { "Type": "AddSpiritDamage", "Values": { "MinValue": 33, "MaxValue": 44, "Increment": 1 } }
+        ]
+    },
+    {
+        "ID": "BerserkerStrip",
+        "Name": "$mod_epicloot_l_berserker_strip",
+        "Description": "$mod_epicloot_l_berserker_strip_desc",
+        "Requirements": {
+            "AllowedItemNames": [ "LeatherBelt" ]
+        },
+        "SelectionWeight": 2000,
+        "GuaranteedEffectCount": 5,
+        "GuaranteedMagicEffects": [
+            { "Type": "ModifyDamageLowHealth", "Values": { "MinValue": 50, "MaxValue": 60, "Increment": 1 } },
+            { "Type": "ModifyAttackSpeedLowHealth", "Values": { "MinValue": 50, "MaxValue": 60, "Increment": 1 } },
+            { "Type": "LifeStealLowHealth", "Values": { "MinValue": 23, "MaxValue": 23, "Increment": 1 } },
+            { "Type": "ModifyMovementSpeedLowHealth", "Values": { "MinValue": 23, "MaxValue": 29, "Increment": 1 } },
+            { "Type": "AddUnarmedSkill", "Values": { "MinValue": 33, "MaxValue": 33, "Increment": 1 } }
+        ]
+    },
+    {
+        "ID": "BeltOfJotunStrength",
+        "Name": "$mod_epicloot_l_belt_of_jotun_strength",
+        "Description": "$mod_epicloot_l_belt_of_jotun_strength_desc",
+        "Requirements": {
+            "AllowedItemNames": [ "LeatherBelt" ]
+        },
+        "SelectionWeight": 1500,
+        "GuaranteedEffectCount": 5,
+        "GuaranteedMagicEffects": [
+            { "Type": "ModifyPhysicalDamage", "Values": { "MinValue": 10, "MaxValue": 20, "Increment": 1 } },
+            { "Type": "IncreaseHealth", "Values": { "MinValue": 35, "MaxValue": 45, "Increment": 5 } },
+            { "Type": "ModifyJumpStaminaUse", "Values": { "MinValue": 25, "MaxValue": 35, "Increment": 1 } },
+            { "Type": "AddCarryWeight", "Values": { "MinValue": 90, "MaxValue": 120, "Increment": 5 } },
+            { "Type": "AddPoisonResistancePercentage", "Values": { "MinValue": 35, "MaxValue": 45, "Increment": 5 } }
+        ]
+    },
+// Gold rings
+    {
+        "ID": "UlvPower",
+        "Name": "$mod_epicloot_l_ulv_power",
+        "Description": "$mod_epicloot_l_ulv_power_desc",
+        "Requirements": {
+            "AllowedItemNames": [ "GoldRubyRing" ]
+        },
+        "SelectionWeight": 2500,
+        "GuaranteedEffectCount": 5,
+        "GuaranteedMagicEffects": [
+            { "Type": "IncreaseHealth", "Values": { "MinValue": 30, "MaxValue": 40, "Increment": 5 } },
+            { "Type": "IncreaseStamina", "Values": { "MinValue": 30, "MaxValue": 40, "Increment": 5 } },
+            { "Type": "AddHealthRegen", "Values": { "MinValue": 4, "MaxValue": 6, "Increment": 1 } },
+            { "Type": "AddElementalResistancePercentage", "Values": { "MinValue": 15, "MaxValue": 15, "Increment": 1 } },
+            { "Type": "Comfortable", "Values": { "MinValue": 2, "MaxValue": 2, "Increment": 1 } }
+        ]
+    },
+    {
+        "ID": "RingOfCultist",
+        "Name": "$mod_epicloot_l_ring_of_cultist",
+        "Description": "$mod_epicloot_l_ring_of_cultist_desc",
+        "Requirements": {
+            "AllowedItemNames": [ "GoldRubyRing" ]
+        },
+        "SelectionWeight": 1500,
+        "GuaranteedEffectCount": 4,
+        "GuaranteedMagicEffects": [
+            { "Type": "AddFireDamage", "Values": { "MinValue": 45, "MaxValue": 60, "Increment": 1 } },
+            { "Type": "ExplosiveArrows", "Values": { "MinValue": 33, "MaxValue": 33, "Increment": 1 } },
+            { "Type": "Executioner", "Values": { "MinValue": 300, "MaxValue": 300, "Increment": 1 } },
+            { "Type": "AddFireResistancePercentage", "Values": { "MinValue": 40, "MaxValue": 45, "Increment": 5 } }
+        ]
+    },
+    {
+        "ID": "RingOfRockClimber",
+        "Name": "$mod_epicloot_l_ring_of_rock_climber",
+        "Description": "$mod_epicloot_l_ring_of_rock_climber_desc",
+        "Requirements": {
+            "AllowedItemNames": [ "GoldRubyRing" ]
+        },
+        "SelectionWeight": 3500,
+        "GuaranteedEffectCount": 5,
+        "GuaranteedMagicEffects": [
+            { "Type": "IncreaseStamina", "Values": { "MinValue": 45, "MaxValue": 55, "Increment": 5 } },
+            { "Type": "ModifyAttackStaminaUse", "Values": { "MinValue": 10, "MaxValue": 15, "Increment": 1 } },
+            { "Type": "ModifyJumpStaminaUse", "Values": { "MinValue": 45, "MaxValue": 55, "Increment": 1 } },
+            { "Type": "AddCarryWeight", "Values": { "MinValue": 75, "MaxValue": 100, "Increment": 5 } },
+            { "Type": "AddFrostResistancePercentage", "Values": { "MinValue": 30, "MaxValue": 40, "Increment": 5 } }
+        ]
+    },
+    {
+        "ID": "RingOfGreed",
+        "Name": "$mod_epicloot_l_ring_of_greed",
+        "Description": "$mod_epicloot_l_ring_of_greed_desc",
+        "Requirements": {
+            "AllowedItemNames": [ "GoldRubyRing" ]
+        },
+        "SelectionWeight": 2500,
+        "GuaranteedEffectCount": 5,
+        "GuaranteedMagicEffects": [
+            { "Type": "ModifyAttackSpeed", "Values": { "MinValue": 15, "MaxValue": 20, "Increment": 5 } },
+            { "Type": "ModifyBackstab", "Values": { "MinValue": 50, "MaxValue": 60, "Increment": 1 } },
+            { "Type": "AddMovementSkills", "Values": { "MinValue": 15, "MaxValue": 20, "Increment": 1 } },
+            { "Type": "AddCarryWeight", "Values": { "MinValue": 90, "MaxValue": 180, "Increment": 5 } },
+            { "Type": "Riches", "Values": { "MinValue": 15, "MaxValue": 20, "Increment": 1 } }
+        ]
+    },
+// Silver rings
+    {
+        "ID": "DvergrMageAmulet",
+        "Name": "$mod_epicloot_l_dverge_mage_amulet",
+        "Description": "$mod_epicloot_l_dverge_mage_amulet_desc",
+        "Requirements": {
+            "AllowedItemNames": [ "SilverRing" ]
+        },
+        "SelectionWeight": 5000,
+        "GuaranteedEffectCount": 5,
+        "GuaranteedMagicEffects": [
+            { "Type": "IncreaseEitr", "Values": { "MinValue": 85, "MaxValue": 125, "Increment": 5 } },
+            { "Type": "ModifyEitrRegen", "Values": { "MinValue": 35, "MaxValue": 70, "Increment": 1 } },
+            { "Type": "StaggerOnDamageTaken", "Values": { "MinValue": 35, "MaxValue": 35, "Increment": 1 } },
+            { "Type": "AddElementalResistancePercentage", "Values": { "MinValue": 35, "MaxValue": 35, "Increment": 1 } },
+            { "Type": "AddElementalMagicSkill", "Values": { "MinValue": 20, "MaxValue": 30, "Increment": 1 } }
+        ]
+    },
+    {
+        "ID": "OdinWord",
+        "Name": "$mod_epicloot_l_odin_word",
+        "Description": "$mod_epicloot_l_odin_word_desc",
+        "Requirements": {
+            "AllowedItemNames": [ "SilverRing" ]
+        },
+        "SelectionWeight": 5000,
+        "GuaranteedEffectCount": 6,
+        "GuaranteedMagicEffects": [
+            { "Type": "ModifyPhysicalDamage", "Values": { "MinValue": 16, "MaxValue": 18, "Increment": 1 } },
+            { "Type": "ModifyAttackSpeed", "Values": { "MinValue": 16, "MaxValue": 18, "Increment": 1 } },
+            { "Type": "IncreaseStamina", "Values": { "MinValue": 65, "MaxValue": 80, "Increment": 5 } },
+            { "Type": "ModifyArmorLowHealth", "Values": { "MinValue": 45, "MaxValue": 45, "Increment": 1 } },
+            { "Type": "Undying" },
+            { "Type": "Comfortable", "Values": { "MinValue": 5, "MaxValue": 5, "Increment": 1 } }
+        ]
+    },
+// Hammers
+    {
+        "ID": "FrodeHammer",
+        "Name": "$mod_epicloot_l_frode_hammer",
+        "Description": "$mod_epicloot_l_frode_hammer_desc",
+        "Requirements": {
+            "AllowedItemNames": [ "$item_hammer" ]
+        },
+        "SelectionWeight": 8900,
+        "GuaranteedEffectCount": 3,
+        "GuaranteedMagicEffects": [
+            { "Type": "ModifyStaminaRegen", "Values": { "MinValue": 40, "MaxValue": 60, "Increment": 1 } },
+            { "Type": "IncreaseStamina", "Values": { "MinValue": 60, "MaxValue": 80, "Increment": 5 } },
+            { "Type": "Indestructible" }
+        ]
+    },
+    {
+        "ID": "ReginHammer",
+        "Name": "$mod_epicloot_l_regin_hammer",
+        "Description": "$mod_epicloot_l_regin_hammer_desc",
+        "Requirements": {
+            "AllowedItemNames": [ "$item_hammer" ]
+        },
+        "SelectionWeight": 1100,
+        "GuaranteedEffectCount": 7,
+        "GuaranteedMagicEffects": [
+            { "Type": "ModifyStaminaRegen", "Values": { "MinValue": 70, "MaxValue": 70, "Increment": 1 } },
+            { "Type": "IncreaseStamina", "Values": { "MinValue": 100, "MaxValue": 100, "Increment": 5 } },
+            { "Type": "AddCarryWeight", "Values": { "MinValue": 150, "MaxValue": 300, "Increment": 10 } },
+            { "Type": "FreeBuild" },
+            { "Type": "Indestructible" },
+            { "Type": "FeatherFall"},
+            { "Type": "Glowing" }
+        ]
+    },
+// Hoes
+    {
+        "ID": "FrodeHoe",
+        "Name": "$mod_epicloot_l_frode_hoe",
+        "Description": "$mod_epicloot_l_frode_hoe_desc",
+        "Requirements": {
+            "AllowedItemNames": [ "$item_hoe" ]
+        },
+        "SelectionWeight": 10000,
+        "GuaranteedEffectCount": 3,
+        "GuaranteedMagicEffects": [
+            { "Type": "ModifyStaminaRegen", "Values": { "MinValue": 40, "MaxValue": 60, "Increment": 1 } },
+            { "Type": "IncreaseStamina", "Values": { "MinValue": 60, "MaxValue": 80, "Increment": 5 } },
+            { "Type": "Indestructible" }
+        ]
+    },
+// Cultivators
+    {
+        "ID": "FrodeCultivator",
+        "Name": "$mod_epicloot_l_frode_cultivator",
+        "Description": "$mod_epicloot_l_frode_cultivator_desc",
+        "Requirements": {
+            "AllowedItemNames": [ "$item_cultivator" ]
+        },
+        "SelectionWeight": 8500,
+        "GuaranteedEffectCount": 3,
+        "GuaranteedMagicEffects": [
+            { "Type": "ModifyStaminaRegen", "Values": { "MinValue": 40, "MaxValue": 60, "Increment": 1 } },
+            { "Type": "IncreaseStamina", "Values": { "MinValue": 60, "MaxValue": 80, "Increment": 5 } },
+            { "Type": "Indestructible" }
+        ]
+    },
+    {
+        "ID": "GefionCultivator",
+        "Name": "$mod_epicloot_l_gefion_cultivator",
+        "Description": "$mod_epicloot_l_gefion_cultivator_desc",
+        "Requirements": {
+            "AllowedItemNames": [ "$item_cultivator" ]
+        },
+        "SelectionWeight": 1500,
+        "GuaranteedEffectCount": 5,
+        "GuaranteedMagicEffects": [
+            { "Type": "ModifyStaminaRegen", "Values": { "MinValue": 70, "MaxValue": 70, "Increment": 1 } },
+            { "Type": "IncreaseStamina", "Values": { "MinValue": 100, "MaxValue": 100, "Increment": 5 } },
+            { "Type": "ModifyHealthRegen", "Values": { "MinValue": 110, "MaxValue": 170, "Increment": 1 } },
+            { "Type": "Indestructible" },
+            { "Type": "Glowing" }
+        ]
+    },
+// Pickaxes
+    {
+        "ID": "SilverHorn",
+        "Name": "$mod_epicloot_l_silver_horn",
+        "Description": "$mod_epicloot_l_silver_horn_desc",
+        "Requirements": {
+            "AllowedItemNames": [ "$item_pickaxe_antler" ]
+        },
+        "SelectionWeight": 10000,
+        "GuaranteedEffectCount": 3,
+        "GuaranteedMagicEffects": [
+            { "Type": "ModifyPhysicalDamage", "Values": { "MinValue": 117, "MaxValue": 147, "Increment": 1 } },
+            { "Type": "Indestructible" },
+            { "Type": "Glowing" }
+        ]
+    },
+    {
+        "ID": "RavenClaw",
+        "Name": "$mod_epicloot_l_raven_claw",
+        "Description": "$mod_epicloot_l_raven_claw_desc",
+        "Requirements": {
+            "AllowedItemNames": [ "$item_pickaxe_bronze" ]
+        },
+        "SelectionWeight": 10000,
+        "GuaranteedEffectCount": 5,
+        "GuaranteedMagicEffects": [
+            { "Type": "ModifyPhysicalDamage", "Values": { "MinValue": 27, "MaxValue": 27, "Increment": 1 } },
+            { "Type": "ModifyAttackSpeed", "Values": { "MinValue": 80, "MaxValue": 120, "Increment": 1 } },
+            { "Type": "ModifyAttackStaminaUse", "Values": { "MinValue": 35, "MaxValue": 55, "Increment": 1 } },
+            { "Type": "Indestructible" },
+            { "Type": "RemoveSpeedPenalty" }
+        ]
+    },
+    {
+        "ID": "IceAx",
+        "Name": "$mod_epicloot_l_ace_ax",
+        "Description": "$mod_epicloot_l_ace_ax_desc",
+        "Requirements": {
+            "AllowedItemNames": [ "$item_pickaxe_iron" ]
+        },
+        "SelectionWeight": 8000,
+        "GuaranteedEffectCount": 5,
+        "GuaranteedMagicEffects": [
+            { "Type": "ModifyPhysicalDamage", "Values": { "MinValue": 45, "MaxValue": 65, "Increment": 1 } },
+            { "Type": "ModifyAttackSpeed", "Values": { "MinValue": 45, "MaxValue": 65, "Increment": 1 } },
+            { "Type": "ModifyAttackStaminaUse", "Values": { "MinValue": 45, "MaxValue": 65, "Increment": 1 } },
+            { "Type": "Indestructible" },
+            { "Type": "RemoveSpeedPenalty" }
+        ]
+    },
+    {
+        "ID": "StoneCrusher",
+        "Name": "$mod_epicloot_l_stone_crusher",
+        "Description": "$mod_epicloot_l_stone_crusher_desc",
+        "Requirements": {
+            "AllowedItemNames": [ "$item_pickaxe_iron" ]
+        },
+        "SelectionWeight": 2000,
+        "GuaranteedEffectCount": 2,
+        "GuaranteedMagicEffects": [
+            { "Type": "AddBluntDamage", "Values": { "MinValue": 220, "MaxValue": 260, "Increment": 1 } },
+            { "Type": "ModifyStaggerDamage", "Values": { "MinValue": 75, "MaxValue": 75, "Increment": 1 } }
+        ]
+    },
+    {
+        "ID": "RockDemolisher",
+        "Name": "$mod_epicloot_l_rock_demolisher",
+        "Description": "$mod_epicloot_l_rock_demolisher_desc",
+        "Requirements": {
+            "AllowedItemNames": [ "$item_pickaxe_blackmetal" ]
+        },
+        "SelectionWeight": 10000,
+        "GuaranteedEffectCount": 3,
+        "GuaranteedMagicEffects": [
+            { "Type": "ModifyPhysicalDamage", "Values": { "MinValue": 100, "MaxValue": 140, "Increment": 1 } },
+            { "Type": "ModifyAttackSpeed", "Values": { "MinValue": 35, "MaxValue": 45, "Increment": 1 } },
+            { "Type": "Indestructible" }
+        ]
+    },
+// Torches
+    {
+        "ID": "JourneyTorch",
+        "Name": "$mod_epicloot_l_journey_torch",
+        "Description": "$mod_epicloot_l_journey_torch_desc",
+        "Requirements": {
+            "AllowedItemNames": [ "item_torch" ]
+        },
+        "SelectionWeight": 1700,
+        "GuaranteedEffectCount": 6,
+        "GuaranteedMagicEffects": [
+            { "Type": "ModifyStaminaRegen", "Values": { "MinValue": 17, "MaxValue": 27, "Increment": 1 } },
+            { "Type": "AddMovementSkills", "Values": { "MinValue": 11, "MaxValue": 17, "Increment": 1 } },
+            { "Type": "ModifyMovementSpeed", "Values": { "MinValue": 5, "MaxValue": 7, "Increment": 1 } },
+            { "Type": "QuickLearner", "Values": { "MinValue": 17, "MaxValue": 27, "Increment": 1 } },
+            { "Type": "Luck", "Values": { "MinValue": 11, "MaxValue": 17, "Increment": 1 } },
+            { "Type": "Indestructible" }
+        ]
+    },
+    {
+        "ID": "FireClub",
+        "Name": "$mod_epicloot_l_fire_club",
+        "Description": "$mod_epicloot_l_fire_club_desc",
+        "Requirements": {
+            "AllowedItemNames": [ "$item_torch" ]
+        },
+        "SelectionWeight": 2500,
+        "GuaranteedEffectCount": 5,
+        "GuaranteedMagicEffects": [
+            { "Type": "ModifyElementalDamage", "Values": { "MinValue": 60, "MaxValue": 90, "Increment": 1 } },
+            { "Type": "AddFireDamage", "Values": { "MinValue": 30, "MaxValue": 60, "Increment": 1 } },
+            { "Type": "ModifyMovementSpeed", "Values": { "MinValue": 6, "MaxValue": 13, "Increment": 1 } },
+            { "Type": "RemoveSpeedPenalty" },
+            { "Type": "Indestructible" }
+        ]
+    },
+    {
+        "ID": "HearthSpark",
+        "Name": "$mod_epicloot_l_hearth_spark",
+        "Description": "$mod_epicloot_l_hearth_spark_desc",
+        "Requirements": {
+            "AllowedItemNames": [ "$item_torch" ]
+        },
+        "SelectionWeight": 1500,
+        "GuaranteedEffectCount": 4,
+        "GuaranteedMagicEffects": [
+            { "Type": "ModifyHealthRegen", "Values": { "MinValue": 100, "MaxValue": 100, "Increment": 1 } },
+            { "Type": "AddHealthRegen", "Values": { "MinValue": 4, "MaxValue": 7, "Increment": 1 } },
+            { "Type": "ModifyStaminaRegen", "Values": { "MinValue": 100, "MaxValue": 100, "Increment": 1 } },
+            { "Type": "Indestructible" }
+        ]
+    },
+    {
+        "ID": "TorchOfInsight",
+        "Name": "$mod_epicloot_l_torch_of_insight",
+        "Description": "$mod_epicloot_l_torch_of_insight_desc",
+        "Requirements": {
+            "AllowedItemNames": [ "$item_torch" ]
+        },
+        "SelectionWeight": 1300,
+        "GuaranteedEffectCount": 3,
+        "GuaranteedMagicEffects": [
+            { "Type": "IncreaseStamina", "Values": { "MinValue": 30, "MaxValue": 70, "Increment": 5 } },
+            { "Type": "ModifyStaminaRegen", "Values": { "MinValue": 100, "MaxValue": 300, "Increment": 10 } },
+            { "Type": "QuickLearner", "Values": { "MinValue": 1000, "MaxValue": 2000, "Increment": 100 } }
+        ]
+    },
+    {
+        "ID": "HolyFire",
+        "Name": "$mod_epicloot_l_holy_fire",
+        "Description": "$mod_epicloot_l_holy_fire_desc",
+        "Requirements": {
+            "AllowedItemNames": [ "$item_torch" ]
+        },
+        "SelectionWeight": 2100,
+        "GuaranteedEffectCount": 2,
+        "GuaranteedMagicEffects": [
+            { "Type": "AddFireDamage", "Values": { "MinValue": 130, "MaxValue": 180, "Increment": 1 } },
+            { "Type": "AddSpiritDamage", "Values": { "MinValue": 260, "MaxValue": 390, "Increment": 1 } }
+        ]
+    },
+    {
+        "ID": "FreezingFlame",
+        "Name": "$mod_epicloot_l_freezing_flame",
+        "Description": "$mod_epicloot_l_freezing_flame_desc",
+        "Requirements": {
+            "AllowedItemNames": [ "$item_torch" ]
+        },
+        "SelectionWeight": 900,
+        "GuaranteedEffectCount": 5,
+        "GuaranteedMagicEffects": [
+            { "Type": "ModifyElementalDamage", "Values": { "MinValue": 70, "MaxValue": 100, "Increment": 1 } },
+            { "Type": "AddFrostDamage", "Values": { "MinValue": 27, "MaxValue": 27, "Increment": 1 } },
+            { "Type": "Slow", "Values": { "MinValue": 50, "MaxValue": 50, "Increment": 1 } },
+            { "Type": "ModifyArmorLowHealth", "Values": { "MinValue": 50, "MaxValue": 50, "Increment": 1 } },
+            { "Type": "Indestructible" }
+        ]
+    },
+// Axes
+    {
+        "ID": "Ax",
+        "Name": "$mod_epicloot_l_ax",
+        "Description": "$mod_epicloot_l_ax_desc",
+        "Requirements": {
+            "AllowedItemNames": [ "$item_axe_stone" ]
+        },
+        "SelectionWeight": 10000,
+        "GuaranteedEffectCount": 4,
+        "GuaranteedMagicEffects": [
+            { "Type": "ModifyPhysicalDamage", "Values": { "MinValue": 30, "MaxValue": 40, "Increment": 1 } },
+            { "Type": "AddBluntDamage", "Values": { "MinValue": 65, "MaxValue": 85, "Increment": 1 } },
+            { "Type": "ModifyBackstab", "Values": { "MinValue": 85, "MaxValue": 100, "Increment": 1 } },
+            { "Type": "Slow", "Values": { "MinValue": 30, "MaxValue": 40, "Increment": 1 } }
+        ]
+    },
+    {
+        "ID": "Deforestator",
+        "Name": "$mod_epicloot_l_deforestator",
+        "Description": "$mod_epicloot_l_deforestator_desc",
+        "Requirements": {
+            "AllowedItemNames": [ "$item_axe_flint" ]
+        },
+        "SelectionWeight": 10000,
+        "GuaranteedEffectCount": 5,
+        "GuaranteedMagicEffects": [
+            { "Type": "ModifyPhysicalDamage", "Values": { "MinValue": 25, "MaxValue": 25, "Increment": 1 } },
+            { "Type": "ModifyAttackSpeed", "Values": { "MinValue": 70, "MaxValue": 90, "Increment": 1 } },
+            { "Type": "ReflectDamage", "Values": { "MinValue": 17, "MaxValue": 17, "Increment": 1 } },
+            { "Type": "AvoidDamageTaken", "Values": { "MinValue": 17, "MaxValue": 17, "Increment": 1 } },
+            { "Type": "Indestructible" }
+        ]
+    },
+    {
+        "ID": "SharpAxe",
+        "Name": "$mod_epicloot_l_sharp_axe",
+        "Description": "$mod_epicloot_l_sharp_axe_desc",
+        "Requirements": {
+            "AllowedItemNames": [ "$item_axe_bronze" ]
+        },
+        "SelectionWeight": 10000,
+        "GuaranteedEffectCount": 4,
+        "GuaranteedMagicEffects": [
+            { "Type": "ModifyPhysicalDamage", "Values": { "MinValue": 35, "MaxValue": 45, "Increment": 1 } },
+            { "Type": "ModifyAttackSpeed", "Values": { "MinValue": 27, "MaxValue": 27, "Increment": 1 } },
+            { "Type": "ModifyAttackStaminaUse", "Values": { "MinValue": 21, "MaxValue": 21, "Increment": 1 } },
+            { "Type": "AddAxesSkill", "Values": { "MinValue": 15, "MaxValue": 25, "Increment": 1 } }
+        ]
+    },
+    {
+        "ID": "Uprooter",
+        "Name": "$mod_epicloot_l_uprooter",
+        "Description": "$mod_epicloot_l_uprooter_desc",
+        "Requirements": {
+            "AllowedItemNames": [ "$item_axe_iron" ]
+        },
+        "SelectionWeight": 10000,
+        "GuaranteedEffectCount": 3,
+        "GuaranteedMagicEffects": [
+            { "Type": "AddFireDamage", "Values": { "MinValue": 65, "MaxValue": 85, "Increment": 1 } },
+            { "Type": "ModifyAttackSpeed", "Values": { "MinValue": 40, "MaxValue": 40, "Increment": 1 } },
+            { "Type": "ModifyAttackSpeedLowHealth", "Values": { "MinValue": 60, "MaxValue": 60, "Increment": 1 } }
+        ]
+    },
+    {
+        "ID": "BlackWing",
+        "Name": "$mod_epicloot_l_black_wing",
+        "Description": "$mod_epicloot_l_black_wing_desc",
+        "Requirements": {
+            "AllowedItemNames": [ "$item_axe_blackmetal" ]
+        },
+        "SelectionWeight": 10000,
+        "GuaranteedEffectCount": 5,
+        "GuaranteedMagicEffects": [
+            { "Type": "ModifyPhysicalDamage", "Values": { "MinValue": 107, "MaxValue": 157, "Increment": 1 } },
+            { "Type": "ModifyAttackStaminaUse", "Values": { "MinValue": 50, "MaxValue": 50, "Increment": 1 } },
+            { "Type": "Executioner", "Values": { "MinValue": 300, "MaxValue": 300, "Increment": 1 } },
+            { "Type": "Throwable" },
+            { "Type": "RecallWeapon" }
+        ]
+    },
+    {
+        "ID": "JotunSorrow",
+        "Name": "$mod_epicloot_l_jotun_sorrow",
+        "Description": "$mod_epicloot_l_jotun_sorrow_desc",
+        "Requirements": {
+            "AllowedItemNames": [ "$item_axe_jotunbane" ]
+        },
+        "SelectionWeight": 10000,
+        "GuaranteedEffectCount": 4,
+        "GuaranteedMagicEffects": [
+            { "Type": "AddPoisonDamage", "Values": { "MinValue": 160, "MaxValue": 260, "Increment": 1 } },
+            { "Type": "StaggerOnDamageTaken", "Values": { "MinValue": 30, "MaxValue": 30, "Increment": 1 } },
+            { "Type": "Slow", "Values": { "MinValue": 30, "MaxValue": 40, "Increment": 1 } },
+            { "Type": "Indestructible" }
+        ]
+    },
+// Two-handed axes
+    {
+        "ID": "BerserkerFate",
+        "Name": "$mod_epicloot_l_berserker_fate",
+        "Description": "$mod_epicloot_l_berserker_fate_desc",
+        "Requirements": {
+            "AllowedItemNames": [ "$item_battleaxe" ]
+        },
+        "SelectionWeight": 10000,
+        "GuaranteedEffectCount": 4,
+        "GuaranteedMagicEffects": [
+            { "Type": "ModifyPhysicalDamage", "Values": { "MinValue": 85, "MaxValue": 95, "Increment": 5 } },
+            { "Type": "ModifyDamageLowHealth", "Values": { "MinValue": 80, "MaxValue": 120, "Increment": 1 } },
+            { "Type": "ModifyAttackSpeedLowHealth", "Values": { "MinValue": 80, "MaxValue": 120, "Increment": 1 } },
+            { "Type": "LifeStealLowHealth", "Values": { "MinValue": 25, "MaxValue": 35, "Increment": 1 } }
+        ]
+    },
+    {
+        "ID": "MountainGuard",
+        "Name": "$mod_epicloot_l_mountain_guard",
+        "Description": "$mod_epicloot_l_mountain_guard_desc",
+        "Requirements": {
+            "AllowedItemNames": [ "$item_battleaxe_crystal" ]
+        },
+        "SelectionWeight": 10000,
+        "GuaranteedEffectCount": 5,
+        "GuaranteedMagicEffects": [
+            { "Type": "ModifyPhysicalDamage", "Values": { "MinValue": 55, "MaxValue": 80, "Increment": 1 } },
+            { "Type": "ModifyAttackSpeed", "Values": { "MinValue": 40, "MaxValue": 40, "Increment": 1 } },
+            { "Type": "ModifyParry", "Values": { "MinValue": 55, "MaxValue": 80, "Increment": 1 } },
+            { "Type": "Slow", "Values": { "MinValue": 40, "MaxValue": 40, "Increment": 1 } },
+            { "Type": "Indestructible" }
+        ]
+    },
+// Clubs
+    {
+        "ID": "TarredStick",
+        "Name": "$mod_epicloot_l_tarred_stick",
+        "Description": "$mod_epicloot_l_tarred_stick_desc",
+        "Requirements": {
+            "AllowedItemNames": [ "$item_club" ]
+        },
+        "SelectionWeight": 10000,
+        "GuaranteedEffectCount": 5,
+        "GuaranteedMagicEffects": [
+            { "Type": "ModifyPhysicalDamage", "Values": { "MinValue": 60, "MaxValue": 90, "Increment": 1 } },
+            { "Type": "ModifyStaggerDamage", "Values": { "MinValue": 60, "MaxValue": 90, "Increment": 1 } },
+            { "Type": "ModifyParry", "Values": { "MinValue": 400, "MaxValue": 400, "Increment": 1 } },
+            { "Type": "RemoveSpeedPenalty" },
+            { "Type": "Indestructible" }
+        ]
+    },
+    {
+        "ID": "ThunderCharge",
+        "Name": "$mod_epicloot_l_thunder_charge",
+        "Description": "$mod_epicloot_l_thunder_charge_desc",
+        "Requirements": {
+            "AllowedItemNames": [ "$item_mace_bronze" ]
+        },
+        "SelectionWeight": 10000,
+        "GuaranteedEffectCount": 4,
+        "GuaranteedMagicEffects": [
+            { "Type": "AddLightningDamage", "Values": { "MinValue": 77, "MaxValue": 77, "Increment": 1 } },
+            { "Type": "ModifyAttackSpeed", "Values": { "MinValue": 37, "MaxValue": 43, "Increment": 1 } },
+            { "Type": "RemoveSpeedPenalty" },
+            { "Type": "Glowing" }
+        ]
+    },
+    {
+        "ID": "TrappedSoul",
+        "Name": "$mod_epicloot_l_trapped_soul",
+        "Description": "$mod_epicloot_l_trapped_soul_desc",
+        "Requirements": {
+            "AllowedItemNames": [ "$item_mace_iron" ]
+        },
+        "SelectionWeight": 10000,
+        "GuaranteedEffectCount": 6,
+        "GuaranteedMagicEffects": [
+            { "Type": "AddSpiritDamage", "Values": { "MinValue": 140, "MaxValue": 280, "Increment": 1 } },
+            { "Type": "IncreaseStamina", "Values": { "MinValue": 40, "MaxValue": 60, "Increment": 1 } },
+            { "Type": "ModifyStaminaRegenLowHealth", "Values": { "MinValue": 85, "MaxValue": 115, "Increment": 1 } },
+            { "Type": "Slow", "Values": { "MinValue": 25, "MaxValue": 25, "Increment": 1 } },
+            { "Type": "Indestructible" },
+            { "Type": "Glowing" }
+        ]
+    },
+    {
+        "ID": "NothernMight",
+        "Name": "$mod_epicloot_l_nothern_might",
+        "Description": "$mod_epicloot_l_nothern_might_desc",
+        "Requirements": {
+            "AllowedItemNames": [ "$item_mace_silver" ]
+        },
+        "SelectionWeight": 10000,
+        "GuaranteedEffectCount": 3,
+        "GuaranteedMagicEffects": [
+            { "Type": "ModifyPhysicalDamage", "Values": { "MinValue": 115, "MaxValue": 175, "Increment": 5 } },
+            { "Type": "ModifyStaggerDamage", "Values": { "MinValue": 50, "MaxValue": 50, "Increment": 1 } },
+            { "Type": "ModifyParry", "Values": { "MinValue": 95, "MaxValue": 95, "Increment": 1 } }
+        ]
+    },
+    {
+        "ID": "ViciousHedgehog",
+        "Name": "$mod_epicloot_l_vicious_hedgehog",
+        "Description": "$mod_epicloot_l_vicious_hedgehog_desc",
+        "Requirements": {
+            "AllowedItemNames": [ "$item_mace_needle" ]
+        },
+        "SelectionWeight": 10000,
+        "GuaranteedEffectCount": 5,
+        "GuaranteedMagicEffects": [
+            { "Type": "AddPiercingDamage", "Values": { "MinValue": 30, "MaxValue": 40, "Increment": 1 } },
+            { "Type": "ModifyAttackSpeed", "Values": { "MinValue": 60, "MaxValue": 80, "Increment": 1 } },
+            { "Type": "ModifyAttackStaminaUse", "Values": { "MinValue": 35, "MaxValue": 35, "Increment": 1 } },
+            { "Type": "LifeSteal", "Values": { "MinValue": 12, "MaxValue": 15, "Increment": 1 } },
+            { "Type": "RemoveSpeedPenalty" }
+        ]
+    },
+// Two-handed clubs
+    {
+        "ID": "HollowTeeth",
+        "Name": "$mod_epicloot_l_hollow_teeth",
+        "Description": "$mod_epicloot_l_hollow_teeth_desc",
+        "Requirements": {
+            "AllowedItemNames": [ "$item_stagbreaker" ]
+        },
+        "SelectionWeight": 6000,
+        "GuaranteedEffectCount": 4,
+        "GuaranteedMagicEffects": [
+            { "Type": "AddPiercingDamage", "Values": { "MinValue": 35, "MaxValue": 45, "Increment": 1 } },
+            { "Type": "ModifyAttackSpeed", "Values": { "MinValue": 60, "MaxValue": 80, "Increment": 1 } },
+            { "Type": "ModifyAttackStaminaUse", "Values": { "MinValue": 40, "MaxValue": 50, "Increment": 1 } },
+            { "Type": "RemoveSpeedPenalty" }
+        ]
+    },
+    {
+        "ID": "DwarfCrusher",
+        "Name": "$mod_epicloot_l_dwarf_crusher",
+        "Description": "$mod_epicloot_l_dwarf_crusher_desc",
+        "Requirements": {
+            "AllowedItemNames": [ "$item_stagbreaker" ]
+        },
+        "SelectionWeight": 4000,
+        "GuaranteedEffectCount": 4,
+        "GuaranteedMagicEffects": [
+            { "Type": "AddFireDamage", "Values": { "MinValue": 120, "MaxValue": 160, "Increment": 1 } },
+            { "Type": "LifeSteal", "Values": { "MinValue": 10, "MaxValue": 10, "Increment": 1 } },
+            { "Type": "ModifyParry", "Values": { "MinValue": 120, "MaxValue": 120, "Increment": 1 } },
+            { "Type": "ModifyMovementSpeedLowHealth", "Values": { "MinValue": 25, "MaxValue": 25, "Increment": 1 } }
+        ]
+    },
+    {
+        "ID": "FjordEcho",
+        "Name": "$mod_epicloot_l_fjord_echo",
+        "Description": "$mod_epicloot_l_fjord_echo_desc",
+        "Requirements": {
+            "AllowedItemNames": [ "$item_sledge_iron" ]
+        },
+        "SelectionWeight": 10000,
+        "GuaranteedEffectCount": 6,
+        "GuaranteedMagicEffects": [
+            { "Type": "ModifyPhysicalDamage", "Values": { "MinValue": 25, "MaxValue": 40, "Increment": 1 } },
+            { "Type": "AddFrostDamage", "Values": { "MinValue": 25, "MaxValue": 40, "Increment": 1 } },
+            { "Type": "ModifyAttackSpeed", "Values": { "MinValue": 40, "MaxValue": 40, "Increment": 1 } },
+            { "Type": "ModifyStaggerDamage", "Values": { "MinValue": 75, "MaxValue": 150, "Increment": 1 } },
+            { "Type": "ModifyStaggerDuration", "Values": { "MinValue": 40, "MaxValue": 70, "Increment": 1 } },
+            { "Type": "ModifyParry", "Values": { "MinValue": 80, "MaxValue": 80, "Increment": 1 } }
+        ]
+    },
+    {
+        "ID": "ThorDemolisher",
+        "Name": "$mod_epicloot_l_thor_demolisher",
+        "Description": "$mod_epicloot_l_thor_demolisher_desc",
+        "Requirements": {
+            "AllowedItemNames": [ "$item_sledge_demolisher" ]
+        },
+        "SelectionWeight": 10000,
+        "GuaranteedEffectCount": 7,
+        "GuaranteedMagicEffects": [
+            { "Type": "AddLightningDamage", "Values": { "MinValue": 110, "MaxValue": 110, "Increment": 1 } },
+            { "Type": "ModifyAttackSpeed", "Values": { "MinValue": 25, "MaxValue": 25, "Increment": 1 } },
+            { "Type": "ModifyStaggerDuration", "Values": { "MinValue": 55, "MaxValue": 165, "Increment": 5 } },
+            { "Type": "ModifyStaminaRegen", "Values": { "MinValue": 36, "MaxValue": 36 } },
+            { "Type": "ModifyMovementSpeed", "Values": { "MinValue": 7, "MaxValue": 7, "Increment": 1 } },
+            { "Type": "RemoveSpeedPenalty" },
+            { "Type": "Glowing" }
+        ]
+    },
+// Swords
+    {
+        "ID": "Wildfire",
+        "Name": "$mod_epicloot_l_wildfire",
+        "Description": "$mod_epicloot_l_wildfire_desc",
+        "Requirements": {
+            "AllowedItemNames": [ "$item_sword_bronze" ]
+        },
+        "SelectionWeight": 10000,
+        "GuaranteedEffectCount": 5,
+        "GuaranteedMagicEffects": [
+            { "Type": "ModifyPhysicalDamage", "Values": { "MinValue": 35, "MaxValue": 35, "Increment": 5 } },
+            { "Type": "AddFireDamage", "Values": { "MinValue": 90, "MaxValue": 125, "Increment": 1 } },
+            { "Type": "ModifyParry", "Values": { "MinValue": 50, "MaxValue": 50, "Increment": 1 } },
+            { "Type": "ModifyHealthRegen", "Values": { "MinValue": 40, "MaxValue": 40, "Increment": 1 } },
+            { "Type": "Waterproof" }
+        ]
+    },
+    {
+        "ID": "CharmedBlade",
+        "Name": "$mod_epicloot_l_charmed_blade",
+        "Description": "$mod_epicloot_l_charmed_blade_desc",
+        "Requirements": {
+            "AllowedItemNames": [ "$item_sword_iron" ]
+        },
+        "SelectionWeight": 10000,
+        "GuaranteedEffectCount": 7,
+        "GuaranteedMagicEffects": [
+            { "Type": "ModifyPhysicalDamage", "Values": { "MinValue": 30, "MaxValue": 50, "Increment": 5 } },
+            { "Type": "ModifyAttackSpeed", "Values": { "MinValue": 37, "MaxValue": 37, "Increment": 1 } },
+            { "Type": "AddSwordsSkill", "Values": { "MinValue": 15, "MaxValue": 20, "Increment": 1 } },
+            { "Type": "AvoidDamageTakenLowHealth", "Values": { "MinValue": 27, "MaxValue": 37, "Increment": 1 } },
+            { "Type": "Luck", "Values": { "MinValue": 14, "MaxValue": 14, "Increment": 1 } },
+            { "Type": "Indestructible" },
+            { "Type": "Weightless"}
+        ]
+    },
+    {
+        "ID": "AncientRapier",
+        "Name": "$mod_epicloot_l_ancient_rapier",
+        "Description": "$mod_epicloot_l_ancient_rapier_desc",
+        "Requirements": {
+            "AllowedItemNames": [ "$item_sword_silver" ]
+        },
+        "SelectionWeight": 10000,
+        "GuaranteedEffectCount": 5,
+        "GuaranteedMagicEffects": [
+            { "Type": "AddPiercingDamage", "Values": { "MinValue": 25, "MaxValue": 25, "Increment": 1 } },
+            { "Type": "ModifyAttackSpeed", "Values": { "MinValue": 75, "MaxValue": 100, "Increment": 1 } },
+            { "Type": "ModifyAttackStaminaUse", "Values": { "MinValue": 50, "MaxValue": 65, "Increment": 1 } },
+            { "Type": "ModifyParry", "Values": { "MinValue": 55, "MaxValue": 75, "Increment": 1 } },
+            { "Type": "RemoveSpeedPenalty" }
+        ]
+    },
+    {
+        "ID": "DarkBlade",
+        "Name": "$mod_epicloot_l_dark_blade",
+        "Description": "$mod_epicloot_l_dark_blade_desc",
+        "Requirements": {
+            "AllowedItemNames": [ "$item_sword_blackmetal" ]
+        },
+        "SelectionWeight": 10000,
+        "GuaranteedEffectCount": 6,
+        "GuaranteedMagicEffects": [
+            { "Type": "ModifyPhysicalDamage", "Values": { "MinValue": 35, "MaxValue": 65, "Increment": 1 } },
+            { "Type": "ModifyAttackSpeed", "Values": { "MinValue": 35, "MaxValue": 35, "Increment": 1 } },
+            { "Type": "LifeSteal", "Values": { "MinValue": 12, "MaxValue": 12, "Increment": 1 } },
+            { "Type": "ModifyDamageLowHealth", "Values": { "MinValue": 35, "MaxValue": 65, "Increment": 1 } },
+            { "Type": "ModifyAttackSpeedLowHealth", "Values": { "MinValue": 65, "MaxValue": 65, "Increment": 1 } },
+            { "Type": "LifeStealLowHealth", "Values": { "MinValue": 13, "MaxValue": 13, "Increment": 1 } }
+        ]
+    },
+    {
+        "ID": "PolarSteel",
+        "Name": "$mod_epicloot_l_polar_steel",
+        "Description": "$mod_epicloot_l_polar_steel_desc",
+        "Requirements": {
+            "AllowedItemNames": [ "$item_sword_mistwalker" ]
+        },
+        "SelectionWeight": 10000,
+        "GuaranteedEffectCount": 4,
+        "GuaranteedMagicEffects": [
+            { "Type": "ModifyPhysicalDamage", "Values": { "MinValue": 50, "MaxValue": 70, "Increment": 5 } },
+            { "Type": "AddFrostDamage", "Values": { "MinValue": 50, "MaxValue": 50, "Increment": 1 } },
+            { "Type": "AddSwordsSkill", "Values": { "MinValue": 20, "MaxValue": 27, "Increment": 1 } },
+            { "Type": "Luck", "Values": { "MinValue": 17, "MaxValue": 17, "Increment": 1 } }
+        ]
+    },
+// Two-handed swords
+// $item_sword_krom
+// Polearms
+    {
+        "ID": "SwiftBlade",
+        "Name": "$mod_epicloot_l_swift_blade",
+        "Description": "$mod_epicloot_l_swift_blade_desc",
+        "Requirements": {
+            "AllowedItemNames": [ "$item_atgeir_bronze", "$item_atgeir_iron" ]
+        },
+        "SelectionWeight": 10000,
+        "GuaranteedEffectCount": 4,
+        "GuaranteedMagicEffects": [
+            { "Type": "ModifyPhysicalDamage", "Values": { "MinValue": 45, "MaxValue": 65, "Increment": 1 } },
+            { "Type": "ModifyAttackSpeed", "Values": { "MinValue": 45, "MaxValue": 65, "Increment": 1 } },
+            { "Type": "ModifyAttackStaminaUse", "Values": { "MinValue": 35, "MaxValue": 45, "Increment": 1 } },
+            { "Type": "RemoveSpeedPenalty" }
+        ]
+    },
+    {
+        "ID": "PoisonedEdge",
+        "Name": "$mod_epicloot_l_poisoned_edge",
+        "Description": "$mod_epicloot_l_poisoned_edge_desc",
+        "Requirements": {
+            "AllowedItemNames": [ "$item_atgeir_blackmetal" ]
+        },
+        "SelectionWeight": 10000,
+        "GuaranteedEffectCount": 4,
+        "GuaranteedMagicEffects": [
+            { "Type": "ModifyPhysicalDamage", "Values": { "MinValue": 60, "MaxValue": 60, "Increment": 1 } },
+            { "Type": "AddPoisonDamage", "Values": { "MinValue": 140, "MaxValue": 190, "Increment": 1 } },
+            { "Type": "ModifyParry", "Values": { "MinValue": 45, "MaxValue": 45, "Increment": 1 } },
+            { "Type": "Slow", "Values": { "MinValue": 25, "MaxValue": 45, "Increment": 1 } }
+        ]
+    },
+    {
+        "ID": "AncientHimminAfl",
+        "Name": "$mod_epicloot_l_ancient_himmin_afl",
+        "Description": "$mod_epicloot_l_ancient_himmin_afl_desc",
+        "Requirements": {
+            "AllowedItemNames": [ "$item_atgeir_himminafl" ]
+        },
+        "SelectionWeight": 10000,
+        "GuaranteedEffectCount": 4,
+        "GuaranteedMagicEffects": [
+            { "Type": "AddFrostDamage", "Values": { "MinValue": 105, "MaxValue": 105, "Increment": 1 } },
+            { "Type": "Slow", "Values": { "MinValue": 40, "MaxValue": 60, "Increment": 1 } },
+            { "Type": "ReflectDamage", "Values": { "MinValue": 27, "MaxValue": 27, "Increment": 1 } },
+            { "Type": "Luck", "Values": { "MinValue": 27, "MaxValue": 27, "Increment": 1 } }
+        ]
+    },
+// Spears
+    {
+        "ID": "Javelin",
+        "Name": "$mod_epicloot_l_javelin",
+        "Description": "$mod_epicloot_l_javelin_desc",
+        "Requirements": {
+            "AllowedItemNames": [ "$item_spear_flint", "$item_spear_bronze", "$item_spear_ancientbark", "$item_spear_wolffang", "$item_spear_carapace" ]
+        },
+        "SelectionWeight": 5000,
+        "GuaranteedEffectCount": 4,
+        "GuaranteedMagicEffects": [
+            { "Type": "ModifyPhysicalDamage", "Values": { "MinValue": 90, "MaxValue": 110, "Increment": 1 } },
+            { "Type": "ModifyBackstab", "Values": { "MinValue": 110, "MaxValue": 150, "Increment": 1 } },
+            { "Type": "RemoveSpeedPenalty" },
+            { "Type": "RecallWeapon" }
+        ]
+    },
+    {
+        "ID": "BoarFang",
+        "Name": "$mod_epicloot_l_boar_fang",
+        "Description": "$mod_epicloot_l_boar_fang_desc",
+        "Requirements": {
+            "AllowedItemNames": [ "$item_spear_flint" ]
+        },
+        "SelectionWeight": 5000,
+        "GuaranteedEffectCount": 4,
+        "GuaranteedMagicEffects": [
+            { "Type": "ModifyPhysicalDamage", "Values": { "MinValue": 75, "MaxValue": 90, "Increment": 1 } },
+            { "Type": "AddPoisonDamage", "Values": { "MinValue": 56, "MaxValue": 68, "Increment": 1 } },
+            { "Type": "LifeSteal", "Values": { "MinValue": 12, "MaxValue": 16, "Increment": 1 } },
+            { "Type": "ModifyAttackSpeedLowHealth", "Values": { "MinValue": 75, "MaxValue": 90, "Increment": 1 } }
+        ]
+    },
+    {
+        "ID": "DarkThunder",
+        "Name": "$mod_epicloot_l_dark_thunder",
+        "Description": "$mod_epicloot_l_dark_thunder_desc",
+        "Requirements": {
+            "AllowedItemNames": [ "$item_spear_ancientbark" ]
+        },
+        "SelectionWeight": 2700,
+        "GuaranteedEffectCount": 4,
+        "GuaranteedMagicEffects": [
+            { "Type": "AddLightningDamage", "Values": { "MinValue": 117, "MaxValue": 117, "Increment": 1 } },
+            { "Type": "AddBluntDamage", "Values": { "MinValue": 36, "MaxValue": 36, "Increment": 1 } },
+            { "Type": "StaggerOnDamageTaken", "Values": { "MinValue": 36, "MaxValue": 36, "Increment": 1 } },
+            { "Type": "Glowing" }
+        ]
+    },
+// Knives
+    {
+        "ID": "JourneyKnife",
+        "Name": "$mod_epicloot_l_journey_knife",
+        "Description": "$mod_epicloot_l_journey_knife_desc",
+        "Requirements": {
+            "AllowedItemNames": [ "$item_knife_flint", "$item_knife_chitin" ]
+        },
+        "SelectionWeight": 5000,
+        "GuaranteedEffectCount": 4,
+        "GuaranteedMagicEffects": [
+            { "Type": "ModifyAttackSpeed", "Values": { "MinValue": 35, "MaxValue": 35, "Increment": 1 } },
+            { "Type": "AddMovementSkills", "Values": { "MinValue": 17, "MaxValue": 21, "Increment": 1 } },
+            { "Type": "ModifyMovementSpeed", "Values": { "MinValue": 7, "MaxValue": 9, "Increment": 1 } }, 
+            { "Type": "ModifyJumpStaminaUse", "Values": { "MinValue": 30, "MaxValue": 40, "Increment": 1 } }
+        ]
+    },
+    {
+        "ID": "ColdEye",
+        "Name": "$mod_epicloot_l_cold_eye",
+        "Description": "$mod_epicloot_l_cold_eye_desc",
+        "Requirements": {
+            "AllowedItemNames": [ "$item_knife_copper" ]
+        },
+        "SelectionWeight": 10000,
+        "GuaranteedEffectCount": 4,
+        "GuaranteedMagicEffects": [
+            { "Type": "ModifyPhysicalDamage", "Values": { "MinValue": 50, "MaxValue": 70, "Increment": 1 } },
+            { "Type": "AddFrostDamage", "Values": { "MinValue": 50, "MaxValue": 70, "Increment": 1 } },
+            { "Type": "ModifyBackstab", "Values": { "MinValue": 50, "MaxValue": 50, "Increment": 1 } },
+            { "Type": "Executioner", "Values": { "MinValue": 400, "MaxValue": 400, "Increment": 1 } }
+        ]
+    },
+    {
+        "ID": "BladeOfAvidity",
+        "Name": "$mod_epicloot_l_blade_of_avidity",
+        "Description": "$mod_epicloot_l_blade_of_avidity_desc",
+        "Requirements": {
+            "AllowedItemNames": [ "$item_knife_chitin", "$item_knife_silver" ]
+        },
+        "SelectionWeight": 5000,
+        "GuaranteedEffectCount": 5,
+        "GuaranteedMagicEffects": [
+            { "Type": "AddPiercingDamage", "Values": { "MinValue": 33, "MaxValue": 33, "Increment": 1 } },
+            { "Type": "ModifyAttackSpeed", "Values": { "MinValue": 65, "MaxValue": 65, "Increment": 1 } },
+            { "Type": "ReflectDamage", "Values": { "MinValue": 16, "MaxValue": 26, "Increment": 1 } },
+            { "Type": "ModifyStaminaRegen", "Values": { "MinValue": 36, "MaxValue": 56, "Increment": 1 } },
+            { "Type": "Riches", "Values": { "MinValue": 12, "MaxValue": 16, "Increment": 1 } }
+        ]
+    },
+    {
+        "ID": "NailOfFortune",
+        "Name": "$mod_epicloot_l_nail_of_fortune",
+        "Description": "$mod_epicloot_l_nail_of_fortune_desc",
+        "Requirements": {
+            "AllowedItemNames": [ "$item_knife_silver" ]
+        },
+        "SelectionWeight": 5000,
+        "GuaranteedEffectCount": 5,
+        "GuaranteedMagicEffects": [
+            { "Type": "ModifyPhysicalDamage", "Values": { "MinValue": 27, "MaxValue": 37, "Increment": 1 } },
+            { "Type": "AvoidDamageTaken", "Values": { "MinValue": 17, "MaxValue": 27, "Increment": 1 } },
+            { "Type": "AddKnivesSkill", "Values": { "MinValue": 27, "MaxValue": 37, "Increment": 1 } },
+            { "Type": "Luck", "Values": { "MinValue": 17, "MaxValue": 37, "Increment": 1 } },
+            { "Type": "Glowing" }
+        ]
+    },
+    {
+        "ID": "DeathsquitoSting",
+        "Name": "$mod_epicloot_l_deathsquito_sting",
+        "Description": "$mod_epicloot_l_deathsquito_sting_desc",
+        "Requirements": {
+            "AllowedItemNames": [ "$item_knife_blackmetal" ]
+        },
+        "SelectionWeight": 10000,
+        "GuaranteedEffectCount": 5,
+        "GuaranteedMagicEffects": [
+            { "Type": "ModifyPhysicalDamage", "Values": { "MinValue": 40, "MaxValue": 60, "Increment": 1 } },
+            { "Type": "ModifyAttackStaminaUse", "Values": { "MinValue": 45, "MaxValue": 45, "Increment": 1 } }, 
+            { "Type": "ModifyBackstab", "Values": { "MinValue": 67, "MaxValue": 67, "Increment": 1 } },
+            { "Type": "Opportunist", "Values": { "MinValue": 17, "MaxValue": 17, "Increment": 1 } },
+            { "Type": "LifeSteal", "Values": { "MinValue": 9, "MaxValue": 11, "Increment": 1 } }
+        ]
+    },
+    {
+        "ID": "UlfRevenge",
+        "Name": "$mod_epicloot_l_ulf_revenge",
+        "Description": "$mod_epicloot_l_ulf_revenge_desc",
+        "Requirements": {
+            "AllowedItemNames": [ "$item_knife_skollandhati" ]
+        },
+        "SelectionWeight": 10000,
+        "GuaranteedEffectCount": 5,
+        "GuaranteedMagicEffects": [
+            { "Type": "ModifyPhysicalDamage", "Values": { "MinValue": 80, "MaxValue": 120, "Increment": 1 } },
+            { "Type": "ModifyParry", "Values": { "MinValue": 90, "MaxValue": 90, "Increment": 1 } },
+            { "Type": "IncreaseHealth", "Values": { "MinValue": 60, "MaxValue": 80, "Increment": 1 } },
+            { "Type": "ModifyArmorLowHealth", "Values": { "MinValue": 25, "MaxValue": 25, "Increment": 1 } },
+            { "Type": "LifeStealLowHealth", "Values": { "MinValue": 25, "MaxValue": 25, "Increment": 1 } }
+        ]
+    },
+// Flesh rippers
+// $item_fistweapon_fenris
+// Bows
+    {
+        "ID": "Sling",
+        "Name": "$mod_epicloot_l_sling",
+        "Description": "$mod_epicloot_l_sling_desc",
+        "Requirements": {
+            "AllowedItemNames": [ "$item_bow" ]
+        },
+        "SelectionWeight": 7800,
+        "GuaranteedEffectCount": 3,
+        "GuaranteedMagicEffects": [
+            { "Type": "AddBluntDamage", "Values": { "MinValue": 60, "MaxValue": 75, "Increment": 1 } },
+            { "Type": "QuickDraw", "Values": { "MinValue": 40, "MaxValue": 55, "Increment": 1 } },
+            { "Type": "RemoveSpeedPenalty" }
+        ]
+    },
+    {
+        "ID": "EikthyrHorn",
+        "Name": "$mod_epicloot_l_eikthyr_horn",
+        "Description": "$mod_epicloot_l_eikthyr_horn_desc",
+        "Requirements": {
+            "AllowedItemNames": [ "$item_bow" ]
+        },
+        "SelectionWeight": 2200,
+        "GuaranteedEffectCount": 5,
+        "GuaranteedMagicEffects": [
+            { "Type": "AddLightningDamage", "Values": { "MinValue": 110, "MaxValue": 110, "Increment": 1 } },
+            { "Type": "ModifyBackstab", "Values": { "MinValue": 55, "MaxValue": 110, "Increment": 1 } },
+            { "Type": "Luck", "Values": { "MinValue": 7, "MaxValue": 17, "Increment": 1 } },
+            { "Type": "Indestructible" },
+            { "Type": "Glowing" }
+        ]
+    },
+    {
+        "ID": "ElegantBow",
+        "Name": "$mod_epicloot_l_elegant_bow",
+        "Description": "$mod_epicloot_l_elegant_bow_desc",
+        "Requirements": {
+            "AllowedItemNames": [ "$item_bow_finewood", "$item_bow_huntsman", "$item_bow_draugrfang", "$item_bow_snipesnap" ]
+        },
+        "SelectionWeight": 6500,
+        "GuaranteedEffectCount": 5,
+        "GuaranteedMagicEffects": [
+            { "Type": "ModifyPhysicalDamage", "Values": { "MinValue": 27, "MaxValue": 27, "Increment": 1 } },
+            { "Type": "QuickDraw", "Values": { "MinValue": 27, "MaxValue": 27, "Increment": 1 } },
+            { "Type": "AddBowsSkill", "Values": { "MinValue": 17, "MaxValue": 27, "Increment": 1 } },
+            { "Type": "QuickLearner", "Values": { "MinValue": 17, "MaxValue": 27, "Increment": 1 } },
+            { "Type": "RemoveSpeedPenalty" }
+        ]
+    },
+    {
+        "ID": "SharpEye",
+        "Name": "$mod_epicloot_l_sharp_eye",
+        "Description": "$mod_epicloot_l_sharp_eye_desc",
+        "Requirements": {
+            "AllowedItemNames": [ "$item_bow_finewood", "$item_bow_huntsman", "$item_bow_draugrfang", "$item_bow_snipesnap" ]
+        },
+        "SelectionWeight": 3500,
+        "GuaranteedEffectCount": 4,
+        "GuaranteedMagicEffects": [
+            { "Type": "ModifyPhysicalDamage", "Values": { "MinValue": 37, "MaxValue": 57, "Increment": 1 } },
+            { "Type": "ModifyBackstab", "Values": { "MinValue": 170, "MaxValue": 210, "Increment": 1 } },
+            { "Type": "ModifyStaggerDamage", "Values": { "MinValue": 70, "MaxValue": 130, "Increment": 1 } },
+            { "Type": "Slow", "Values": { "MinValue": 30, "MaxValue": 30, "Increment": 1 } }
+        ]
+    },
+// Crossbows
+// 	$item_crossbow_arbalest
+// Shields
+    {
+        "ID": "BarrelBottom",
+        "Name": "$mod_epicloot_l_barrel_bottom",
+        "Description": "$mod_epicloot_l_barrel_bottom_desc",
+        "Requirements": {
+            "AllowedItemNames": [ "$item_shield_wood" ]
+        },
+        "SelectionWeight": 10000,
+        "GuaranteedEffectCount": 5,
+        "GuaranteedMagicEffects": [
+            { "Type": "ModifyBlockPower", "Values": { "MinValue": 35, "MaxValue": 35, "Increment": 1 } },
+            { "Type": "ModifyParry", "Values": { "MinValue": 35, "MaxValue": 35, "Increment": 1 } },
+            { "Type": "ModifyBlockStaminaUse", "Values": { "MinValue": 35, "MaxValue": 65, "Increment": 1 } },
+            { "Type": "ReduceWeight", "Values": { "MinValue": 50, "MaxValue": 50, "Increment": 1 } },
+            { "Type": "Indestructible" }
+        ]
+    },
+    {
+        "ID": "DoorShield",
+        "Name": "$mod_epicloot_l_door_shield",
+        "Description": "$mod_epicloot_l_door_shield_desc",
+        "Requirements": {
+            "AllowedItemNames": [ "$item_shield_woodtower" ]
+        },
+        "SelectionWeight": 10000,
+        "GuaranteedEffectCount": 4,
+        "GuaranteedMagicEffects": [
+            { "Type": "ModifyBlockPower", "Values": { "MinValue": 40, "MaxValue": 70, "Increment": 1 } },
+            { "Type": "AddPiercingResistancePercentage", "Values": { "MinValue": 50, "MaxValue": 60, "Increment": 1 } },
+            { "Type": "ModifyHealthRegen", "Values": { "MinValue": 100, "MaxValue": 200, "Increment": 1 } },
+            { "Type": "Immovable" }
+        ]
+    },
+    {
+        "ID": "SpikeShield",
+        "Name": "$mod_epicloot_l_spike_shield",
+        "Description": "$mod_epicloot_l_spike_shield_desc",
+        "Requirements": {
+            "AllowedItemNames": [ "$item_shield_bonetower" ]
+        },
+        "SelectionWeight": 10000,
+        "GuaranteedEffectCount": 4,
+        "GuaranteedMagicEffects": [
+            { "Type": "ModifyBlockPower", "Values": { "MinValue": 45, "MaxValue": 60, "Increment": 1 } },
+            { "Type": "LifeSteal", "Values": { "MinValue": 6, "MaxValue": 13, "Increment": 1 } },
+            { "Type": "ReflectDamage", "Values": { "MinValue": 27, "MaxValue": 37, "Increment": 1 } },
+            { "Type": "IncreaseHealth", "Values": { "MinValue": 35, "MaxValue": 45, "Increment": 1 } }
+        ]
+    },
+    {
+        "ID": "RisingSun",
+        "Name": "$mod_epicloot_l_rising_sun",
+        "Description": "$mod_epicloot_l_rising_sun_desc",
+        "Requirements": {
+            "AllowedItemNames": [ "$item_shield_bronzebuckler" ]
+        },
+        "SelectionWeight": 10000,
+        "GuaranteedEffectCount": 6,
+        "GuaranteedMagicEffects": [
+            { "Type": "ModifyParry", "Values": { "MinValue": 55, "MaxValue": 55, "Increment": 1 } },
+            { "Type": "AddFireDamage", "Values": { "MinValue": 15, "MaxValue": 15, "Increment": 1 } },
+            { "Type": "AddSpiritDamage", "Values": { "MinValue": 15, "MaxValue": 15, "Increment": 1 } },
+            { "Type": "ModifyBlockStaminaUse", "Values": { "MinValue": 35, "MaxValue": 50, "Increment": 1 } },
+            { "Type": "RemoveSpeedPenalty" },
+            { "Type": "Indestructible" }
+        ]
+    },
+    {
+        "ID": "TheBalancer",
+        "Name": "$mod_epicloot_l_the_balancer",
+        "Description": "$mod_epicloot_l_the_balancer_desc",
+        "Requirements": {
+            "AllowedItemNames": [ "$item_shield_ironbuckler" ]
+        },
+        "SelectionWeight": 10000,
+        "GuaranteedEffectCount": 6,
+        "GuaranteedMagicEffects": [
+            { "Type": "ModifyParry", "Values": { "MinValue": 65, "MaxValue": 85, "Increment": 1 } },
+            { "Type": "ModifyAttackSpeed", "Values": { "MinValue": 15, "MaxValue": 15, "Increment": 1 } },
+            { "Type": "ModifyAttackStaminaUse", "Values": { "MinValue": 15, "MaxValue": 15, "Increment": 1 } },
+            { "Type": "ModifyStaggerDuration", "Values": { "MinValue": 50, "MaxValue": 50, "Increment": 1 } },
+            { "Type": "RemoveSpeedPenalty" },
+            { "Type": "Indestructible" }
+        ]
+    },
+    {
+        "ID": "VikingBanner",
+        "Name": "$mod_epicloot_l_viking_banner",
+        "Description": "$mod_epicloot_l_viking_banner_desc",
+        "Requirements": {
+            "AllowedItemNames": [ "$item_shield_banded" ]
+        },
+        "SelectionWeight": 10000,
+        "GuaranteedEffectCount": 5,
+        "GuaranteedMagicEffects": [
+            { "Type": "ModifyBlockPower", "Values": { "MinValue": 50, "MaxValue": 65, "Increment": 1 } },
+            { "Type": "AddBluntDamage", "Values": { "MinValue": 18, "MaxValue": 18, "Increment": 1 } },
+            { "Type": "Executioner", "Values": { "MinValue": 200, "MaxValue": 200, "Increment": 1 } },
+            { "Type": "ModifyAttackSpeedLowHealth", "Values": { "MinValue": 50, "MaxValue": 65, "Increment": 1 } },
+            { "Type": "ModifyParryLowHealth", "Values": { "MinValue": 50, "MaxValue": 65, "Increment": 1 } }
+        ]
+    },
+    {
+        "ID": "CapturedSpirit",
+        "Name": "$mod_epicloot_l_captured_spirit",
+        "Description": "$mod_epicloot_l_captured_spirit_desc",
+        "Requirements": {
+            "AllowedItemNames": [ "$item_shield_iron_tower" ]
+        },
+        "SelectionWeight": 10000,
+        "GuaranteedEffectCount": 7,
+        "GuaranteedMagicEffects": [
+            { "Type": "ModifyBlockPower", "Values": { "MinValue": 60, "MaxValue": 80, "Increment": 1 } },
+            { "Type": "AddSpiritDamage", "Values": { "MinValue": 22, "MaxValue": 44, "Increment": 1 } },
+            { "Type": "IncreaseStamina", "Values": { "MinValue": 40, "MaxValue": 60, "Increment": 1 } },
+            { "Type": "ModifyStaminaRegenLowHealth", "Values": { "MinValue": 55, "MaxValue": 85, "Increment": 1 } },
+            { "Type": "Slow", "Values": { "MinValue": 15, "MaxValue": 15, "Increment": 1 } },
+            { "Type": "Indestructible" },
+            { "Type": "Glowing" }
+        ]
+    },
+    {
+        "ID": "WindRose",
+        "Name": "$mod_epicloot_l_wind_rose",
+        "Description": "$mod_epicloot_l_wind_rose_desc",
+        "Requirements": {
+            "AllowedItemNames": [ "$item_shield_serpentscale" ]
+        },
+        "SelectionWeight": 10000,
+        "GuaranteedEffectCount": 5,
+        "GuaranteedMagicEffects": [
+            { "Type": "ModifyBlockPower", "Values": { "MinValue": 70, "MaxValue": 90, "Increment": 1 } },
+            { "Type": "ModifyBlockStaminaUse", "Values": { "MinValue": 50, "MaxValue": 75, "Increment": 1 } },
+            { "Type": "AddPiercingResistancePercentage", "Values": { "MinValue": 40, "MaxValue": 40, "Increment": 1 } },
+            { "Type": "ModifyMovementSpeed", "Values": { "MinValue": 7, "MaxValue": 7, "Increment": 1 } },
+            { "Type": "RemoveSpeedPenalty" }
+        ]
+    },
+
+    // $item_shield_silver
+
+    // $item_shield_blackmetal
+    // $item_shield_blackmetal_tower
+
+    // $item_shield_carapacebuckler
+    // $item_shield_carapace
+// Chest
+    {
+        "ID": "BlessedTatters",
+        "Name": "$mod_epicloot_l_blessed_tatters",
+        "Description": "$mod_epicloot_l_blessed_tatters_desc",
+        "Requirements": {
+            "AllowedItemNames": [ "$item_chest_rags" ]
+        },
+        "SelectionWeight": 10000,
+        "GuaranteedEffectCount": 6,
+        "GuaranteedMagicEffects": [
+            { "Type": "ModifyArmor", "Values": { "MinValue": 150, "MaxValue": 250, "Increment": 10 } },
+            { "Type": "AvoidDamageTaken", "Values": { "MinValue": 9, "MaxValue": 15, "Increment": 1 } },
+            { "Type": "AddPoisonResistancePercentage", "Values": { "MinValue": 75, "MaxValue": 90, "Increment": 1 } },
+            { "Type": "IncreaseHealth", "Values": { "MinValue": 30, "MaxValue": 30, "Increment": 1 } },
+            { "Type": "Luck", "Values": { "MinValue": 10, "MaxValue": 12, "Increment": 1 } },
+            { "Type": "Waterproof" }
+        ]
+    },
+    {
+        "ID": "LizardSkin",
+        "Name": "$mod_epicloot_l_lizard_skin",
+        "Description": "$mod_epicloot_l_lizard_skin_desc",
+        "Requirements": {
+            "AllowedItemNames": [ "$item_chest_leather" ]
+        },
+        "SelectionWeight": 10000,
+        "GuaranteedEffectCount": 6,
+        "GuaranteedMagicEffects": [
+            { "Type": "ModifyArmor", "Values": { "MinValue": 90, "MaxValue": 120, "Increment": 10 } },
+            { "Type": "ModifyArmorLowHealth", "Values": { "MinValue": 35, "MaxValue": 45, "Increment": 1 } },
+            { "Type": "ModifyHealthRegen", "Values": { "MinValue": 40, "MaxValue": 40, "Increment": 1 } },
+            { "Type": "ModifyHealthRegenLowHealth", "Values": { "MinValue": 100, "MaxValue": 120, "Increment": 1 } },
+            { "Type": "AddCarryWeight", "Values": { "MinValue": 120, "MaxValue": 160, "Increment": 10 } },
+            { "Type": "Comfortable", "Values": { "MinValue": 1, "MaxValue": 2, "Increment": 1 } }
+        ]
+    },
+    {
+        "ID": "TrollHugs",
+        "Name": "$mod_epicloot_l_troll_hugs",
+        "Description": "$mod_epicloot_l_troll_hugs_desc",
+        "Requirements": {
+            "AllowedItemNames": [ "$item_chest_trollleather" ]
+        },
+        "SelectionWeight": 10000,
+        "GuaranteedEffectCount": 4,
+        "GuaranteedMagicEffects": [
+            { "Type": "ModifyArmor", "Values": { "MinValue": 45, "MaxValue": 65, "Increment": 5 } },
+            { "Type": "AddHealthRegen", "Values": { "MinValue": 4, "MaxValue": 6, "Increment": 0.5 } },
+            { "Type": "IncreaseHealth", "Values": { "MinValue": 30, "MaxValue": 40, "Increment": 5 } },
+            { "Type": "AddBluntResistancePercentage", "Values": { "MinValue": 15, "MaxValue": 20, "Increment": 1 } }
+        ]
+    },
+    {
+        "ID": "SvendBreastplate",
+        "Name": "$mod_epicloot_l_svend_breastplate",
+        "Description": "$mod_epicloot_l_svend_breastplate_desc",
+        "Requirements": {
+            "AllowedItemNames": [ "$item_chest_bronze" ]
+        },
+        "SelectionWeight": 10000,
+        "GuaranteedEffectCount": 3,
+        "GuaranteedMagicEffects": [
+            { "Type": "ModifyArmor", "Values": { "MinValue": 75, "MaxValue": 75, "Increment": 5 } },
+            { "Type": "IncreaseHealth", "Values": { "MinValue": 40, "MaxValue": 40, "Increment": 5 } },
+            { "Type": "AddSlashingResistancePercentage", "Values": { "MinValue": 15, "MaxValue": 20, "Increment": 1 } }
+        ]
+    },
+    {
+        "ID": "DewyTrunk",
+        "Name": "$mod_epicloot_l_dewy_trunk",
+        "Description": "$mod_epicloot_l_dewy_trunk_desc",
+        "Requirements": {
+            "AllowedItemNames": [ "$item_chest_root" ]
+        },
+        "SelectionWeight": 10000,
+        "GuaranteedEffectCount": 4,
+        "GuaranteedMagicEffects": [
+            { "Type": "ModifyArmor", "Values": { "MinValue": 55, "MaxValue": 70, "Increment": 5 } },
+            { "Type": "ModifyHealthRegen", "Values": { "MinValue": 70, "MaxValue": 90, "Increment": 5 } },
+            { "Type": "IncreaseStamina", "Values": { "MinValue": 35, "MaxValue": 45, "Increment": 5 } },
+            { "Type": "AddFireResistancePercentage", "Values": { "MinValue": 15, "MaxValue": 20, "Increment": 1 } }
+        ]
+    },
+    {
+        "ID": "AncientWarriorCoat",
+        "Name": "$mod_epicloot_l_ancient_warrior_coat",
+        "Description": "$mod_epicloot_l_ancient_warrior_coat_desc",
+        "Requirements": {
+            "AllowedItemNames": [ "$item_chest_iron" ]
+        },
+        "SelectionWeight": 10000,
+        "GuaranteedEffectCount": 5,
+        "GuaranteedMagicEffects": [
+            { "Type": "ModifyArmor", "Values": { "MinValue": 70, "MaxValue": 100, "Increment": 5 } },
+            { "Type": "AddSpiritDamage", "Values": { "MinValue": 14, "MaxValue": 28, "Increment": 1 } },
+            { "Type": "AddSwordsSkill", "Values": { "MinValue": 9, "MaxValue": 18, "Increment": 1 } },
+            { "Type": "AddAxesSkill", "Values": { "MinValue": 9, "MaxValue": 18, "Increment": 1 } },
+            { "Type": "AddCarryWeight", "Values": { "MinValue": 100, "MaxValue": 100, "Increment": 1 } }
+        ]
+    },
+// Legs
+    {
+        "ID": "BlessedRagPants",
+        "Name": "$mod_epicloot_l_blessed_rag_pants",
+        "Description": "$mod_epicloot_l_blessed_rag_pants_desc",
+        "Requirements": {
+            "AllowedItemNames": [ "$item_legs_rags" ]
+        },
+        "SelectionWeight": 10000,
+        "GuaranteedEffectCount": 5,
+        "GuaranteedMagicEffects": [
+            { "Type": "ModifyArmor", "Values": { "MinValue": 150, "MaxValue": 250, "Increment": 10 } },
+            { "Type": "AvoidDamageTaken", "Values": { "MinValue": 7, "MaxValue": 12, "Increment": 1 } },
+            { "Type": "IncreaseStamina", "Values": { "MinValue": 30, "MaxValue": 30, "Increment": 1 } },
+            { "Type": "AddMovementSkills", "Values": { "MinValue": 13, "MaxValue": 17, "Increment": 1 } },
+            { "Type": "ModifyMovementSpeed", "Values": { "MinValue": 10, "MaxValue": 12, "Increment": 1 } }
+        ]
+    },
+    {
+        "ID": "LizardTail",
+        "Name": "$mod_epicloot_l_lizard_tail",
+        "Description": "$mod_epicloot_l_lizard_tail_desc",
+        "Requirements": {
+            "AllowedItemNames": [ "$item_legs_leather" ]
+        },
+        "SelectionWeight": 10000,
+        "GuaranteedEffectCount": 7,
+        "GuaranteedMagicEffects": [
+            { "Type": "ModifyArmor", "Values": { "MinValue": 70, "MaxValue": 90, "Increment": 10 } },
+            { "Type": "ModifyArmorLowHealth", "Values": { "MinValue": 25, "MaxValue": 35, "Increment": 1 } },
+            { "Type": "ModifyStaminaRegen", "Values": { "MinValue": 35, "MaxValue": 35, "Increment": 1 } },
+            { "Type": "ModifyStaminaRegenLowHealth", "Values": { "MinValue": 80, "MaxValue": 100, "Increment": 1 } },
+            { "Type": "AddCarryWeight", "Values": { "MinValue": 80, "MaxValue": 120, "Increment": 10 } },
+            { "Type": "DoubleJump" },
+            { "Type": "Comfortable", "Values": { "MinValue": 1, "MaxValue": 2, "Increment": 1 } }
+        ]
+    },
+    {
+        "ID": "TrollDance",
+        "Name": "$mod_epicloot_l_troll_dance",
+        "Description": "$mod_epicloot_l_troll_dance_desc",
+        "Requirements": {
+            "AllowedItemNames": [ "$item_legs_trollleather" ]
+        },
+        "SelectionWeight": 10000,
+        "GuaranteedEffectCount": 5,
+        "GuaranteedMagicEffects": [
+            { "Type": "ModifyArmor", "Values": { "MinValue": 30, "MaxValue": 45, "Increment": 5 } },
+            { "Type": "ModifyStaminaRegen", "Values": { "MinValue": 30, "MaxValue": 40, "Increment": 1 } },
+            { "Type": "IncreaseStamina", "Values": { "MinValue": 30, "MaxValue": 40, "Increment": 5 } },
+            { "Type": "AddBluntResistancePercentage", "Values": { "MinValue": 15, "MaxValue": 20, "Increment": 1 } },
+            { "Type": "DoubleJump" }
+        ]
+    },
+    {
+        "ID": "SvendGreaves",
+        "Name": "$mod_epicloot_l_svend_greaves",
+        "Description": "$mod_epicloot_l_svend_greaves_desc",
+        "Requirements": {
+            "AllowedItemNames": [ "$item_legs_bronze" ]
+        },
+        "SelectionWeight": 10000,
+        "GuaranteedEffectCount": 4,
+        "GuaranteedMagicEffects": [
+            { "Type": "ModifyArmor", "Values": { "MinValue": 55, "MaxValue": 55, "Increment": 5 } },
+            { "Type": "AddBluntDamage", "Values": { "MinValue": 20, "MaxValue": 25, "Increment": 1 } },
+            { "Type": "IncreaseHealth", "Values": { "MinValue": 35, "MaxValue": 35, "Increment": 5 } },
+            { "Type": "AddSlashingResistancePercentage", "Values": { "MinValue": 15, "MaxValue": 20, "Increment": 1 } }
+        ]
+    },
+    {
+        "ID": "DewyRoots",
+        "Name": "$mod_epicloot_l_dewy_roots",
+        "Description": "$mod_epicloot_l_dewy_roots_desc",
+        "Requirements": {
+            "AllowedItemNames": [ "$item_legs_root" ]
+        },
+        "SelectionWeight": 10000,
+        "GuaranteedEffectCount": 4,
+        "GuaranteedMagicEffects": [
+            { "Type": "ModifyArmor", "Values": { "MinValue": 40, "MaxValue": 55, "Increment": 5 } },
+            { "Type": "AddHealthRegen", "Values": { "MinValue": 6, "MaxValue": 10, "Increment": 0.5 } },
+            { "Type": "IncreaseStamina", "Values": { "MinValue": 35, "MaxValue": 45, "Increment": 5 } },
+            { "Type": "AddFireResistancePercentage", "Values": { "MinValue": 15, "MaxValue": 20, "Increment": 1 } }
+        ]
+    },
+    {
+        "ID": "AncientWarriorPlatedBoots",
+        "Name": "$mod_epicloot_l_ancient_warrior_plated_boots",
+        "Description": "$mod_epicloot_l_ancient_warrior_plated_boots_desc",
+        "Requirements": {
+            "AllowedItemNames": [ "$item_legs_iron" ]
+        },
+        "SelectionWeight": 10000,
+        "GuaranteedEffectCount": 5,
+        "GuaranteedMagicEffects": [
+            { "Type": "ModifyArmor", "Values": { "MinValue": 50, "MaxValue": 80, "Increment": 5 } },
+            { "Type": "AddSpiritDamage", "Values": { "MinValue": 14, "MaxValue": 28, "Increment": 1 } },
+            { "Type": "AddSwordsSkill", "Values": { "MinValue": 9, "MaxValue": 18, "Increment": 1 } },
+            { "Type": "AddAxesSkill", "Values": { "MinValue": 9, "MaxValue": 18, "Increment": 1 } },
+            { "Type": "AddCarryWeight", "Values": { "MinValue": 100, "MaxValue": 100, "Increment": 1 } }
+        ]
+    },
+// Helmets
+    {
+        "ID": "LizardHead",
+        "Name": "$mod_epicloot_l_lizard_head",
+        "Description": "$mod_epicloot_l_lizard_head_desc",
+        "Requirements": {
+            "AllowedItemNames": [ "$item_helmet_leather" ]
+        },
+        "SelectionWeight": 10000,
+        "GuaranteedEffectCount": 5,
+        "GuaranteedMagicEffects": [
+            { "Type": "ModifyArmor", "Values": { "MinValue": 70, "MaxValue": 90, "Increment": 10 } },
+            { "Type": "ModifyArmorLowHealth", "Values": { "MinValue": 25, "MaxValue": 35, "Increment": 1 } },
+            { "Type": "AddLightningResistancePercentage", "Values": { "MinValue": 75, "MaxValue": 75, "Increment": 1 } },
+            { "Type": "QuickLearner", "Values": { "MinValue": 50, "MaxValue": 100, "Increment": 10 } },
+            { "Type": "Comfortable", "Values": { "MinValue": 1, "MaxValue": 2, "Increment": 1 } }
+        ]
+    },
+    {
+        "ID": "TrollSmile",
+        "Name": "$mod_epicloot_l_troll_smile",
+        "Description": "$mod_epicloot_l_troll_smile_desc",
+        "Requirements": {
+            "AllowedItemNames": [ "$item_helmet_trollleather" ]
+        },
+        "SelectionWeight": 10000,
+        "GuaranteedEffectCount": 5,
+        "GuaranteedMagicEffects": [
+            { "Type": "ModifyArmor", "Values": { "MinValue": 30, "MaxValue": 45, "Increment": 5 } },
+            { "Type": "IncreaseHealth", "Values": { "MinValue": 20, "MaxValue": 25, "Increment": 5 } },
+            { "Type": "AddBluntResistancePercentage", "Values": { "MinValue": 15, "MaxValue": 20, "Increment": 1 } },
+            { "Type": "AddClubsSkill", "Values": { "MinValue": 12, "MaxValue": 16, "Increment": 1 } },
+            { "Type": "Luck", "Values": { "MinValue": 16, "MaxValue": 18, "Increment": 1 } }
+        ]
+    },
+    {
+        "ID": "SvendHelment",
+        "Name": "$mod_epicloot_l_svend_helmet",
+        "Description": "$mod_epicloot_l_svend_helmet_desc",
+        "Requirements": {
+            "AllowedItemNames": [ "$item_helmet_bronze" ]
+        },
+        "SelectionWeight": 10000,
+        "GuaranteedEffectCount": 4,
+        "GuaranteedMagicEffects": [
+            { "Type": "ModifyArmor", "Values": { "MinValue": 55, "MaxValue": 55, "Increment": 5 } },
+            { "Type": "IncreaseHealth", "Values": { "MinValue": 25, "MaxValue": 25, "Increment": 5 } },
+            { "Type": "AddSlashingResistancePercentage", "Values": { "MinValue": 15, "MaxValue": 20, "Increment": 1 } },
+            { "Type": "QuickLearner", "Values": { "MinValue": 45, "MaxValue": 45, "Increment": 1 } }
+        ]
+    },
+    {
+        "ID": "DewyCrown",
+        "Name": "$mod_epicloot_l_dewy_crown",
+        "Description": "$mod_epicloot_l_dewy_crown_desc",
+        "Requirements": {
+            "AllowedItemNames": [ "$item_helmet_root" ]
+        },
+        "SelectionWeight": 10000,
+        "GuaranteedEffectCount": 5,
+        "GuaranteedMagicEffects": [
+            { "Type": "ModifyArmor", "Values": { "MinValue": 40, "MaxValue": 55, "Increment": 5 } },
+            { "Type": "IncreaseStamina", "Values": { "MinValue": 20, "MaxValue": 30, "Increment": 5 } },
+            { "Type": "ModifyHealthRegen", "Values": { "MinValue": 45, "MaxValue": 60, "Increment": 5 } },
+            { "Type": "AddFireResistancePercentage", "Values": { "MinValue": 15, "MaxValue": 20, "Increment": 1 } },
+            { "Type": "QuickDraw", "Values": { "MinValue": 15, "MaxValue": 25, "Increment": 1 } }
+        ]
+    },
+    {
+        "ID": "AncientWarriorHelmet",
+        "Name": "$mod_epicloot_l_ancient_warrior_helmet",
+        "Description": "$mod_epicloot_l_ancient_warrior_helmet_desc",
+        "Requirements": {
+            "AllowedItemNames": [ "$item_helmet_iron" ]
+        },
+        "SelectionWeight": 10000,
+        "GuaranteedEffectCount": 4,
+        "GuaranteedMagicEffects": [
+            { "Type": "ModifyArmor", "Values": { "MinValue": 50, "MaxValue": 80, "Increment": 5 } },
+            { "Type": "AddSpiritDamage", "Values": { "MinValue": 14, "MaxValue": 28, "Increment": 1 } },
+            { "Type": "AddSwordsSkill", "Values": { "MinValue": 14, "MaxValue": 28, "Increment": 1 } },
+            { "Type": "AddAxesSkill", "Values": { "MinValue": 14, "MaxValue": 28, "Increment": 1 } }
+        ]
+    },
+// Capes
+    {
+        "ID": "LeatherSail",
+        "Name": "$mod_epicloot_l_leather_sail",
+        "Description": "$mod_epicloot_l_leather_sail_desc",
+        "Requirements": {
+            "AllowedItemNames": [ "$item_cape_deerhide" ]
+        },
+        "SelectionWeight": 10000,
+        "GuaranteedEffectCount": 4,
+        "GuaranteedMagicEffects": [
+            { "Type": "ModifyArmor", "Values": { "MinValue": 70, "MaxValue": 110, "Increment": 10 } },
+            { "Type": "ModifyStaminaRegen", "Values": { "MinValue": 27, "MaxValue": 27, "Increment": 1 } },
+            { "Type": "AddMovementSkills", "Values": { "MinValue": 17, "MaxValue": 21, "Increment": 1 } },
+            { "Type": "ModifyMovementSpeed", "Values": { "MinValue": 5, "MaxValue": 7, "Increment": 1 } }
+        ]
+    },
+    {
+        "ID": "TrollCharm",
+        "Name": "$mod_epicloot_l_troll_charm",
+        "Description": "$mod_epicloot_l_troll_charm_desc",
+        "Requirements": {
+            "AllowedItemNames": [ "$item_cape_trollhide" ]
+        },
+        "SelectionWeight": 10000,
+        "GuaranteedEffectCount": 6,
+        "GuaranteedMagicEffects": [
+            { "Type": "ModifyArmor", "Values": { "MinValue": 140, "MaxValue": 160, "Increment": 10 } },
+            { "Type": "IncreaseStamina", "Values": { "MinValue": 20, "MaxValue": 25, "Increment": 5 } },
+            { "Type": "ModifyStaminaRegen", "Values": { "MinValue": 20, "MaxValue": 25, "Increment": 1 } },
+            { "Type": "AddBluntResistancePercentage", "Values": { "MinValue": 10, "MaxValue": 15, "Increment": 1 } },
+            { "Type": "AddElementalResistancePercentage", "Values": { "MinValue": 20, "MaxValue": 25, "Increment": 1 } },
+            { "Type": "Waterproof" }
+        ]
+    },
+
+// legacy items
     {
       "ID": "Dyrnwyn",
       "Name": "$mod_epicloot_l_dyrnwyn",
@@ -12,6 +1563,7 @@
         "AllowedItemTypes": [ "OneHandedWeapon" ],
         "AllowedSkillTypes": [ "Swords" ]
       },
+      "SelectionWeight": 0,
       "GuaranteedMagicEffects": [
         { "Type": "AddFireDamage", "Values": { "MinValue": 36, "MaxValue": 48, "Increment": 1 } }
       ]
@@ -26,6 +1578,7 @@
         "AllowedItemTypes": [ "OneHandedWeapon" ],
         "AllowedSkillTypes": [ "Clubs" ]
       },
+      "SelectionWeight": 0,
       "GuaranteedMagicEffects": [
         { "Type": "ModifyMovementSpeed", "Values": { "MinValue": 10, "MaxValue": 14, "Increment": 1 } }
       ]
@@ -38,6 +1591,7 @@
         "AllowedItemTypes": [ "OneHandedWeapon" ],
         "AllowedSkillTypes": [ "Spears" ]
       },
+      "SelectionWeight": 0,
       "GuaranteedMagicEffects": [
         { "Type": "ModifyDamage", "Values": { "MinValue": 20, "MaxValue": 25, "Increment": 1 } }
       ]
@@ -51,6 +1605,7 @@
       "Requirements": {
         "AllowedItemNames": [ "$item_sledge_iron" ]
       },
+      "SelectionWeight": 0,
       "GuaranteedEffectCount": 6, 
       "GuaranteedMagicEffects": [
         { "Type": "ModifyPhysicalDamage", "Values": { "MinValue": 36, "MaxValue": 44, "Increment": 1 } },
@@ -67,6 +1622,7 @@
         "AllowedItemTypes": [ "OneHandedWeapon" ],
         "AllowedSkillTypes": [ "Axes" ]
       },
+      "SelectionWeight": 0,
       "GuaranteedMagicEffects": [
         { "Type": "Throwable" },
         { "Type": "RecallWeapon" },
@@ -82,6 +1638,7 @@
         "AllowedItemTypes": [ "OneHandedWeapon" ],
         "AllowedSkillTypes": [ "Swords" ]
       },
+      "SelectionWeight": 0,
       "GuaranteedMagicEffects": [
         { "Type": "AddSlashingDamage", "Values": { "MinValue" : 30, "MaxValue" : 35, "Increment" : 1 } },
         { "Type": "Executioner", "Values": { "MinValue" : 900, "MaxValue" : 1000, "Increment" : 10 } },
@@ -98,6 +1655,7 @@
         "AllowedItemTypes": [ "OneHandedWeapon" ],
         "AllowedSkillTypes": [ "Swords" ]
       },
+      "SelectionWeight": 0,
       "GuaranteedMagicEffects": [
         { "Type": "Glowing" },
         { "Type": "RemoveSpeedPenalty" },
@@ -113,6 +1671,7 @@
         "AllowedItemTypes": [ "OneHandedWeapon" ],
         "AllowedSkillTypes": [ "Knives" ]
       },
+      "SelectionWeight": 0,
       "GuaranteedMagicEffects": [
         { "Type": "Throwable" },
         { "Type": "RecallWeapon" },
@@ -128,6 +1687,7 @@
         "AllowedItemTypes": [ "OneHandedWeapon" ],
         "AllowedSkillTypes": [ "Knives" ]
       },
+      "SelectionWeight": 0,
       "GuaranteedMagicEffects": [
         { "Type": "AddSlashingDamage", "Values": { "MinValue" : 30, "MaxValue" : 35, "Increment" : 1 } },
         { "Type": "ModifyMovementSpeed", "Values": { "MinValue" : 10, "MaxValue" : 14, "Increment" : 1 } },
@@ -142,6 +1702,7 @@
         "AllowedItemTypes": [ "TwoHandedWeapon" ],
         "AllowedSkillTypes": [ "Axes" ]
       },
+      "SelectionWeight": 0,
       "GuaranteedMagicEffects": [
         { "Type": "ModifyMovementSpeedLowHealth", "Values": { "MinValue" : 25, "MaxValue" : 35, "Increment" : 1 } },
         { "Type": "ModifyStaminaRegenLowHealth", "Values": { "MinValue" : 70, "MaxValue" : 90, "Increment" : 1 } },
@@ -158,6 +1719,7 @@
         "AllowedItemTypes": [ "OneHandedWeapon" ],
         "AllowedSkillTypes": [ "Swords" ]
       },
+      "SelectionWeight": 0,
       "GuaranteedMagicEffects": [
         { "Type": "AddSlashingDamage", "Values": { "MinValue" : 30, "MaxValue" : 35, "Increment" : 1 } },
         { "Type": "ModifyAttackStaminaUse", "Values": { "MinValue" : 25, "MaxValue" : 30, "Increment" : 1 } },
@@ -173,6 +1735,7 @@
         "AllowedItemTypes": [ "OneHandedWeapon" ],
         "AllowedSkillTypes": [ "Swords" ]
       },
+      "SelectionWeight": 0,
       "GuaranteedMagicEffects": [
         { "Type": "AddSlashingDamage", "Values": { "MinValue" : 30, "MaxValue" : 35, "Increment" : 1 } },
         { "Type": "ModifyAttackStaminaUse", "Values": { "MinValue" : 25, "MaxValue" : 30, "Increment" : 1 } },
@@ -188,6 +1751,7 @@
         "AllowedItemTypes": [ "OneHandedWeapon" ],
         "AllowedSkillTypes": [ "Clubs" ]
       },
+      "SelectionWeight": 0,
       "GuaranteedMagicEffects": [
         { "Type": "AddFireDamage", "Values": { "MinValue" : 12, "MaxValue" : 21, "Increment" : 1 } },
         { "Type": "AddFrostDamage", "Values": { "MinValue" : 6, "MaxValue" : 10, "Increment" : 1 } },
@@ -202,6 +1766,7 @@
       "Requirements" : {
         "AllowedItemNames" : [ "$item_mace_needle" ]
       },
+      "SelectionWeight": 0,
       "GuaranteedMagicEffects": [
         { "Type": "AddPiercingDamage", "Values": { "MinValue" : 15, "MaxValue" : 20, "Increment" : 1 } },
         { "Type": "LifeSteal", "Values": { "MinValue" : 4, "MaxValue" : 4.5, "Increment" : 0.1 } },
@@ -216,6 +1781,7 @@
         "AllowedItemTypes": [ "TwoHandedWeapon" ],
         "AllowedSkillTypes": [ "Polearms" ]
       },
+      "SelectionWeight": 0,
       "GuaranteedMagicEffects": [
         { "Type": "AddPiercingDamage", "Values": { "MinValue" : 20, "MaxValue" : 25, "Increment" : 1 } },
         { "Type": "ModifyAttackSpeed", "Values": { "MinValue" : 20, "MaxValue" : 22, "Increment" : 1 } },
@@ -230,6 +1796,7 @@
         "AllowedItemTypes": [ "Bow" ],
         "AllowedSkillTypes": [ "Bows" ]
       },
+      "SelectionWeight": 0,
       "GuaranteedMagicEffects": [
         { "Type": "ModifyMovementSpeed", "Values": { "MinValue" : 8, "MaxValue" : 13, "Increment" : 1 } },
         { "Type": "RemoveSpeedPenalty" }
@@ -243,6 +1810,7 @@
         "AllowedItemTypes": [ "Bow" ],
         "AllowedSkillTypes": [ "Bows" ]
       },
+      "SelectionWeight": 0,
       "GuaranteedMagicEffects": [
         { "Type": "ExplosiveArrows", "Values": { "MinValue" : 35, "MaxValue" : 40, "Increment" : 1 } },
         { "Type": "AddFrostDamage", "Values": { "MinValue" : 6, "MaxValue" : 10, "Increment" : 1 } },
@@ -257,6 +1825,7 @@
         "AllowedItemTypes": [ "Bow" ],
         "AllowedSkillTypes": [ "Bows" ]
       },
+      "SelectionWeight": 0,
       "GuaranteedMagicEffects": [
         { "Type": "QuickDraw", "Values": { "MinValue" : 25, "MaxValue" : 35, "Increment" : 1 } },
         { "Type": "ModifyAttackStaminaUse", "Values": { "MinValue" : 17, "MaxValue" : 20, "Increment" : 1 } },
@@ -271,6 +1840,7 @@
         "AllowedItemTypes": [ "OneHandedWeapon" ],
         "AllowedSkillTypes": [ "Knives" ]
       },
+      "SelectionWeight": 0,
       "GuaranteedEffectCount": 6, 
       "GuaranteedMagicEffects": [
         { "Type": "ModifyAttackStaminaUse", "Values": { "MinValue" : 30, "MaxValue" : 40, "Increment" : 1 } },
@@ -284,6 +1854,46 @@
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Legendary Set Items
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    {
+        "ID": "TrollHelmet",
+        "Name": "$mod_epicloot_l_troll_helmet",
+        "Description": "$mod_epicloot_l_troll_helmet_desc",
+        "IsSetItem": true,
+        "Requirements": {
+            "AllowedItemNames": [ "$item_helmet_trollleather" ]
+        },
+        "SelectionWeight": 1000
+    },
+    {
+        "ID": "TrollChest",
+        "Name": "$mod_epicloot_l_troll_chest",
+        "Description": "$mod_epicloot_l_troll_chest_desc",
+        "IsSetItem": true,
+        "Requirements": {
+            "AllowedItemNames": [ "$item_chest_trollleather" ]
+        },
+        "SelectionWeight": 1000
+    }, 
+    {
+        "ID": "TrollLegs",
+        "Name": "$mod_epicloot_l_troll_legs",
+        "Description": "$mod_epicloot_l_troll_legs_desc",
+        "IsSetItem": true,
+        "Requirements": {
+            "AllowedItemNames": [ "$item_legs_trollleather" ]
+        },
+        "SelectionWeight": 1000
+    }, 
+    {
+        "ID": "TrollCape",
+        "Name": "$mod_epicloot_l_troll_cape",
+        "Description": "$mod_epicloot_l_troll_cape_desc",
+        "IsSetItem": true,
+        "Requirements": {
+            "AllowedItemNames": [ "$item_cape_trollhide" ]
+        },
+        "SelectionWeight": 1000
+    }, 
 
     // Heimdall
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -298,6 +1908,7 @@
         ],
         "ItemHasNoParryPower": true
       },
+      "SelectionWeight": 0,
       "GuaranteedMagicEffects": [
         { "Type": "Immovable" }
       ]
@@ -312,6 +1923,7 @@
           "Helmet"
         ]
       },
+      "SelectionWeight": 0,
       "GuaranteedEffectCount": 6, 
       "GuaranteedMagicEffects": [
         { "Type": "ModifyArmorLowHealth", "Values": { "MinValue": 30, "MaxValue": 35, "Increment": 1 } },
@@ -329,6 +1941,7 @@
           "Chest"
         ]
       },
+      "SelectionWeight": 0,
       "GuaranteedEffectCount": 6, 
       "GuaranteedMagicEffects": [
         { "Type": "ModifyArmor", "Values": { "MinValue": 50, "MaxValue": 50, "Increment": 1 } },
@@ -345,6 +1958,7 @@
           "Legs"
         ]
       },
+      "SelectionWeight": 0,
       "GuaranteedEffectCount": 6, 
       "GuaranteedMagicEffects": [
         { "Type": "AddMovementSkills", "Values": { "MinValue": 30, "MaxValue": 40, "Increment": 1 } },
@@ -365,6 +1979,7 @@
         "AllowedItemTypes": [ "TwoHandedWeapon" ], 
         "AllowedSkillTypes": [ "Axes" ]
       },
+      "SelectionWeight": 0,
       "GuaranteedMagicEffects": [
         { "Type": "ModifyPhysicalDamage", "Values": { "MinValue": 15, "MaxValue": 20, "Increment": 1 } },
         { "Type": "AddFrostDamage", "Values": { "MinValue": 30, "MaxValue": 35, "Increment": 1 } }
@@ -380,6 +1995,7 @@
           "Shoulder"
         ]
       },
+      "SelectionWeight": 0,
       "GuaranteedEffectCount": 6
     },
     {
@@ -393,6 +2009,7 @@
           "Chest"
         ]
       },
+      "SelectionWeight": 0,
       "GuaranteedEffectCount": 6
     },
     {
@@ -405,6 +2022,7 @@
           "Legs"
         ]
       },
+      "SelectionWeight": 0,
       "GuaranteedEffectCount": 6
     }
   ],
@@ -412,6 +2030,24 @@
   // Legendary Sets
   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   "LegendarySets": [
+    {
+        "ID": "SetTroll",
+        "Name": "$mod_epicloot_set_troll",
+        "LegendaryIDs": [
+          "TrollHelmet",
+          "TrollChest",
+          "TrollLegs",
+          "TrollCape"
+        ],
+        "SetBonuses": [
+          { "Count": 4, "Effect": { "Type": "ModifyHealthRegenLowHealth", "Values": { "MinValue": 100, "MaxValue": 100, "Increment": 1 } } },
+          { "Count": 4, "Effect": { "Type": "ModifyMovementSpeed", "Values": { "MinValue": 57, "MaxValue": 57, "Increment": 1 } } },
+          { "Count": 4, "Effect": { "Type": "Luck", "Values": { "MinValue": 15, "MaxValue": 15, "Increment": 1 } } },
+          { "Count": 4, "Effect": { "Type": "DoubleJump" } },
+          { "Count": 4, "Effect": { "Type": "FeatherFall" } }
+        ]
+    },
+
     {
       "ID": "Heimdall",
       "Name": "$mod_epicloot_set_heimdall",

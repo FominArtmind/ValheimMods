@@ -13,7 +13,7 @@
   "ItemInfo": [
     {
       "Type": "Swords",
-      "Fallback": "AxeFlint",
+      "Fallback": "AxeStone",
       "Items": [ "SwordBronze", "SwordIron", "SwordSilver", "SwordBlackmetal", "SwordMistwalker", "THSwordKrom" ],
       "ItemsByBoss" : {
         "defeated_eikthyr"    : [  ],
@@ -39,7 +39,7 @@
     },
     {
         "Type": "TwoHandAxes",
-        "Fallback": "Axes",
+        "Fallback": "AxeStone",
         "Items": [ "Battleaxe", "BattleaxeCrystal" ],
         "ItemsByBoss": {
             "defeated_eikthyr": [],
@@ -52,7 +52,7 @@
     },
     {
       "Type": "Knives",
-      "Fallback": "Clubs",
+      "Fallback": "AxeStone",
       "Items": [ "KnifeFlint", "KnifeCopper", "KnifeChitin", "KnifeSilver", "KnifeBlackMetal", "KnifeSkollAndHati" ],
       "ItemsByBoss" : {
         "defeated_eikthyr"    : [ "KnifeFlint" ],
@@ -65,7 +65,7 @@
     },
     {
       "Type": "Fists",
-      "Fallback": "Knives",
+      "Fallback": "AxeStone",
       "Items": [ "FistFenrirClaw" ],
       "ItemsByBoss" : {
         "defeated_eikthyr"    : [  ],
@@ -78,7 +78,7 @@
     },
     {
         "Type": "Staffs",
-        "Fallback": "Spears",
+        "Fallback": "AxeStone",
         "Items": [ "StaffFireball", "StaffIceShards", "StaffShield", "StaffSkeleton" ],
         "ItemsByBoss": {
             "defeated_eikthyr": [],
@@ -91,7 +91,7 @@
     },
     {
       "Type": "Clubs",
-      "Fallback": "",
+      "Fallback": "AxeStone",
       "Items": [ "Club", "MaceBronze", "MaceIron", "MaceSilver", "MaceNeedle" ],
       "ItemsByBoss" : {
         "defeated_eikthyr"    : [ "Club" ],
@@ -104,7 +104,7 @@
     },
     {
         "Type": "Sledges",
-        "Fallback": "Clubs",
+        "Fallback": "AxeStone",
         "Items": [ "SledgeStagbreaker", "SledgeIron", "SledgeDemolisher" ],
         "ItemsByBoss": {
             "defeated_eikthyr": [ "SledgeStagbreaker" ],
@@ -117,7 +117,7 @@
     },
     {
         "Type": "Polearms",
-        "Fallback": "Spears",
+        "Fallback": "AxeStone",
         "Items": [ "AtgeirBronze", "AtgeirIron", "AtgeirBlackmetal", "AtgeirHimminAfl" ],
         "ItemsByBoss": {
             "defeated_eikthyr": [],
@@ -130,7 +130,7 @@
     },
     {
         "Type": "Spears",
-        "Fallback": "Axes",
+        "Fallback": "AxeStone",
         "Items": [ "SpearFlint", "SpearBronze", "SpearElderbark", "SpearChitin", "SpearWolfFang", "SpearCarapace" ],
         "ItemsByBoss": {
             "defeated_eikthyr": [ "SpearFlint" ],
@@ -143,7 +143,7 @@
     },
     {
         "Type": "Pickaxes",
-        "Fallback": "Axes",
+        "Fallback": "AxeStone",
         "Items": [ "PickaxeAntler", "PickaxeBronze", "PickaxeIron", "PickaxeBlackMetal" ],
         "ItemsByBoss": {
             "defeated_eikthyr": [ "PickaxeAntler" ],
@@ -156,7 +156,7 @@
     },
     {
       "Type": "Bows",
-      "Fallback": "Clubs",
+      "Fallback": "AxeStone",
       "Items": [ "Bow", "BowFineWood", "BowHuntsman", "BowDraugrFang", "CrossbowArbalest", "BowSpineSnap" ],
       "ItemsByBoss" : {
         "defeated_eikthyr"    : [ "Bow" ],
@@ -169,7 +169,7 @@
     },
     {
         "Type": "Bucklers",
-        "Fallback": "RoundShields",
+        "Fallback": "ShieldWood",
         "Items": [ "ShieldBronzeBuckler", "ShieldIronBuckler", "ShieldCarapaceBuckler" ],
         "ItemsByBoss": {
             "defeated_eikthyr": [],

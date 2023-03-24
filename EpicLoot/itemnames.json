@@ -211,7 +211,5 @@
     ]
   },
   "Legendary": [
-    { "Name": "$mod_epicloot_l_fafnir", "Types": [ "OneHandedWeapon" ], "Skills": [ "Swords" ] },
-    { "Name": "$mod_epicloot_l_luff", "Types": [ "OneHandedWeapon"], "Skills": [ "Spears" ] }
   ]
 }
