@@ -546,35 +546,24 @@ namespace EpicLoot.CraftingV2
             if (item == null || !item.IsMagic())
                 return result;
 
-            var rarity = item.GetRarity();
-            List<ItemAmountConfig> costList;
-            switch (rarity)
-            {
-                case ItemRarity.Magic:
-                    costList = EnchantCostsHelper.Config.DisenchantCosts.Magic;
-                    break;
+            var type = item.m_shared.m_itemType;
+            var name = item.m_shared.m_name;
 
-                case ItemRarity.Rare:
-                    costList = EnchantCostsHelper.Config.DisenchantCosts.Rare;
-                    break;
+            var configEntry = EnchantCostsHelper.Config.DisenchantCosts.Find(x => {
+                if (x.ItemTypes?.Count > 0 && !x.ItemTypes.Contains(type.ToString()))
+                {
+                    return false;
+                }
 
-                case ItemRarity.Epic:
-                    costList = EnchantCostsHelper.Config.DisenchantCosts.Epic;
-                    break;
+                if (x.ItemNames?.Count > 0 && !x.ItemNames.Contains(name))
+                {
+                    return false;
+                }
 
-                case ItemRarity.Legendary:
-                    costList = EnchantCostsHelper.Config.DisenchantCosts.Legendary;
-                    break;
-
-                // TODO: Mythic Hookup
-                case ItemRarity.Mythic:
-                    return result;
-
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
+                return true;
+            });
             
-            foreach (var itemAmountConfig in costList)
+            foreach (var itemAmountConfig in configEntry.Cost)
             {
                 var prefab = ObjectDB.instance.GetItemPrefab(itemAmountConfig.Item);
                 if (prefab == null)

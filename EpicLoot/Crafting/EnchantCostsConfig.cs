@@ -13,11 +13,9 @@ namespace EpicLoot.Crafting
     [Serializable]
     public class DisenchantCostsConfig
     {
-        public List<ItemAmountConfig> Magic = new List<ItemAmountConfig>();
-        public List<ItemAmountConfig> Rare = new List<ItemAmountConfig>();
-        public List<ItemAmountConfig> Epic = new List<ItemAmountConfig>();
-        public List<ItemAmountConfig> Legendary = new List<ItemAmountConfig>();
-        public List<ItemAmountConfig> Mythic = new List<ItemAmountConfig>();
+        public List<string> ItemTypes = new List<string>();
+        public List<string> ItemNames = new List<string>();
+        public List<ItemAmountConfig> Cost = new List<ItemAmountConfig>();
     }
 
     [Serializable]
@@ -51,7 +49,7 @@ namespace EpicLoot.Crafting
     [Serializable]
     public class EnchantingCostsConfig
     {
-        public DisenchantCostsConfig DisenchantCosts = new DisenchantCostsConfig();
+        public List<DisenchantCostsConfig> DisenchantCosts = new List<DisenchantCostsConfig>();
         public List<DisenchantProductsConfig> DisenchantProducts = new List<DisenchantProductsConfig>();
         public List<EnchantCostConfig> EnchantCosts = new List<EnchantCostConfig>();
         public List<AugmentCostConfig> AugmentCosts = new List<AugmentCostConfig>();
