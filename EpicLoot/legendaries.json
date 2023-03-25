@@ -1012,7 +1012,24 @@
         ]
     },
 // Flesh rippers
-// $item_fistweapon_fenris
+    {
+        "ID": "WerewolfClaw",
+        "Name": "$mod_epicloot_l_werewolf_claw",
+        "Description": "$mod_epicloot_l_werewolf_claw_desc",
+        "Requirements": {
+            "AllowedItemNames": [ "$item_fistweapon_fenris" ]
+        },
+        "SelectionWeight": 10000,
+        "GuaranteedEffectCount": 6,
+        "GuaranteedMagicEffects": [
+            { "Type": "ModifyPhysicalDamage", "Values": { "MinValue": 90, "MaxValue": 110, "Increment": 1 } },
+            { "Type": "AddPoisonDamage", "Values": { "MinValue": 60, "MaxValue": 90, "Increment": 1 } },
+            { "Type": "ModifyParry", "Values": { "MinValue": 150, "MaxValue": 150, "Increment": 1 } },
+            { "Type": "ModifyBackstab", "Values": { "MinValue": 40, "MaxValue": 80, "Increment": 1 } },
+            { "Type": "ModifyAttackSpeedLowHealth", "Values": { "MinValue": 35, "MaxValue": 35, "Increment": 1 } },
+            { "Type": "LifeStealLowHealth", "Values": { "MinValue": 16, "MaxValue": 22, "Increment": 1 } }
+        ]
+    },
 // Bows
     {
         "ID": "Sling",
@@ -1093,9 +1110,9 @@
         "GuaranteedEffectCount": 5,
         "GuaranteedMagicEffects": [
             { "Type": "ModifyBlockPower", "Values": { "MinValue": 35, "MaxValue": 35, "Increment": 1 } },
-            { "Type": "ModifyParry", "Values": { "MinValue": 35, "MaxValue": 35, "Increment": 1 } },
+            { "Type": "ModifyParry", "Values": { "MinValue": 45, "MaxValue": 45, "Increment": 1 } },
             { "Type": "ModifyBlockStaminaUse", "Values": { "MinValue": 35, "MaxValue": 65, "Increment": 1 } },
-            { "Type": "ReduceWeight", "Values": { "MinValue": 50, "MaxValue": 50, "Increment": 1 } },
+            { "Type": "Weightless" },
             { "Type": "Indestructible" }
         ]
     },
