@@ -88,35 +88,6 @@
       ]
     },
     {
-      "Name": "Recipe_EssenceRareUpgrade",
-      "Product": "EssenceRare",
-      "Amount": 1,
-      "Type": "Upgrade", 
-      "Resources": [
-        { "Item": "EssenceMagic", "Amount": 5 }
-      ]
-    },
-    {
-      "Name": "Recipe_EssenceEpicUpgrade",
-      "Product": "EssenceEpic",
-      "Amount": 1,
-      "Type": "Upgrade", 
-      "Resources": [
-        { "Item": "EssenceRare", "Amount": 5  },
-        { "Item": "Coins",       "Amount": 5 }
-      ]
-    },
-    {
-      "Name": "Recipe_EssenceLegendaryUpgrade",
-      "Product": "EssenceLegendary",
-      "Amount": 1,
-      "Type": "Upgrade", 
-      "Resources": [
-        { "Item": "EssenceEpic", "Amount": 5  },
-        { "Item": "Coins",       "Amount": 10 }
-      ]
-    },
-    {
       "Name": "Recipe_RunestoneRareUpgrade",
       "Product": "RunestoneRare",
       "Amount": 1,
@@ -155,15 +126,6 @@
       ]
     },
     {
-      "Name": "Recipe_MagicShardToEssence_Conversion",
-      "Product": "EssenceMagic",
-      "Amount": 1,
-      "Type": "Convert", 
-      "Resources": [
-        { "Item": "ShardMagic", "Amount": 2 }
-      ]
-    },
-    {
       "Name": "Recipe_MagicShardToReagent_Conversion",
       "Product": "ReagentMagic",
       "Amount": 1,
@@ -175,16 +137,6 @@
     {
       "Name": "Recipe_RareShardToDust_Conversion",
       "Product": "DustRare",
-      "Amount": 1,
-      "Type": "Convert", 
-      "Resources": [
-        { "Item": "ShardRare", "Amount": 2 },
-        { "Item": "Coins",     "Amount": 2 }
-      ]
-    },
-    {
-      "Name": "Recipe_RareShardToEssence_Conversion",
-      "Product": "EssenceRare",
       "Amount": 1,
       "Type": "Convert", 
       "Resources": [
@@ -213,16 +165,6 @@
       ]
     },
     {
-      "Name": "Recipe_EpicShardToEssence_Conversion",
-      "Product": "EssenceEpic",
-      "Amount": 1,
-      "Type": "Convert", 
-      "Resources": [
-        { "Item": "ShardEpic", "Amount": 2 },
-        { "Item": "Coins",     "Amount": 3 }
-      ]
-    },
-    {
       "Name": "Recipe_EpicShardToReagent_Conversion",
       "Product": "ReagentEpic",
       "Amount": 1,
@@ -235,16 +177,6 @@
     {
       "Name": "Recipe_LegendaryShardToDust_Conversion",
       "Product": "DustLegendary",
-      "Amount": 1,
-      "Type": "Convert", 
-      "Resources": [
-        { "Item": "ShardLegendary", "Amount": 2 },
-        { "Item": "Coins",          "Amount": 4 }
-      ]
-    },
-    {
-      "Name": "Recipe_LegendaryShardToEssence_Conversion",
-      "Product": "EssenceLegendary",
       "Amount": 1,
       "Type": "Convert", 
       "Resources": [

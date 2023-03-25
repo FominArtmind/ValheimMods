@@ -233,8 +233,7 @@
       "ItemTypes" : [ "OneHandedWeapon", "Bow", "TwoHandedWeapon", "TwoHandedWeaponLeft" ],
       "Rarity": "Magic",
       "Products": [
-        { "Item": "DustMagic",    "Amount": 2 },
-        { "Item": "EssenceMagic", "Amount": 2 }
+        { "Item": "ReagentMagic",    "Amount": 2 }
       ]
     },
     {
@@ -242,8 +241,7 @@
       "ItemTypes" : [ "OneHandedWeapon", "Bow", "TwoHandedWeapon", "TwoHandedWeaponLeft" ],
       "Rarity": "Rare",
       "Products": [
-        { "Item": "DustRare",    "Amount": 2 },
-        { "Item": "EssenceRare", "Amount": 2 }
+        { "Item": "ReagentRare",    "Amount": 2 }
       ]
     },
     {
@@ -251,8 +249,7 @@
       "ItemTypes" : [ "OneHandedWeapon", "Bow", "TwoHandedWeapon", "TwoHandedWeaponLeft" ],
       "Rarity": "Epic",
       "Products": [
-        { "Item": "DustEpic",    "Amount": 2 },
-        { "Item": "EssenceEpic", "Amount": 2 }
+        { "Item": "ReagentEpic",    "Amount": 2 }
       ]
     },
     {
@@ -260,8 +257,7 @@
       "ItemTypes" : [ "OneHandedWeapon", "Bow", "TwoHandedWeapon", "TwoHandedWeaponLeft" ],
       "Rarity": "Legendary",
       "Products": [
-        { "Item": "DustEpic",    "Amount": 7 },
-        { "Item": "EssenceEpic", "Amount": 7 }
+        { "Item": "ReagentEpic",    "Amount": 7 }
       ]
     },
     {
@@ -269,8 +265,7 @@
         "ItemTypes" : [ "Torch", "Tool" ],
         "Rarity": "Magic",
         "Products": [
-          { "Item": "DustMagic",    "Amount": 1 },
-          { "Item": "EssenceMagic", "Amount": 1 }
+          { "Item": "ReagentMagic",    "Amount": 1 }
         ]
       },
       {
@@ -278,8 +273,7 @@
         "ItemTypes" : [ "Torch", "Tool" ],
         "Rarity": "Rare",
         "Products": [
-          { "Item": "DustRare",    "Amount": 1 },
-          { "Item": "EssenceRare", "Amount": 1 }
+          { "Item": "ReagentRare",    "Amount": 1 }
         ]
       },
       {
@@ -287,8 +281,7 @@
         "ItemTypes" : [ "Torch", "Tool" ],
         "Rarity": "Epic",
         "Products": [
-          { "Item": "DustEpic",    "Amount": 1 },
-          { "Item": "EssenceEpic", "Amount": 1 }
+          { "Item": "ReagentEpic",    "Amount": 1 }
         ]
       },
       {
@@ -296,8 +289,7 @@
         "ItemTypes" : [ "Torch", "Tool" ],
         "Rarity": "Legendary",
         "Products": [
-          { "Item": "DustEpic",    "Amount": 3 },
-          { "Item": "EssenceEpic", "Amount": 3 }
+          { "Item": "ReagentEpic",    "Amount": 3 }
         ]
       },
     {
@@ -305,8 +297,7 @@
       "ItemTypes" : [ "Shield", "Helmet", "Chest", "Legs", "Shoulder", "Utility" ],
       "Rarity": "Magic",
       "Products": [
-        { "Item": "DustMagic",    "Amount": 1 },
-        { "Item": "ReagentMagic", "Amount": 1 }
+        { "Item": "DustMagic",    "Amount": 1 }
       ]
     },
     {
@@ -314,8 +305,7 @@
       "ItemTypes" : [ "Shield", "Helmet", "Chest", "Legs", "Shoulder", "Utility" ],
       "Rarity": "Rare",
       "Products": [
-        { "Item": "DustRare",    "Amount": 1 },
-        { "Item": "ReagentRare", "Amount": 1 }
+        { "Item": "DustRare",    "Amount": 1 }
       ]
     },
     {
@@ -323,8 +313,7 @@
       "ItemTypes" : [ "Shield", "Helmet", "Chest", "Legs", "Shoulder", "Utility" ],
       "Rarity": "Epic",
       "Products": [
-        { "Item": "DustEpic",    "Amount": 1 },
-        { "Item": "ReagentEpic", "Amount": 1 }
+        { "Item": "DustEpic",    "Amount": 1 }
       ]
     },
     {
@@ -332,8 +321,7 @@
       "ItemTypes" : [ "Shield", "Helmet", "Chest", "Legs", "Shoulder", "Utility" ],
       "Rarity": "Legendary",
       "Products": [
-        { "Item": "DustEpic",    "Amount": 3 },
-        { "Item": "ReagentEpic", "Amount": 3 }
+        { "Item": "DustEpic",    "Amount": 3 }
       ]
     },
     {
@@ -429,48 +417,42 @@
     {
       "ItemNames" : [ "$item_cryptkey" ],
       "Products" : [
-        { "Item": "DustRare",    "Amount": 6 },
-        { "Item": "EssenceRare", "Amount": 3 },
+        { "Item": "DustRare",    "Amount": 3 },
         { "Item": "ReagentRare", "Amount": 3 }
       ]
     },
     {
       "ItemNames" : [ "$item_wishbone" ],
       "Products" : [
-        { "Item": "DustEpic",    "Amount": 6 },
-        { "Item": "EssenceEpic", "Amount": 3 },
+        { "Item": "DustEpic",    "Amount": 3 },
         { "Item": "ReagentEpic", "Amount": 3 }
       ]
     },
     {
       "ItemNames" : [ "$item_dragontear" ],
       "Products" : [
-        { "Item": "DustEpic",    "Amount": 2 },
-        { "Item": "EssenceEpic", "Amount": 1 },
+        { "Item": "DustEpic",    "Amount": 1 },
         { "Item": "ReagentEpic", "Amount": 1 }
       ]
     },
     {
       "ItemNames" : [ "$item_yagluththing" ],
       "Products" : [
-        { "Item": "DustEpic",    "Amount": 18 },
-        { "Item": "EssenceEpic", "Amount": 9 },
+        { "Item": "DustEpic",    "Amount": 9 },
         { "Item": "ReagentEpic", "Amount": 9 }
       ]
     },
     {
       "ItemNames" : [ "$item_dvergrkeyfragment" ],
       "Products" : [
-        { "Item": "DustEpic",    "Amount": 6 },
-        { "Item": "EssenceEpic", "Amount": 3 },
+        { "Item": "DustEpic",    "Amount": 3 },
         { "Item": "ReagentEpic", "Amount": 3 }
       ]
     },
     {
       "ItemNames" : [ "$item_queen_drop" ],
       "Products" : [
-        { "Item": "DustEpic",    "Amount": 54 },
-        { "Item": "EssenceEpic", "Amount": 27 },
+        { "Item": "DustEpic",    "Amount": 27 },
         { "Item": "ReagentEpic", "Amount": 27 }
       ]
     }
@@ -485,8 +467,7 @@
       "Rarity": "Magic",
       "Cost": [
         { "Item": "RunestoneMagic", "Amount": 1 },
-        { "Item": "DustMagic",      "Amount": 7 },
-        { "Item": "EssenceMagic",   "Amount": 7 }
+        { "Item": "ReagentMagic",   "Amount": 7 }
       ]
     },
     {
@@ -494,8 +475,7 @@
       "Rarity": "Rare",
       "Cost": [
         { "Item": "RunestoneRare", "Amount": 1 },
-        { "Item": "DustRare",      "Amount": 7 },
-        { "Item": "EssenceRare",   "Amount": 7 }
+        { "Item": "ReagentRare",   "Amount": 7 }
       ]
     },
     {
@@ -503,8 +483,7 @@
       "Rarity": "Epic",
       "Cost": [
         { "Item": "RunestoneEpic", "Amount": 1 },
-        { "Item": "DustEpic",      "Amount": 7 },
-        { "Item": "EssenceEpic",   "Amount": 7 }
+        { "Item": "ReagentEpic",   "Amount": 7 }
       ]
     },
     {
@@ -512,8 +491,7 @@
       "Rarity": "Legendary",
       "Cost": [
         { "Item": "RunestoneLegendary", "Amount": 1 },
-        { "Item": "DustLegendary",      "Amount": 7 },
-        { "Item": "EssenceLegendary",   "Amount": 7 }
+        { "Item": "ReagentLegendary",      "Amount": 7 }
       ]
     },
     {
@@ -521,8 +499,7 @@
         "Rarity": "Magic",
         "Cost": [
           { "Item": "RunestoneMagic", "Amount": 1 },
-          { "Item": "DustMagic",      "Amount": 3 },
-          { "Item": "EssenceMagic",   "Amount": 3 }
+          { "Item": "ReagentMagic",      "Amount": 3 }
         ]
       },
       {
@@ -530,8 +507,7 @@
         "Rarity": "Rare",
         "Cost": [
           { "Item": "RunestoneRare", "Amount": 1 },
-          { "Item": "DustRare",      "Amount": 3 },
-          { "Item": "EssenceRare",   "Amount": 3 }
+          { "Item": "ReagentRare",      "Amount": 3 }
         ]
       },
       {
@@ -539,8 +515,7 @@
         "Rarity": "Epic",
         "Cost": [
           { "Item": "RunestoneEpic", "Amount": 1 },
-          { "Item": "DustEpic",      "Amount": 3 },
-          { "Item": "EssenceEpic",   "Amount": 3 }
+          { "Item": "ReagentEpic",      "Amount": 3 }
         ]
       },
       {
@@ -548,8 +523,7 @@
         "Rarity": "Legendary",
         "Cost": [
           { "Item": "RunestoneLegendary", "Amount": 1 },
-          { "Item": "DustLegendary",      "Amount": 3 },
-          { "Item": "EssenceLegendary",   "Amount": 3 }
+          { "Item": "ReagentLegendary",      "Amount": 3 }
         ]
     },
     {
@@ -557,8 +531,7 @@
       "Rarity": "Magic",
       "Cost": [
         { "Item": "RunestoneMagic", "Amount": 1 },
-        { "Item": "DustMagic",      "Amount": 5 },
-        { "Item": "ReagentMagic",   "Amount": 5 }
+        { "Item": "DustMagic",      "Amount": 5 }
       ]
     },
     {
@@ -566,8 +539,7 @@
       "Rarity": "Rare",
       "Cost": [
         { "Item": "RunestoneRare", "Amount": 1 },
-        { "Item": "DustRare",      "Amount": 5 },
-        { "Item": "ReagentRare",   "Amount": 5 }
+        { "Item": "DustRare",      "Amount": 5 }
       ]
     },
     {
@@ -575,8 +547,7 @@
       "Rarity": "Epic",
       "Cost": [
         { "Item": "RunestoneEpic", "Amount": 1 },
-        { "Item": "DustEpic",      "Amount": 5 },
-        { "Item": "ReagentEpic",   "Amount": 5 }
+        { "Item": "DustEpic",      "Amount": 5 }
       ]
     },
     {
@@ -584,8 +555,7 @@
       "Rarity": "Legendary",
       "Cost": [
         { "Item": "RunestoneLegendary", "Amount": 1 },
-        { "Item": "DustLegendary",      "Amount": 5 },
-        { "Item": "ReagentLegendary",   "Amount": 5 }
+        { "Item": "DustLegendary",      "Amount": 5 }
       ]
     }
   ],
@@ -605,8 +575,7 @@
       ],
       "Rarity": "Magic",
       "Cost": [
-        { "Item": "DustMagic",    "Amount": 1 },
-        { "Item": "EssenceMagic", "Amount": 1 }
+        { "Item": "ReagentMagic",    "Amount": 1 }
       ]
     },
     {
@@ -622,8 +591,7 @@
       "Rarity": "Magic",
       "Cost": [
         { "Item": "ShardMagic",   "Amount": 1 },
-        { "Item": "DustMagic",    "Amount": 1 },
-        { "Item": "EssenceMagic", "Amount": 1 }
+        { "Item": "ReagentMagic",    "Amount": 1 }
       ]
     },
     {
@@ -641,8 +609,7 @@
       "Rarity": "Magic",
       "Cost": [
         { "Item": "ShardMagic",   "Amount": 1 },
-        { "Item": "DustMagic",    "Amount": 2 },
-        { "Item": "EssenceMagic", "Amount": 2 }
+        { "Item": "ReagentMagic",    "Amount": 2 }
       ]
     },
     {
@@ -660,8 +627,7 @@
       "Rarity": "Magic",
       "Cost": [
         { "Item": "ShardMagic",   "Amount": 1 },
-        { "Item": "DustMagic",    "Amount": 3 },
-        { "Item": "EssenceMagic", "Amount": 3 }
+        { "Item": "ReagentMagic",    "Amount": 3 }
       ]
     },
     {
@@ -678,8 +644,7 @@
       "Rarity": "Magic",
       "Cost": [
         { "Item": "ShardMagic",   "Amount": 2 },
-        { "Item": "DustMagic",    "Amount": 5 },
-        { "Item": "EssenceMagic", "Amount": 5 }
+        { "Item": "ReagentMagic",    "Amount": 5 }
       ]
     },
     {
@@ -693,8 +658,7 @@
       "Rarity": "Magic",
       "Cost": [
         { "Item": "ShardMagic",   "Amount": 2 },
-        { "Item": "DustMagic",    "Amount": 7 },
-        { "Item": "EssenceMagic", "Amount": 7 }
+        { "Item": "ReagentMagic",    "Amount": 7 }
       ]
     },
     {
@@ -712,8 +676,7 @@
       "Rarity": "Magic",
       "Cost": [
         { "Item": "ShardMagic",   "Amount": 3 },
-        { "Item": "DustMagic",    "Amount": 10 },
-        { "Item": "EssenceMagic", "Amount": 10 }
+        { "Item": "ReagentMagic",    "Amount": 10 }
       ]
     },
 // Rare weapon
@@ -727,8 +690,7 @@
         ],
         "Rarity": "Rare",
         "Cost": [
-            { "Item": "DustRare",    "Amount": 1 },
-            { "Item": "EssenceRare", "Amount": 1 }
+            { "Item": "ReagentRare",    "Amount": 1 }
         ]
     },
     {
@@ -744,8 +706,7 @@
         "Rarity": "Rare",
         "Cost": [
             { "Item": "ShardRare",   "Amount": 1 },
-            { "Item": "DustRare",    "Amount": 1 },
-            { "Item": "EssenceRare", "Amount": 1 }
+            { "Item": "ReagentRare",    "Amount": 1 }
         ]
     },
     {
@@ -763,8 +724,7 @@
         "Rarity": "Rare",
         "Cost": [
             { "Item": "ShardRare",   "Amount": 1 },
-            { "Item": "DustRare",    "Amount": 2 },
-            { "Item": "EssenceRare", "Amount": 2 }
+            { "Item": "ReagentRare",    "Amount": 2 }
         ]
     },
     {
@@ -782,8 +742,7 @@
         "Rarity": "Rare",
         "Cost": [
             { "Item": "ShardRare",   "Amount": 1 },
-            { "Item": "DustRare",    "Amount": 3 },
-            { "Item": "EssenceRare", "Amount": 3 }
+            { "Item": "ReagentRare",    "Amount": 3 }
         ]
     },
     {
@@ -800,8 +759,7 @@
         "Rarity": "Rare",
         "Cost": [
             { "Item": "ShardRare",   "Amount": 2 },
-            { "Item": "DustRare",    "Amount": 5 },
-            { "Item": "EssenceRare", "Amount": 5 }
+            { "Item": "ReagentRare",    "Amount": 5 }
         ]
     },
     {
@@ -815,8 +773,7 @@
         "Rarity": "Rare",
         "Cost": [
             { "Item": "ShardRare",   "Amount": 2 },
-            { "Item": "DustRare",    "Amount": 7 },
-            { "Item": "EssenceRare", "Amount": 7 }
+            { "Item": "ReagentRare",    "Amount": 7 }
         ]
     },
     {
@@ -834,8 +791,7 @@
         "Rarity": "Rare",
         "Cost": [
             { "Item": "ShardRare",   "Amount": 3 },
-            { "Item": "DustRare",    "Amount": 10 },
-            { "Item": "EssenceRare", "Amount": 10 }
+            { "Item": "ReagentRare",    "Amount": 10 }
         ]
     },
 // Epic weapon
@@ -849,8 +805,7 @@
         ],
         "Rarity": "Epic",
         "Cost": [
-            { "Item": "DustEpic",    "Amount": 1 },
-            { "Item": "EssenceEpic", "Amount": 1 }
+            { "Item": "ReagentEpic",    "Amount": 1 }
         ]
     },
     {
@@ -866,8 +821,7 @@
         "Rarity": "Epic",
         "Cost": [
             { "Item": "ShardEpic",   "Amount": 1 },
-            { "Item": "DustEpic",    "Amount": 1 },
-            { "Item": "EssenceEpic", "Amount": 1 }
+            { "Item": "ReagentEpic",    "Amount": 1 }
         ]
     },
     {
@@ -885,8 +839,7 @@
         "Rarity": "Epic",
         "Cost": [
             { "Item": "ShardEpic",   "Amount": 1 },
-            { "Item": "DustEpic",    "Amount": 2 },
-            { "Item": "EssenceEpic", "Amount": 2 }
+            { "Item": "ReagentEpic",    "Amount": 2 }
         ]
     },
     {
@@ -904,8 +857,7 @@
         "Rarity": "Epic",
         "Cost": [
             { "Item": "ShardEpic",   "Amount": 1 },
-            { "Item": "DustEpic",    "Amount": 3 },
-            { "Item": "EssenceEpic", "Amount": 3 }
+            { "Item": "ReagentEpic",    "Amount": 3 }
         ]
     },
     {
@@ -922,8 +874,7 @@
         "Rarity": "Epic",
         "Cost": [
             { "Item": "ShardEpic",   "Amount": 2 },
-            { "Item": "DustEpic",    "Amount": 5 },
-            { "Item": "EssenceEpic", "Amount": 5 }
+            { "Item": "ReagentEpic",    "Amount": 5 }
         ]
     },
     {
@@ -937,8 +888,7 @@
         "Rarity": "Epic",
         "Cost": [
             { "Item": "ShardEpic",   "Amount": 2 },
-            { "Item": "DustEpic",    "Amount": 7 },
-            { "Item": "EssenceEpic", "Amount": 7 }
+            { "Item": "ReagentEpic",    "Amount": 7 }
         ]
     },
     {
@@ -956,8 +906,7 @@
         "Rarity": "Epic",
         "Cost": [
             { "Item": "ShardEpic",   "Amount": 3 },
-            { "Item": "DustEpic",    "Amount": 10 },
-            { "Item": "EssenceEpic", "Amount": 10 }
+            { "Item": "ReagentEpic",    "Amount": 10 }
         ]
     },
 // Legendary weapon stub
@@ -966,8 +915,7 @@
         "Rarity": "Legendary",
         "Cost": [
             { "Item": "ShardLegendary",   "Amount": 1 },
-            { "Item": "DustLegendary",    "Amount": 3 },
-            { "Item": "EssenceLegendary", "Amount": 3 }
+            { "Item": "ReagentLegendary",    "Amount": 3 }
         ]
     },
     {
@@ -975,8 +923,7 @@
         "Rarity": "Legendary",
         "Cost": [
           { "Item": "ShardLegendary",   "Amount": 1 },
-          { "Item": "DustLegendary",    "Amount": 1 },
-          { "Item": "EssenceLegendary", "Amount": 1 }
+          { "Item": "ReagentLegendary",    "Amount": 1 }
         ]
     },
 // Magic armor
@@ -993,8 +940,7 @@
         ],
         "Rarity": "Magic",
         "Cost": [
-            { "Item": "DustMagic",    "Amount": 1 },
-            { "Item": "ReagentMagic", "Amount": 1 }
+            { "Item": "DustMagic",    "Amount": 1 }
         ]
     },
     {
@@ -1012,8 +958,7 @@
         "Rarity": "Magic",
         "Cost": [
             { "Item": "ShardMagic",   "Amount": 1 },
-            { "Item": "DustMagic",    "Amount": 1 },
-            { "Item": "ReagentMagic", "Amount": 1 }
+            { "Item": "DustMagic",    "Amount": 1 }
         ]
     },
     {
@@ -1034,8 +979,7 @@
         "Rarity": "Magic",
         "Cost": [
             { "Item": "ShardMagic",   "Amount": 1 },
-            { "Item": "DustMagic",    "Amount": 2 },
-            { "Item": "ReagentMagic", "Amount": 2 }
+            { "Item": "DustMagic",    "Amount": 2 }
         ]
     },
     {
@@ -1053,8 +997,7 @@
         "Rarity": "Magic",
         "Cost": [
             { "Item": "ShardMagic",   "Amount": 1 },
-            { "Item": "DustMagic",    "Amount": 3 },
-            { "Item": "ReagentMagic", "Amount": 3 }
+            { "Item": "DustMagic",    "Amount": 3 }
         ]
     },
     {
@@ -1070,8 +1013,7 @@
         "Rarity": "Magic",
         "Cost": [
             { "Item": "ShardMagic",   "Amount": 1 },
-            { "Item": "DustMagic",    "Amount": 4 },
-            { "Item": "ReagentMagic", "Amount": 4 }
+            { "Item": "DustMagic",    "Amount": 4 }
         ]
     },
     {
@@ -1089,8 +1031,7 @@
         "Rarity": "Magic",
         "Cost": [
             { "Item": "ShardMagic",   "Amount": 2 },
-            { "Item": "DustMagic",    "Amount": 5 },
-            { "Item": "ReagentMagic", "Amount": 5 }
+            { "Item": "DustMagic",    "Amount": 5 }
         ]
     },
 // Rare armor
@@ -1107,8 +1048,7 @@
         ],
         "Rarity": "Magic",
         "Cost": [
-            { "Item": "DustRare",    "Amount": 1 },
-            { "Item": "ReagentRare", "Amount": 1 }
+            { "Item": "DustRare",    "Amount": 1 }
         ]
     },
     {
@@ -1126,8 +1066,7 @@
         "Rarity": "Magic",
         "Cost": [
             { "Item": "ShardRare",   "Amount": 1 },
-            { "Item": "DustRare",    "Amount": 1 },
-            { "Item": "ReagentRare", "Amount": 1 }
+            { "Item": "DustRare",    "Amount": 1 }
         ]
     },
     {
@@ -1148,8 +1087,7 @@
         "Rarity": "Magic",
         "Cost": [
             { "Item": "ShardRare",   "Amount": 1 },
-            { "Item": "DustRare",    "Amount": 2 },
-            { "Item": "ReagentRare", "Amount": 2 }
+            { "Item": "DustRare",    "Amount": 2 }
         ]
     },
     {
@@ -1167,8 +1105,7 @@
         "Rarity": "Magic",
         "Cost": [
             { "Item": "ShardRare",   "Amount": 1 },
-            { "Item": "DustRare",    "Amount": 3 },
-            { "Item": "ReagentRare", "Amount": 3 }
+            { "Item": "DustRare",    "Amount": 3 }
         ]
     },
     {
@@ -1184,8 +1121,7 @@
         "Rarity": "Magic",
         "Cost": [
             { "Item": "ShardRare",   "Amount": 1 },
-            { "Item": "DustRare",    "Amount": 4 },
-            { "Item": "ReagentRare", "Amount": 4 }
+            { "Item": "DustRare",    "Amount": 4 }
         ]
     },
     {
@@ -1203,8 +1139,7 @@
         "Rarity": "Magic",
         "Cost": [
             { "Item": "ShardRare",   "Amount": 2 },
-            { "Item": "DustRare",    "Amount": 5 },
-            { "Item": "ReagentRare", "Amount": 5 }
+            { "Item": "DustRare",    "Amount": 5 }
         ]
     },
 // Epic armor
@@ -1221,8 +1156,7 @@
         ],
         "Rarity": "Magic",
         "Cost": [
-            { "Item": "DustEpic",    "Amount": 1 },
-            { "Item": "ReagentEpic", "Amount": 1 }
+            { "Item": "DustEpic",    "Amount": 1 }
         ]
     },
     {
@@ -1240,8 +1174,7 @@
         "Rarity": "Magic",
         "Cost": [
             { "Item": "ShardEpic",   "Amount": 1 },
-            { "Item": "DustEpic",    "Amount": 1 },
-            { "Item": "ReagentEpic", "Amount": 1 }
+            { "Item": "DustEpic",    "Amount": 1 }
         ]
     },
     {
@@ -1262,8 +1195,7 @@
         "Rarity": "Magic",
         "Cost": [
             { "Item": "ShardEpic",   "Amount": 1 },
-            { "Item": "DustEpic",    "Amount": 2 },
-            { "Item": "ReagentEpic", "Amount": 2 }
+            { "Item": "DustEpic",    "Amount": 2 }
         ]
     },
     {
@@ -1281,8 +1213,7 @@
         "Rarity": "Magic",
         "Cost": [
             { "Item": "ShardEpic",   "Amount": 1 },
-            { "Item": "DustEpic",    "Amount": 3 },
-            { "Item": "ReagentEpic", "Amount": 3 }
+            { "Item": "DustEpic",    "Amount": 3 }
         ]
     },
     {
@@ -1298,8 +1229,7 @@
         "Rarity": "Magic",
         "Cost": [
             { "Item": "ShardEpic",   "Amount": 1 },
-            { "Item": "DustEpic",    "Amount": 4 },
-            { "Item": "ReagentEpic", "Amount": 4 }
+            { "Item": "DustEpic",    "Amount": 4 }
         ]
     },
     {
@@ -1317,8 +1247,7 @@
         "Rarity": "Magic",
         "Cost": [
             { "Item": "ShardEpic",   "Amount": 2 },
-            { "Item": "DustEpic",    "Amount": 5 },
-            { "Item": "ReagentEpic", "Amount": 5 }
+            { "Item": "DustEpic",    "Amount": 5 }
         ]
     },
 // Legendary armor stub
@@ -1327,8 +1256,7 @@
       "Rarity": "Legendary",
       "Cost": [
         { "Item": "ShardLegendary",   "Amount": 1 },
-        { "Item": "DustLegendary",    "Amount": 2 },
-        { "Item": "ReagentLegendary", "Amount": 2 }
+        { "Item": "DustLegendary",    "Amount": 2 }
       ]
     }
   ],

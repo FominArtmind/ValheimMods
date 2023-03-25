@@ -46,7 +46,6 @@
       "Name": "Tier0Mats",
       "Loot": [
         { "Item": "DustMagic"    },
-        { "Item": "EssenceMagic" },
         { "Item": "ReagentMagic" }
       ]
     },
@@ -54,7 +53,6 @@
       "Name": "Tier1Mats",
       "Loot": [
         { "Item": "DustRare"    },
-        { "Item": "EssenceRare" },
         { "Item": "ReagentRare" }
       ]
     },
@@ -62,7 +60,6 @@
       "Name": "Tier2Mats",
       "Loot": [
         { "Item": "DustEpic"    },
-        { "Item": "EssenceEpic" },
         { "Item": "ReagentEpic" }
       ]
     },
@@ -70,7 +67,6 @@
       "Name": "Tier3Mats",
       "Loot": [
         { "Item": "DustLegendary"    },
-        { "Item": "EssenceLegendary" },
         { "Item": "ReagentLegendary" }
       ]
     },
