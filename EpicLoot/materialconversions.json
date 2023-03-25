@@ -59,31 +59,31 @@
       ]
     },
     {
-      "Name": "Recipe_ReagentRareUpgrade",
-      "Product": "ReagentRare",
+      "Name": "Recipe_EssenceRareUpgrade",
+      "Product": "EssenceRare",
       "Amount": 1,
       "Type": "Upgrade", 
       "Resources": [
-        { "Item": "ReagentMagic", "Amount": 5 }
+        { "Item": "EssenceMagic", "Amount": 5 }
       ]
     },
     {
-      "Name": "Recipe_ReagentEpicUpgrade",
-      "Product": "ReagentEpic",
+      "Name": "Recipe_EssenceEpicUpgrade",
+      "Product": "EssenceEpic",
       "Amount": 1,
       "Type": "Upgrade", 
       "Resources": [
-        { "Item": "ReagentRare", "Amount": 5  },
+        { "Item": "EssenceRare", "Amount": 5  },
         { "Item": "Coins",       "Amount": 5 }
       ]
     },
     {
-      "Name": "Recipe_ReagentLegendaryUpgrade",
-      "Product": "ReagentLegendary",
+      "Name": "Recipe_EssenceLegendaryUpgrade",
+      "Product": "EssenceLegendary",
       "Amount": 1,
       "Type": "Upgrade", 
       "Resources": [
-        { "Item": "ReagentEpic", "Amount": 5  },
+        { "Item": "EssenceEpic", "Amount": 5  },
         { "Item": "Coins",       "Amount": 10 }
       ]
     },
@@ -126,8 +126,8 @@
       ]
     },
     {
-      "Name": "Recipe_MagicShardToReagent_Conversion",
-      "Product": "ReagentMagic",
+      "Name": "Recipe_MagicShardToEssence_Conversion",
+      "Product": "EssenceMagic",
       "Amount": 1,
       "Type": "Convert", 
       "Resources": [
@@ -145,8 +145,8 @@
       ]
     },
     {
-      "Name": "Recipe_RareShardToReagent_Conversion",
-      "Product": "ReagentRare",
+      "Name": "Recipe_RareShardToEssence_Conversion",
+      "Product": "EssenceRare",
       "Amount": 1,
       "Type": "Convert", 
       "Resources": [
@@ -165,8 +165,8 @@
       ]
     },
     {
-      "Name": "Recipe_EpicShardToReagent_Conversion",
-      "Product": "ReagentEpic",
+      "Name": "Recipe_EpicShardToEssence_Conversion",
+      "Product": "EssenceEpic",
       "Amount": 1,
       "Type": "Convert", 
       "Resources": [
@@ -185,8 +185,8 @@
       ]
     },
     {
-      "Name": "Recipe_LegendaryShardToReagent_Conversion",
-      "Product": "ReagentLegendary",
+      "Name": "Recipe_LegendaryShardToEssence_Conversion",
+      "Product": "EssenceLegendary",
       "Amount": 1,
       "Type": "Convert", 
       "Resources": [

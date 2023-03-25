@@ -154,60 +154,60 @@
     // },
     ///////////////////////////////////////////////////////////////////////////////////////////////
     {
-      "name": "Recipe_ReagentRareUpgrade",
-      "item": "ReagentRare",
+      "name": "Recipe_EssenceRareUpgrade",
+      "item": "EssenceRare",
       "amount": 1,
       "craftingStation": "",
       "resources": [
-        { "item": "ReagentMagic", "amount": 5 }
+        { "item": "EssenceMagic", "amount": 5 }
       ]
     },
     {
-        "name": "Recipe_ReagentRareUpgrade5",
-        "item": "ReagentRare",
+        "name": "Recipe_EssenceRareUpgrade5",
+        "item": "EssenceRare",
         "amount": 5,
         "craftingStation": "",
         "resources": [
-          { "item": "ReagentMagic", "amount": 25 }
+          { "item": "EssenceMagic", "amount": 25 }
         ]
     },
     {
-      "name": "Recipe_ReagentEpicUpgrade",
-      "item": "ReagentEpic",
+      "name": "Recipe_EssenceEpicUpgrade",
+      "item": "EssenceEpic",
       "amount": 1,
       "craftingStation": "",
       "resources": [
-        { "item": "ReagentRare", "amount": 5 },
+        { "item": "EssenceRare", "amount": 5 },
         { "item": "Coins",       "amount": 5 }
       ]
     },
     {
-        "name": "Recipe_ReagentEpicUpgrade5",
-        "item": "ReagentEpic",
+        "name": "Recipe_EssenceEpicUpgrade5",
+        "item": "EssenceEpic",
         "amount": 5,
         "craftingStation": "",
         "resources": [
-          { "item": "ReagentRare", "amount": 25 },
+          { "item": "EssenceRare", "amount": 25 },
           { "item": "Coins",       "amount": 25 }
         ]
     },
     // {
-    //   "name": "Recipe_ReagentLegendaryUpgrade",
-    //   "item": "ReagentLegendary",
+    //   "name": "Recipe_EssenceLegendaryUpgrade",
+    //   "item": "EssenceLegendary",
     //   "amount": 1,
     //   "craftingStation": "",
     //   "resources": [
-    //     { "item": "ReagentEpic", "amount": 5  },
+    //     { "item": "EssenceEpic", "amount": 5  },
     //     { "item": "Coins",       "amount": 10 }
     //   ]
     // },
     // {
-    //     "name": "Recipe_ReagentLegendaryUpgrade5",
-    //     "item": "ReagentLegendary",
+    //     "name": "Recipe_EssenceLegendaryUpgrade5",
+    //     "item": "EssenceLegendary",
     //     "amount": 5,
     //     "craftingStation": "",
     //     "resources": [
-    //       { "item": "ReagentEpic", "amount": 25 },
+    //       { "item": "EssenceEpic", "amount": 25 },
     //       { "item": "Coins",       "amount": 50 }
     //     ]
     // },
@@ -283,8 +283,8 @@
       ]
     },
     {
-      "name": "Recipe_MagicShardToReagent_Conversion",
-      "item": "ReagentMagic",
+      "name": "Recipe_MagicShardToEssence_Conversion",
+      "item": "EssenceMagic",
       "amount": 1,
       "craftingStation": "",
       "resources": [
@@ -303,8 +303,8 @@
       ]
     },
     {
-      "name": "Recipe_RareShardToReagent_Conversion",
-      "item": "ReagentRare",
+      "name": "Recipe_RareShardToEssence_Conversion",
+      "item": "EssenceRare",
       "amount": 1,
       "craftingStation": "",
       "resources": [
@@ -324,8 +324,8 @@
       ]
     },
     {
-      "name": "Recipe_EpicShardToReagent_Conversion",
-      "item": "ReagentEpic",
+      "name": "Recipe_EpicShardToEssence_Conversion",
+      "item": "EssenceEpic",
       "amount": 1,
       "craftingStation": "",
       "resources": [
@@ -345,8 +345,8 @@
       ]
     },
     {
-      "name": "Recipe_LegendaryShardToReagent_Conversion",
-      "item": "ReagentLegendary",
+      "name": "Recipe_LegendaryShardToEssence_Conversion",
+      "item": "EssenceLegendary",
       "amount": 1,
       "craftingStation": "",
       "resources": [
