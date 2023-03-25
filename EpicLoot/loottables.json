@@ -645,31 +645,27 @@
           "Level": 1,
           "Drops": [ [0, 95], [3, 5] ],
           "Loot": [
-            { "Item": "EssenceMagic", "Weight": 1 },
             { "Item": "ReagentMagic", "Weight": 1 }
           ]
         },
         {
           "Level": 2,
-          "Drops": [ [0, 85], [5, 15] ],
+          "Drops": [ [0, 90], [5, 10] ],
           "Loot": [
-            { "Item": "EssenceMagic", "Weight": 1 },
             { "Item": "ReagentMagic", "Weight": 1 }
           ]
         },
         {
           "Level": 3,
-          "Drops": [ [0, 65], [10, 35] ],
+          "Drops": [ [0, 50], [3, 50] ],
           "Loot": [
-            { "Item": "EssenceMagic", "Weight": 1 },
             { "Item": "ReagentMagic", "Weight": 1 }
           ]
         },
         {
           "Level": 4,
-          "Drops": [ [15, 100] ],
+          "Drops": [ [5, 100] ],
           "Loot": [
-            { "Item": "EssenceMagic", "Weight": 1 },
             { "Item": "ReagentMagic", "Weight": 1 }
           ]
         }
@@ -681,35 +677,32 @@
       "Object": "SkeletonMob",
       "LeveledLoot": [
         {
-          "Level": 1,
-          "Drops": [ [0, 98], [8, 2] ],
-          "Loot": [
-            { "Item": "DustMagic", "Weight": 1 }
-          ]
+            "Level": 1,
+            "Drops": [ [0, 95], [3, 5] ],
+            "Loot": [
+              { "Item": "DustMagic", "Weight": 1 }
+            ]
         },
         {
-          "Level": 2,
-          "Drops": [ [0, 93], [12, 7] ],
-          "Loot": [
-            { "Item": "DustMagic", "Weight": 25 },
-            { "Item": "DustRare",  "Weight": 1 }
-          ]
+            "Level": 2,
+            "Drops": [ [0, 90], [5, 10] ],
+            "Loot": [
+              { "Item": "DustMagic", "Weight": 1 }
+            ]
         },
         {
-          "Level": 3,
-          "Drops": [ [0, 75], [15, 25] ],
-          "Loot": [
-            { "Item": "DustMagic", "Weight": 15 },
-            { "Item": "DustRare",  "Weight": 1 }
-          ]
+            "Level": 3,
+            "Drops": [ [0, 50], [3, 50] ],
+            "Loot": [
+              { "Item": "DustMagic", "Weight": 1 }
+            ]
         },
         {
-          "Level": 4,
-          "Drops": [ [20, 100] ],
-          "Loot": [
-            { "Item": "DustMagic", "Weight": 7 },
-            { "Item": "DustRare",  "Weight": 1 }
-          ]
+            "Level": 4,
+            "Drops": [ [5, 100] ],
+            "Loot": [
+              { "Item": "DustMagic", "Weight": 1 }
+            ]
         }
       ]
     },
@@ -766,67 +759,67 @@
       "Object": "GreydwarfBruteMob",
       "LeveledLoot": [
         {
-          "Level": 1,
-          "Drops": [ [0, 80], [1, 20] ],
-          "Loot": [
-            { "Item": "EssenceRare", "Weight": 1 }
-          ]
+            "Level": 1,
+            "Drops": [ [0, 85], [1, 15] ],
+            "Loot": [
+              { "Item": "ReagentRare", "Weight": 1 }
+            ]
         },
         {
-          "Level": 2,
-          "Drops": [ [0, 60], [2, 40] ],
-          "Loot": [
-            { "Item": "EssenceRare", "Weight": 1 }
-          ]
+            "Level": 2,
+            "Drops": [ [0, 75], [2, 25] ],
+            "Loot": [
+              { "Item": "ReagentRare", "Weight": 1 }
+            ]
         },
         {
-          "Level": 3,
-          "Drops": [ [3, 100] ],
-          "Loot": [
-            { "Item": "EssenceRare", "Weight": 1 }
-          ]
+            "Level": 3,
+            "Drops": [ [0, 50], [3, 50] ],
+            "Loot": [
+              { "Item": "ReagentRare", "Weight": 1 }
+            ]
         },
         {
-          "Level": 4,
-          "Drops": [ [12, 100] ],
-          "Loot": [
-            { "Item": "EssenceRare", "Weight": 1 }
-          ]
+            "Level": 4,
+            "Drops": [ [5, 100] ],
+            "Loot": [
+              { "Item": "ReagentRare", "Weight": 1 }
+            ]
         }
       ]
     },
-    // Tier 2 Mobs (Greydwarf Shaman) EssenceMagic ReagentMagic DustMagic
+    // Tier 2 Mobs (Greydwarf Shaman)
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     {
       "Object": "GreydwarfShamanMob",
       "LeveledLoot": [
         {
-          "Level": 1,
-          "Drops": [ [0, 80], [1, 20] ],
-          "Loot": [
-            { "Item": "ReagentRare", "Weight": 1 }
-          ]
+            "Level": 1,
+            "Drops": [ [0, 90], [1, 10] ],
+            "Loot": [
+              { "Item": "DustRare", "Weight": 1 }
+            ]
         },
         {
-          "Level": 2,
-          "Drops": [ [0, 60], [2, 40] ],
-          "Loot": [
-            { "Item": "ReagentRare", "Weight": 1 }
-          ]
+            "Level": 2,
+            "Drops": [ [0, 85], [2, 15] ],
+            "Loot": [
+              { "Item": "DustRare", "Weight": 1 }
+            ]
         },
         {
-          "Level": 3,
-          "Drops": [ [3, 100] ],
-          "Loot": [
-            { "Item": "ReagentRare", "Weight": 1 }
-          ]
+            "Level": 3,
+            "Drops": [ [0, 50], [2, 50] ],
+            "Loot": [
+              { "Item": "DustRare", "Weight": 1 }
+            ]
         },
         {
-          "Level": 4,
-          "Drops": [ [12, 100] ],
-          "Loot": [
-            { "Item": "ReagentRare", "Weight": 1 }
-          ]
+            "Level": 4,
+            "Drops": [ [3, 100] ],
+            "Loot": [
+              { "Item": "DustRare", "Weight": 1 }
+            ]
         }
       ]
     },
@@ -982,42 +975,32 @@
       "Object": "DraugrMob",
       "LeveledLoot": [
         {
-          "Level": 1,
-          "Drops": [ [0, 80], [1, 20] ],
-          "Loot": [
-            { "Item": "EssenceRare", "Weight": 1 },
-            { "Item": "ReagentRare", "Weight": 1 }
-          ]
+            "Level": 1,
+            "Drops": [ [0, 88], [2, 12] ],
+            "Loot": [
+              { "Item": "DustRare", "Weight": 1 }
+            ]
         },
         {
-          "Level": 2,
-          "Drops": [ [0, 60], [2, 40] ],
-          "Loot": [
-            { "Item": "EssenceRare", "Weight": 25 },
-            { "Item": "EssenceEpic", "Weight": 1 },
-            { "Item": "ReagentRare", "Weight": 25 },
-            { "Item": "ReagentEpic", "Weight": 1 }
-          ]
+            "Level": 2,
+            "Drops": [ [0, 75], [3, 25] ],
+            "Loot": [
+              { "Item": "DustRare", "Weight": 1 }
+            ]
         },
         {
-          "Level": 3,
-          "Drops": [ [3, 100] ],
-          "Loot": [
-            { "Item": "EssenceRare", "Weight": 15 },
-            { "Item": "EssenceEpic", "Weight": 1 },
-            { "Item": "ReagentRare", "Weight": 15 },
-            { "Item": "ReagentEpic", "Weight": 1 }
-          ]
+            "Level": 3,
+            "Drops": [ [0, 55], [5, 45] ],
+            "Loot": [
+              { "Item": "DustRare", "Weight": 1 }
+            ]
         },
         {
-          "Level": 4,
-          "Drops": [ [12, 100] ],
-          "Loot": [
-            { "Item": "EssenceRare", "Weight": 7 },
-            { "Item": "EssenceEpic", "Weight": 1 },
-            { "Item": "ReagentRare", "Weight": 7 },
-            { "Item": "ReagentEpic", "Weight": 1 }
-          ]
+            "Level": 4,
+            "Drops": [ [7, 100] ],
+            "Loot": [
+              { "Item": "DustRare", "Weight": 1 }
+            ]
         }
       ]
     },
@@ -1027,42 +1010,32 @@
       "Object": "DraugrArcherMob",
       "LeveledLoot": [
         {
-          "Level": 1,
-          "Drops": [ [0, 80], [1, 20] ],
-          "Loot": [
-            { "Item": "EssenceRare", "Weight": 1 },
-            { "Item": "ReagentRare", "Weight": 1 }
-          ]
+            "Level": 1,
+            "Drops": [ [0, 88], [2, 12] ],
+            "Loot": [
+              { "Item": "DustRare", "Weight": 1 }
+            ]
         },
         {
-          "Level": 2,
-          "Drops": [ [0, 60], [2, 40] ],
-          "Loot": [
-            { "Item": "EssenceRare", "Weight": 25 },
-            { "Item": "EssenceEpic", "Weight": 1 },
-            { "Item": "ReagentRare", "Weight": 25 },
-            { "Item": "ReagentEpic", "Weight": 1 }
-          ]
+            "Level": 2,
+            "Drops": [ [0, 75], [3, 25] ],
+            "Loot": [
+              { "Item": "DustRare", "Weight": 1 }
+            ]
         },
         {
-          "Level": 3,
-          "Drops": [ [3, 100] ],
-          "Loot": [
-            { "Item": "EssenceRare", "Weight": 15 },
-            { "Item": "EssenceEpic", "Weight": 1 },
-            { "Item": "ReagentRare", "Weight": 15 },
-            { "Item": "ReagentEpic", "Weight": 1 }
-          ]
+            "Level": 3,
+            "Drops": [ [0, 55], [5, 45] ],
+            "Loot": [
+              { "Item": "DustRare", "Weight": 1 }
+            ]
         },
         {
-          "Level": 4,
-          "Drops": [ [12, 100] ],
-          "Loot": [
-            { "Item": "EssenceRare", "Weight": 7 },
-            { "Item": "EssenceEpic", "Weight": 1 },
-            { "Item": "ReagentRare", "Weight": 7 },
-            { "Item": "ReagentEpic", "Weight": 1 }
-          ]
+            "Level": 4,
+            "Drops": [ [7, 100] ],
+            "Loot": [
+              { "Item": "DustRare", "Weight": 1 }
+            ]
         }
       ]
     },
@@ -1072,35 +1045,32 @@
       "Object": "DraugrEliteMob",
       "LeveledLoot": [
         {
-          "Level": 1,
-          "Drops": [ [0, 97], [10, 3] ],
-          "Loot": [
-            { "Item": "DustRare", "Weight": 1 }
-          ]
+            "Level": 1,
+            "Drops": [ [0, 80], [5, 20] ],
+            "Loot": [
+              { "Item": "ReagentRare", "Weight": 1 }
+            ]
         },
         {
-          "Level": 2,
-          "Drops": [ [0, 93], [15, 7] ],
-          "Loot": [
-            { "Item": "DustRare", "Weight": 25 },
-            { "Item": "DustEpic",  "Weight": 1 }
-          ]
+            "Level": 2,
+            "Drops": [ [0, 75], [12, 25] ],
+            "Loot": [
+              { "Item": "ReagentRare", "Weight": 1 }
+            ]
         },
         {
-          "Level": 3,
-          "Drops": [ [0, 75], [18, 25] ],
-          "Loot": [
-            { "Item": "DustRare", "Weight": 15 },
-            { "Item": "DustEpic",  "Weight": 1 }
-          ]
+            "Level": 3,
+            "Drops": [ [0, 50], [18, 50] ],
+            "Loot": [
+              { "Item": "ReagentRare", "Weight": 1 }
+            ]
         },
         {
-          "Level": 4,
-          "Drops": [ [25, 100] ],
-          "Loot": [
-            { "Item": "DustRare", "Weight": 7 },
-            { "Item": "DustEpic",  "Weight": 1 }
-          ]
+            "Level": 4,
+            "Drops": [ [27, 100] ],
+            "Loot": [
+              { "Item": "ReagentRare", "Weight": 1 }
+            ]
         }
       ]
     },
@@ -1314,42 +1284,32 @@
       "LeveledLoot": [
         {
             "Level": 1,
-            "Drops": [ [0, 80], [2, 20] ],
+            "Drops": [ [0, 88], [2, 12] ],
             "Loot": [
-              { "Item": "EssenceRare", "Weight": 1 },
-              { "Item": "ReagentRare", "Weight": 1 }
+              { "Item": "ReagentEpic", "Weight": 1 }
             ]
-          },
-          {
+        },
+        {
             "Level": 2,
-            "Drops": [ [0, 60], [4, 40] ],
+            "Drops": [ [0, 75], [3, 25] ],
             "Loot": [
-              { "Item": "EssenceRare", "Weight": 25 },
-              { "Item": "EssenceEpic", "Weight": 1 },
-              { "Item": "ReagentRare", "Weight": 25 },
               { "Item": "ReagentEpic", "Weight": 1 }
             ]
-          },
-          {
+        },
+        {
             "Level": 3,
-            "Drops": [ [6, 100] ],
+            "Drops": [ [0, 55], [5, 45] ],
             "Loot": [
-              { "Item": "EssenceRare", "Weight": 15 },
-              { "Item": "EssenceEpic", "Weight": 1 },
-              { "Item": "ReagentRare", "Weight": 15 },
               { "Item": "ReagentEpic", "Weight": 1 }
             ]
-          },
-          {
+        },
+        {
             "Level": 4,
-            "Drops": [ [24, 100] ],
+            "Drops": [ [7, 100] ],
             "Loot": [
-              { "Item": "EssenceRare", "Weight": 7 },
-              { "Item": "EssenceEpic", "Weight": 1 },
-              { "Item": "ReagentRare", "Weight": 7 },
               { "Item": "ReagentEpic", "Weight": 1 }
             ]
-          }
+        }
       ]
     },
     // Tier 4 Mobs (Fenring)
@@ -1500,33 +1460,30 @@
       "LeveledLoot": [
         {
             "Level": 1,
-            "Drops": [ [0, 98], [5, 2] ],
+            "Drops": [ [0, 93], [1, 7] ],
             "Loot": [
-              { "Item": "DustRare", "Weight": 1 }
+              { "Item": "DustEpic", "Weight": 1 }
             ]
         },
         {
             "Level": 2,
-            "Drops": [ [0, 95], [8, 5] ],
+            "Drops": [ [0, 79], [1, 21] ],
             "Loot": [
-                { "Item": "DustRare", "Weight": 25 },
-                { "Item": "DustEpic",  "Weight": 1 }
+              { "Item": "DustEpic", "Weight": 1 }
             ]
         },
         {
             "Level": 3,
-            "Drops": [ [0, 85], [9, 15] ],
+            "Drops": [ [0, 67], [2, 33] ],
             "Loot": [
-                { "Item": "DustRare", "Weight": 15 },
-                { "Item": "DustEpic",  "Weight": 1 }
+              { "Item": "DustEpic", "Weight": 1 }
             ]
         },
         {
             "Level": 4,
-            "Drops": [ [12, 100] ],
+            "Drops": [ [2, 100] ],
             "Loot": [
-                { "Item": "DustRare", "Weight": 7 },
-                { "Item": "DustEpic",  "Weight": 1 }
+              { "Item": "DustEpic", "Weight": 1 }
             ]
         }
       ]
@@ -1661,38 +1618,32 @@
         "Object": "GrowthMob",
         "LeveledLoot": [
             {
-              "Level": 1,
-              "Drops": [ [0, 80], [3, 20] ],
-              "Loot": [
-                { "Item": "EssenceRare", "Weight": 1 },
-                { "Item": "ReagentRare", "Weight": 1 }
-              ]
+                "Level": 1,
+                "Drops": [ [0, 80], [5, 20] ],
+                "Loot": [
+                  { "Item": "ReagentEpic", "Weight": 1 }
+                ]
             },
             {
-              "Level": 2,
-              "Drops": [ [0, 60], [6, 40] ],
-              "Loot": [
-                { "Item": "EssenceRare", "Weight": 25 },
-                { "Item": "EssenceEpic", "Weight": 1 },
-                { "Item": "ReagentRare", "Weight": 25 },
-                { "Item": "ReagentEpic", "Weight": 1 }
-              ]
+                "Level": 2,
+                "Drops": [ [0, 75], [12, 25] ],
+                "Loot": [
+                  { "Item": "ReagentEpic", "Weight": 1 }
+                ]
             },
             {
-              "Level": 3,
-              "Drops": [ [2, 100] ],
-              "Loot": [
-                { "Item": "EssenceEpic", "Weight": 1 },
-                { "Item": "ReagentEpic", "Weight": 1 }
-              ]
+                "Level": 3,
+                "Drops": [ [0, 50], [18, 50] ],
+                "Loot": [
+                  { "Item": "ReagentEpic", "Weight": 1 }
+                ]
             },
             {
-              "Level": 4,
-              "Drops": [ [8, 100] ],
-              "Loot": [
-                { "Item": "EssenceEpic", "Weight": 1 },
-                { "Item": "ReagentEpic", "Weight": 1 }
-              ]
+                "Level": 4,
+                "Drops": [ [27, 100] ],
+                "Loot": [
+                  { "Item": "ReagentEpic", "Weight": 1 }
+                ]
             }
         ]
     },
@@ -1702,33 +1653,32 @@
         "Object": "LoxMob",
         "LeveledLoot": [
             {
-              "Level": 1,
-              "Drops": [ [0, 90], [15, 10] ],
-              "Loot": [
-                { "Item": "DustRare", "Weight": 1 }
-              ]
+                "Level": 1,
+                "Drops": [ [0, 80], [5, 20] ],
+                "Loot": [
+                  { "Item": "DustEpic", "Weight": 1 }
+                ]
             },
             {
-              "Level": 2,
-              "Drops": [ [0, 80], [22, 20] ],
-              "Loot": [
-                { "Item": "DustRare", "Weight": 25 },
-                { "Item": "DustEpic", "Weight": 1 }
-              ]
+                "Level": 2,
+                "Drops": [ [0, 75], [12, 25] ],
+                "Loot": [
+                  { "Item": "DustEpic", "Weight": 1 }
+                ]
             },
             {
-              "Level": 3,
-              "Drops": [ [0, 75], [27, 25] ],
-              "Loot": [
-                { "Item": "DustEpic", "Weight": 1 }
-              ]
+                "Level": 3,
+                "Drops": [ [0, 50], [18, 50] ],
+                "Loot": [
+                  { "Item": "DustEpic", "Weight": 1 }
+                ]
             },
             {
-              "Level": 4,
-              "Drops": [ [27, 100] ],
-              "Loot": [
-                { "Item": "DustEpic", "Weight": 1 }
-              ]
+                "Level": 4,
+                "Drops": [ [27, 100] ],
+                "Loot": [
+                  { "Item": "DustEpic", "Weight": 1 }
+                ]
             }
         ]
     },
