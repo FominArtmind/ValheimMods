@@ -277,6 +277,11 @@ namespace EpicLoot.CraftingV2
             sb.AppendLine();
             sb.AppendLine(Localization.instance.Localize("$mod_epicloot_augment_availableeffects"));
             sb.AppendLine($"<color={rarityColor}>");
+            sb.AppendLine($"Chances for effect value to be higher than min + X * (max - min), where X");
+            sb.AppendLine($"0.9 - 1%   0.8 - 4%   0.7 - 9%");
+            sb.AppendLine($"0.6 - 16%  0.5 - 25%  0.4 - 37%");
+            sb.AppendLine($"0.3 - 51%  0.2 - 67%  0.1 - 84%");
+            sb.AppendLine();
 
             var tempMagicItem = new MagicItem() { Rarity = rarity };
             var availableEffects = MagicItemEffectDefinitions.GetAvailableEffects(item, tempMagicItem);
@@ -422,6 +427,12 @@ namespace EpicLoot.CraftingV2
             
             var sb = new StringBuilder();
             sb.Append($"<color={rarityColor}>");
+            sb.AppendLine($"Chances for effect value to be higher than min + X * (max - min), where X");
+            sb.AppendLine($"0.9 - 1%   0.8 - 4%   0.7 - 9%");
+            sb.AppendLine($"0.6 - 16%  0.5 - 25%  0.4 - 37%");
+            sb.AppendLine($"0.3 - 51%  0.2 - 67%  0.1 - 84%");
+            sb.AppendLine();
+
             foreach (var effectDef in availableEffects)
             {
                 var values = effectDef.GetValuesForRarity(item.GetRarity());

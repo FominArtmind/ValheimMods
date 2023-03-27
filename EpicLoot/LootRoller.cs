@@ -15,6 +15,20 @@ using Random = UnityEngine.Random;
 
 namespace EpicLoot
 {
+    public class EffectValueRandom : System.Random
+    {
+        private System.Random _random;
+
+        public EffectValueRandom()
+        {
+            _random = new System.Random();
+        }
+        public override double NextDouble()
+        {
+            return Math.Pow(_random.NextDouble() * _random.NextDouble(), 0.7);
+        }
+    }
+
     public static class LootRoller
     {
         public static LootConfig Config;
@@ -39,10 +53,11 @@ namespace EpicLoot
             Config = lootConfig;
             
             var random = new System.Random();
+            EffectValueRandom effectValueRandom = new EffectValueRandom();
             _weightedDropCountTable = new WeightedRandomCollection<KeyValuePair<int, float>>(random);
             _weightedLootTable = new WeightedRandomCollection<LootDrop>(random);
             _weightedEffectTable = new WeightedRandomCollection<MagicItemEffectDefinition>(random);
-            _weightedEffectCountTable = new WeightedRandomCollection<KeyValuePair<int, float>>(random);
+            _weightedEffectCountTable = new WeightedRandomCollection<KeyValuePair<int, float>>(effectValueRandom);
             _weightedRarityTable = new WeightedRandomCollection<KeyValuePair<ItemRarity, float>>(random);
             _weightedLegendaryTable = new WeightedRandomCollection<LegendaryInfo>(random);
 
