@@ -431,7 +431,7 @@
         "GuaranteedMagicEffects": [
             { "Type": "ModifyElementalDamage", "Values": { "MinValue": 70, "MaxValue": 100, "Increment": 1 } },
             { "Type": "AddFrostDamage", "Values": { "MinValue": 27, "MaxValue": 27, "Increment": 1 } },
-            { "Type": "Slow", "Values": { "MinValue": 50, "MaxValue": 50, "Increment": 1 } },
+            { "Type": "Slow", "Values": { "MinValue": 57, "MaxValue": 57, "Increment": 1 } },
             { "Type": "ModifyArmorLowHealth", "Values": { "MinValue": 50, "MaxValue": 50, "Increment": 1 } },
             { "Type": "Indestructible" }
         ]
@@ -1109,8 +1109,8 @@
         "SelectionWeight": 10000,
         "GuaranteedEffectCount": 5,
         "GuaranteedMagicEffects": [
-            { "Type": "ModifyBlockPower", "Values": { "MinValue": 35, "MaxValue": 35, "Increment": 1 } },
-            { "Type": "ModifyParry", "Values": { "MinValue": 45, "MaxValue": 45, "Increment": 1 } },
+            { "Type": "ModifyBlockPower", "Values": { "MinValue": 35, "MaxValue": 45, "Increment": 1 } },
+            { "Type": "ModifyParry", "Values": { "MinValue": 45, "MaxValue": 55, "Increment": 1 } },
             { "Type": "ModifyBlockStaminaUse", "Values": { "MinValue": 35, "MaxValue": 65, "Increment": 1 } },
             { "Type": "Weightless" },
             { "Type": "Indestructible" }
@@ -1126,7 +1126,7 @@
         "SelectionWeight": 10000,
         "GuaranteedEffectCount": 4,
         "GuaranteedMagicEffects": [
-            { "Type": "ModifyBlockPower", "Values": { "MinValue": 40, "MaxValue": 70, "Increment": 1 } },
+            { "Type": "ModifyBlockPower", "Values": { "MinValue": 50, "MaxValue": 80, "Increment": 1 } },
             { "Type": "AddPiercingResistancePercentage", "Values": { "MinValue": 50, "MaxValue": 60, "Increment": 1 } },
             { "Type": "ModifyHealthRegen", "Values": { "MinValue": 100, "MaxValue": 200, "Increment": 1 } },
             { "Type": "Immovable" }
@@ -1142,7 +1142,7 @@
         "SelectionWeight": 10000,
         "GuaranteedEffectCount": 4,
         "GuaranteedMagicEffects": [
-            { "Type": "ModifyBlockPower", "Values": { "MinValue": 45, "MaxValue": 60, "Increment": 1 } },
+            { "Type": "ModifyBlockPower", "Values": { "MinValue": 45, "MaxValue": 70, "Increment": 1 } },
             { "Type": "LifeSteal", "Values": { "MinValue": 6, "MaxValue": 13, "Increment": 1 } },
             { "Type": "ReflectDamage", "Values": { "MinValue": 27, "MaxValue": 37, "Increment": 1 } },
             { "Type": "IncreaseHealth", "Values": { "MinValue": 35, "MaxValue": 45, "Increment": 1 } }
@@ -1158,7 +1158,7 @@
         "SelectionWeight": 10000,
         "GuaranteedEffectCount": 6,
         "GuaranteedMagicEffects": [
-            { "Type": "ModifyParry", "Values": { "MinValue": 55, "MaxValue": 55, "Increment": 1 } },
+            { "Type": "ModifyParry", "Values": { "MinValue": 65, "MaxValue": 65, "Increment": 1 } },
             { "Type": "AddFireDamage", "Values": { "MinValue": 15, "MaxValue": 15, "Increment": 1 } },
             { "Type": "AddSpiritDamage", "Values": { "MinValue": 15, "MaxValue": 15, "Increment": 1 } },
             { "Type": "ModifyBlockStaminaUse", "Values": { "MinValue": 35, "MaxValue": 50, "Increment": 1 } },
@@ -1176,7 +1176,7 @@
         "SelectionWeight": 10000,
         "GuaranteedEffectCount": 6,
         "GuaranteedMagicEffects": [
-            { "Type": "ModifyParry", "Values": { "MinValue": 65, "MaxValue": 85, "Increment": 1 } },
+            { "Type": "ModifyParry", "Values": { "MinValue": 65, "MaxValue": 95, "Increment": 1 } },
             { "Type": "ModifyAttackSpeed", "Values": { "MinValue": 15, "MaxValue": 15, "Increment": 1 } },
             { "Type": "ModifyAttackStaminaUse", "Values": { "MinValue": 15, "MaxValue": 15, "Increment": 1 } },
             { "Type": "ModifyStaggerDuration", "Values": { "MinValue": 50, "MaxValue": 50, "Increment": 1 } },
@@ -1194,7 +1194,7 @@
         "SelectionWeight": 10000,
         "GuaranteedEffectCount": 5,
         "GuaranteedMagicEffects": [
-            { "Type": "ModifyBlockPower", "Values": { "MinValue": 50, "MaxValue": 65, "Increment": 1 } },
+            { "Type": "ModifyBlockPower", "Values": { "MinValue": 50, "MaxValue": 75, "Increment": 1 } },
             { "Type": "AddBluntDamage", "Values": { "MinValue": 18, "MaxValue": 18, "Increment": 1 } },
             { "Type": "Executioner", "Values": { "MinValue": 200, "MaxValue": 200, "Increment": 1 } },
             { "Type": "ModifyAttackSpeedLowHealth", "Values": { "MinValue": 50, "MaxValue": 65, "Increment": 1 } },
@@ -1211,7 +1211,7 @@
         "SelectionWeight": 10000,
         "GuaranteedEffectCount": 7,
         "GuaranteedMagicEffects": [
-            { "Type": "ModifyBlockPower", "Values": { "MinValue": 60, "MaxValue": 80, "Increment": 1 } },
+            { "Type": "ModifyBlockPower", "Values": { "MinValue": 60, "MaxValue": 90, "Increment": 1 } },
             { "Type": "AddSpiritDamage", "Values": { "MinValue": 22, "MaxValue": 44, "Increment": 1 } },
             { "Type": "IncreaseStamina", "Values": { "MinValue": 40, "MaxValue": 60, "Increment": 1 } },
             { "Type": "ModifyStaminaRegenLowHealth", "Values": { "MinValue": 55, "MaxValue": 85, "Increment": 1 } },
@@ -1230,7 +1230,7 @@
         "SelectionWeight": 10000,
         "GuaranteedEffectCount": 5,
         "GuaranteedMagicEffects": [
-            { "Type": "ModifyBlockPower", "Values": { "MinValue": 70, "MaxValue": 90, "Increment": 1 } },
+            { "Type": "ModifyBlockPower", "Values": { "MinValue": 70, "MaxValue": 100, "Increment": 1 } },
             { "Type": "ModifyBlockStaminaUse", "Values": { "MinValue": 50, "MaxValue": 75, "Increment": 1 } },
             { "Type": "AddPiercingResistancePercentage", "Values": { "MinValue": 40, "MaxValue": 40, "Increment": 1 } },
             { "Type": "ModifyMovementSpeed", "Values": { "MinValue": 7, "MaxValue": 7, "Increment": 1 } },
