@@ -55,7 +55,7 @@ namespace EpicLoot
             {
                 var effectType = entry.Key;
                 var effectDef = MagicItemEffectDefinitions.Get(effectType);
-                float sum = PlayerExtensions.GetEffectDiminishingReturnsTotalValue(effectType, entry.Value.Select(x => x.Key.EffectValue).ToList());
+                float sum = (float)Math.Round(PlayerExtensions.GetEffectDiminishingReturnsTotalValue(entry.Value.Select(x => x.Key.EffectValue).ToList(), effectType));
 
                 var totalEffectText = MagicItem.GetEffectText(effectDef, sum);
                 var highestRarity = (ItemRarity) entry.Value.Max(x => (int) x.Value.GetRarity());

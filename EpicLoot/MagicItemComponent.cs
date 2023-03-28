@@ -640,9 +640,20 @@ namespace EpicLoot
             return sets;
         }
 
-        public static float GetEffectDiminishingReturnsTotalValue(string effectType, List<float> effectValues)
+        public static float GetEffectDiminishingReturnsTotalValue(List<float> effectValues, string effectType = null)
         {
             var LIMITED_EFFECTS = new List<string>() {
+                MagicEffectType.AddPhysicalResistancePercentage,
+                MagicEffectType.AddBluntResistancePercentage,
+                MagicEffectType.AddSlashingResistancePercentage,
+                MagicEffectType.AddPiercingResistancePercentage,
+                MagicEffectType.AddChoppingResistancePercentage,
+                MagicEffectType.AddFireResistancePercentage,
+                MagicEffectType.AddFrostResistancePercentage,
+                MagicEffectType.AddLightningResistancePercentage,
+                MagicEffectType.AddPoisonResistancePercentage,
+                MagicEffectType.AddSpiritResistancePercentage,
+                MagicEffectType.AddElementalResistancePercentage,
                 MagicEffectType.AvoidDamageTaken,
                 MagicEffectType.ModifyAttackStaminaUse,
                 MagicEffectType.ModifyBlockStaminaUse,
@@ -651,7 +662,7 @@ namespace EpicLoot
                 MagicEffectType.Slow
             };
 
-            if (LIMITED_EFFECTS.Contains(effectType))
+            if (effectType == null || LIMITED_EFFECTS.Contains(effectType))
             {
                 var limitedValues = effectValues.Select(x => Math.Min(x, 90.0f)).ToList();
                 limitedValues.Sort((float a, float b) => { if (a > b) return -1; return 1; });
@@ -684,7 +695,7 @@ namespace EpicLoot
                     return null;
                 }
 
-                return GetEffectDiminishingReturnsTotalValue(effectType, allValues);
+                return GetEffectDiminishingReturnsTotalValue(allValues, effectType);
             }) ?? 0);
 
             if (effectType == MagicEffectType.Slow)
