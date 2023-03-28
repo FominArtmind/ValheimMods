@@ -35,6 +35,7 @@ namespace EpicLoot
         public static readonly Dictionary<string, LootItemSet> ItemSets = new Dictionary<string, LootItemSet>();
         public static readonly Dictionary<string, List<LootTable>> LootTables = new Dictionary<string, List<LootTable>>();
 
+        private static EffectValueRandom _random;
         private static WeightedRandomCollection<KeyValuePair<int, float>> _weightedDropCountTable;
         private static WeightedRandomCollection<LootDrop> _weightedLootTable;
         private static WeightedRandomCollection<MagicItemEffectDefinition> _weightedEffectTable;
@@ -53,11 +54,11 @@ namespace EpicLoot
             Config = lootConfig;
             
             var random = new System.Random();
-            EffectValueRandom effectValueRandom = new EffectValueRandom();
+            _random = new EffectValueRandom();
             _weightedDropCountTable = new WeightedRandomCollection<KeyValuePair<int, float>>(random);
             _weightedLootTable = new WeightedRandomCollection<LootDrop>(random);
             _weightedEffectTable = new WeightedRandomCollection<MagicItemEffectDefinition>(random);
-            _weightedEffectCountTable = new WeightedRandomCollection<KeyValuePair<int, float>>(effectValueRandom);
+            _weightedEffectCountTable = new WeightedRandomCollection<KeyValuePair<int, float>>(random);
             _weightedRarityTable = new WeightedRandomCollection<KeyValuePair<ItemRarity, float>>(random);
             _weightedLegendaryTable = new WeightedRandomCollection<LegendaryInfo>(random);
 
@@ -548,7 +549,8 @@ namespace EpicLoot
                 {
                     EpicLoot.Log($"RollEffect: {effectDef.Type} {itemRarity} value={value} (min={valuesDef.MinValue} max={valuesDef.MaxValue})");
                     var incrementCount = (int)((valuesDef.MaxValue - valuesDef.MinValue) / valuesDef.Increment);
-                    value = valuesDef.MinValue + (Random.Range(0, incrementCount + 1) * valuesDef.Increment);
+                    var r = _random.NextDouble();
+                    value = valuesDef.MinValue + (int)(r * incrementCount + 0.5) * valuesDef.Increment;
                 }
             }
 
