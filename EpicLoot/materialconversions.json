@@ -6,7 +6,7 @@
       "Amount": 1,
       "Type": "Upgrade", 
       "Resources": [
-        { "Item": "ShardMagic", "Amount": 5 }
+        { "Item": "ShardMagic", "Amount": 3 }
       ]
     },
     {
@@ -15,18 +15,8 @@
       "Amount": 1,
       "Type": "Upgrade", 
       "Resources": [
-        { "Item": "ShardRare", "Amount": 5 },
-        { "Item": "Coins",     "Amount": 5 }
-      ]
-    },
-    {
-      "Name": "Recipe_ShardLegendaryUpgrade",
-      "Product": "ShardLegendary",
-      "Amount": 1,
-      "Type": "Upgrade", 
-      "Resources": [
-        { "Item": "ShardEpic", "Amount": 5 },
-        { "Item": "Coins",     "Amount": 10 }
+        { "Item": "ShardRare", "Amount": 3 },
+        { "Item": "Coins",     "Amount": 3 }
       ]
     },
     {
@@ -35,7 +25,7 @@
       "Amount": 1,
       "Type": "Upgrade", 
       "Resources": [
-        { "Item": "DustMagic", "Amount": 5  }
+        { "Item": "DustMagic", "Amount": 3 }
       ]
     },
     {
@@ -44,18 +34,8 @@
       "Amount": 1,
       "Type": "Upgrade", 
       "Resources": [
-        { "Item": "DustRare", "Amount": 5  },
-        { "Item": "Coins",    "Amount": 5 }
-      ]
-    },
-    {
-      "Name": "Recipe_DustLegendaryUpgrade",
-      "Product": "DustLegendary",
-      "Amount": 1,
-      "Type": "Upgrade", 
-      "Resources": [
-        { "Item": "DustEpic", "Amount": 5  },
-        { "Item": "Coins",    "Amount": 10 }
+        { "Item": "DustRare", "Amount": 3 },
+        { "Item": "Coins",    "Amount": 3 }
       ]
     },
     {
@@ -64,7 +44,7 @@
       "Amount": 1,
       "Type": "Upgrade", 
       "Resources": [
-        { "Item": "EssenceMagic", "Amount": 5 }
+        { "Item": "EssenceMagic", "Amount": 3 }
       ]
     },
     {
@@ -73,18 +53,8 @@
       "Amount": 1,
       "Type": "Upgrade", 
       "Resources": [
-        { "Item": "EssenceRare", "Amount": 5  },
-        { "Item": "Coins",       "Amount": 5 }
-      ]
-    },
-    {
-      "Name": "Recipe_EssenceLegendaryUpgrade",
-      "Product": "EssenceLegendary",
-      "Amount": 1,
-      "Type": "Upgrade", 
-      "Resources": [
-        { "Item": "EssenceEpic", "Amount": 5  },
-        { "Item": "Coins",       "Amount": 10 }
+        { "Item": "EssenceRare", "Amount": 3 },
+        { "Item": "Coins",       "Amount": 3 }
       ]
     },
     {
@@ -93,7 +63,7 @@
       "Amount": 1,
       "Type": "Upgrade", 
       "Resources": [
-        { "Item": "RunestoneMagic", "Amount": 5 }
+        { "Item": "RunestoneMagic", "Amount": 3 }
       ]
     },
     {
@@ -102,18 +72,8 @@
       "Amount": 1,
       "Type": "Upgrade", 
       "Resources": [
-        { "Item": "RunestoneRare", "Amount": 5  },
-        { "Item": "Coins",         "Amount": 5 }
-      ]
-    },
-    {
-      "Name": "Recipe_RunestoneLegendaryUpgrade",
-      "Product": "RunestoneLegendary",
-      "Amount": 1,
-      "Type": "Upgrade", 
-      "Resources": [
-        { "Item": "RunestoneEpic", "Amount": 5  },
-        { "Item": "Coins",         "Amount": 10 }
+        { "Item": "RunestoneRare", "Amount": 3 },
+        { "Item": "Coins",         "Amount": 3 }
       ]
     },
     {
@@ -175,26 +135,6 @@
       ]
     },
     {
-      "Name": "Recipe_LegendaryShardToDust_Conversion",
-      "Product": "DustLegendary",
-      "Amount": 1,
-      "Type": "Convert", 
-      "Resources": [
-        { "Item": "ShardLegendary", "Amount": 2 },
-        { "Item": "Coins",          "Amount": 4 }
-      ]
-    },
-    {
-      "Name": "Recipe_LegendaryShardToEssence_Conversion",
-      "Product": "EssenceLegendary",
-      "Amount": 1,
-      "Type": "Convert", 
-      "Resources": [
-        { "Item": "ShardLegendary", "Amount": 2 },
-        { "Item": "Coins",          "Amount": 4 }
-      ]
-    },
-    {
       "Name": "Recipe_BoneSkeletonTrophy",
       "Product": "TrophySkeleton",
       "Type": "Junk", 
@@ -244,7 +184,7 @@
     },
     {
       "Name": "Recipe_DragonTearRunestone",
-      "Product": "RunestoneLegendary",
+      "Product": "RunestoneEpic",
       "Type": "Junk", 
       "Resources": [
         { "Item": "DragonTear", "Amount": 3 }
@@ -252,7 +192,7 @@
     },
     {
       "Name": "Recipe_YagluthThingRunestone",
-      "Product": "RunestoneLegendary",
+      "Product": "RunestoneEpic",
       "Type": "Junk", 
       "Resources": [
         { "Item": "YagluthDrop", "Amount": 1 }
@@ -260,7 +200,7 @@
     },
     {
       "Name": "Recipe_SeekerQueenRunestone",
-      "Product": "RunestoneLegendary",
+      "Product": "RunestoneEpic",
       "Amount": 3, 
       "Type": "Junk", 
       "Resources": [

@@ -407,7 +407,7 @@
     },
     {
       "name": "Recipe_DragonTearRunestone",
-      "item": "RunestoneLegendary",
+      "item": "RunestoneEpic",
       "craftingStation": "piece_workbench",
       "resources": [
         { "item": "DragonTear", "amount": 3 }
@@ -415,11 +415,20 @@
     },
     {
       "name": "Recipe_YagluthThingRunestone",
-      "item": "RunestoneLegendary",
+      "item": "RunestoneEpic",
       "craftingStation": "piece_workbench",
       "resources": [
         { "item": "YagluthDrop", "amount": 1 }
       ]
+    },
+    {
+        "Name": "Recipe_SeekerQueenRunestone",
+        "Product": "RunestoneEpic",
+        "Amount": 3, 
+        "Type": "Junk", 
+        "Resources": [
+          { "Item": "QueenDrop", "Amount": 1 }
+        ]
     }
   ]
 }
