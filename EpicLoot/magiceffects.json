@@ -1080,6 +1080,9 @@
       "DisplayText" : "$mod_epicloot_me_addfireresistancepercentage_display",
       "Description" : "$mod_epicloot_me_addfireresistancepercentage_desc",
       "Requirements" : {
+        "ExclusiveEffectTypes" : [
+            "AddElementalResistancePercentage"
+        ],
         "AllowedItemTypes" : [
           "Legs"
         ]
@@ -1103,6 +1106,9 @@
       "DisplayText" : "$mod_epicloot_me_addfrostresistancepercentage_display",
       "Description" : "$mod_epicloot_me_addfrostresistancepercentage_desc",
       "Requirements" : {
+        "ExclusiveEffectTypes" : [
+            "AddElementalResistancePercentage"
+        ],
         "AllowedItemTypes" : [
           "Shoulder"
         ]
@@ -1126,6 +1132,9 @@
       "DisplayText" : "$mod_epicloot_me_addlightningresistancepercentage_display",
       "Description" : "$mod_epicloot_me_addlightningresistancepercentage_desc",
       "Requirements" : {
+        "ExclusiveEffectTypes" : [
+            "AddElementalResistancePercentage"
+        ],
         "AllowedItemTypes" : [
           "Helmet"
         ]
@@ -1149,6 +1158,9 @@
       "DisplayText" : "$mod_epicloot_me_addpoisonresistancepercentage_display",
       "Description" : "$mod_epicloot_me_addpoisonresistancepercentage_desc",
       "Requirements" : {
+        "ExclusiveEffectTypes" : [
+            "AddElementalResistancePercentage"
+        ],
         "AllowedItemTypes" : [
           "Chest"
         ]
@@ -1173,6 +1185,9 @@
       "Description" : "$mod_epicloot_me_addspiritresistancepercentage_desc",
       "Requirements" : {
         "NoRoll": true,
+        "ExclusiveEffectTypes" : [
+            "AddElementalResistancePercentage"
+        ],
         "AllowedItemTypes" : [
           "Helmet",
           "Chest",
@@ -1201,6 +1216,13 @@
       "DisplayText" : "$mod_epicloot_me_addelementalresistancepercentage_display",
       "Description" : "$mod_epicloot_me_addelementalresistancepercentage_desc",
       "Requirements" : {
+        "ExclusiveEffectTypes" : [
+            "AddFireResistancePercentage",
+            "AddFrostResistancePercentage",
+            "AddLightningResistancePercentage",
+            "AddPoisonResistancePercentage",
+            "AddSpiritResistancePercentage"
+        ],
         "AllowedItemTypes" : [
           "Helmet",
           "Chest",
@@ -1234,6 +1256,9 @@
       "Description" : "$mod_epicloot_me_addbluntresistancepercentage_desc",
       "Requirements" : {
         "NoRoll": true,
+        "ExclusiveEffectTypes" : [
+            "AddPhysicalResistancePercentage"
+        ],
         "AllowedItemTypes" : [
           "Helmet",
           "Chest",
@@ -1244,10 +1269,10 @@
         ]
       },
       "ValuesPerRarity" : {
-        "Magic" :     { "MinValue" :  5, "MaxValue" : 25, "Increment" : 1 },
-        "Rare" :      { "MinValue" :  7, "MaxValue" : 12, "Increment" : 1 },
-        "Epic" :      { "MinValue" :  8, "MaxValue" : 20, "Increment" : 1 },
-        "Legendary" : { "MinValue" : 10, "MaxValue" : 15, "Increment" : 1 }
+        "Magic" :     { "MinValue" : 4, "MaxValue" : 17, "Increment" : 1 },
+        "Rare" :      { "MinValue" : 5, "MaxValue" : 9, "Increment" : 1 },
+        "Epic" :      { "MinValue" : 6, "MaxValue" : 14, "Increment" : 1 },
+        "Legendary" : { "MinValue" : 7, "MaxValue" : 10, "Increment" : 1 }
       },
       "SelectionWeight" : 1,
       "Prefixes": [
@@ -1263,6 +1288,9 @@
       "Description" : "$mod_epicloot_me_addslashingresistancepercentage_desc",
       "Requirements" : {
         "NoRoll": true,
+        "ExclusiveEffectTypes" : [
+            "AddPhysicalResistancePercentage"
+        ],
         "AllowedItemTypes" : [
           "Helmet",
           "Chest",
@@ -1291,15 +1319,18 @@
       "DisplayText" : "$mod_epicloot_me_addpiercingresistancepercentage_display",
       "Description" : "$mod_epicloot_me_addpiercingresistancepercentage_desc",
       "Requirements" : {
+        "ExclusiveEffectTypes" : [
+            "AddPhysicalResistancePercentage"
+        ],
         "AllowedItemTypes" : [
           "Shield"
         ]
       },
       "ValuesPerRarity" : {
-        "Magic" :     { "MinValue" : 10, "MaxValue" : 50, "Increment" : 1 },
-        "Rare" :      { "MinValue" : 15, "MaxValue" : 30, "Increment" : 1 },
-        "Epic" :      { "MinValue" : 25, "MaxValue" : 45, "Increment" : 1 },
-        "Legendary" : { "MinValue" : 30, "MaxValue" : 40, "Increment" : 1 }
+        "Magic" :     { "MinValue" : 7,  "MaxValue" : 37, "Increment" : 1 },
+        "Rare" :      { "MinValue" : 10, "MaxValue" : 20, "Increment" : 1 },
+        "Epic" :      { "MinValue" : 15, "MaxValue" : 30, "Increment" : 1 },
+        "Legendary" : { "MinValue" : 20, "MaxValue" : 27, "Increment" : 1 }
       },
       "SelectionWeight" : 3,
       "Prefixes": [
@@ -1314,7 +1345,7 @@
       "DisplayText" : "$mod_epicloot_me_addchoppingresistancepercentage_display",
       "Description" : "$mod_epicloot_me_addchoppingresistancepercentage_desc",
       "Requirements" : {
-        "NoRoll": true, 
+        "NoRoll": true,
         "AllowedItemTypes" : [
           "Helmet",
           "Chest",
@@ -1343,6 +1374,11 @@
       "DisplayText" : "$mod_epicloot_me_addphysicalresistancepercentage_display",
       "Description" : "$mod_epicloot_me_addphysicalresistancepercentage_desc",
       "Requirements" : {
+        "ExclusiveEffectTypes" : [
+            "AddBluntResistancePercentage",
+            "AddSlashingResistancePercentage",
+            "AddPiercingResistancePercentage"
+        ],
         "AllowedItemTypes" : [
           "Helmet",
           "Chest",
