@@ -275,12 +275,12 @@
         "ItemHasBlockPower" : true
       },
       "ValuesPerRarity" : {
-        "Magic" :     { "MinValue" : 10, "MaxValue" : 100, "Increment" : 1 },
-        "Rare" :      { "MinValue" : 20, "MaxValue" : 40, "Increment" : 1 },
-        "Epic" :      { "MinValue" : 30, "MaxValue" : 60, "Increment" : 1 },
-        "Legendary" : { "MinValue" : 40, "MaxValue" : 50, "Increment" : 1 }
+        "Magic" :     { "MinValue" : 7,  "MaxValue" : 65, "Increment" : 1 },
+        "Rare" :      { "MinValue" : 14, "MaxValue" : 27, "Increment" : 1 },
+        "Epic" :      { "MinValue" : 20, "MaxValue" : 40, "Increment" : 1 },
+        "Legendary" : { "MinValue" : 27, "MaxValue" : 35, "Increment" : 1 }
       },
-      "SelectionWeight" : 6,
+      "SelectionWeight" : 18,
       "Prefixes": [
         "$mod_epicloot_me_modifyblockpower_prefix1",
         "$mod_epicloot_me_modifyblockpower_prefix2"
@@ -308,12 +308,12 @@
         "ItemHasParryPower" : true
       },
       "ValuesPerRarity" : {
-        "Magic" :     { "MinValue" : 13, "MaxValue" : 130, "Increment" : 1 },
-        "Rare" :      { "MinValue" : 25, "MaxValue" : 50, "Increment" : 1 },
-        "Epic" :      { "MinValue" : 37, "MaxValue" : 75, "Increment" : 1 },
-        "Legendary" : { "MinValue" : 50, "MaxValue" : 65, "Increment" : 1 }
+        "Magic" :     { "MinValue" : 9,  "MaxValue" : 85, "Increment" : 1 },
+        "Rare" :      { "MinValue" : 17, "MaxValue" : 33, "Increment" : 1 },
+        "Epic" :      { "MinValue" : 25, "MaxValue" : 50, "Increment" : 1 },
+        "Legendary" : { "MinValue" : 23, "MaxValue" : 45, "Increment" : 1 }
       },
-      "SelectionWeight" : 4,
+      "SelectionWeight" : 9,
       "Prefixes": [
         "$mod_epicloot_me_modifyparry_prefix1",
         "$mod_epicloot_me_modifyparry_prefix2"
@@ -340,7 +340,7 @@
         "Epic" :      { "MinValue" : 30, "MaxValue" : 60, "Increment" : 1 },
         "Legendary" : { "MinValue" : 40, "MaxValue" : 50, "Increment" : 1 }
       },
-      "SelectionWeight" : 12,
+      "SelectionWeight" : 18,
       "Prefixes": [
         "$mod_epicloot_me_modifyarmor_prefix1",
         "$mod_epicloot_me_modifyarmor_prefix2"
@@ -405,6 +405,87 @@
       "Suffixes": [
         "$mod_epicloot_me_increasehealth_suffix1"
       ]
+    },
+    {
+        "Type" : "IncreaseHealth",
+        "DisplayText" : "$mod_epicloot_me_increasehealth_display",
+        "Description" : "$mod_epicloot_me_increasehealth_desc",
+        "Requirements" : {
+          "AllowedItemNames" : [
+            "$mod_epicloot_assets_leatherbelt"
+          ],
+          "AllowedRarities" : [
+            "Rare",
+            "Epic",
+            "Legendary"
+          ]
+        },
+        "ValuesPerRarity" : {
+          "Rare" :      { "MinValue" : 10, "MaxValue" : 20, "Increment" : 5 },
+          "Epic" :      { "MinValue" : 20, "MaxValue" : 40, "Increment" : 5 },
+          "Legendary" : { "MinValue" : 20, "MaxValue" : 30, "Increment" : 5 }
+        },
+        "SelectionWeight" : 3,
+        "Prefixes": [
+          "$mod_epicloot_me_increasehealth_prefix1"
+        ],
+        "Suffixes": [
+          "$mod_epicloot_me_increasehealth_suffix1"
+        ]
+    },
+    {
+        "Type" : "IncreaseHealth",
+        "DisplayText" : "$mod_epicloot_me_increasehealth_display",
+        "Description" : "$mod_epicloot_me_increasehealth_desc",
+        "Requirements" : {
+          "AllowedItemNames" : [
+            "$mod_epicloot_assets_goldrubyring"
+          ],
+          "AllowedRarities" : [
+            "Rare",
+            "Epic",
+            "Legendary"
+          ]
+        },
+        "ValuesPerRarity" : {
+          "Rare" :      { "MinValue" : 15, "MaxValue" : 30, "Increment" : 5 },
+          "Epic" :      { "MinValue" : 25, "MaxValue" : 50, "Increment" : 5 },
+          "Legendary" : { "MinValue" : 30, "MaxValue" : 40, "Increment" : 5 }
+        },
+        "SelectionWeight" : 3,
+        "Prefixes": [
+          "$mod_epicloot_me_increasehealth_prefix1"
+        ],
+        "Suffixes": [
+          "$mod_epicloot_me_increasehealth_suffix1"
+        ]
+    },
+    {
+        "Type" : "IncreaseHealth",
+        "DisplayText" : "$mod_epicloot_me_increasehealth_display",
+        "Description" : "$mod_epicloot_me_increasehealth_desc",
+        "Requirements" : {
+          "AllowedItemNames" : [
+            "$mod_epicloot_assets_silverring"
+          ],
+          "AllowedRarities" : [
+            "Rare",
+            "Epic",
+            "Legendary"
+          ]
+        },
+        "ValuesPerRarity" : {
+          "Rare" :      { "MinValue" : 20, "MaxValue" : 40, "Increment" : 5 },
+          "Epic" :      { "MinValue" : 30, "MaxValue" : 60, "Increment" : 5 },
+          "Legendary" : { "MinValue" : 40, "MaxValue" : 50, "Increment" : 5 }
+        },
+        "SelectionWeight" : 3,
+        "Prefixes": [
+          "$mod_epicloot_me_increasehealth_prefix1"
+        ],
+        "Suffixes": [
+          "$mod_epicloot_me_increasehealth_suffix1"
+        ]
     },
     {
       "Type" : "IncreaseStamina",
@@ -1279,7 +1360,7 @@
         "Epic" :      { "MinValue" : 5, "MaxValue" : 13, "Increment" : 1 },
         "Legendary" : { "MinValue" : 8, "MaxValue" : 10, "Increment" : 1 }
       },
-      "SelectionWeight" : 2,
+      "SelectionWeight" : 6,
       "Prefixes": [
         "$mod_epicloot_me_addphysicalresistancepercentage_prefix1"
       ],
@@ -1880,11 +1961,11 @@
         ]
       },
       "ValuesPerRarity" : {
-        "Rare" :      { "MinValue" : 14, "MaxValue" : 27, "Increment" : 1 },
-        "Epic" :      { "MinValue" : 20, "MaxValue" : 40, "Increment" : 1 },
-        "Legendary" : { "MinValue" : 27, "MaxValue" : 33, "Increment" : 1 }
+        "Rare" :      { "MinValue" : 28, "MaxValue" : 54, "Increment" : 1 },
+        "Epic" :      { "MinValue" : 40, "MaxValue" : 80, "Increment" : 1 },
+        "Legendary" : { "MinValue" : 57, "MaxValue" : 66, "Increment" : 1 }
       },
-      "SelectionWeight" : 2,
+      "SelectionWeight" : 6,
       "Prefixes": [
         "$mod_epicloot_me_addblockingskill_prefix1"
       ],

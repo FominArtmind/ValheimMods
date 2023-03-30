@@ -1109,8 +1109,8 @@
         "SelectionWeight": 10000,
         "GuaranteedEffectCount": 5,
         "GuaranteedMagicEffects": [
-            { "Type": "ModifyBlockPower", "Values": { "MinValue": 35, "MaxValue": 45, "Increment": 1 } },
-            { "Type": "ModifyParry", "Values": { "MinValue": 45, "MaxValue": 55, "Increment": 1 } },
+            { "Type": "ModifyBlockPower", "Values": { "MinValue": 25, "MaxValue": 35, "Increment": 1 } },
+            { "Type": "ModifyParry", "Values": { "MinValue": 45, "MaxValue": 45, "Increment": 1 } },
             { "Type": "ModifyBlockStaminaUse", "Values": { "MinValue": 35, "MaxValue": 65, "Increment": 1 } },
             { "Type": "Weightless" },
             { "Type": "Indestructible" }
@@ -1126,7 +1126,7 @@
         "SelectionWeight": 10000,
         "GuaranteedEffectCount": 4,
         "GuaranteedMagicEffects": [
-            { "Type": "ModifyBlockPower", "Values": { "MinValue": 50, "MaxValue": 80, "Increment": 1 } },
+            { "Type": "ModifyBlockPower", "Values": { "MinValue": 75, "MaxValue": 100, "Increment": 1 } },
             { "Type": "AddPiercingResistancePercentage", "Values": { "MinValue": 50, "MaxValue": 60, "Increment": 1 } },
             { "Type": "ModifyHealthRegen", "Values": { "MinValue": 100, "MaxValue": 200, "Increment": 1 } },
             { "Type": "Immovable" }
@@ -1176,7 +1176,7 @@
         "SelectionWeight": 10000,
         "GuaranteedEffectCount": 6,
         "GuaranteedMagicEffects": [
-            { "Type": "ModifyParry", "Values": { "MinValue": 65, "MaxValue": 95, "Increment": 1 } },
+            { "Type": "ModifyParry", "Values": { "MinValue": 65, "MaxValue": 85, "Increment": 1 } },
             { "Type": "ModifyAttackSpeed", "Values": { "MinValue": 15, "MaxValue": 15, "Increment": 1 } },
             { "Type": "ModifyAttackStaminaUse", "Values": { "MinValue": 15, "MaxValue": 15, "Increment": 1 } },
             { "Type": "ModifyStaggerDuration", "Values": { "MinValue": 50, "MaxValue": 50, "Increment": 1 } },
@@ -1194,7 +1194,7 @@
         "SelectionWeight": 10000,
         "GuaranteedEffectCount": 5,
         "GuaranteedMagicEffects": [
-            { "Type": "ModifyBlockPower", "Values": { "MinValue": 50, "MaxValue": 75, "Increment": 1 } },
+            { "Type": "ModifyBlockPower", "Values": { "MinValue": 55, "MaxValue": 75, "Increment": 1 } },
             { "Type": "AddBluntDamage", "Values": { "MinValue": 18, "MaxValue": 18, "Increment": 1 } },
             { "Type": "Executioner", "Values": { "MinValue": 200, "MaxValue": 200, "Increment": 1 } },
             { "Type": "ModifyAttackSpeedLowHealth", "Values": { "MinValue": 50, "MaxValue": 65, "Increment": 1 } },
@@ -1234,6 +1234,25 @@
             { "Type": "ModifyBlockStaminaUse", "Values": { "MinValue": 50, "MaxValue": 75, "Increment": 1 } },
             { "Type": "AddPiercingResistancePercentage", "Values": { "MinValue": 40, "MaxValue": 40, "Increment": 1 } },
             { "Type": "ModifyMovementSpeed", "Values": { "MinValue": 7, "MaxValue": 7, "Increment": 1 } },
+            { "Type": "RemoveSpeedPenalty" }
+        ]
+    },
+    {
+        "ID": "MoonBarrier",
+        "Name": "$mod_epicloot_l_moon_barrier",
+        "Description": "$mod_epicloot_l_moon_barrier_desc",
+        "IsSetItem": true,
+        "Requirements": {
+            "AllowedItemNames": [ "$item_shield_silver" ]
+        },
+        "SelectionWeight": 10000,
+        "GuaranteedEffectCount": 6,
+        "GuaranteedMagicEffects": [
+            { "Type": "ModifyBlockPower", "Values": { "MinValue": 70, "MaxValue": 90, "Increment": 1 } },
+            { "Type": "AddFrostDamage", "Values": { "MinValue": 11, "MaxValue": 11, "Increment": 1 } },
+            { "Type": "IncreaseStamina", "Values": { "MinValue": 40, "MaxValue": 40, "Increment": 5 } },
+            { "Type": "IncreaseEitr", "Values": { "MinValue": 20, "MaxValue": 20, "Increment": 5 } },
+            { "Type": "AddElementalResistancePercentage", "Values": { "MinValue": 11, "MaxValue": 11, "Increment": 1 } },
             { "Type": "RemoveSpeedPenalty" }
         ]
     },
@@ -1295,7 +1314,7 @@
         "SelectionWeight": 10000,
         "GuaranteedEffectCount": 4,
         "GuaranteedMagicEffects": [
-            { "Type": "ModifyArmor", "Values": { "MinValue": 45, "MaxValue": 65, "Increment": 5 } },
+            { "Type": "ModifyArmor", "Values": { "MinValue": 65, "MaxValue": 75, "Increment": 5 } },
             { "Type": "AddHealthRegen", "Values": { "MinValue": 4, "MaxValue": 6, "Increment": 0.5 } },
             { "Type": "IncreaseHealth", "Values": { "MinValue": 30, "MaxValue": 40, "Increment": 5 } },
             { "Type": "AddBluntResistancePercentage", "Values": { "MinValue": 10, "MaxValue": 10, "Increment": 1 } }
@@ -1312,7 +1331,7 @@
         "SelectionWeight": 10000,
         "GuaranteedEffectCount": 3,
         "GuaranteedMagicEffects": [
-            { "Type": "ModifyArmor", "Values": { "MinValue": 75, "MaxValue": 75, "Increment": 5 } },
+            { "Type": "ModifyArmor", "Values": { "MinValue": 80, "MaxValue": 80, "Increment": 5 } },
             { "Type": "IncreaseHealth", "Values": { "MinValue": 40, "MaxValue": 40, "Increment": 5 } },
             { "Type": "AddSlashingResistancePercentage", "Values": { "MinValue": 10, "MaxValue": 15, "Increment": 1 } }
         ]
@@ -1328,7 +1347,7 @@
         "SelectionWeight": 10000,
         "GuaranteedEffectCount": 4,
         "GuaranteedMagicEffects": [
-            { "Type": "ModifyArmor", "Values": { "MinValue": 55, "MaxValue": 70, "Increment": 5 } },
+            { "Type": "ModifyArmor", "Values": { "MinValue": 55, "MaxValue": 75, "Increment": 5 } },
             { "Type": "ModifyHealthRegen", "Values": { "MinValue": 70, "MaxValue": 90, "Increment": 5 } },
             { "Type": "IncreaseStamina", "Values": { "MinValue": 35, "MaxValue": 45, "Increment": 5 } },
             { "Type": "AddFireResistancePercentage", "Values": { "MinValue": 15, "MaxValue": 20, "Increment": 1 } }
@@ -1350,6 +1369,24 @@
             { "Type": "AddSwordsSkill", "Values": { "MinValue": 9, "MaxValue": 18, "Increment": 1 } },
             { "Type": "AddAxesSkill", "Values": { "MinValue": 9, "MaxValue": 18, "Increment": 1 } },
             { "Type": "AddCarryWeight", "Values": { "MinValue": 100, "MaxValue": 100, "Increment": 1 } }
+        ]
+    },
+    {
+        "ID": "MoonСhainMail",
+        "Name": "$mod_epicloot_l_moon_chain_mail",
+        "Description": "$mod_epicloot_l_moon_chain_mail_desc",
+        "IsSetItem": true,
+        "Requirements": {
+            "AllowedItemNames": [ "$item_chest_wolf" ]
+        },
+        "SelectionWeight": 10000,
+        "GuaranteedEffectCount": 5,
+        "GuaranteedMagicEffects": [
+            { "Type": "ModifyArmor", "Values": { "MinValue": 75, "MaxValue": 90, "Increment": 1 } },
+            { "Type": "IncreaseStamina", "Values": { "MinValue": 40, "MaxValue": 40, "Increment": 5 } },
+            { "Type": "IncreaseEitr", "Values": { "MinValue": 20, "MaxValue": 20, "Increment": 5 } },
+            { "Type": "AddElementalResistancePercentage", "Values": { "MinValue": 11, "MaxValue": 11, "Increment": 1 } },
+            { "Type": "AddElementalMagicSkill", "Values": { "MinValue": 7, "MaxValue": 11, "Increment": 1 } }
         ]
     },
 // Legs
@@ -1402,7 +1439,7 @@
         "SelectionWeight": 10000,
         "GuaranteedEffectCount": 5,
         "GuaranteedMagicEffects": [
-            { "Type": "ModifyArmor", "Values": { "MinValue": 30, "MaxValue": 45, "Increment": 5 } },
+            { "Type": "ModifyArmor", "Values": { "MinValue": 45, "MaxValue": 60, "Increment": 5 } },
             { "Type": "ModifyStaminaRegen", "Values": { "MinValue": 30, "MaxValue": 40, "Increment": 1 } },
             { "Type": "IncreaseStamina", "Values": { "MinValue": 30, "MaxValue": 40, "Increment": 5 } },
             { "Type": "AddBluntResistancePercentage", "Values": { "MinValue": 10, "MaxValue": 10, "Increment": 1 } },
@@ -1420,7 +1457,7 @@
         "SelectionWeight": 10000,
         "GuaranteedEffectCount": 4,
         "GuaranteedMagicEffects": [
-            { "Type": "ModifyArmor", "Values": { "MinValue": 55, "MaxValue": 55, "Increment": 5 } },
+            { "Type": "ModifyArmor", "Values": { "MinValue": 75, "MaxValue": 75, "Increment": 5 } },
             { "Type": "AddBluntDamage", "Values": { "MinValue": 20, "MaxValue": 25, "Increment": 1 } },
             { "Type": "IncreaseHealth", "Values": { "MinValue": 35, "MaxValue": 35, "Increment": 5 } },
             { "Type": "AddSlashingResistancePercentage", "Values": { "MinValue": 10, "MaxValue": 15, "Increment": 1 } }
@@ -1437,7 +1474,7 @@
         "SelectionWeight": 10000,
         "GuaranteedEffectCount": 4,
         "GuaranteedMagicEffects": [
-            { "Type": "ModifyArmor", "Values": { "MinValue": 40, "MaxValue": 55, "Increment": 5 } },
+            { "Type": "ModifyArmor", "Values": { "MinValue": 50, "MaxValue": 65, "Increment": 5 } },
             { "Type": "AddHealthRegen", "Values": { "MinValue": 6, "MaxValue": 10, "Increment": 0.5 } },
             { "Type": "IncreaseStamina", "Values": { "MinValue": 35, "MaxValue": 45, "Increment": 5 } },
             { "Type": "AddFireResistancePercentage", "Values": { "MinValue": 15, "MaxValue": 20, "Increment": 1 } }
@@ -1454,11 +1491,29 @@
         "SelectionWeight": 10000,
         "GuaranteedEffectCount": 5,
         "GuaranteedMagicEffects": [
-            { "Type": "ModifyArmor", "Values": { "MinValue": 50, "MaxValue": 80, "Increment": 5 } },
+            { "Type": "ModifyArmor", "Values": { "MinValue": 65, "MaxValue": 95, "Increment": 5 } },
             { "Type": "AddSpiritDamage", "Values": { "MinValue": 14, "MaxValue": 28, "Increment": 1 } },
             { "Type": "AddSwordsSkill", "Values": { "MinValue": 9, "MaxValue": 18, "Increment": 1 } },
             { "Type": "AddAxesSkill", "Values": { "MinValue": 9, "MaxValue": 18, "Increment": 1 } },
             { "Type": "AddCarryWeight", "Values": { "MinValue": 100, "MaxValue": 100, "Increment": 1 } }
+        ]
+    },
+    {
+        "ID": "MoonHighShoes",
+        "Name": "$mod_epicloot_l_moon_high_shoes",
+        "Description": "$mod_epicloot_l_moon_high_shoes_desc",
+        "IsSetItem": true,
+        "Requirements": {
+            "AllowedItemNames": [ "$item_legs_wolf" ]
+        },
+        "SelectionWeight": 10000,
+        "GuaranteedEffectCount": 5,
+        "GuaranteedMagicEffects": [
+            { "Type": "ModifyArmor", "Values": { "MinValue": 75, "MaxValue": 90, "Increment": 1 } },
+            { "Type": "IncreaseStamina", "Values": { "MinValue": 40, "MaxValue": 40, "Increment": 5 } },
+            { "Type": "IncreaseEitr", "Values": { "MinValue": 20, "MaxValue": 20, "Increment": 5 } },
+            { "Type": "AddElementalResistancePercentage", "Values": { "MinValue": 11, "MaxValue": 11, "Increment": 1 } },
+            { "Type": "ModifyJumpStaminaUse", "Values": { "MinValue": 50, "MaxValue": 50, "Increment": 1 } }
         ]
     },
 // Helmets
@@ -1491,7 +1546,7 @@
         "SelectionWeight": 10000,
         "GuaranteedEffectCount": 5,
         "GuaranteedMagicEffects": [
-            { "Type": "ModifyArmor", "Values": { "MinValue": 30, "MaxValue": 45, "Increment": 5 } },
+            { "Type": "ModifyArmor", "Values": { "MinValue": 40, "MaxValue": 55, "Increment": 5 } },
             { "Type": "IncreaseHealth", "Values": { "MinValue": 20, "MaxValue": 25, "Increment": 5 } },
             { "Type": "AddBluntResistancePercentage", "Values": { "MinValue": 10, "MaxValue": 10, "Increment": 1 } },
             { "Type": "AddClubsSkill", "Values": { "MinValue": 12, "MaxValue": 16, "Increment": 1 } },
@@ -1509,7 +1564,7 @@
         "SelectionWeight": 10000,
         "GuaranteedEffectCount": 4,
         "GuaranteedMagicEffects": [
-            { "Type": "ModifyArmor", "Values": { "MinValue": 55, "MaxValue": 55, "Increment": 5 } },
+            { "Type": "ModifyArmor", "Values": { "MinValue": 70, "MaxValue": 70, "Increment": 5 } },
             { "Type": "IncreaseHealth", "Values": { "MinValue": 25, "MaxValue": 25, "Increment": 5 } },
             { "Type": "AddSlashingResistancePercentage", "Values": { "MinValue": 10, "MaxValue": 15, "Increment": 1 } },
             { "Type": "QuickLearner", "Values": { "MinValue": 45, "MaxValue": 45, "Increment": 1 } }
@@ -1526,7 +1581,7 @@
         "SelectionWeight": 10000,
         "GuaranteedEffectCount": 5,
         "GuaranteedMagicEffects": [
-            { "Type": "ModifyArmor", "Values": { "MinValue": 40, "MaxValue": 55, "Increment": 5 } },
+            { "Type": "ModifyArmor", "Values": { "MinValue": 50, "MaxValue": 65, "Increment": 5 } },
             { "Type": "IncreaseStamina", "Values": { "MinValue": 20, "MaxValue": 30, "Increment": 5 } },
             { "Type": "ModifyHealthRegen", "Values": { "MinValue": 45, "MaxValue": 60, "Increment": 5 } },
             { "Type": "AddFireResistancePercentage", "Values": { "MinValue": 15, "MaxValue": 20, "Increment": 1 } },
@@ -1544,10 +1599,28 @@
         "SelectionWeight": 10000,
         "GuaranteedEffectCount": 4,
         "GuaranteedMagicEffects": [
-            { "Type": "ModifyArmor", "Values": { "MinValue": 50, "MaxValue": 80, "Increment": 5 } },
+            { "Type": "ModifyArmor", "Values": { "MinValue": 60, "MaxValue": 90, "Increment": 5 } },
             { "Type": "AddSpiritDamage", "Values": { "MinValue": 14, "MaxValue": 28, "Increment": 1 } },
             { "Type": "AddSwordsSkill", "Values": { "MinValue": 14, "MaxValue": 28, "Increment": 1 } },
             { "Type": "AddAxesSkill", "Values": { "MinValue": 14, "MaxValue": 28, "Increment": 1 } }
+        ]
+    },
+    {
+        "ID": "MoonVisor",
+        "Name": "$mod_epicloot_l_moon_visor",
+        "Description": "$mod_epicloot_l_moon_visor_desc",
+        "IsSetItem": true,
+        "Requirements": {
+            "AllowedItemNames": [ "$item_helmet_drake" ]
+        },
+        "SelectionWeight": 10000,
+        "GuaranteedEffectCount": 5,
+        "GuaranteedMagicEffects": [
+            { "Type": "ModifyArmor", "Values": { "MinValue": 75, "MaxValue": 90, "Increment": 1 } },
+            { "Type": "IncreaseStamina", "Values": { "MinValue": 40, "MaxValue": 40, "Increment": 5 } },
+            { "Type": "IncreaseEitr", "Values": { "MinValue": 20, "MaxValue": 20, "Increment": 5 } },
+            { "Type": "AddElementalResistancePercentage", "Values": { "MinValue": 11, "MaxValue": 11, "Increment": 1 } },
+            { "Type": "AddElementalMagicSkill", "Values": { "MinValue": 7, "MaxValue": 11, "Increment": 1 } }
         ]
     },
 // Capes
@@ -1585,6 +1658,24 @@
             { "Type": "AddBluntResistancePercentage", "Values": { "MinValue": 5, "MaxValue": 5, "Increment": 1 } },
             { "Type": "AddElementalResistancePercentage", "Values": { "MinValue": 5, "MaxValue": 15, "Increment": 1 } },
             { "Type": "Waterproof" }
+        ]
+    },
+    {
+        "ID": "MoonVeil",
+        "Name": "$mod_epicloot_l_moon_veil",
+        "Description": "$mod_epicloot_l_moon_veil_desc",
+        "IsSetItem": true,
+        "Requirements": {
+            "AllowedItemNames": [ "$item_cape_wolf" ]
+        },
+        "SelectionWeight": 10000,
+        "GuaranteedEffectCount": 5,
+        "GuaranteedMagicEffects": [
+            { "Type": "ModifyArmor", "Values": { "MinValue": 110, "MaxValue": 110, "Increment": 1 } },
+            { "Type": "IncreaseStamina", "Values": { "MinValue": 40, "MaxValue": 40, "Increment": 5 } },
+            { "Type": "IncreaseEitr", "Values": { "MinValue": 20, "MaxValue": 20, "Increment": 5 } },
+            { "Type": "AddElementalResistancePercentage", "Values": { "MinValue": 11, "MaxValue": 11, "Increment": 1 } },
+            { "Type": "AddElementalMagicSkill", "Values": { "MinValue": 7, "MaxValue": 11, "Increment": 1 } }
         ]
     }
   ],
@@ -1680,6 +1771,24 @@
             { "Count": 3, "Effect": { "Type": "AddSpiritDamage", "Values": { "MinValue": 84, "MaxValue": 84, "Increment": 1 } } },
             { "Count": 3, "Effect": { "Type": "ModifyArmorLowHealth", "Values": { "MinValue": 126, "MaxValue": 126, "Increment": 1 } } },
             { "Count": 3, "Effect": { "Type": "AddCarryWeight", "Values": { "MinValue": 300, "MaxValue": 300, "Increment": 1 } } }
+        ]
+    },
+    {
+        "ID": "FullMoon",
+        "Name": "$mod_epicloot_set_full_moon",
+        "LegendaryIDs": [
+            "MoonBarrier",
+            "MoonСhainMail",
+            "MoonHighShoes",
+            "MoonVisor",
+            "MoonVeil"
+        ],
+        "SetBonuses": [
+            { "Count": 3, "Effect": { "Type": "ModifyStaminaRegen", "Values": { "MinValue": 50, "MaxValue": 50, "Increment": 1 } } },
+            { "Count": 3, "Effect": { "Type": "ModifyEitrRegen", "Values": { "MinValue": 50, "MaxValue": 50, "Increment": 1 } } },
+            { "Count": 5, "Effect": { "Type": "AddElementalResistancePercentage", "Values": { "MinValue": 22, "MaxValue": 22, "Increment": 1 } } },
+            { "Count": 5, "Effect": { "Type": "AddElementalMagicSkill", "Values": { "MinValue": 22, "MaxValue": 22, "Increment": 1 } } },
+            { "Count": 5, "Effect": { "Type": "StaggerOnDamageTaken", "Values": { "MinValue": 55, "MaxValue": 55, "Increment": 1 } } }
         ]
     }
   ] 
