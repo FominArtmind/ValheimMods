@@ -497,10 +497,10 @@
           "Level": 4,
           "Drops": [ [1, 80], [2, 20] ],
           "Loot": [
-            { "Item": "Torch" ,       "Weight": 1, "Rarity": [ 32, 58, 0, 10 ] },
-            { "Item": "Hammer",       "Weight": 1, "Rarity": [ 32, 58, 0, 10 ] },
-            { "Item": "Club",         "Weight": 1, "Rarity": [ 65, 30, 0, 5 ] },
-            { "Item": "Tier0Shields", "Weight": 1, "Rarity": [ 65, 30, 0, 5 ] }
+            { "Item": "Torch" ,       "Weight": 1, "Rarity": [ 0, 90, 0, 10 ] },
+            { "Item": "Hammer",       "Weight": 1, "Rarity": [ 0, 90, 0, 10 ] },
+            { "Item": "Club",         "Weight": 1, "Rarity": [ 0, 95, 0, 5 ] },
+            { "Item": "Tier0Shields", "Weight": 1, "Rarity": [ 0, 95, 0, 5 ] }
           ]
         }
       ]
@@ -539,7 +539,7 @@
           "Drops": [ [1, 80], [2, 20] ],
           "Loot": [
             { "Item": "KnifeFlint",    "Weight": 1, "Rarity": [ 0, 87, 0, 13 ] },
-            { "Item": "HelmetLeather", "Weight": 1, "Rarity": [ 38, 57, 0, 5 ] }
+            { "Item": "HelmetLeather", "Weight": 1, "Rarity": [ 0, 95, 0, 5 ] }
           ]
         }
       ]
@@ -577,6 +577,7 @@
           "Level": 4,
           "Drops": [ [1, 80], [2, 20] ],
           "Loot": [
+            // domestic animal exception
             { "Item": "Tier0Armor", "Weight": 10, "Rarity": [ 70, 30, 0, 0 ] },
             { "Item": "Hoe",        "Weight": 1,  "Rarity": [ 70, 30, 0, 0 ] }
           ]
@@ -623,11 +624,11 @@
           "Level": 4,
           "Drops": [ [1, 80], [2, 20] ],
           "Loot": [
-            { "Item": "BowFineWood",   "Weight": 1, "Rarity": [ 35, 57, 0, 8 ] },
-            { "Item": "Tier1Armor",    "Weight": 4, "Rarity": [ 35, 57, 0, 8 ] },
-            { "Item": "CapeDeerHide",  "Weight": 2, "Rarity": [ 35, 57, 0, 8 ] },
-            { "Item": "SpearFlint",    "Weight": 1, "Rarity": [ 35, 57, 0, 8 ] },
-            { "Item": "LeatherBelt",   "Weight": 1, "Rarity": [ 35, 57, 0, 8 ] }
+            { "Item": "BowFineWood",   "Weight": 1, "Rarity": [ 0, 92, 0, 8 ] },
+            { "Item": "Tier1Armor",    "Weight": 4, "Rarity": [ 0, 92, 0, 8 ] },
+            { "Item": "CapeDeerHide",  "Weight": 2, "Rarity": [ 0, 92, 0, 8 ] },
+            { "Item": "SpearFlint",    "Weight": 1, "Rarity": [ 0, 92, 0, 8 ] },
+            { "Item": "LeatherBelt",   "Weight": 1, "Rarity": [ 0, 92, 0, 8 ] }
           ]
         }
       ]
@@ -857,7 +858,7 @@
           "Loot": [
             { "Item": "Tier1Everything", "Weight": 1, "Rarity": [ 0, 65, 0, 35 ] },
             { "Item": "TrollArmor",      "Weight": 3, "Rarity": [ 0, 60, 0, 40 ] },
-            { "Item": "Tier2Everything", "Weight": 2, "Rarity": [ 21, 45, 0, 21 ] }
+            { "Item": "Tier2Everything", "Weight": 2, "Rarity": [ 0, 79, 0, 21 ] }
           ]
         }
       ]
