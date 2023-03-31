@@ -381,7 +381,15 @@
       "DisplayText" : "$mod_epicloot_me_increasehealth_display",
       "Description" : "$mod_epicloot_me_increasehealth_desc",
       "Requirements" : {
-        "NoRoll": true,
+        "ExcludedItemNames": [
+            "$item_helmet_leather",
+            "$item_helmet_bronze",
+            "$item_helmet_trollleather",
+            "$item_chest_rags",
+            "$item_chest_leather",
+            "$item_chest_bronze",
+            "$item_chest_trollleather"
+        ],
         "AllowedItemTypes" : [
           "Helmet",
           "Chest",
@@ -407,93 +415,22 @@
       ]
     },
     {
-        "Type" : "IncreaseHealth",
-        "DisplayText" : "$mod_epicloot_me_increasehealth_display",
-        "Description" : "$mod_epicloot_me_increasehealth_desc",
-        "Requirements" : {
-          "AllowedItemNames" : [
-            "$mod_epicloot_assets_leatherbelt"
-          ],
-          "AllowedRarities" : [
-            "Rare",
-            "Epic",
-            "Legendary"
-          ]
-        },
-        "ValuesPerRarity" : {
-          "Rare" :      { "MinValue" : 10, "MaxValue" : 20, "Increment" : 5 },
-          "Epic" :      { "MinValue" : 20, "MaxValue" : 40, "Increment" : 5 },
-          "Legendary" : { "MinValue" : 20, "MaxValue" : 30, "Increment" : 5 }
-        },
-        "SelectionWeight" : 3,
-        "Prefixes": [
-          "$mod_epicloot_me_increasehealth_prefix1"
-        ],
-        "Suffixes": [
-          "$mod_epicloot_me_increasehealth_suffix1"
-        ]
-    },
-    {
-        "Type" : "IncreaseHealth",
-        "DisplayText" : "$mod_epicloot_me_increasehealth_display",
-        "Description" : "$mod_epicloot_me_increasehealth_desc",
-        "Requirements" : {
-          "AllowedItemNames" : [
-            "$mod_epicloot_assets_goldrubyring"
-          ],
-          "AllowedRarities" : [
-            "Rare",
-            "Epic",
-            "Legendary"
-          ]
-        },
-        "ValuesPerRarity" : {
-          "Rare" :      { "MinValue" : 15, "MaxValue" : 30, "Increment" : 5 },
-          "Epic" :      { "MinValue" : 25, "MaxValue" : 50, "Increment" : 5 },
-          "Legendary" : { "MinValue" : 30, "MaxValue" : 40, "Increment" : 5 }
-        },
-        "SelectionWeight" : 3,
-        "Prefixes": [
-          "$mod_epicloot_me_increasehealth_prefix1"
-        ],
-        "Suffixes": [
-          "$mod_epicloot_me_increasehealth_suffix1"
-        ]
-    },
-    {
-        "Type" : "IncreaseHealth",
-        "DisplayText" : "$mod_epicloot_me_increasehealth_display",
-        "Description" : "$mod_epicloot_me_increasehealth_desc",
-        "Requirements" : {
-          "AllowedItemNames" : [
-            "$mod_epicloot_assets_silverring"
-          ],
-          "AllowedRarities" : [
-            "Rare",
-            "Epic",
-            "Legendary"
-          ]
-        },
-        "ValuesPerRarity" : {
-          "Rare" :      { "MinValue" : 20, "MaxValue" : 40, "Increment" : 5 },
-          "Epic" :      { "MinValue" : 30, "MaxValue" : 60, "Increment" : 5 },
-          "Legendary" : { "MinValue" : 40, "MaxValue" : 50, "Increment" : 5 }
-        },
-        "SelectionWeight" : 3,
-        "Prefixes": [
-          "$mod_epicloot_me_increasehealth_prefix1"
-        ],
-        "Suffixes": [
-          "$mod_epicloot_me_increasehealth_suffix1"
-        ]
-    },
-    {
       "Type" : "IncreaseStamina",
       "DisplayText" : "$mod_epicloot_me_increasestamina_display",
       "Description" : "$mod_epicloot_me_increasestamina_desc",
       "Requirements" : {
-        "NoRoll": true,
+        "ExcludedItemNames": [
+            "$item_chest_rags",
+            "$item_chest_leather",
+            "$item_chest_bronze",
+            "$item_chest_trollleather",
+            "$item_legs_rags",
+            "$item_legs_leather",
+            "$item_legs_bronze",
+            "$item_legs_trollleather"
+        ],
         "AllowedItemTypes" : [
+          "Chest",
           "Legs",
           "Tool"
         ],
