@@ -829,6 +829,7 @@
           "Level": 1,
           "Drops": [ [1, 20], [2, 45], [3, 25], [4, 10] ],
           "Loot": [
+            { "Item": "Tier0Everything", "Weight": 1, "Rarity": [ 0, 76, 17, 7 ] },
             { "Item": "Tier1Everything", "Weight": 2, "Rarity": [ 30, 52, 16, 2 ] },
             { "Item": "TrollArmor",      "Weight": 3, "Rarity": [ 49, 36, 12, 3 ] },
             { "Item": "Tier2Everything", "Weight": 1, "Rarity": [ 69, 25, 5, 1 ] }
@@ -838,6 +839,7 @@
           "Level": 2,
           "Drops": [ [2, 65], [3, 20], [4, 10], [5, 5] ],
           "Loot": [
+            { "Item": "Tier0Everything", "Weight": 1, "Rarity": [ 0, 46, 37, 17 ] },
             { "Item": "Tier1Everything", "Weight": 1, "Rarity": [ 15, 54, 27, 4 ] },
             { "Item": "TrollArmor",      "Weight": 3, "Rarity": [ 33, 45, 15, 7 ] },
             { "Item": "Tier2Everything", "Weight": 1, "Rarity": [ 53, 35, 10, 2 ] }
@@ -2619,8 +2621,9 @@
       "Object": "shipwreck_karve_chest",
       "Drops": [ [0, 35], [1, 50], [2, 10], [3, 5] ],
       "Loot": [
-        { "Item": "Tier0Everything", "Weight": 10, "Rarity": [ 70, 23, 5, 2 ] },
-        { "Item": "Tier1Everything", "Weight": 10, "Rarity": [ 70, 23, 5, 2 ] },
+        { "Item": "Tier0Everything", "Weight": 8, "Rarity": [ 22, 50, 11, 17 ] },
+        { "Item": "Tier1Everything", "Weight": 7, "Rarity": [ 34, 50, 7, 9 ] },
+        { "Item": "Tier2Everything", "Weight": 4, "Rarity": [ 61, 30, 4, 5 ] },
         { "Item": "RunestoneMagic",  "Weight": 3 },
         { "Item": "RunestoneRare",   "Weight": 1 }
       ]
@@ -2631,9 +2634,9 @@
       "Object": "TreasureChest_meadows_buried",
       "Drops": [ [0, 15], [1, 40], [2, 25], [3, 15], [4, 5] ],
       "Loot": [
-        { "Item": "Tier0Everything", "Weight": 8, "Rarity": [ 26, 50, 20, 4 ] },
-        { "Item": "Tier1Everything", "Weight": 5, "Rarity": [ 26, 50, 20, 4 ] },
-        { "Item": "Tier2Everything", "Weight": 3, "Rarity": [ 60, 30, 7, 3 ] },
+        { "Item": "Tier0Everything", "Weight": 10, "Rarity": [ 16, 50, 27, 7 ] },
+        { "Item": "Tier1Everything", "Weight": 7, "Rarity": [ 29, 50, 17, 4 ] },
+        { "Item": "Tier2Everything", "Weight": 2, "Rarity": [ 57, 30, 11, 2 ] },
         { "Item": "RunestoneMagic",  "Weight": 3 },
         { "Item": "RunestoneRare",   "Weight": 1 }
       ]
