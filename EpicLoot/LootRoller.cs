@@ -260,8 +260,10 @@ namespace EpicLoot
                     continue;
                 }
                 var lootDrop = ResolveLootDrop(ld);
+
+                var itemID = (CheatDisableGating) ? lootDrop.Item : GatedItemTypeHelper.GetGatedItemID(lootDrop.Item);
                 
-                if (!cheatsActive && EpicLoot.ItemsToMaterialsDropRatio.Value > 0)
+                if (itemID == null || (!cheatsActive && EpicLoot.ItemsToMaterialsDropRatio.Value > 0))
                 {
                     var clampedConvertRate = Mathf.Clamp(EpicLoot.ItemsToMaterialsDropRatio.Value, 0.0f, 1.0f);
                     var replaceWithMats = Random.Range(0.0f, 1.0f) < clampedConvertRate;
@@ -291,7 +293,6 @@ namespace EpicLoot
                         continue;
                     }
                 }
-                var itemID = (CheatDisableGating) ? lootDrop.Item : GatedItemTypeHelper.GetGatedItemID(lootDrop.Item);
 
                 var itemPrefab = ObjectDB.instance.GetItemPrefab(itemID);
                 if (itemPrefab == null)
