@@ -262,36 +262,47 @@ namespace EpicLoot
                 var lootDrop = ResolveLootDrop(ld);
 
                 var itemID = (CheatDisableGating) ? lootDrop.Item : GatedItemTypeHelper.GetGatedItemID(lootDrop.Item);
-                
-                if (itemID == null || (!cheatsActive && EpicLoot.ItemsToMaterialsDropRatio.Value > 0))
+
+                bool ReplaceWithMats()
                 {
-                    var clampedConvertRate = Mathf.Clamp(EpicLoot.ItemsToMaterialsDropRatio.Value, 0.0f, 1.0f);
-                    var replaceWithMats = Random.Range(0.0f, 1.0f) < clampedConvertRate;
-                    if (replaceWithMats)
+                    if(itemID == null)
                     {
-                        var prefab = ObjectDB.instance.GetItemPrefab(lootDrop.Item);
-                        if (prefab != null)
+                        return true;
+                    }
+
+                    if(!cheatsActive && EpicLoot.ItemsToMaterialsDropRatio.Value > 0)
+                    {
+                        var clampedConvertRate = Mathf.Clamp(EpicLoot.ItemsToMaterialsDropRatio.Value, 0.0f, 1.0f);
+                        return Random.Range(0.0f, 1.0f) < clampedConvertRate;
+                    }
+
+                    return false;
+                };
+
+                if (ReplaceWithMats())
+                {
+                    var prefab = ObjectDB.instance.GetItemPrefab(lootDrop.Item);
+                    if (prefab != null)
+                    {
+                        var rarity = RollItemRarity(lootDrop, luckFactor);
+                        var itemType = prefab.GetComponent<ItemDrop>().m_itemData.m_shared.m_itemType;
+                        var disenchantProducts = EnchantCostsHelper.GetDisenchantProducts(true, itemType, rarity);
+                        if (disenchantProducts != null)
                         {
-                            var rarity = RollItemRarity(lootDrop, luckFactor);
-                            var itemType = prefab.GetComponent<ItemDrop>().m_itemData.m_shared.m_itemType;
-                            var disenchantProducts = EnchantCostsHelper.GetDisenchantProducts(true, itemType, rarity);
-                            if (disenchantProducts != null)
+                            foreach (var itemAmountConfig in disenchantProducts)
                             {
-                                foreach (var itemAmountConfig in disenchantProducts)
-                                {
-                                    var materialPrefab = ObjectDB.instance.GetItemPrefab(itemAmountConfig.Item);
-                                    var materialItem = SpawnLootForDrop(materialPrefab, dropPoint, true);
-                                    var materialItemDrop = materialItem.GetComponent<ItemDrop>();
-                                    materialItemDrop.m_itemData.m_stack = itemAmountConfig.Amount;
-                                    if (materialItemDrop.m_itemData.IsMagicCraftingMaterial())
-                                        materialItemDrop.m_itemData.m_variant = EpicLoot.GetRarityIconIndex(rarity);
-                                    results.Add(materialItem);
-                                }
+                                var materialPrefab = ObjectDB.instance.GetItemPrefab(itemAmountConfig.Item);
+                                var materialItem = SpawnLootForDrop(materialPrefab, dropPoint, true);
+                                var materialItemDrop = materialItem.GetComponent<ItemDrop>();
+                                materialItemDrop.m_itemData.m_stack = itemAmountConfig.Amount;
+                                if (materialItemDrop.m_itemData.IsMagicCraftingMaterial())
+                                    materialItemDrop.m_itemData.m_variant = EpicLoot.GetRarityIconIndex(rarity);
+                                results.Add(materialItem);
                             }
                         }
-
-                        continue;
                     }
+ 
+                    continue;
                 }
 
                 var itemPrefab = ObjectDB.instance.GetItemPrefab(itemID);
