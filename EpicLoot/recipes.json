@@ -18,7 +18,7 @@
         "craftingStation": "forge",
         "resources": [
           { "item": "Ruby", "amount": 1 },
-          { "item": "Coins", "amount": 200 }
+          { "item": "Coins", "amount": 250 }
         ]
     },
     {
@@ -26,8 +26,8 @@
       "item": "SilverRing",
       "craftingStation": "forge",
       "resources": [
-        { "item": "Silver", "amount": 1 },
-        { "item": "Coins", "amount": 400 }
+        { "item": "Silver", "amount": 2 },
+        { "item": "Coins", "amount": 700 }
       ]
     },
 
