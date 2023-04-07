@@ -529,7 +529,7 @@ namespace EpicLoot.Crafting
         {
             var pip = EpicLoot.GetMagicEffectPip(magicItem.IsEffectAugmented(i));
             bool free = EnchantCostsHelper.EffectIsDeprecated(augmentableEffects[i].EffectType);
-            return $"{pip} {Localization.instance.Localize(MagicItem.GetEffectText(augmentableEffects[i], rarity, magicItem.ItemName, true))}{(free ? " [<color=yellow>*FREE</color>]" : "")}";
+            return $"{pip} {Localization.instance.Localize(MagicItem.GetEffectText(augmentableEffects[i], rarity, magicItem.ItemName, true, magicItem.LegendaryID))}{(free ? " [<color=yellow>*FREE</color>]" : "")}";
         }
 
         private void OnSelectorValueChanged(int index, bool selected)
