@@ -446,19 +446,20 @@
       "DisplayText" : "$mod_epicloot_me_increasestamina_display",
       "Description" : "$mod_epicloot_me_increasestamina_desc",
       "Requirements" : {
-        "ExcludedItemNames": [
-            "$item_chest_rags",
-            "$item_chest_leather",
-            "$item_chest_bronze",
-            "$item_chest_trollleather",
-            "$item_legs_rags",
-            "$item_legs_leather",
-            "$item_legs_bronze",
-            "$item_legs_trollleather"
-        ],
+        // "ExcludedItemNames": [
+        //     "$item_chest_rags",
+        //     "$item_chest_leather",
+        //     "$item_chest_bronze",
+        //     "$item_chest_trollleather",
+        //     "$item_legs_rags",
+        //     "$item_legs_leather",
+        //     "$item_legs_bronze",
+        //     "$item_legs_trollleather"
+        // ],
         "AllowedItemTypes" : [
           "Chest",
           "Legs",
+          "Shoulder",
           "Tool"
         ],
         "AllowedRarities" : [
@@ -472,6 +473,49 @@
         "Epic" :      { "MinValue" : 20, "MaxValue" : 50, "Increment" : 5 },
         "Legendary" : { "MinValue" : 30, "MaxValue" : 40, "Increment" : 5 }
       },
+      "ValuesPerItemName": [
+        {
+            "ItemNames": [
+                "$item_cape_deerhide"
+            ],
+            "ValuesPerRarity" : {
+                "Rare" :      { "MinValue" : 5, "MaxValue" : 5, "Increment" : 5 },
+                "Epic" :      { "MinValue" : 5, "MaxValue" : 15, "Increment" : 5 },
+                "Legendary" : { "MinValue" : 10, "MaxValue" : 10, "Increment" : 5 }
+            }
+        },
+        {
+            "ItemNames": [
+                "$item_chest_rags",
+                "$item_chest_leather",
+                "$item_legs_rags",
+                "$item_legs_leather",
+                "$item_cape_trollhide",
+                "$item_cape_wolf"
+            ],
+            "ValuesPerRarity" : {
+                "Rare" :      { "MinValue" : 5, "MaxValue" : 10, "Increment" : 5 },
+                "Epic" :      { "MinValue" : 10, "MaxValue" : 20, "Increment" : 5 },
+                "Legendary" : { "MinValue" : 15, "MaxValue" : 15, "Increment" : 5 }
+            }
+        },
+        {
+            "ItemNames": [
+                "$item_chest_bronze",
+                "$item_chest_trollleather",
+                "$item_legs_bronze",
+                "$item_legs_trollleather",
+                "$item_cape_lox",
+                "$item_cape_linen",
+                "$item_cape_feather"
+            ],
+            "ValuesPerRarity" : {
+                "Rare" :      { "MinValue" : 10, "MaxValue" : 15, "Increment" : 5 },
+                "Epic" :      { "MinValue" : 15, "MaxValue" : 30, "Increment" : 5 },
+                "Legendary" : { "MinValue" : 20, "MaxValue" : 20, "Increment" : 5 }
+            }
+        }
+      ],
       "SelectionWeight" : 3,
       "Prefixes": [
         "$mod_epicloot_me_increasestamina_prefix1"
@@ -1083,6 +1127,64 @@
         "Epic" :      { "MinValue" : 25, "MaxValue" : 45, "Increment" : 1 },
         "Legendary" : { "MinValue" : 30, "MaxValue" : 40, "Increment" : 1 }
       },
+      "ValuesPerItemName": [
+        {
+            "ItemNames": [
+                "$item_cape_deerhide"
+            ],
+            "ValuesPerRarity" : {
+                "Magic" :     { "MinValue" : 5,  "MaxValue" : 25, "Increment" : 1 },
+                "Rare" :      { "MinValue" : 7,  "MaxValue" : 15, "Increment" : 1 },
+                "Epic" :      { "MinValue" : 12, "MaxValue" : 22, "Increment" : 1 },
+                "Legendary" : { "MinValue" : 15, "MaxValue" : 20, "Increment" : 1 }
+            }
+        },
+        {
+            "ItemNames": [
+                "$item_cape_trollhide"
+            ],
+            "ValuesPerRarity" : {
+                "Magic" :     { "MinValue" : 7,  "MaxValue" : 35, "Increment" : 1 },
+                "Rare" :      { "MinValue" : 10, "MaxValue" : 21, "Increment" : 1 },
+                "Epic" :      { "MinValue" : 17, "MaxValue" : 32, "Increment" : 1 },
+                "Legendary" : { "MinValue" : 21, "MaxValue" : 28, "Increment" : 1 }
+            }
+        },
+        {
+            "ItemNames": [
+                "$item_cape_wolf"
+            ],
+            "ValuesPerRarity" : {
+                "Magic" :     { "MinValue" : 8,  "MaxValue" : 40, "Increment" : 1 },
+                "Rare" :      { "MinValue" : 12, "MaxValue" : 24, "Increment" : 1 },
+                "Epic" :      { "MinValue" : 20, "MaxValue" : 36, "Increment" : 1 },
+                "Legendary" : { "MinValue" : 24, "MaxValue" : 32, "Increment" : 1 }
+            }
+        },
+        {
+            "ItemNames": [
+                "$item_cape_lox",
+                "$item_cape_linen"
+            ],
+            "ValuesPerRarity" : {
+                "Magic" :     { "MinValue" : 9,  "MaxValue" : 45, "Increment" : 1 },
+                "Rare" :      { "MinValue" : 14, "MaxValue" : 27, "Increment" : 1 },
+                "Epic" :      { "MinValue" : 23, "MaxValue" : 40, "Increment" : 1 },
+                "Legendary" : { "MinValue" : 27, "MaxValue" : 36, "Increment" : 1 }
+            }
+        },
+        {
+            "ItemNames": [
+                "$item_cape_feather"
+            ],
+            "ValuesPerRarity" : {
+                "Magic" :     { "MinValue" : 10, "MaxValue" : 50, "Increment" : 1 },
+                "Rare" :      { "MinValue" : 15, "MaxValue" : 30, "Increment" : 1 },
+                "Epic" :      { "MinValue" : 25, "MaxValue" : 45, "Increment" : 1 },
+                "Legendary" : { "MinValue" : 30, "MaxValue" : 40, "Increment" : 1 }
+            }
+        }
+      ],
       "SelectionWeight" : 1,
       "Prefixes": [
         "$mod_epicloot_me_addfrostresistance_prefix1"
@@ -1206,6 +1308,59 @@
         "Epic" :      { "MinValue" : 5, "MaxValue" : 15, "Increment" : 1 },
         "Legendary" : { "MinValue" : 8, "MaxValue" : 12, "Increment" : 1 }
       },
+      "ValuesPerItemName": [
+        {
+            "ItemNames": [
+                "$item_cape_deerhide"
+            ],
+            "ValuesPerRarity" : {
+                "Rare" :      { "MinValue" : 2, "MaxValue" : 4,  "Increment" : 1 },
+                "Epic" :      { "MinValue" : 3, "MaxValue" : 7, "Increment" : 1 },
+                "Legendary" : { "MinValue" : 4, "MaxValue" : 6, "Increment" : 1 }
+            }
+        },
+        {
+            "ItemNames": [
+                "$item_cape_trollhide"
+            ],
+            "ValuesPerRarity" : {
+                "Rare" :      { "MinValue" : 3, "MaxValue" : 5,  "Increment" : 1 },
+                "Epic" :      { "MinValue" : 4, "MaxValue" : 10, "Increment" : 1 },
+                "Legendary" : { "MinValue" : 6, "MaxValue" : 8, "Increment" : 1 }
+            }
+        },
+        {
+            "ItemNames": [
+                "$item_cape_wolf"
+            ],
+            "ValuesPerRarity" : {
+                "Rare" :      { "MinValue" : 4, "MaxValue" : 6,  "Increment" : 1 },
+                "Epic" :      { "MinValue" : 5, "MaxValue" : 12, "Increment" : 1 },
+                "Legendary" : { "MinValue" : 8, "MaxValue" : 10, "Increment" : 1 }
+            }
+        },
+        {
+            "ItemNames": [
+                "$item_cape_lox",
+                "$item_cape_linen"
+            ],
+            "ValuesPerRarity" : {
+                "Rare" :      { "MinValue" : 4, "MaxValue" : 6,  "Increment" : 1 },
+                "Epic" :      { "MinValue" : 5, "MaxValue" : 14, "Increment" : 1 },
+                "Legendary" : { "MinValue" : 8, "MaxValue" : 11, "Increment" : 1 }
+            }
+        },
+        {
+            "ItemNames": [
+                "$item_cape_feather"
+            ],
+            "ValuesPerRarity" : {
+                "Rare" :      { "MinValue" : 4, "MaxValue" : 7,  "Increment" : 1 },
+                "Epic" :      { "MinValue" : 5, "MaxValue" : 15, "Increment" : 1 },
+                "Legendary" : { "MinValue" : 8, "MaxValue" : 12, "Increment" : 1 }
+            }
+        }
+      ],
       "SelectionWeight" : 3,
       "Prefixes": [
         "$mod_epicloot_me_addelementalresistancepercentage_prefix1"
@@ -1580,6 +1735,64 @@
         "Epic" :      { "MinValue" : 50, "MaxValue" : 110, "Increment" : 5 },
         "Legendary" : { "MinValue" : 70, "MaxValue" : 90, "Increment" : 5 }
       },
+      "ValuesPerItemName": [
+        {
+            "ItemNames": [
+                "$item_cape_deerhide"
+            ],
+            "ValuesPerRarity" : {
+                "Magic" :     { "MinValue" : 15, "MaxValue" : 65, "Increment" : 5 },
+                "Rare" :      { "MinValue" : 20, "MaxValue" : 30, "Increment" : 5 },
+                "Epic" :      { "MinValue" : 25, "MaxValue" : 55, "Increment" : 5 },
+                "Legendary" : { "MinValue" : 35, "MaxValue" : 45, "Increment" : 5 }
+            }
+        },
+        {
+            "ItemNames": [
+                "$item_cape_trollhide"
+            ],
+            "ValuesPerRarity" : {
+                "Magic" :     { "MinValue" : 20, "MaxValue" : 90, "Increment" : 5 },
+                "Rare" :      { "MinValue" : 25, "MaxValue" : 40, "Increment" : 5 },
+                "Epic" :      { "MinValue" : 35, "MaxValue" : 70, "Increment" : 5 },
+                "Legendary" : { "MinValue" : 40, "MaxValue" : 55, "Increment" : 5 }
+            }
+        },
+        {
+            "ItemNames": [
+                "$item_cape_wolf"
+            ],
+            "ValuesPerRarity" : {
+                "Magic" :     { "MinValue" : 20, "MaxValue" : 110, "Increment" : 5 },
+                "Rare" :      { "MinValue" : 30, "MaxValue" : 45, "Increment" : 5 },
+                "Epic" :      { "MinValue" : 40, "MaxValue" : 90, "Increment" : 5 },
+                "Legendary" : { "MinValue" : 60, "MaxValue" : 70, "Increment" : 5 }
+            }
+        },
+        {
+            "ItemNames": [
+                "$item_cape_lox",
+                "$item_cape_linen"
+            ],
+            "ValuesPerRarity" : {
+                "Magic" :     { "MinValue" : 25, "MaxValue" : 120, "Increment" : 5 },
+                "Rare" :      { "MinValue" : 35, "MaxValue" : 50, "Increment" : 5 },
+                "Epic" :      { "MinValue" : 45, "MaxValue" : 100, "Increment" : 5 },
+                "Legendary" : { "MinValue" : 65, "MaxValue" : 80, "Increment" : 5 }
+            }
+        },
+        {
+            "ItemNames": [
+                "$item_cape_feather"
+            ],
+            "ValuesPerRarity" : {
+                "Magic" :     { "MinValue" : 30, "MaxValue" : 130, "Increment" : 5 },
+                "Rare" :      { "MinValue" : 40, "MaxValue" : 55, "Increment" : 5 },
+                "Epic" :      { "MinValue" : 50, "MaxValue" : 110, "Increment" : 5 },
+                "Legendary" : { "MinValue" : 70, "MaxValue" : 90, "Increment" : 5 }
+            }
+        }
+      ],
       "SelectionWeight" : 1,
       "Prefixes": [
         "$mod_epicloot_me_addcarryweight_prefix1"
@@ -2166,6 +2379,59 @@
         "Epic" :      { "MinValue" : 14, "MaxValue" : 27, "Increment" : 1 },
         "Legendary" : { "MinValue" : 17, "MaxValue" : 22, "Increment" : 1 }
       },
+      "ValuesPerItemName": [
+        {
+            "ItemNames": [
+                "$item_cape_deerhide"
+            ],
+            "ValuesPerRarity" : {
+                "Rare" :      { "MinValue" : 5,  "MaxValue" : 9, "Increment" : 1 },
+                "Epic" :      { "MinValue" : 7, "MaxValue" : 14, "Increment" : 1 },
+                "Legendary" : { "MinValue" : 9, "MaxValue" : 11, "Increment" : 1 }
+            }
+        },
+        {
+            "ItemNames": [
+                "$item_cape_trollhide"
+            ],
+            "ValuesPerRarity" : {
+                "Rare" :      { "MinValue" : 6,  "MaxValue" : 12, "Increment" : 1 },
+                "Epic" :      { "MinValue" : 10, "MaxValue" : 19, "Increment" : 1 },
+                "Legendary" : { "MinValue" : 12, "MaxValue" : 15, "Increment" : 1 }
+            }
+        },
+        {
+            "ItemNames": [
+                "$item_cape_wolf"
+            ],
+            "ValuesPerRarity" : {
+                "Rare" :      { "MinValue" : 7,  "MaxValue" : 14, "Increment" : 1 },
+                "Epic" :      { "MinValue" : 12, "MaxValue" : 22, "Increment" : 1 },
+                "Legendary" : { "MinValue" : 14, "MaxValue" : 18, "Increment" : 1 }
+            }
+        },
+        {
+            "ItemNames": [
+                "$item_cape_lox",
+                "$item_cape_linen"
+            ],
+            "ValuesPerRarity" : {
+                "Rare" :      { "MinValue" : 8,  "MaxValue" : 16, "Increment" : 1 },
+                "Epic" :      { "MinValue" : 13, "MaxValue" : 25, "Increment" : 1 },
+                "Legendary" : { "MinValue" : 16, "MaxValue" : 20, "Increment" : 1 }
+            }
+        },
+        {
+            "ItemNames": [
+                "$item_cape_feather"
+            ],
+            "ValuesPerRarity" : {
+                "Rare" :      { "MinValue" : 9,  "MaxValue" : 18, "Increment" : 1 },
+                "Epic" :      { "MinValue" : 14, "MaxValue" : 27, "Increment" : 1 },
+                "Legendary" : { "MinValue" : 17, "MaxValue" : 22, "Increment" : 1 }
+            }
+        }
+      ],
       "SelectionWeight" : 4,
       "Prefixes": [
         "$mod_epicloot_me_addmovementskills_prefix1"
@@ -2303,6 +2569,59 @@
         "Epic" :      { "MinValue" : 5, "MaxValue" : 13,  "Increment" : 1 },
         "Legendary" : { "MinValue" : 7, "MaxValue" : 10, "Increment" : 1 }
       },
+      "ValuesPerItemName": [
+        {
+            "ItemNames": [
+                "$item_cape_deerhide"
+            ],
+            "ValuesPerRarity" : {
+                "Rare" :      { "MinValue" : 2, "MaxValue" : 4,  "Increment" : 1 },
+                "Epic" :      { "MinValue" : 4, "MaxValue" : 9,  "Increment" : 1 },
+                "Legendary" : { "MinValue" : 5, "MaxValue" : 6, "Increment" : 1 }
+            }
+        },
+        {
+            "ItemNames": [
+                "$item_cape_trollhide"
+            ],
+            "ValuesPerRarity" : {
+                "Rare" :      { "MinValue" : 3, "MaxValue" : 4,  "Increment" : 1 },
+                "Epic" :      { "MinValue" : 4, "MaxValue" : 10,  "Increment" : 1 },
+                "Legendary" : { "MinValue" : 6, "MaxValue" : 7, "Increment" : 1 }
+            }
+        },
+        {
+            "ItemNames": [
+                "$item_cape_wolf"
+            ],
+            "ValuesPerRarity" : {
+                "Rare" :      { "MinValue" : 3, "MaxValue" : 5,  "Increment" : 1 },
+                "Epic" :      { "MinValue" : 5, "MaxValue" : 11,  "Increment" : 1 },
+                "Legendary" : { "MinValue" : 7, "MaxValue" : 8, "Increment" : 1 }
+            }
+        },
+        {
+            "ItemNames": [
+                "$item_cape_lox",
+                "$item_cape_linen"
+            ],
+            "ValuesPerRarity" : {
+                "Rare" :      { "MinValue" : 3, "MaxValue" : 6,  "Increment" : 1 },
+                "Epic" :      { "MinValue" : 5, "MaxValue" : 12,  "Increment" : 1 },
+                "Legendary" : { "MinValue" : 7, "MaxValue" : 9, "Increment" : 1 }
+            }
+        },
+        {
+            "ItemNames": [
+                "$item_cape_feather"
+            ],
+            "ValuesPerRarity" : {
+                "Rare" :      { "MinValue" : 3, "MaxValue" : 7,  "Increment" : 1 },
+                "Epic" :      { "MinValue" : 5, "MaxValue" : 13,  "Increment" : 1 },
+                "Legendary" : { "MinValue" : 7, "MaxValue" : 10, "Increment" : 1 }
+            }
+        }
+      ],
       "SelectionWeight" : 2,
       "Prefixes": [ "$mod_epicloot_me_avoiddamagetaken_prefix1" ],
       "Suffixes": [ "$mod_epicloot_me_avoiddamagetaken_suffix1" ]
@@ -2333,6 +2652,10 @@
       "DisplayText" : "$mod_epicloot_me_featherfall_display",
       "Description" : "$mod_epicloot_me_featherfall_desc",
       "Requirements" : {
+        "ExcludedItemNames": [
+            "$item_cape_deerhide",
+            "$item_cape_trollhide"
+        ],
         "AllowedItemTypes" : [
           "Shoulder",
           "Staff"
@@ -2390,6 +2713,54 @@
         "Epic" :      { "MinValue" : 1, "MaxValue" : 4, "Increment" : 1 },
         "Legendary" : { "MinValue" : 2, "MaxValue" : 3, "Increment" : 1 }
       },
+      "ValuesPerItemName": [
+        {
+            "ItemNames": [
+                "$item_cape_deerhide"
+            ],
+            "ValuesPerRarity" : {
+                "Epic" :      { "MinValue" : 1, "MaxValue" : 1, "Increment" : 1 },
+                "Legendary" : { "MinValue" : 1, "MaxValue" : 1, "Increment" : 1 }
+            }
+        },
+        {
+            "ItemNames": [
+                "$item_cape_trollhide"
+            ],
+            "ValuesPerRarity" : {
+                "Epic" :      { "MinValue" : 1, "MaxValue" : 2, "Increment" : 1 },
+                "Legendary" : { "MinValue" : 1, "MaxValue" : 2, "Increment" : 1 }
+            }
+        },
+        {
+            "ItemNames": [
+                "$item_cape_wolf"
+            ],
+            "ValuesPerRarity" : {
+                "Epic" :      { "MinValue" : 1, "MaxValue" : 3, "Increment" : 1 },
+                "Legendary" : { "MinValue" : 2, "MaxValue" : 2, "Increment" : 1 }
+            }
+        },
+        {
+            "ItemNames": [
+                "$item_cape_lox",
+                "$item_cape_linen"
+            ],
+            "ValuesPerRarity" : {
+                "Epic" :      { "MinValue" : 1, "MaxValue" : 4, "Increment" : 1 },
+                "Legendary" : { "MinValue" : 2, "MaxValue" : 3, "Increment" : 1 }
+            }
+        },
+        {
+            "ItemNames": [
+                "$item_cape_feather"
+            ],
+            "ValuesPerRarity" : {
+                "Epic" :      { "MinValue" : 1, "MaxValue" : 4, "Increment" : 1 },
+                "Legendary" : { "MinValue" : 2, "MaxValue" : 3, "Increment" : 1 }
+            }
+        }
+      ],
       "SelectionWeight" : 2,
       "Prefixes": [ "$mod_epicloot_me_comfortable_prefix1" ],
       "Suffixes": [ "$mod_epicloot_me_comfortable_suffix1" ]
@@ -2442,6 +2813,64 @@
         "Epic" :      { "MinValue" : 60, "MaxValue" : 120, "Increment" : 1 },
         "Legendary" : { "MinValue" : 80, "MaxValue" : 100, "Increment" : 1 }
       },
+      "ValuesPerItemName": [
+        {
+            "ItemNames": [
+                "$item_cape_deerhide"
+            ],
+            "ValuesPerRarity" : {
+                "Magic" :     { "MinValue" : 10, "MaxValue" : 100, "Increment" : 1 },
+                "Rare" :      { "MinValue" : 20, "MaxValue" : 40, "Increment" : 1 },
+                "Epic" :      { "MinValue" : 30, "MaxValue" : 60, "Increment" : 1 },
+                "Legendary" : { "MinValue" : 40, "MaxValue" : 50, "Increment" : 1 }
+            }
+        },
+        {
+            "ItemNames": [
+                "$item_cape_trollhide"
+            ],
+            "ValuesPerRarity" : {
+                "Magic" :     { "MinValue" : 15, "MaxValue" : 140, "Increment" : 1 },
+                "Rare" :      { "MinValue" : 30, "MaxValue" : 55, "Increment" : 1 },
+                "Epic" :      { "MinValue" : 40, "MaxValue" : 85, "Increment" : 1 },
+                "Legendary" : { "MinValue" : 55, "MaxValue" : 70, "Increment" : 1 }
+            }
+        },
+        {
+            "ItemNames": [
+                "$item_cape_wolf"
+            ],
+            "ValuesPerRarity" : {
+                "Magic" :     { "MinValue" : 15, "MaxValue" : 160, "Increment" : 1 },
+                "Rare" :      { "MinValue" : 30, "MaxValue" : 65, "Increment" : 1 },
+                "Epic" :      { "MinValue" : 50, "MaxValue" : 95, "Increment" : 1 },
+                "Legendary" : { "MinValue" : 65, "MaxValue" : 80, "Increment" : 1 }
+            }
+        },
+        {
+            "ItemNames": [
+                "$item_cape_lox",
+                "$item_cape_linen"
+            ],
+            "ValuesPerRarity" : {
+                "Magic" :     { "MinValue" : 20, "MaxValue" : 180, "Increment" : 1 },
+                "Rare" :      { "MinValue" : 35, "MaxValue" : 70, "Increment" : 1 },
+                "Epic" :      { "MinValue" : 55, "MaxValue" : 100, "Increment" : 1 },
+                "Legendary" : { "MinValue" : 70, "MaxValue" : 90, "Increment" : 1 }
+            }
+        },
+        {
+            "ItemNames": [
+                "$item_cape_feather"
+            ],
+            "ValuesPerRarity" : {
+                "Magic" :     { "MinValue" : 20, "MaxValue" : 200, "Increment" : 1 },
+                "Rare" :      { "MinValue" : 40, "MaxValue" : 80, "Increment" : 1 },
+                "Epic" :      { "MinValue" : 60, "MaxValue" : 120, "Increment" : 1 },
+                "Legendary" : { "MinValue" : 80, "MaxValue" : 100, "Increment" : 1 }
+            }
+        }
+      ],
       "SelectionWeight" : 2,
       "Prefixes": [
         "$mod_epicloot_me_modifyhealthregenlowhealth_prefix1"
@@ -2470,6 +2899,64 @@
         "Epic" :      { "MinValue" : 42, "MaxValue" : 84, "Increment" : 1 },
         "Legendary" : { "MinValue" : 56, "MaxValue" : 70, "Increment" : 1 }
       },
+      "ValuesPerItemName": [
+        {
+            "ItemNames": [
+                "$item_cape_deerhide"
+            ],
+            "ValuesPerRarity" : {
+                "Magic" :     { "MinValue" : 7,  "MaxValue" : 70, "Increment" : 1 },
+                "Rare" :      { "MinValue" : 14, "MaxValue" : 28, "Increment" : 1 },
+                "Epic" :      { "MinValue" : 21, "MaxValue" : 42, "Increment" : 1 },
+                "Legendary" : { "MinValue" : 28, "MaxValue" : 35, "Increment" : 1 }
+            }
+        },
+        {
+            "ItemNames": [
+                "$item_cape_trollhide"
+            ],
+            "ValuesPerRarity" : {
+                "Magic" :     { "MinValue" : 11, "MaxValue" : 98, "Increment" : 1 },
+                "Rare" :      { "MinValue" : 19, "MaxValue" : 39, "Increment" : 1 },
+                "Epic" :      { "MinValue" : 30, "MaxValue" : 59, "Increment" : 1 },
+                "Legendary" : { "MinValue" : 40, "MaxValue" : 49, "Increment" : 1 }
+            }
+        },
+        {
+            "ItemNames": [
+                "$item_cape_wolf"
+            ],
+            "ValuesPerRarity" : {
+                "Magic" :     { "MinValue" : 12, "MaxValue" : 112, "Increment" : 1 },
+                "Rare" :      { "MinValue" : 22, "MaxValue" : 45, "Increment" : 1 },
+                "Epic" :      { "MinValue" : 34, "MaxValue" : 67, "Increment" : 1 },
+                "Legendary" : { "MinValue" : 45, "MaxValue" : 56, "Increment" : 1 }
+            }
+        },
+        {
+            "ItemNames": [
+                "$item_cape_lox",
+                "$item_cape_linen"
+            ],
+            "ValuesPerRarity" : {
+                "Magic" :     { "MinValue" : 13, "MaxValue" : 125, "Increment" : 1 },
+                "Rare" :      { "MinValue" : 25, "MaxValue" : 51, "Increment" : 1 },
+                "Epic" :      { "MinValue" : 38, "MaxValue" : 76, "Increment" : 1 },
+                "Legendary" : { "MinValue" : 51, "MaxValue" : 63, "Increment" : 1 }
+            }
+        },
+        {
+            "ItemNames": [
+                "$item_cape_feather"
+            ],
+            "ValuesPerRarity" : {
+                "Magic" :     { "MinValue" : 14, "MaxValue" : 140, "Increment" : 1 },
+                "Rare" :      { "MinValue" : 28, "MaxValue" : 56, "Increment" : 1 },
+                "Epic" :      { "MinValue" : 42, "MaxValue" : 84, "Increment" : 1 },
+                "Legendary" : { "MinValue" : 56, "MaxValue" : 70, "Increment" : 1 }
+            }
+        }
+      ],
       "SelectionWeight" : 2,
       "Prefixes": [
         "$mod_epicloot_me_modifystaminaregenlowhealth_prefix1"
@@ -2529,6 +3016,64 @@
         "Epic" :      { "MinValue" : 21, "MaxValue" : 42, "Increment" : 1 },
         "Legendary" : { "MinValue" : 28, "MaxValue" : 35, "Increment" : 1 }
       },
+      "ValuesPerItemName": [
+        {
+            "ItemNames": [
+                "$item_cape_deerhide"
+            ],
+            "ValuesPerRarity" : {
+                "Magic" :     { "MinValue" : 4,  "MaxValue" : 35, "Increment" : 1 },
+                "Rare" :      { "MinValue" : 7,  "MaxValue" : 14, "Increment" : 1 },
+                "Epic" :      { "MinValue" : 10, "MaxValue" : 21, "Increment" : 1 },
+                "Legendary" : { "MinValue" : 14, "MaxValue" : 17, "Increment" : 1 }
+            }
+        },
+        {
+            "ItemNames": [
+                "$item_cape_trollhide"
+            ],
+            "ValuesPerRarity" : {
+                "Magic" :     { "MinValue" : 5,  "MaxValue" : 49, "Increment" : 1 },
+                "Rare" :      { "MinValue" : 9,  "MaxValue" : 19, "Increment" : 1 },
+                "Epic" :      { "MinValue" : 15, "MaxValue" : 29, "Increment" : 1 },
+                "Legendary" : { "MinValue" : 20, "MaxValue" : 24, "Increment" : 1 }
+            }
+        },
+        {
+            "ItemNames": [
+                "$item_cape_wolf"
+            ],
+            "ValuesPerRarity" : {
+                "Magic" :     { "MinValue" : 6,  "MaxValue" : 56, "Increment" : 1 },
+                "Rare" :      { "MinValue" : 11, "MaxValue" : 22, "Increment" : 1 },
+                "Epic" :      { "MinValue" : 17, "MaxValue" : 33, "Increment" : 1 },
+                "Legendary" : { "MinValue" : 22, "MaxValue" : 28, "Increment" : 1 }
+            }
+        },
+        {
+            "ItemNames": [
+                "$item_cape_lox",
+                "$item_cape_linen"
+            ],
+            "ValuesPerRarity" : {
+                "Magic" :     { "MinValue" : 6,  "MaxValue" : 62, "Increment" : 1 },
+                "Rare" :      { "MinValue" : 12, "MaxValue" : 25, "Increment" : 1 },
+                "Epic" :      { "MinValue" : 19, "MaxValue" : 38, "Increment" : 1 },
+                "Legendary" : { "MinValue" : 25, "MaxValue" : 32, "Increment" : 1 }
+            }
+        },
+        {
+            "ItemNames": [
+                "$item_cape_feather"
+            ],
+            "ValuesPerRarity" : {
+                "Magic" :     { "MinValue" : 7,  "MaxValue" : 70, "Increment" : 1 },
+                "Rare" :      { "MinValue" : 14, "MaxValue" : 27, "Increment" : 1 },
+                "Epic" :      { "MinValue" : 21, "MaxValue" : 42, "Increment" : 1 },
+                "Legendary" : { "MinValue" : 28, "MaxValue" : 35, "Increment" : 1 }
+            }
+        }
+      ],
       "SelectionWeight" : 3,
       "Prefixes": [
         "$mod_epicloot_me_modifyarmorlowhealth_prefix1",
@@ -2677,6 +3222,59 @@
         "Epic" :      { "MinValue" : 10, "MaxValue" : 25, "Increment" : 1 },
         "Legendary" : { "MinValue" : 15, "MaxValue" : 20, "Increment" : 1 }
       },
+      "ValuesPerItemName": [
+        {
+            "ItemNames": [
+                "$item_cape_deerhide"
+            ],
+            "ValuesPerRarity" : {
+                "Rare" :      { "MinValue" : 4, "MaxValue" : 7, "Increment" : 1 },
+                "Epic" :      { "MinValue" : 5, "MaxValue" : 12, "Increment" : 1 },
+                "Legendary" : { "MinValue" : 7, "MaxValue" : 10, "Increment" : 1 }
+            }
+        },
+        {
+            "ItemNames": [
+                "$item_cape_trollhide"
+            ],
+            "ValuesPerRarity" : {
+                "Rare" :      { "MinValue" : 5, "MaxValue" : 9, "Increment" : 1 },
+                "Epic" :      { "MinValue" : 7, "MaxValue" : 16, "Increment" : 1 },
+                "Legendary" : { "MinValue" : 9, "MaxValue" : 14, "Increment" : 1 }
+            }
+        },
+        {
+            "ItemNames": [
+                "$item_cape_wolf"
+            ],
+            "ValuesPerRarity" : {
+                "Rare" :      { "MinValue" : 6,  "MaxValue" : 10, "Increment" : 1 },
+                "Epic" :      { "MinValue" : 8,  "MaxValue" : 19, "Increment" : 1 },
+                "Legendary" : { "MinValue" : 11, "MaxValue" : 16, "Increment" : 1 }
+            }
+        },
+        {
+            "ItemNames": [
+                "$item_cape_lox",
+                "$item_cape_linen"
+            ],
+            "ValuesPerRarity" : {
+                "Rare" :      { "MinValue" : 6,  "MaxValue" : 11, "Increment" : 1 },
+                "Epic" :      { "MinValue" : 9,  "MaxValue" : 22, "Increment" : 1 },
+                "Legendary" : { "MinValue" : 13, "MaxValue" : 18, "Increment" : 1 }
+            }
+        },
+        {
+            "ItemNames": [
+                "$item_cape_feather"
+            ],
+            "ValuesPerRarity" : {
+                "Rare" :      { "MinValue" :  7, "MaxValue" : 12, "Increment" : 1 },
+                "Epic" :      { "MinValue" : 10, "MaxValue" : 25, "Increment" : 1 },
+                "Legendary" : { "MinValue" : 15, "MaxValue" : 20, "Increment" : 1 }
+            }
+        }
+      ],
       "SelectionWeight" : 2,
       "Prefixes": [ "$mod_epicloot_me_avoiddamagetakenlowhealth_prefix1" ],
       "Suffixes": [ "$mod_epicloot_me_avoiddamagetakenlowhealth_suffix1" ]
@@ -2919,6 +3517,59 @@
         "Epic" :      { "MinValue" :  7, "MaxValue" : 20, "Increment" : 1 },
         "Legendary" : { "MinValue" : 10, "MaxValue" : 15, "Increment" : 1 }
       },
+      "ValuesPerItemName": [
+        {
+            "ItemNames": [
+                "$item_cape_deerhide"
+            ],
+            "ValuesPerRarity" : {
+                "Rare" :      { "MinValue" : 3, "MaxValue" : 4,  "Increment" : 1 },
+                "Epic" :      { "MinValue" : 4, "MaxValue" : 10, "Increment" : 1 },
+                "Legendary" : { "MinValue" : 5, "MaxValue" : 7,  "Increment" : 1 }
+            }
+        },
+        {
+            "ItemNames": [
+                "$item_cape_trollhide"
+            ],
+            "ValuesPerRarity" : {
+                "Rare" :      { "MinValue" : 3, "MaxValue" : 5,  "Increment" : 1 },
+                "Epic" :      { "MinValue" : 5, "MaxValue" : 13, "Increment" : 1 },
+                "Legendary" : { "MinValue" : 7, "MaxValue" : 9,  "Increment" : 1 }
+            }
+        },
+        {
+            "ItemNames": [
+                "$item_cape_wolf"
+            ],
+            "ValuesPerRarity" : {
+                "Rare" :      { "MinValue" : 4, "MaxValue" : 5,  "Increment" : 1 },
+                "Epic" :      { "MinValue" : 5, "MaxValue" : 16, "Increment" : 1 },
+                "Legendary" : { "MinValue" : 8, "MaxValue" : 11, "Increment" : 1 }
+            }
+        },
+        {
+            "ItemNames": [
+                "$item_cape_lox",
+                "$item_cape_linen"
+            ],
+            "ValuesPerRarity" : {
+                "Rare" :      { "MinValue" : 4, "MaxValue" : 6,  "Increment" : 1 },
+                "Epic" :      { "MinValue" : 6, "MaxValue" : 18, "Increment" : 1 },
+                "Legendary" : { "MinValue" : 9, "MaxValue" : 13, "Increment" : 1 }
+            }
+        },
+        {
+            "ItemNames": [
+                "$item_cape_feather"
+            ],
+            "ValuesPerRarity" : {
+                "Rare" :      { "MinValue" : 4,  "MaxValue" : 7,  "Increment" : 1 },
+                "Epic" :      { "MinValue" : 7,  "MaxValue" : 20, "Increment" : 1 },
+                "Legendary" : { "MinValue" : 10, "MaxValue" : 15, "Increment" : 1 }
+            }
+        }
+      ],
       "SelectionWeight" : 1,
       "Prefixes": [
         "$mod_epicloot_me_luck_prefix1"
