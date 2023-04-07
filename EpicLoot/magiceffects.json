@@ -381,15 +381,15 @@
       "DisplayText" : "$mod_epicloot_me_increasehealth_display",
       "Description" : "$mod_epicloot_me_increasehealth_desc",
       "Requirements" : {
-        "ExcludedItemNames": [
-            "$item_helmet_leather",
-            "$item_helmet_bronze",
-            "$item_helmet_trollleather",
-            "$item_chest_rags",
-            "$item_chest_leather",
-            "$item_chest_bronze",
-            "$item_chest_trollleather"
-        ],
+        // "ExcludedItemNames": [
+        //     "$item_helmet_leather",
+        //     "$item_helmet_bronze",
+        //     "$item_helmet_trollleather",
+        //     "$item_chest_rags",
+        //     "$item_chest_leather",
+        //     "$item_chest_bronze",
+        //     "$item_chest_trollleather"
+        // ],
         "AllowedItemTypes" : [
           "Helmet",
           "Chest",
@@ -406,7 +406,34 @@
         "Epic" :      { "MinValue" : 20, "MaxValue" : 50, "Increment" : 5 },
         "Legendary" : { "MinValue" : 30, "MaxValue" : 40, "Increment" : 5 }
       },
-      "SelectionWeight" : 3,
+      "ValuesPerItemName": [
+        {
+            "ItemNames": [
+                "$item_helmet_leather",
+                "$item_chest_rags",
+                "$item_chest_leather"
+            ],
+            "ValuesPerRarity" : {
+                "Rare" :      { "MinValue" : 5, "MaxValue" : 10, "Increment" : 5 },
+                "Epic" :      { "MinValue" : 10, "MaxValue" : 20, "Increment" : 5 },
+                "Legendary" : { "MinValue" : 15, "MaxValue" : 15, "Increment" : 5 }
+            }
+        },
+        {
+            "ItemNames": [
+                "$item_helmet_bronze",
+                "$item_helmet_trollleather",
+                "$item_chest_bronze",
+                "$item_chest_trollleather"
+            ],
+            "ValuesPerRarity" : {
+                "Rare" :      { "MinValue" : 10, "MaxValue" : 15, "Increment" : 5 },
+                "Epic" :      { "MinValue" : 15, "MaxValue" : 30, "Increment" : 5 },
+                "Legendary" : { "MinValue" : 20, "MaxValue" : 20, "Increment" : 5 }
+            }
+        }
+      ],
+      "SelectionWeight" : 300,
       "Prefixes": [
         "$mod_epicloot_me_increasehealth_prefix1"
       ],

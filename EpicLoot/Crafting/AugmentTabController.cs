@@ -425,7 +425,7 @@ namespace EpicLoot.Crafting
             if (recipe.EffectIndex >= 0 && recipe.EffectIndex < magicItem.Effects.Count)
             {
                 var currentEffectDef = MagicItemEffectDefinitions.Get(magicItem.Effects[recipe.EffectIndex].EffectType);
-                valuelessEffect = currentEffectDef.GetValuesForRarity(rarity) == null;
+                valuelessEffect = currentEffectDef.GetValuesForRarity(rarity, item.m_shared.m_name) == null;
             }
 
             return MagicItemEffectDefinitions.GetAvailableEffects(item.Extended(), item.GetMagicItem(), valuelessEffect ? -1 : recipe.EffectIndex);
@@ -529,7 +529,7 @@ namespace EpicLoot.Crafting
         {
             var pip = EpicLoot.GetMagicEffectPip(magicItem.IsEffectAugmented(i));
             bool free = EnchantCostsHelper.EffectIsDeprecated(augmentableEffects[i].EffectType);
-            return $"{pip} {Localization.instance.Localize(MagicItem.GetEffectText(augmentableEffects[i], rarity, true))}{(free ? " [<color=yellow>*FREE</color>]" : "")}";
+            return $"{pip} {Localization.instance.Localize(MagicItem.GetEffectText(augmentableEffects[i], rarity, magicItem.ItemName, true))}{(free ? " [<color=yellow>*FREE</color>]" : "")}";
         }
 
         private void OnSelectorValueChanged(int index, bool selected)

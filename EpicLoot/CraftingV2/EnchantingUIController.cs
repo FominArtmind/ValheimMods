@@ -288,7 +288,7 @@ namespace EpicLoot.CraftingV2
             
             foreach (var effectDef in availableEffects)
             {
-                var values = effectDef.GetValuesForRarity(rarity);
+                var values = effectDef.GetValuesForRarity(rarity, item.m_shared.m_name);
                 var valueDisplay = values != null ? Mathf.Approximately(values.MinValue, values.MaxValue) ? $"{values.MinValue}" : $"({values.MinValue}-{values.MaxValue})" : "";
                 sb.AppendLine($"‣ {string.Format(Localization.instance.Localize(effectDef.DisplayText), valueDisplay)}");
             }
@@ -420,7 +420,7 @@ namespace EpicLoot.CraftingV2
             if (augmentindex >= 0 && augmentindex < magicItem.Effects.Count)
             {
                 var currentEffectDef = MagicItemEffectDefinitions.Get(magicItem.Effects[augmentindex].EffectType);
-                valuelessEffect = currentEffectDef.GetValuesForRarity(rarity) == null;
+                valuelessEffect = currentEffectDef.GetValuesForRarity(rarity, item.m_shared.m_name) == null;
             }
 
             var availableEffects = MagicItemEffectDefinitions.GetAvailableEffects(item.Extended(), item.GetMagicItem(), valuelessEffect ? -1 : augmentindex);
@@ -435,7 +435,7 @@ namespace EpicLoot.CraftingV2
 
             foreach (var effectDef in availableEffects)
             {
-                var values = effectDef.GetValuesForRarity(item.GetRarity());
+                var values = effectDef.GetValuesForRarity(item.GetRarity(), item.m_shared.m_name);
                 var valueDisplay = values != null ? Mathf.Approximately(values.MinValue, values.MaxValue) ? $"{values.MinValue}" : $"({values.MinValue}-{values.MaxValue})" : "";
                 sb.AppendLine($"‣ {string.Format(Localization.instance.Localize(effectDef.DisplayText), valueDisplay)}");
             }
