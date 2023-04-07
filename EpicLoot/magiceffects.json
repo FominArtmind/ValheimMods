@@ -393,6 +393,7 @@
         "AllowedItemTypes" : [
           "Helmet",
           "Chest",
+          "Utility",
           "Staff"
         ],
         "AllowedRarities" : [
@@ -411,7 +412,8 @@
             "ItemNames": [
                 "$item_helmet_leather",
                 "$item_chest_rags",
-                "$item_chest_leather"
+                "$item_chest_leather",
+                "$mod_epicloot_assets_leatherbelt"
             ],
             "ValuesPerRarity" : {
                 "Rare" :      { "MinValue" : 5, "MaxValue" : 10, "Increment" : 5 },
@@ -424,7 +426,8 @@
                 "$item_helmet_bronze",
                 "$item_helmet_trollleather",
                 "$item_chest_bronze",
-                "$item_chest_trollleather"
+                "$item_chest_trollleather",
+                "$mod_epicloot_assets_goldrubyring"
             ],
             "ValuesPerRarity" : {
                 "Rare" :      { "MinValue" : 10, "MaxValue" : 15, "Increment" : 5 },
@@ -460,6 +463,7 @@
           "Chest",
           "Legs",
           "Shoulder",
+          "Utility",
           "Tool"
         ],
         "AllowedRarities" : [
@@ -491,7 +495,8 @@
                 "$item_legs_rags",
                 "$item_legs_leather",
                 "$item_cape_trollhide",
-                "$item_cape_wolf"
+                "$item_cape_wolf",
+                "$mod_epicloot_assets_leatherbelt"
             ],
             "ValuesPerRarity" : {
                 "Rare" :      { "MinValue" : 5, "MaxValue" : 10, "Increment" : 5 },
@@ -507,7 +512,8 @@
                 "$item_legs_trollleather",
                 "$item_cape_lox",
                 "$item_cape_linen",
-                "$item_cape_feather"
+                "$item_cape_feather",
+                "$mod_epicloot_assets_goldrubyring"
             ],
             "ValuesPerRarity" : {
                 "Rare" :      { "MinValue" : 10, "MaxValue" : 15, "Increment" : 5 },
@@ -530,7 +536,12 @@
       "Description" : "$mod_epicloot_me_increaseeitr_desc",
       "Requirements" : {
         "AllowedItemTypes" : [
-          "Staff"
+          "Staff",
+          "Utility"
+        ],
+        "ExcludedItemNames": [
+            "$mod_epicloot_assets_leatherbelt",
+            "$mod_epicloot_assets_goldrubyring"
         ],
         "AllowedRarities" : [
           "Magic",
@@ -572,6 +583,41 @@
         "Epic" :      { "MinValue" : 30, "MaxValue" : 60, "Increment" : 1 },
         "Legendary" : { "MinValue" : 40, "MaxValue" : 50, "Increment" : 1 }
       },
+      "ValuesPerItemName": [
+        {
+            "ItemNames": [
+                "$mod_epicloot_assets_leatherbelt"
+            ],
+            "ValuesPerRarity" : {
+                "Magic" :     { "MinValue" : 5,  "MaxValue" : 50, "Increment" : 1 },
+                "Rare" :      { "MinValue" : 10, "MaxValue" : 20, "Increment" : 1 },
+                "Epic" :      { "MinValue" : 15, "MaxValue" : 30, "Increment" : 1 },
+                "Legendary" : { "MinValue" : 20, "MaxValue" : 25, "Increment" : 1 }
+            }
+        },
+        {
+            "ItemNames": [
+                "$mod_epicloot_assets_goldrubyring"
+            ],
+            "ValuesPerRarity" : {
+                "Magic" :     { "MinValue" : 8,  "MaxValue" : 80, "Increment" : 1 },
+                "Rare" :      { "MinValue" : 16, "MaxValue" : 32, "Increment" : 1 },
+                "Epic" :      { "MinValue" : 24, "MaxValue" : 48, "Increment" : 1 },
+                "Legendary" : { "MinValue" : 32, "MaxValue" : 40, "Increment" : 1 }
+            }
+        },
+        {
+            "ItemNames": [
+                "$mod_epicloot_assets_silverring"
+            ],
+            "ValuesPerRarity" : {
+                "Magic" :     { "MinValue" : 10, "MaxValue" : 100, "Increment" : 1 },
+                "Rare" :      { "MinValue" : 20, "MaxValue" : 40, "Increment" : 1 },
+                "Epic" :      { "MinValue" : 30, "MaxValue" : 60, "Increment" : 1 },
+                "Legendary" : { "MinValue" : 40, "MaxValue" : 50, "Increment" : 1 }
+            }
+        }
+      ],
       "SelectionWeight" : 5,
       "Prefixes": [
         "$mod_epicloot_me_modifyhealthregen_prefix1"
@@ -585,14 +631,13 @@
       "DisplayText" : "$mod_epicloot_me_addhealthregen_display",
       "Description" : "$mod_epicloot_me_addhealthregen_desc",
       "Requirements" : {
-        "NoRoll": true,
         "AllowedItemTypes" : [
-          "Helmet",
-          "Chest",
-          "Utility",
-          "Shield",
-          "Staff",
-          "Torch"
+        //   "Helmet",
+        //   "Chest",
+          "Utility" //,
+        //   "Shield",
+        //   "Staff",
+        //   "Torch"
         ]
       },
       "ValuesPerRarity" : {
@@ -601,6 +646,41 @@
         "Epic" :      { "MinValue" : 2.0, "MaxValue" : 8, "Increment" : 0.5 },
         "Legendary" : { "MinValue" : 2.5, "MaxValue" : 7, "Increment" : 0.5 }
       },
+      "ValuesPerItemName": [
+        {
+            "ItemNames": [
+                "$mod_epicloot_assets_leatherbelt"
+            ],
+            "ValuesPerRarity" : {
+                "Magic" :     { "MinValue" : 0.5, "MaxValue" : 2.5, "Increment" : 0.5 },
+                "Rare" :      { "MinValue" : 1.0, "MaxValue" : 1.5, "Increment" : 0.5 },
+                "Epic" :      { "MinValue" : 1.0, "MaxValue" : 4.0, "Increment" : 0.5 },
+                "Legendary" : { "MinValue" : 1.5, "MaxValue" : 3.5, "Increment" : 0.5 }
+            }
+        },
+        {
+            "ItemNames": [
+                "$mod_epicloot_assets_goldrubyring"
+            ],
+            "ValuesPerRarity" : {
+                "Magic" :     { "MinValue" : 0.5, "MaxValue" : 4.0, "Increment" : 0.5 },
+                "Rare" :      { "MinValue" : 1.5, "MaxValue" : 2.5, "Increment" : 0.5 },
+                "Epic" :      { "MinValue" : 1.5, "MaxValue" : 6.0, "Increment" : 0.5 },
+                "Legendary" : { "MinValue" : 2.0, "MaxValue" : 5.5, "Increment" : 0.5 }
+            }
+        },
+        {
+            "ItemNames": [
+                "$mod_epicloot_assets_silverring"
+            ],
+            "ValuesPerRarity" : {
+                "Magic" :     { "MinValue" : 0.5, "MaxValue" : 5, "Increment" : 0.5 },
+                "Rare" :      { "MinValue" : 1.5, "MaxValue" : 3, "Increment" : 0.5 },
+                "Epic" :      { "MinValue" : 2.0, "MaxValue" : 8, "Increment" : 0.5 },
+                "Legendary" : { "MinValue" : 2.5, "MaxValue" : 7, "Increment" : 0.5 }
+            }
+        }
+      ],
       "SelectionWeight" : 4,
       "Prefixes": [
         "$mod_epicloot_me_addhealthregen_prefix1"
@@ -626,6 +706,41 @@
         "Epic" :      { "MinValue" : 21, "MaxValue" : 42, "Increment" : 1 },
         "Legendary" : { "MinValue" : 28, "MaxValue" : 35, "Increment" : 1 }
       },
+      "ValuesPerItemName": [
+        {
+            "ItemNames": [
+                "$mod_epicloot_assets_leatherbelt"
+            ],
+            "ValuesPerRarity" : {
+                "Magic" :     { "MinValue" : 4,  "MaxValue" : 35, "Increment" : 1 },
+                "Rare" :      { "MinValue" : 7,  "MaxValue" : 14, "Increment" : 1 },
+                "Epic" :      { "MinValue" : 10, "MaxValue" : 21, "Increment" : 1 },
+                "Legendary" : { "MinValue" : 14, "MaxValue" : 17, "Increment" : 1 }
+            }
+        },
+        {
+            "ItemNames": [
+                "$mod_epicloot_assets_goldrubyring"
+            ],
+            "ValuesPerRarity" : {
+                "Magic" :     { "MinValue" : 6,  "MaxValue" : 56, "Increment" : 1 },
+                "Rare" :      { "MinValue" : 11, "MaxValue" : 22, "Increment" : 1 },
+                "Epic" :      { "MinValue" : 17, "MaxValue" : 33, "Increment" : 1 },
+                "Legendary" : { "MinValue" : 22, "MaxValue" : 27, "Increment" : 1 }
+            }
+        },
+        {
+            "ItemNames": [
+                "$mod_epicloot_assets_silverring"
+            ],
+            "ValuesPerRarity" : {
+                "Magic" :     { "MinValue" : 7,  "MaxValue" : 70, "Increment" : 1 },
+                "Rare" :      { "MinValue" : 14, "MaxValue" : 27, "Increment" : 1 },
+                "Epic" :      { "MinValue" : 21, "MaxValue" : 42, "Increment" : 1 },
+                "Legendary" : { "MinValue" : 28, "MaxValue" : 35, "Increment" : 1 }
+            }
+        }
+      ],
       "SelectionWeight" : 5,
       "Prefixes": [
         "$mod_epicloot_me_modifystaminaregen_prefix1"
@@ -639,7 +754,20 @@
       "DisplayText" : "$mod_epicloot_me_modifyeitrregen_display",
       "Description" : "$mod_epicloot_me_modifyeitrregen_desc",
       "Requirements" : {
+        "ExcludedItemNames": [
+            "$item_helmet_leather",
+            "$item_helmet_bronze",
+            "$item_helmet_trollleather",
+            "$item_helmet_iron",
+            "$item_helmet_root",
+            "$item_helmet_drake",
+            "$item_helmet_fenris",
+            "$item_helmet_padded",
+            "$mod_epicloot_assets_leatherbelt",
+            "$mod_epicloot_assets_goldrubyring"
+        ],
         "AllowedItemTypes" : [
+          "Helmet",
           "Utility",
           "Staff"
         ],
@@ -1311,7 +1439,8 @@
       "ValuesPerItemName": [
         {
             "ItemNames": [
-                "$item_cape_deerhide"
+                "$item_cape_deerhide",
+                "$mod_epicloot_assets_leatherbelt"
             ],
             "ValuesPerRarity" : {
                 "Rare" :      { "MinValue" : 2, "MaxValue" : 4,  "Increment" : 1 },
@@ -1331,7 +1460,8 @@
         },
         {
             "ItemNames": [
-                "$item_cape_wolf"
+                "$item_cape_wolf",
+                "$mod_epicloot_assets_goldrubyring"
             ],
             "ValuesPerRarity" : {
                 "Rare" :      { "MinValue" : 4, "MaxValue" : 6,  "Increment" : 1 },
@@ -1352,7 +1482,8 @@
         },
         {
             "ItemNames": [
-                "$item_cape_feather"
+                "$item_cape_feather",
+                "$mod_epicloot_assets_silverring"
             ],
             "ValuesPerRarity" : {
                 "Rare" :      { "MinValue" : 4, "MaxValue" : 7,  "Increment" : 1 },
@@ -1565,6 +1696,41 @@
         "Epic" :      { "MinValue" : 20, "MaxValue" : 40, "Increment" : 1 },
         "Legendary" : { "MinValue" : 25, "MaxValue" : 35, "Increment" : 1 }
       },
+      "ValuesPerItemName": [
+        {
+            "ItemNames": [
+                "$mod_epicloot_assets_leatherbelt"
+            ],
+            "ValuesPerRarity" : {
+                "Magic" :     { "MinValue" : 5,  "MaxValue" : 22, "Increment" : 1 },
+                "Rare" :      { "MinValue" : 7,  "MaxValue" : 12, "Increment" : 1 },
+                "Epic" :      { "MinValue" : 10, "MaxValue" : 20, "Increment" : 1 },
+                "Legendary" : { "MinValue" : 12, "MaxValue" : 17, "Increment" : 1 }
+            }
+        },
+        {
+            "ItemNames": [
+                "$mod_epicloot_assets_goldrubyring"
+            ],
+            "ValuesPerRarity" : {
+                "Magic" :     { "MinValue" : 8,  "MaxValue" : 36, "Increment" : 1 },
+                "Rare" :      { "MinValue" : 12, "MaxValue" : 20, "Increment" : 1 },
+                "Epic" :      { "MinValue" : 16, "MaxValue" : 32, "Increment" : 1 },
+                "Legendary" : { "MinValue" : 20, "MaxValue" : 27, "Increment" : 1 }
+            }
+        },
+        {
+            "ItemNames": [
+                "$mod_epicloot_assets_silverring"
+            ],
+            "ValuesPerRarity" : {
+                "Magic" :     { "MinValue" : 10, "MaxValue" : 45, "Increment" : 1 },
+                "Rare" :      { "MinValue" : 15, "MaxValue" : 25, "Increment" : 1 },
+                "Epic" :      { "MinValue" : 20, "MaxValue" : 40, "Increment" : 1 },
+                "Legendary" : { "MinValue" : 25, "MaxValue" : 35, "Increment" : 1 }
+            }
+        }
+      ],
       "SelectionWeight" : 3,
       "Prefixes": [
         "$mod_epicloot_me_modifysprintstaminause_prefix1"
@@ -1589,6 +1755,41 @@
         "Epic" :      { "MinValue" : 20, "MaxValue" : 40, "Increment" : 1 },
         "Legendary" : { "MinValue" : 25, "MaxValue" : 35, "Increment" : 1 }
       },
+      "ValuesPerItemName": [
+        {
+            "ItemNames": [
+                "$mod_epicloot_assets_leatherbelt"
+            ],
+            "ValuesPerRarity" : {
+                "Magic" :     { "MinValue" : 5,  "MaxValue" : 22, "Increment" : 1 },
+                "Rare" :      { "MinValue" : 7,  "MaxValue" : 12, "Increment" : 1 },
+                "Epic" :      { "MinValue" : 10, "MaxValue" : 20, "Increment" : 1 },
+                "Legendary" : { "MinValue" : 12, "MaxValue" : 17, "Increment" : 1 }
+            }
+        },
+        {
+            "ItemNames": [
+                "$mod_epicloot_assets_goldrubyring"
+            ],
+            "ValuesPerRarity" : {
+                "Magic" :     { "MinValue" : 8,  "MaxValue" : 36, "Increment" : 1 },
+                "Rare" :      { "MinValue" : 12, "MaxValue" : 20, "Increment" : 1 },
+                "Epic" :      { "MinValue" : 16, "MaxValue" : 32, "Increment" : 1 },
+                "Legendary" : { "MinValue" : 20, "MaxValue" : 27, "Increment" : 1 }
+            }
+        },
+        {
+            "ItemNames": [
+                "$mod_epicloot_assets_silverring"
+            ],
+            "ValuesPerRarity" : {
+                "Magic" :     { "MinValue" : 10, "MaxValue" : 45, "Increment" : 1 },
+                "Rare" :      { "MinValue" : 15, "MaxValue" : 25, "Increment" : 1 },
+                "Epic" :      { "MinValue" : 20, "MaxValue" : 40, "Increment" : 1 },
+                "Legendary" : { "MinValue" : 25, "MaxValue" : 35, "Increment" : 1 }
+            }
+        }
+      ],
       "SelectionWeight" : 3,
       "Prefixes": [
         "$mod_epicloot_me_modifyjumpstaminause_prefix1"
@@ -1738,7 +1939,8 @@
       "ValuesPerItemName": [
         {
             "ItemNames": [
-                "$item_cape_deerhide"
+                "$item_cape_deerhide",
+                "$mod_epicloot_assets_leatherbelt"
             ],
             "ValuesPerRarity" : {
                 "Magic" :     { "MinValue" : 15, "MaxValue" : 65, "Increment" : 5 },
@@ -1760,7 +1962,8 @@
         },
         {
             "ItemNames": [
-                "$item_cape_wolf"
+                "$item_cape_wolf",
+                "$mod_epicloot_assets_goldrubyring"
             ],
             "ValuesPerRarity" : {
                 "Magic" :     { "MinValue" : 20, "MaxValue" : 110, "Increment" : 5 },
@@ -1783,7 +1986,8 @@
         },
         {
             "ItemNames": [
-                "$item_cape_feather"
+                "$item_cape_feather",
+                "$mod_epicloot_assets_silverring"
             ],
             "ValuesPerRarity" : {
                 "Magic" :     { "MinValue" : 30, "MaxValue" : 130, "Increment" : 5 },
@@ -2008,12 +2212,12 @@
         ]
       },
       "ValuesPerRarity" : {
-        "Magic" :     { "MinValue" : 10, "MaxValue" : 100, "Increment" : 1 },
+        "Magic" :     { "MinValue" : 10, "MaxValue" : 140, "Increment" : 1 },
         "Rare" :      { "MinValue" : 20, "MaxValue" : 40, "Increment" : 1 },
         "Epic" :      { "MinValue" : 30, "MaxValue" : 60, "Increment" : 1 },
         "Legendary" : { "MinValue" : 40, "MaxValue" : 50, "Increment" : 1 }
       },
-      "SelectionWeight" : 4,
+      "SelectionWeight" : 400,
       "Prefixes": [
         "$mod_epicloot_me_quickdraw_prefix1"
       ],
@@ -2382,7 +2586,8 @@
       "ValuesPerItemName": [
         {
             "ItemNames": [
-                "$item_cape_deerhide"
+                "$item_cape_deerhide",
+                "$mod_epicloot_assets_leatherbelt"
             ],
             "ValuesPerRarity" : {
                 "Rare" :      { "MinValue" : 5,  "MaxValue" : 9, "Increment" : 1 },
@@ -2402,7 +2607,8 @@
         },
         {
             "ItemNames": [
-                "$item_cape_wolf"
+                "$item_cape_wolf",
+                "$mod_epicloot_assets_goldrubyring"
             ],
             "ValuesPerRarity" : {
                 "Rare" :      { "MinValue" : 7,  "MaxValue" : 14, "Increment" : 1 },
@@ -2423,7 +2629,8 @@
         },
         {
             "ItemNames": [
-                "$item_cape_feather"
+                "$item_cape_feather",
+                "$mod_epicloot_assets_silverring"
             ],
             "ValuesPerRarity" : {
                 "Rare" :      { "MinValue" : 9,  "MaxValue" : 18, "Increment" : 1 },
@@ -2572,7 +2779,8 @@
       "ValuesPerItemName": [
         {
             "ItemNames": [
-                "$item_cape_deerhide"
+                "$item_cape_deerhide",
+                "$mod_epicloot_assets_leatherbelt"
             ],
             "ValuesPerRarity" : {
                 "Rare" :      { "MinValue" : 2, "MaxValue" : 4,  "Increment" : 1 },
@@ -2592,7 +2800,8 @@
         },
         {
             "ItemNames": [
-                "$item_cape_wolf"
+                "$item_cape_wolf",
+                "$mod_epicloot_assets_goldrubyring"
             ],
             "ValuesPerRarity" : {
                 "Rare" :      { "MinValue" : 3, "MaxValue" : 5,  "Increment" : 1 },
@@ -2613,7 +2822,8 @@
         },
         {
             "ItemNames": [
-                "$item_cape_feather"
+                "$item_cape_feather",
+                "$mod_epicloot_assets_silverring"
             ],
             "ValuesPerRarity" : {
                 "Rare" :      { "MinValue" : 3, "MaxValue" : 7,  "Increment" : 1 },
@@ -2716,7 +2926,8 @@
       "ValuesPerItemName": [
         {
             "ItemNames": [
-                "$item_cape_deerhide"
+                "$item_cape_deerhide",
+                "$mod_epicloot_assets_leatherbelt"
             ],
             "ValuesPerRarity" : {
                 "Epic" :      { "MinValue" : 1, "MaxValue" : 1, "Increment" : 1 },
@@ -2734,7 +2945,8 @@
         },
         {
             "ItemNames": [
-                "$item_cape_wolf"
+                "$item_cape_wolf",
+                "$mod_epicloot_assets_goldrubyring"
             ],
             "ValuesPerRarity" : {
                 "Epic" :      { "MinValue" : 1, "MaxValue" : 3, "Increment" : 1 },
@@ -2753,7 +2965,8 @@
         },
         {
             "ItemNames": [
-                "$item_cape_feather"
+                "$item_cape_feather",
+                "$mod_epicloot_assets_silverring"
             ],
             "ValuesPerRarity" : {
                 "Epic" :      { "MinValue" : 1, "MaxValue" : 4, "Increment" : 1 },
@@ -2784,6 +2997,41 @@
         "Epic" :      { "MinValue" : 17, "MaxValue" : 30, "Increment" : 1 },
         "Legendary" : { "MinValue" : 20, "MaxValue" : 25, "Increment" : 1 }
       },
+      "ValuesPerItemName": [
+        {
+            "ItemNames": [
+                "$mod_epicloot_assets_leatherbelt"
+            ],
+            "ValuesPerRarity" : {
+                "Magic" :     { "MinValue" : 6,  "MaxValue" : 17, "Increment" : 1 },
+                "Rare" :      { "MinValue" : 7,  "MaxValue" : 9,  "Increment" : 1 },
+                "Epic" :      { "MinValue" : 9,  "MaxValue" : 15, "Increment" : 1 },
+                "Legendary" : { "MinValue" : 10, "MaxValue" : 12, "Increment" : 1 }
+            }
+        },
+        {
+            "ItemNames": [
+                "$mod_epicloot_assets_goldrubyring"
+            ],
+            "ValuesPerRarity" : {
+                "Magic" :     { "MinValue" : 8,  "MaxValue" : 26, "Increment" : 1 },
+                "Rare" :      { "MinValue" : 10, "MaxValue" : 13, "Increment" : 1 },
+                "Epic" :      { "MinValue" : 13, "MaxValue" : 22, "Increment" : 1 },
+                "Legendary" : { "MinValue" : 20, "MaxValue" : 18, "Increment" : 1 }
+            }
+        },
+        {
+            "ItemNames": [
+                "$mod_epicloot_assets_silverring"
+            ],
+            "ValuesPerRarity" : {
+                "Magic" :     { "MinValue" : 10, "MaxValue" : 35, "Increment" : 1 },
+                "Rare" :      { "MinValue" : 13, "MaxValue" : 17, "Increment" : 1 },
+                "Epic" :      { "MinValue" : 17, "MaxValue" : 30, "Increment" : 1 },
+                "Legendary" : { "MinValue" : 20, "MaxValue" : 25, "Increment" : 1 }
+            }
+        }
+      ],
       "SelectionWeight" : 2,
       "Prefixes": [
         "$mod_epicloot_me_modifymovementspeedlowhealth_prefix1"
@@ -2816,7 +3064,8 @@
       "ValuesPerItemName": [
         {
             "ItemNames": [
-                "$item_cape_deerhide"
+                "$item_cape_deerhide",
+                "$mod_epicloot_assets_leatherbelt"
             ],
             "ValuesPerRarity" : {
                 "Magic" :     { "MinValue" : 10, "MaxValue" : 100, "Increment" : 1 },
@@ -2838,7 +3087,8 @@
         },
         {
             "ItemNames": [
-                "$item_cape_wolf"
+                "$item_cape_wolf",
+                "$mod_epicloot_assets_goldrubyring"
             ],
             "ValuesPerRarity" : {
                 "Magic" :     { "MinValue" : 15, "MaxValue" : 160, "Increment" : 1 },
@@ -2861,7 +3111,8 @@
         },
         {
             "ItemNames": [
-                "$item_cape_feather"
+                "$item_cape_feather",
+                "$mod_epicloot_assets_silverring"
             ],
             "ValuesPerRarity" : {
                 "Magic" :     { "MinValue" : 20, "MaxValue" : 200, "Increment" : 1 },
@@ -2902,7 +3153,8 @@
       "ValuesPerItemName": [
         {
             "ItemNames": [
-                "$item_cape_deerhide"
+                "$item_cape_deerhide",
+                "$mod_epicloot_assets_leatherbelt"
             ],
             "ValuesPerRarity" : {
                 "Magic" :     { "MinValue" : 7,  "MaxValue" : 70, "Increment" : 1 },
@@ -2924,7 +3176,8 @@
         },
         {
             "ItemNames": [
-                "$item_cape_wolf"
+                "$item_cape_wolf",
+                "$mod_epicloot_assets_goldrubyring"
             ],
             "ValuesPerRarity" : {
                 "Magic" :     { "MinValue" : 12, "MaxValue" : 112, "Increment" : 1 },
@@ -2947,7 +3200,8 @@
         },
         {
             "ItemNames": [
-                "$item_cape_feather"
+                "$item_cape_feather",
+                "$mod_epicloot_assets_silverring"
             ],
             "ValuesPerRarity" : {
                 "Magic" :     { "MinValue" : 14, "MaxValue" : 140, "Increment" : 1 },
@@ -2970,6 +3224,18 @@
       "DisplayText" : "$mod_epicloot_me_modifyeitrregenlowhealth_display",
       "Description" : "$mod_epicloot_me_modifyeitrregenlowhealth_desc",
       "Requirements" : {
+        "ExcludedItemNames": [
+            "$item_helmet_leather",
+            "$item_helmet_bronze",
+            "$item_helmet_trollleather",
+            "$item_helmet_iron",
+            "$item_helmet_root",
+            "$item_helmet_drake",
+            "$item_helmet_fenris",
+            "$item_helmet_padded",
+            "$mod_epicloot_assets_leatherbelt",
+            "$mod_epicloot_assets_goldrubyring"
+        ],
         "AllowedItemTypes" : [
           "Helmet",
           "Utility",
@@ -3019,7 +3285,8 @@
       "ValuesPerItemName": [
         {
             "ItemNames": [
-                "$item_cape_deerhide"
+                "$item_cape_deerhide",
+                "$mod_epicloot_assets_leatherbelt"
             ],
             "ValuesPerRarity" : {
                 "Magic" :     { "MinValue" : 4,  "MaxValue" : 35, "Increment" : 1 },
@@ -3041,7 +3308,8 @@
         },
         {
             "ItemNames": [
-                "$item_cape_wolf"
+                "$item_cape_wolf",
+                "$mod_epicloot_assets_goldrubyring"
             ],
             "ValuesPerRarity" : {
                 "Magic" :     { "MinValue" : 6,  "MaxValue" : 56, "Increment" : 1 },
@@ -3064,7 +3332,8 @@
         },
         {
             "ItemNames": [
-                "$item_cape_feather"
+                "$item_cape_feather",
+                "$mod_epicloot_assets_silverring"
             ],
             "ValuesPerRarity" : {
                 "Magic" :     { "MinValue" : 7,  "MaxValue" : 70, "Increment" : 1 },
@@ -3225,7 +3494,8 @@
       "ValuesPerItemName": [
         {
             "ItemNames": [
-                "$item_cape_deerhide"
+                "$item_cape_deerhide",
+                "$mod_epicloot_assets_leatherbelt"
             ],
             "ValuesPerRarity" : {
                 "Rare" :      { "MinValue" : 4, "MaxValue" : 7, "Increment" : 1 },
@@ -3245,7 +3515,8 @@
         },
         {
             "ItemNames": [
-                "$item_cape_wolf"
+                "$item_cape_wolf",
+                "$mod_epicloot_assets_goldrubyring"
             ],
             "ValuesPerRarity" : {
                 "Rare" :      { "MinValue" : 6,  "MaxValue" : 10, "Increment" : 1 },
@@ -3266,7 +3537,8 @@
         },
         {
             "ItemNames": [
-                "$item_cape_feather"
+                "$item_cape_feather",
+                "$mod_epicloot_assets_silverring"
             ],
             "ValuesPerRarity" : {
                 "Rare" :      { "MinValue" :  7, "MaxValue" : 12, "Increment" : 1 },
@@ -3369,20 +3641,52 @@
       "DisplayText" : "$mod_epicloot_me_riches_display",
       "Description" : "$mod_epicloot_me_riches_desc",
       "Requirements" : {
-        "NoRoll": true,
         "AllowedItemTypes" : [
-          "Utility",
-          "Torch"
+          "Utility"
         ],
         "AllowedRarities" : [
+          "Rare",
           "Epic",
           "Legendary"
         ]
       },
       "ValuesPerRarity" : {
+        "Rare" :      { "MinValue" : 4, "MaxValue" : 8,  "Increment" : 1 },
         "Epic" :      { "MinValue" : 7, "MaxValue" : 15, "Increment" : 1 },
-        "Legendary" : { "MinValue" : 9, "MaxValue" : 12,  "Increment" : 1 }
+        "Legendary" : { "MinValue" : 9, "MaxValue" : 12, "Increment" : 1 }
       },
+      "ValuesPerItemName": [
+        {
+            "ItemNames": [
+                "$mod_epicloot_assets_leatherbelt"
+            ],
+            "ValuesPerRarity" : {
+                "Rare" :      { "MinValue" : 2, "MaxValue" : 4, "Increment" : 1 },
+                "Epic" :      { "MinValue" : 4, "MaxValue" : 7, "Increment" : 1 },
+                "Legendary" : { "MinValue" : 5, "MaxValue" : 6, "Increment" : 1 }
+            }
+        },
+        {
+            "ItemNames": [
+                "$mod_epicloot_assets_goldrubyring"
+            ],
+            "ValuesPerRarity" : {
+                "Rare" :      { "MinValue" : 3, "MaxValue" : 6,  "Increment" : 1 },
+                "Epic" :      { "MinValue" : 6, "MaxValue" : 11, "Increment" : 1 },
+                "Legendary" : { "MinValue" : 7, "MaxValue" : 9,  "Increment" : 1 }
+            }
+        },
+        {
+            "ItemNames": [
+                "$mod_epicloot_assets_silverring"
+            ],
+            "ValuesPerRarity" : {
+                "Rare" :      { "MinValue" : 4, "MaxValue" : 8,  "Increment" : 1 },
+                "Epic" :      { "MinValue" : 7, "MaxValue" : 15, "Increment" : 1 },
+                "Legendary" : { "MinValue" : 9, "MaxValue" : 12, "Increment" : 1 }
+            }
+        }
+      ],
       "SelectionWeight" : 1,
       "Prefixes": [
         "$mod_epicloot_me_riches_prefix1"
@@ -3520,7 +3824,8 @@
       "ValuesPerItemName": [
         {
             "ItemNames": [
-                "$item_cape_deerhide"
+                "$item_cape_deerhide",
+                "$mod_epicloot_assets_leatherbelt"
             ],
             "ValuesPerRarity" : {
                 "Rare" :      { "MinValue" : 3, "MaxValue" : 4,  "Increment" : 1 },
@@ -3540,7 +3845,8 @@
         },
         {
             "ItemNames": [
-                "$item_cape_wolf"
+                "$item_cape_wolf",
+                "$mod_epicloot_assets_goldrubyring"
             ],
             "ValuesPerRarity" : {
                 "Rare" :      { "MinValue" : 4, "MaxValue" : 5,  "Increment" : 1 },
@@ -3561,7 +3867,8 @@
         },
         {
             "ItemNames": [
-                "$item_cape_feather"
+                "$item_cape_feather",
+                "$mod_epicloot_assets_silverring"
             ],
             "ValuesPerRarity" : {
                 "Rare" :      { "MinValue" : 4,  "MaxValue" : 7,  "Increment" : 1 },

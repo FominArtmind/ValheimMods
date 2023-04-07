@@ -136,8 +136,7 @@
             "$item_chest_trollleather",
             "$item_legs_trollleather",
             "$item_helmet_trollleather",
-            "$item_cape_trollhide",
-            "$mod_epicloot_assets_goldrubyring"
+            "$item_cape_trollhide"
         ],
         "Cost": [
             { "Item": "BoneFragments", "Amount": 7 },
@@ -151,7 +150,7 @@
             "$item_chest_bronze",
             "$item_legs_bronze",
             "$item_helmet_bronze",
-            "$mod_epicloot_assets_silverring"
+            "$mod_epicloot_assets_goldrubyring"
         ],
         "Cost": [
             { "Item": "BoneFragments", "Amount": 15 },
@@ -185,7 +184,8 @@
             "$item_legs_wolf",
             "$item_helmet_fenris",
             "$item_helmet_drake",
-            "$item_cape_wolf"
+            "$item_cape_wolf",
+            "$mod_epicloot_assets_silverring"
         ],
         "Cost": [
             { "Item": "BoneFragments", "Amount": 25 },
@@ -851,7 +851,8 @@
             "$item_legs_bronze",
             "$item_helmet_trollleather",
             "$item_helmet_bronze",
-            "$item_cape_trollhide"
+            "$item_cape_trollhide",
+            "$mod_epicloot_assets_leatherbelt"
         ],
         "Rarity": "Magic",
         "Cost": [
@@ -861,9 +862,6 @@
     },
     {
         "ItemNames": [
-            "$mod_epicloot_assets_leatherbelt",
-            "$mod_epicloot_assets_goldrubyring",
-            "$mod_epicloot_assets_silverring",
             "$item_shield_ironbuckler",
             "$item_shield_banded",
             "$item_shield_iron_tower",
@@ -890,7 +888,8 @@
             "$item_legs_wolf",
             "$item_helmet_fenris",
             "$item_helmet_drake",
-            "$item_cape_wolf"
+            "$item_cape_wolf",
+            "$mod_epicloot_assets_goldrubyring"
         ],
         "Rarity": "Magic",
         "Cost": [
@@ -924,7 +923,8 @@
             "$item_legs_mage",
             "$item_helmet_carapace",
             "$item_helmet_mage",
-            "$item_cape_feather"
+            "$item_cape_feather",
+            "$mod_epicloot_assets_silverring"
         ],
         "Rarity": "Magic",
         "Cost": [
@@ -959,7 +959,8 @@
             "$item_legs_bronze",
             "$item_helmet_trollleather",
             "$item_helmet_bronze",
-            "$item_cape_trollhide"
+            "$item_cape_trollhide",
+            "$mod_epicloot_assets_leatherbelt"
         ],
         "Rarity": "Rare",
         "Cost": [
@@ -969,9 +970,6 @@
     },
     {
         "ItemNames": [
-            "$mod_epicloot_assets_leatherbelt",
-            "$mod_epicloot_assets_goldrubyring",
-            "$mod_epicloot_assets_silverring",
             "$item_shield_ironbuckler",
             "$item_shield_banded",
             "$item_shield_iron_tower",
@@ -998,7 +996,8 @@
             "$item_legs_wolf",
             "$item_helmet_fenris",
             "$item_helmet_drake",
-            "$item_cape_wolf"
+            "$item_cape_wolf",
+            "$mod_epicloot_assets_goldrubyring"
         ],
         "Rarity": "Rare",
         "Cost": [
@@ -1032,7 +1031,8 @@
             "$item_legs_mage",
             "$item_helmet_carapace",
             "$item_helmet_mage",
-            "$item_cape_feather"
+            "$item_cape_feather",
+            "$mod_epicloot_assets_silverring"
         ],
         "Rarity": "Rare",
         "Cost": [
@@ -1067,7 +1067,8 @@
             "$item_legs_bronze",
             "$item_helmet_trollleather",
             "$item_helmet_bronze",
-            "$item_cape_trollhide"
+            "$item_cape_trollhide",
+            "$mod_epicloot_assets_leatherbelt"
         ],
         "Rarity": "Epic",
         "Cost": [
@@ -1077,9 +1078,6 @@
     },
     {
         "ItemNames": [
-            "$mod_epicloot_assets_leatherbelt",
-            "$mod_epicloot_assets_goldrubyring",
-            "$mod_epicloot_assets_silverring",
             "$item_shield_ironbuckler",
             "$item_shield_banded",
             "$item_shield_iron_tower",
@@ -1106,7 +1104,8 @@
             "$item_legs_wolf",
             "$item_helmet_fenris",
             "$item_helmet_drake",
-            "$item_cape_wolf"
+            "$item_cape_wolf",
+            "$mod_epicloot_assets_goldrubyring"
         ],
         "Rarity": "Epic",
         "Cost": [
@@ -1140,7 +1139,8 @@
             "$item_legs_mage",
             "$item_helmet_carapace",
             "$item_helmet_mage",
-            "$item_cape_feather"
+            "$item_cape_feather",
+            "$mod_epicloot_assets_silverring"
         ],
         "Rarity": "Epic",
         "Cost": [
@@ -1552,7 +1552,8 @@
             "$item_legs_bronze",
             "$item_helmet_trollleather",
             "$item_helmet_bronze",
-            "$item_cape_trollhide"
+            "$item_cape_trollhide",
+            "$mod_epicloot_assets_leatherbelt"
         ],
         "Rarity": "Magic",
         "Cost": [
@@ -1562,9 +1563,6 @@
     },
     {
         "ItemNames": [
-            "$mod_epicloot_assets_leatherbelt",
-            "$mod_epicloot_assets_goldrubyring",
-            "$mod_epicloot_assets_silverring",
             "$item_shield_ironbuckler",
             "$item_shield_banded",
             "$item_shield_iron_tower",
@@ -1591,7 +1589,8 @@
             "$item_legs_wolf",
             "$item_helmet_fenris",
             "$item_helmet_drake",
-            "$item_cape_wolf"
+            "$item_cape_wolf",
+            "$mod_epicloot_assets_goldrubyring"
         ],
         "Rarity": "Magic",
         "Cost": [
@@ -1625,7 +1624,8 @@
             "$item_legs_mage",
             "$item_helmet_carapace",
             "$item_helmet_mage",
-            "$item_cape_feather"
+            "$item_cape_feather",
+            "$mod_epicloot_assets_silverring"
         ],
         "Rarity": "Magic",
         "Cost": [
@@ -1660,7 +1660,8 @@
             "$item_legs_bronze",
             "$item_helmet_trollleather",
             "$item_helmet_bronze",
-            "$item_cape_trollhide"
+            "$item_cape_trollhide",
+            "$mod_epicloot_assets_leatherbelt"
         ],
         "Rarity": "Rare",
         "Cost": [
@@ -1670,9 +1671,6 @@
     },
     {
         "ItemNames": [
-            "$mod_epicloot_assets_leatherbelt",
-            "$mod_epicloot_assets_goldrubyring",
-            "$mod_epicloot_assets_silverring",
             "$item_shield_ironbuckler",
             "$item_shield_banded",
             "$item_shield_iron_tower",
@@ -1699,7 +1697,8 @@
             "$item_legs_wolf",
             "$item_helmet_fenris",
             "$item_helmet_drake",
-            "$item_cape_wolf"
+            "$item_cape_wolf",
+            "$mod_epicloot_assets_goldrubyring"
         ],
         "Rarity": "Rare",
         "Cost": [
@@ -1733,7 +1732,8 @@
             "$item_legs_mage",
             "$item_helmet_carapace",
             "$item_helmet_mage",
-            "$item_cape_feather"
+            "$item_cape_feather",
+            "$mod_epicloot_assets_silverring"
         ],
         "Rarity": "Rare",
         "Cost": [
@@ -1768,7 +1768,8 @@
             "$item_legs_bronze",
             "$item_helmet_trollleather",
             "$item_helmet_bronze",
-            "$item_cape_trollhide"
+            "$item_cape_trollhide",
+            "$mod_epicloot_assets_leatherbelt"
         ],
         "Rarity": "Epic",
         "Cost": [
@@ -1778,9 +1779,6 @@
     },
     {
         "ItemNames": [
-            "$mod_epicloot_assets_leatherbelt",
-            "$mod_epicloot_assets_goldrubyring",
-            "$mod_epicloot_assets_silverring",
             "$item_shield_ironbuckler",
             "$item_shield_banded",
             "$item_shield_iron_tower",
@@ -1807,7 +1805,8 @@
             "$item_legs_wolf",
             "$item_helmet_fenris",
             "$item_helmet_drake",
-            "$item_cape_wolf"
+            "$item_cape_wolf",
+            "$mod_epicloot_assets_goldrubyring"
         ],
         "Rarity": "Epic",
         "Cost": [
@@ -1841,7 +1840,8 @@
             "$item_legs_mage",
             "$item_helmet_carapace",
             "$item_helmet_mage",
-            "$item_cape_feather"
+            "$item_cape_feather",
+            "$mod_epicloot_assets_silverring"
         ],
         "Rarity": "Epic",
         "Cost": [
