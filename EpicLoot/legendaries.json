@@ -482,7 +482,7 @@
         "GuaranteedMagicEffects": [
             { "Type": "ModifyPhysicalDamage", "Values": { "MinValue": 35, "MaxValue": 45, "Increment": 1 } },
             { "Type": "ModifyAttackSpeed", "Values": { "MinValue": 27, "MaxValue": 27, "Increment": 1 } },
-            { "Type": "ModifyAttackStaminaUse", "Values": { "MinValue": 21, "MaxValue": 21, "Increment": 1 } },
+            { "Type": "ModifyAttackStaminaUse", "Values": { "MinValue": 35, "MaxValue": 45, "Increment": 1 } },
             { "Type": "AddAxesSkill", "Values": { "MinValue": 15, "MaxValue": 25, "Increment": 1 } }
         ]
     },
@@ -925,6 +925,18 @@
             { "Type": "AddMovementSkills", "Values": { "MinValue": 17, "MaxValue": 21, "Increment": 1 } },
             { "Type": "ModifyMovementSpeed", "Values": { "MinValue": 7, "MaxValue": 9, "Increment": 1 } }, 
             { "Type": "ModifyJumpStaminaUse", "Values": { "MinValue": 30, "MaxValue": 40, "Increment": 1 } }
+        ],
+        "GuaranteedMagicEffectsExceptional": [
+            { "Type": "ModifyAttackSpeed", "Values": { "MinValue": 50, "MaxValue": 50, "Increment": 1 } },
+            { "Type": "AddMovementSkills", "Values": { "MinValue": 23, "MaxValue": 27, "Increment": 1 } },
+            { "Type": "ModifyMovementSpeed", "Values": { "MinValue": 10, "MaxValue": 12, "Increment": 1 } }, 
+            { "Type": "ModifyJumpStaminaUse", "Values": { "MinValue": 40, "MaxValue": 50, "Increment": 1 } }
+        ],
+        "GuaranteedMagicEffectsElite": [
+            { "Type": "ModifyAttackSpeed", "Values": { "MinValue": 65, "MaxValue": 65, "Increment": 1 } },
+            { "Type": "AddMovementSkills", "Values": { "MinValue": 29, "MaxValue": 33, "Increment": 1 } },
+            { "Type": "ModifyMovementSpeed", "Values": { "MinValue": 13, "MaxValue": 15, "Increment": 1 } }, 
+            { "Type": "ModifyJumpStaminaUse", "Values": { "MinValue": 50, "MaxValue": 60, "Increment": 1 } }
         ]
     },
     {
@@ -1365,8 +1377,8 @@
         "GuaranteedMagicEffects": [
             { "Type": "ModifyArmor", "Values": { "MinValue": 70, "MaxValue": 100, "Increment": 5 } },
             { "Type": "AddSpiritDamage", "Values": { "MinValue": 14, "MaxValue": 28, "Increment": 1 } },
-            { "Type": "AddSwordsSkill", "Values": { "MinValue": 9, "MaxValue": 18, "Increment": 1 } },
-            { "Type": "AddAxesSkill", "Values": { "MinValue": 9, "MaxValue": 18, "Increment": 1 } },
+            { "Type": "AddSwordsSkill", "Values": { "MinValue": 6, "MaxValue": 9, "Increment": 1 } },
+            { "Type": "AddAxesSkill", "Values": { "MinValue": 6, "MaxValue": 9, "Increment": 1 } },
             { "Type": "AddCarryWeight", "Values": { "MinValue": 100, "MaxValue": 100, "Increment": 1 } }
         ]
     },
@@ -1527,8 +1539,8 @@
         "GuaranteedMagicEffects": [
             { "Type": "ModifyArmor", "Values": { "MinValue": 65, "MaxValue": 95, "Increment": 5 } },
             { "Type": "AddSpiritDamage", "Values": { "MinValue": 14, "MaxValue": 28, "Increment": 1 } },
-            { "Type": "AddSwordsSkill", "Values": { "MinValue": 9, "MaxValue": 18, "Increment": 1 } },
-            { "Type": "AddAxesSkill", "Values": { "MinValue": 9, "MaxValue": 18, "Increment": 1 } },
+            { "Type": "AddSwordsSkill", "Values": { "MinValue": 6, "MaxValue": 9, "Increment": 1 } },
+            { "Type": "AddAxesSkill", "Values": { "MinValue": 6, "MaxValue": 9, "Increment": 1 } },
             { "Type": "AddCarryWeight", "Values": { "MinValue": 100, "MaxValue": 100, "Increment": 1 } }
         ]
     },
@@ -1672,8 +1684,8 @@
         "GuaranteedMagicEffects": [
             { "Type": "ModifyArmor", "Values": { "MinValue": 60, "MaxValue": 90, "Increment": 5 } },
             { "Type": "AddSpiritDamage", "Values": { "MinValue": 14, "MaxValue": 28, "Increment": 1 } },
-            { "Type": "AddSwordsSkill", "Values": { "MinValue": 14, "MaxValue": 28, "Increment": 1 } },
-            { "Type": "AddAxesSkill", "Values": { "MinValue": 14, "MaxValue": 28, "Increment": 1 } }
+            { "Type": "AddSwordsSkill", "Values": { "MinValue": 9, "MaxValue": 16, "Increment": 1 } },
+            { "Type": "AddAxesSkill", "Values": { "MinValue": 9, "MaxValue": 16, "Increment": 1 } }
         ]
     },
     {
