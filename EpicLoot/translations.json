@@ -1482,5 +1482,8 @@
   "mod_epicloot_rare": "Rare",
   "mod_epicloot_epic": "Epic",
   "mod_epicloot_legendary": "Legendary",
-  "mod_epicloot_legendarysetlabel": "Legendary Set Item"
+  "mod_epicloot_legendarysetlabel": "Legendary Set Item",
+  "mod_epicloot_normal": "Normal",
+  "mod_epicloot_exceptional": "Exceptional",
+  "mod_epicloot_elite": "Elite"
 }

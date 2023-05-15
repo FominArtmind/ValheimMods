@@ -65,7 +65,8 @@ namespace EpicLoot
                 {
                     var effect = entry2.Key;
                     var item = entry2.Value;
-                    t.AppendLine($" <color=silver>- {MagicItem.GetEffectText(effect, item.GetRarity(), item.m_shared.m_name, false)} ({item.GetDecoratedName()})</color>");
+                    var magicItem = item.GetMagicItem();
+                    t.AppendLine($" <color=silver>- {MagicItem.GetEffectText(effect, item.GetRarity(), magicItem != null ? magicItem.Quality : ItemQuality.Normal, item.m_shared.m_name, false)} ({item.GetDecoratedName()})</color>");
                 }
 
                 t.AppendLine();
