@@ -2239,9 +2239,9 @@
           "Level": 1,
           "Drops": [ [1, 55], [2, 30], [3, 10], [4, 5] ],
           "Loot": [
-            { "Item": "Tier1Everything",   "Weight": 3, "Rarity": [ 0, 93, 0, 7 ] },
-            { "Item": "Tier0Everything",   "Weight": 1, "Rarity": [ 0, 63, 0, 37 ] },
-            { "Item": "SledgeStagbreaker", "Weight": 1, "Rarity": [ 0, 83, 0, 17 ] }
+            { "Item": "Tier1Everything",   "Weight": 3, "Rarity": [ 0, 93, 0, 7 ], "Quality": [700, 27, 1] },
+            { "Item": "Tier0Everything",   "Weight": 1, "Rarity": [ 0, 63, 0, 37 ], "Quality": [270, 17, 1] },
+            { "Item": "SledgeStagbreaker", "Weight": 1, "Rarity": [ 0, 83, 0, 17 ], "Quality": [700, 27, 1] }
           ]
         },
         {
@@ -2290,7 +2290,7 @@
           "Level": 1,
           "Drops": [ [2, 55], [3, 30], [4, 10], [5, 5] ],
           "Loot": [
-            { "Item": "Tier2Everything", "Weight": 1, "Rarity": [ 0, 90, 0, 10 ] }
+            { "Item": "Tier2Everything", "Weight": 1, "Rarity": [ 0, 90, 0, 10 ], "Quality": [700, 27, 1] }
           ]
         },
         {
@@ -2339,7 +2339,7 @@
           "Level": 1,
           "Drops": [ [3, 55], [4, 30], [5, 10], [6, 5] ],
           "Loot": [
-            { "Item": "Tier3Everything", "Weight": 1, "Rarity": [ 0, 90, 0, 10 ] }
+            { "Item": "Tier3Everything", "Weight": 1, "Rarity": [ 0, 90, 0, 10 ], "Quality": [700, 27, 1] }
           ]
         },
         {
@@ -2388,7 +2388,7 @@
           "Level": 1,
           "Drops": [ [3, 55], [4, 30], [5, 10], [6, 5] ],
           "Loot": [
-            { "Item": "Tier4Everything", "Weight": 1, "Rarity": [ 0, 83, 0, 17 ] }
+            { "Item": "Tier4Everything", "Weight": 1, "Rarity": [ 0, 83, 0, 17 ], "Quality": [270, 17, 1] }
           ]
         },
         {
@@ -2437,7 +2437,7 @@
           "Level": 1,
           "Drops": [ [4, 55], [5, 30], [6, 10], [7, 5] ],
           "Loot": [
-            { "Item": "Tier5Everything", "Weight": 1, "Rarity": [ 0, 83, 0, 17 ] }
+            { "Item": "Tier5Everything", "Weight": 1, "Rarity": [ 0, 83, 0, 17 ], "Quality": [700, 27, 1] }
           ]
         },
         {
@@ -2486,7 +2486,7 @@
           "Level": 1,
           "Drops": [ [5, 55], [6, 30], [7, 10], [8, 5] ],
           "Loot": [
-            { "Item": "Tier6Everything", "Weight": 1, "Rarity": [ 0, 78, 0, 22 ] }
+            { "Item": "Tier6Everything", "Weight": 1, "Rarity": [ 0, 78, 0, 22 ], "Quality": [270, 17, 1] }
           ]
         },
         {
@@ -2537,11 +2537,11 @@
       "Object": "TreasureChest_meadows",
       "Drops": [ [0, 35], [1, 50], [2, 10], [3, 5] ],
       "Loot": [
-        { "Item": "Tier0Tools",      "Weight": 6, "Rarity": [ 80, 15, 0, 5 ] },
-        { "Item": "AxeFlint",        "Weight": 2, "Rarity": [ 80, 15, 0, 5 ] },
-        { "Item": "Cultivator",      "Weight": 1, "Rarity": [ 80, 15, 0, 5 ] },
-        { "Item": "Tier0Everything", "Weight": 8, "Rarity": [ 80, 15, 3, 2 ] },
-        { "Item": "Tier1Everything", "Weight": 2, "Rarity": [ 80, 15, 4, 1 ] },
+        { "Item": "Tier0Tools",      "Weight": 6, "Rarity": [ 80, 15, 0, 5 ], "Quality": [700, 27, 1] },
+        { "Item": "AxeFlint",        "Weight": 2, "Rarity": [ 80, 15, 0, 5 ], "Quality": [700, 27, 1] },
+        { "Item": "Cultivator",      "Weight": 1, "Rarity": [ 80, 15, 0, 5 ], "Quality": [700, 27, 1] },
+        { "Item": "Tier0Everything", "Weight": 8, "Rarity": [ 80, 15, 3, 2 ], "Quality": [700, 27, 1] },
+        { "Item": "Tier1Everything", "Weight": 2, "Rarity": [ 80, 15, 4, 1 ], "Quality": [700, 27, 1] },
         { "Item": "RunestoneMagic",  "Weight": 1 }
       ]
     },
@@ -2551,10 +2551,10 @@
       "Object": "TreasureChest_blackforest",
       "Drops": [ [0, 35], [1, 35], [2, 25], [3, 5] ],
       "Loot": [
-        { "Item": "AxeFlint",        "Weight": 2, "Rarity": [ 75, 16, 7, 2 ] },
-        { "Item": "PickaxeAntler",   "Weight": 1, "Rarity": [ 75, 16, 7, 2 ] },
-        { "Item": "Tier0Shields",    "Weight": 2, "Rarity": [ 75, 16, 7, 2 ] },
-        { "Item": "Tier1Everything", "Weight": 4, "Rarity": [ 75, 16, 7, 2 ] },
+        { "Item": "AxeFlint",        "Weight": 2, "Rarity": [ 75, 16, 7, 2 ], "Quality": [700, 27, 1] },
+        { "Item": "PickaxeAntler",   "Weight": 1, "Rarity": [ 75, 16, 7, 2 ], "Quality": [700, 27, 1] },
+        { "Item": "Tier0Shields",    "Weight": 2, "Rarity": [ 75, 16, 7, 2 ], "Quality": [700, 27, 1] },
+        { "Item": "Tier1Everything", "Weight": 4, "Rarity": [ 75, 16, 7, 2 ], "Quality": [700, 27, 1] },
         { "Item": "RunestoneMagic",  "Weight": 1 }
       ]
     },
@@ -2564,10 +2564,10 @@
       "Object": "TreasureChest_forestcrypt",
       "Drops": [ [0, 15], [1, 40], [2, 25], [3, 15], [4, 5] ],
       "Loot": [
-        { "Item": "PickaxeAntler",   "Weight": 3,  "Rarity": [ 60, 28, 9, 3 ] },
-        { "Item": "PickaxeBronze",   "Weight": 1,  "Rarity": [ 60, 28, 9, 3 ] },
-        { "Item": "Tier1Everything", "Weight": 18, "Rarity": [ 60, 28, 9, 3 ] },
-        { "Item": "Tier2Everything", "Weight": 9,  "Rarity": [ 60, 28, 9, 3 ] },
+        { "Item": "PickaxeAntler",   "Weight": 3,  "Rarity": [ 60, 28, 9, 3 ], "Quality": [700, 27, 1] },
+        { "Item": "PickaxeBronze",   "Weight": 1,  "Rarity": [ 60, 28, 9, 3 ], "Quality": [700, 27, 1] },
+        { "Item": "Tier1Everything", "Weight": 18, "Rarity": [ 60, 28, 9, 3 ], "Quality": [700, 27, 1] },
+        { "Item": "Tier2Everything", "Weight": 9,  "Rarity": [ 60, 28, 9, 3 ], "Quality": [700, 27, 1] },
         { "Item": "RunestoneMagic",  "Weight": 5 },
         { "Item": "RunestoneRare",   "Weight": 1 }
       ]
@@ -2578,10 +2578,10 @@
       "Object": "TreasureChest_fCrypt",
       "Drops": [ [0, 15], [1, 40], [2, 25], [3, 15], [4, 5] ],
       "Loot": [
-        { "Item": "PickaxeAntler",   "Weight": 3,  "Rarity": [ 60, 28, 9, 3 ] },
-        { "Item": "PickaxeBronze",   "Weight": 1,  "Rarity": [ 60, 28, 9, 3 ] },
-        { "Item": "Tier1Everything", "Weight": 18, "Rarity": [ 60, 28, 9, 3 ] },
-        { "Item": "Tier2Everything", "Weight": 9,  "Rarity": [ 60, 28, 9, 3 ] },
+        { "Item": "PickaxeAntler",   "Weight": 3,  "Rarity": [ 60, 28, 9, 3 ], "Quality": [700, 27, 1] },
+        { "Item": "PickaxeBronze",   "Weight": 1,  "Rarity": [ 60, 28, 9, 3 ], "Quality": [700, 27, 1] },
+        { "Item": "Tier1Everything", "Weight": 18, "Rarity": [ 60, 28, 9, 3 ], "Quality": [700, 27, 1] },
+        { "Item": "Tier2Everything", "Weight": 9,  "Rarity": [ 60, 28, 9, 3 ], "Quality": [700, 27, 1] },
         { "Item": "RunestoneMagic",  "Weight": 5 },
         { "Item": "RunestoneRare",   "Weight": 1 }
       ]
@@ -2592,8 +2592,8 @@
       "Object": "TreasureChest_trollcave",
       "Drops": [ [1, 40], [2, 31], [3, 22], [4, 7] ],
       "Loot": [
-        { "Item": "Tier1Everything", "Weight": 1, "Rarity": [ 15, 70, 11, 4 ] },
-        { "Item": "Tier2Everything", "Weight": 1, "Rarity": [ 35, 56, 7, 2 ] }
+        { "Item": "Tier1Everything", "Weight": 1, "Rarity": [ 15, 70, 11, 4 ], "Quality": [270, 17, 1] },
+        { "Item": "Tier2Everything", "Weight": 1, "Rarity": [ 35, 56, 7, 2 ], "Quality": [270, 17, 1] }
       ]
     },
     // shipwreck_karve_chest
@@ -2602,9 +2602,9 @@
       "Object": "shipwreck_karve_chest",
       "Drops": [ [0, 35], [1, 50], [2, 10], [3, 5] ],
       "Loot": [
-        { "Item": "Tier0Everything", "Weight": 8, "Rarity": [ 22, 50, 11, 17 ] },
-        { "Item": "Tier1Everything", "Weight": 7, "Rarity": [ 34, 50, 7, 9 ] },
-        { "Item": "Tier2Everything", "Weight": 4, "Rarity": [ 61, 30, 4, 5 ] },
+        { "Item": "Tier0Everything", "Weight": 8, "Rarity": [ 22, 50, 11, 17 ], "Quality": [270, 17, 1] },
+        { "Item": "Tier1Everything", "Weight": 7, "Rarity": [ 34, 50, 7, 9 ], "Quality": [270, 17, 1] },
+        { "Item": "Tier2Everything", "Weight": 4, "Rarity": [ 61, 30, 4, 5 ], "Quality": [270, 17, 1] },
         { "Item": "RunestoneMagic",  "Weight": 3 },
         { "Item": "RunestoneRare",   "Weight": 1 }
       ]
@@ -2615,9 +2615,9 @@
       "Object": "TreasureChest_meadows_buried",
       "Drops": [ [0, 15], [1, 40], [2, 25], [3, 15], [4, 5] ],
       "Loot": [
-        { "Item": "Tier0Everything", "Weight": 10, "Rarity": [ 16, 50, 27, 7 ] },
-        { "Item": "Tier1Everything", "Weight": 7, "Rarity": [ 29, 50, 17, 4 ] },
-        { "Item": "Tier2Everything", "Weight": 2, "Rarity": [ 57, 30, 11, 2 ] },
+        { "Item": "Tier0Everything", "Weight": 10, "Rarity": [ 16, 50, 27, 7 ], "Quality": [700, 27, 1] },
+        { "Item": "Tier1Everything", "Weight": 7, "Rarity": [ 29, 50, 17, 4 ], "Quality": [700, 27, 1] },
+        { "Item": "Tier2Everything", "Weight": 2, "Rarity": [ 57, 30, 11, 2 ], "Quality": [700, 27, 1] },
         { "Item": "RunestoneMagic",  "Weight": 3 },
         { "Item": "RunestoneRare",   "Weight": 1 }
       ]
@@ -2628,8 +2628,8 @@
       "Object": "TreasureChest_sunkencrypt",
       "Drops": [ [0, 35], [1, 35], [2, 25], [3, 5] ],
       "Loot": [
-        { "Item": "Tier2Everything", "Weight": 21, "Rarity": [ 60, 31, 7, 2 ] },
-        { "Item": "Tier3Everything", "Weight": 7,  "Rarity": [ 60, 31, 7, 2 ] },
+        { "Item": "Tier2Everything", "Weight": 21, "Rarity": [ 60, 31, 7, 2 ], "Quality": [700, 27, 1] },
+        { "Item": "Tier3Everything", "Weight": 7,  "Rarity": [ 60, 31, 7, 2 ], "Quality": [700, 27, 1] },
         { "Item": "RunestoneRare",   "Weight": 5 },
         { "Item": "RunestoneEpic",   "Weight": 1 }
       ]
@@ -2640,8 +2640,8 @@
       "Object": "TreasureChest_swamp",
       "Drops": [ [0, 35], [1, 50], [2, 10], [3, 5] ],
       "Loot": [
-        { "Item": "Tier2Everything", "Weight": 35, "Rarity": [ 73, 18, 0, 9 ] },
-        { "Item": "Tier3Everything", "Weight": 7,  "Rarity": [ 73, 18, 0, 9 ] },
+        { "Item": "Tier2Everything", "Weight": 35, "Rarity": [ 73, 18, 0, 9 ], "Quality": [700, 27, 1] },
+        { "Item": "Tier3Everything", "Weight": 7,  "Rarity": [ 73, 18, 0, 9 ], "Quality": [700, 27, 1] },
         { "Item": "RunestoneRare",   "Weight": 5 },
         { "Item": "RunestoneEpic",   "Weight": 1 }
       ]
@@ -2652,8 +2652,8 @@
       "Object": "TreasureChest_mountains",
       "Drops": [ [0, 35], [1, 35], [2, 25], [3, 5] ],
       "Loot": [
-        { "Item": "Tier3Everything",    "Weight": 36, "Rarity": [ 54, 30, 12, 4 ] },
-        { "Item": "Tier4Everything",    "Weight": 9,  "Rarity": [ 54, 30, 12, 4 ] },
+        { "Item": "Tier3Everything",    "Weight": 36, "Rarity": [ 54, 30, 12, 4 ], "Quality": [700, 27, 1] },
+        { "Item": "Tier4Everything",    "Weight": 9,  "Rarity": [ 54, 30, 12, 4 ], "Quality": [700, 27, 1] },
         { "Item": "RunestoneEpic",      "Weight": 5 }
       ]
     },
@@ -2663,8 +2663,8 @@
       "Object": "TreasureChest_mountaincave",
       "Drops": [ [0, 15], [1, 40], [2, 25], [3, 15], [4, 5] ],
       "Loot": [
-        { "Item": "Tier3Everything",    "Weight": 28, "Rarity": [ 15, 73, 9, 3 ] },
-        { "Item": "Tier4Everything",    "Weight": 7,  "Rarity": [ 15, 73, 9, 3 ] },
+        { "Item": "Tier3Everything",    "Weight": 28, "Rarity": [ 15, 73, 9, 3 ], "Quality": [700, 27, 1] },
+        { "Item": "Tier4Everything",    "Weight": 7,  "Rarity": [ 15, 73, 9, 3 ], "Quality": [700, 27, 1] },
         { "Item": "RunestoneEpic",      "Weight": 4 }
       ]
     },
@@ -2674,8 +2674,8 @@
       "Object": "TreasureChest_plains_stone",
       "Drops": [ [0, 35], [1, 35], [2, 25], [3, 5] ],
       "Loot": [
-        { "Item": "Tier4Everything",    "Weight": 24, "Rarity": [ 54, 30, 12, 4 ] },
-        { "Item": "Tier5Everything",    "Weight": 8,  "Rarity": [ 54, 30, 12, 4 ] },
+        { "Item": "Tier4Everything",    "Weight": 24, "Rarity": [ 54, 30, 12, 4 ], "Quality": [700, 27, 1] },
+        { "Item": "Tier5Everything",    "Weight": 8,  "Rarity": [ 54, 30, 12, 4 ], "Quality": [700, 27, 1] },
         { "Item": "RunestoneEpic",      "Weight": 4 }
       ]
     },
@@ -2685,8 +2685,8 @@
       "Object": "TreasureChest_heath",
       "Drops": [ [0, 35], [1, 35], [2, 25], [3, 5] ],
       "Loot": [
-        { "Item": "Tier4Everything",    "Weight": 24, "Rarity": [ 54, 30, 12, 4 ] },
-        { "Item": "Tier5Everything",    "Weight": 8,  "Rarity": [ 54, 30, 12, 4 ] },
+        { "Item": "Tier4Everything",    "Weight": 24, "Rarity": [ 54, 30, 12, 4 ], "Quality": [700, 27, 1] },
+        { "Item": "Tier5Everything",    "Weight": 8,  "Rarity": [ 54, 30, 12, 4 ], "Quality": [700, 27, 1] },
         { "Item": "RunestoneEpic",      "Weight": 4 }
       ]
     },
@@ -2696,8 +2696,8 @@
       "Object": "TreasureChest_dvergrtown",
       "Drops": [ [0, 35], [1, 35], [2, 25], [3, 5] ],
       "Loot": [
-        { "Item": "Tier5Everything",    "Weight": 18, "Rarity": [ 54, 30, 12, 4 ] },
-        { "Item": "Tier6Everything",    "Weight": 6,  "Rarity": [ 54, 30, 12, 4 ] },
+        { "Item": "Tier5Everything",    "Weight": 18, "Rarity": [ 54, 30, 12, 4 ], "Quality": [700, 27, 1] },
+        { "Item": "Tier6Everything",    "Weight": 6,  "Rarity": [ 54, 30, 12, 4 ], "Quality": [700, 27, 1] },
         { "Item": "RunestoneEpic",      "Weight": 3 }
       ]
     },
@@ -2707,8 +2707,8 @@
       "Object": "TreasureChest_dvergrtower",
       "Drops": [ [0, 25], [1, 40], [2, 25], [3, 10] ],
       "Loot": [
-        { "Item": "Tier5Everything",    "Weight": 18, "Rarity": [ 54, 30, 12, 4 ] },
-        { "Item": "Tier6Everything",    "Weight": 6,  "Rarity": [ 54, 30, 12, 4 ] },
+        { "Item": "Tier5Everything",    "Weight": 18, "Rarity": [ 54, 30, 12, 4 ], "Quality": [270, 17, 1] },
+        { "Item": "Tier6Everything",    "Weight": 6,  "Rarity": [ 54, 30, 12, 4 ], "Quality": [270, 17, 1] },
         { "Item": "RunestoneEpic",      "Weight": 3 }
       ]
     },
@@ -2718,8 +2718,8 @@
       "Object": "TreasureChest_dvergr_loose_stone",
       "Drops": [ [0, 15], [1, 40], [2, 25], [3, 15], [4, 5] ],
       "Loot": [
-        { "Item": "Tier5Everything",    "Weight": 18, "Rarity": [ 0, 77, 16, 7 ] },
-        { "Item": "Tier6Everything",    "Weight": 6,  "Rarity": [ 0, 77, 16, 7 ] },
+        { "Item": "Tier5Everything",    "Weight": 18, "Rarity": [ 0, 77, 16, 7 ], "Quality": [700, 27, 1] },
+        { "Item": "Tier6Everything",    "Weight": 6,  "Rarity": [ 0, 77, 16, 7 ], "Quality": [700, 27, 1] },
         { "Item": "RunestoneEpic",      "Weight": 3 }
       ]
     },
