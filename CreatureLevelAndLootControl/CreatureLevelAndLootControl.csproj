@@ -10,33 +10,27 @@
     </PropertyGroup>
     <ItemGroup>
         <Reference Include="0Harmony">
-            <HintPath>M:\Code\VapokModBase\References\BepInEx\5.4.2201\BepInEx\core\0Harmony.dll</HintPath>
+            <HintPath>E:\Games\Steam\steamapps\common\Valheim\BepInEx\core\0Harmony.dll</HintPath>
         </Reference>
         <Reference Include="assembly_guiutils_publicized">
-            <HintPath>M:\Code\VapokModBase\References\Valheim\0.217.28\assembly_guiutils_publicized.dll</HintPath>
+            <HintPath>D:\Personal\Valheim\AssemblyPublicizer\publicized_assemblies\assembly_guiutils_publicized.dll</HintPath>
         </Reference>
         <Reference Include="assembly_utils_publicized">
-            <HintPath>M:\Code\VapokModBase\References\Valheim\0.217.28\assembly_utils_publicized.dll</HintPath>
+            <HintPath>D:\Personal\Valheim\AssemblyPublicizer\publicized_assemblies\assembly_utils_publicized.dll</HintPath>
         </Reference>
         <Reference Include="assembly_valheim_publicized">
-            <HintPath>M:\Code\VapokModBase\References\Valheim\0.217.28\assembly_valheim_publicized.dll</HintPath>
-        </Reference>
-        <Reference Include="assembly_utils_publicized">
-            <HintPath>M:\Code\VapokModBase\References\Valheim\0.217.28\assembly_utils_publicized.dll</HintPath>
-        </Reference>
-        <Reference Include="assembly_valheim_publicized">
-            <HintPath>M:\Code\VapokModBase\References\Valheim\0.217.28\assembly_valheim_publicized.dll</HintPath>
+            <HintPath>D:\Personal\Valheim\AssemblyPublicizer\publicized_assemblies\assembly_valheim_publicized.dll</HintPath>
         </Reference>
         <Reference Include="CreatureLevelControl">
-          <HintPath>..\..\VapokModBase\References\CLLC\CreatureLevelControl.dll</HintPath>
+          <HintPath>E:\Games\Steam\steamapps\common\Valheim\BepInEx\plugins\CreatureLevelControl.dll</HintPath>
         </Reference>
         <Reference Include="System.Net" />
         <Reference Include="System.Net.Http" />
         <Reference Include="UnityEngine">
-            <HintPath>M:\Code\VapokModBase\References\BepInEx\5.4.2201\unstripped_corlib\UnityEngine.dll</HintPath>
+            <HintPath>E:\Games\Steam\steamapps\common\Valheim\valheim_Data\Managed\UnityEngine.dll</HintPath>
         </Reference>
         <Reference Include="UnityEngine.CoreModule">
-            <HintPath>M:\Code\VapokModBase\References\BepInEx\5.4.2201\unstripped_corlib\UnityEngine.CoreModule.dll</HintPath>
+            <HintPath>E:\Games\Steam\steamapps\common\Valheim\valheim_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
         </Reference>
     </ItemGroup>
     <Target Name="PostBuild" AfterTargets="PostBuildEvent">
