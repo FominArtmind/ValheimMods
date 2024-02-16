@@ -362,7 +362,7 @@ namespace EpicLoot
                 }
             }
 
-            if (itemName == null || ValuesPerItemName == null)
+            if (string.IsNullOrEmpty(itemName) || ValuesPerItemName == null)
             {
                 return ValueForRarity(ValuesPerRarity);
             }
