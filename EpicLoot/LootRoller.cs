@@ -364,7 +364,7 @@ namespace EpicLoot
                     var magicItem = RollMagicItem(lootDrop, itemData, luckFactor);
                     if (CheatForceMagicEffect)
                     {
-                        AddDebugMagicEffects(magicItem);
+                        AddDebugMagicEffects(magicItem, itemData.m_shared.m_name);
                     }
                     magicItemComponent.SetMagicItem(magicItem);
                     itemDrop.m_itemData = itemData;
@@ -477,7 +477,7 @@ namespace EpicLoot
                 rarity = ItemRarity.Legendary;
             }
 
-            var magicItem = new MagicItem { Rarity = rarity };
+            var magicItem = new MagicItem { Rarity = rarity, ItemName = baseItem.m_shared.m_name };
 
             var effectCount = CheatEffectCount >= 1 ? CheatEffectCount : RollEffectCountPerRarity(magicItem.Rarity);
 
@@ -525,7 +525,7 @@ namespace EpicLoot
                             continue;
                         }
 
-                        var effect = RollEffect(effectDef, ItemRarity.Legendary, guaranteedMagicEffect.Values);
+                        var effect = RollEffect(effectDef, ItemRarity.Legendary, baseItem.m_shared.m_name, guaranteedMagicEffect.Values);
                         magicItem.Effects.Add(effect);
                         effectCount--;
                     }
@@ -545,7 +545,7 @@ namespace EpicLoot
                 _weightedEffectTable.Setup(availableEffects, x => x.SelectionWeight);
                 var effectDef = _weightedEffectTable.Roll();
 
-                var effect = RollEffect(effectDef, magicItem.Rarity);
+                var effect = RollEffect(effectDef, magicItem.Rarity, baseItem.m_shared.m_name);
                 magicItem.Effects.Add(effect);
             }
 
@@ -625,10 +625,10 @@ namespace EpicLoot
             return result;
         }
 
-        public static MagicItemEffect RollEffect(MagicItemEffectDefinition effectDef, ItemRarity itemRarity, MagicItemEffectDefinition.ValueDef valuesOverride = null)
+        public static MagicItemEffect RollEffect(MagicItemEffectDefinition effectDef, ItemRarity itemRarity, string itemName, MagicItemEffectDefinition.ValueDef valuesOverride = null)
         {
             float value = MagicItemEffect.DefaultValue;
-            var valuesDef = valuesOverride ?? effectDef.GetValuesForRarity(itemRarity);
+            var valuesDef = valuesOverride ?? effectDef.GetValuesForRarity(itemRarity, itemName);
             if (valuesDef != null)
             {
                 value = valuesDef.MinValue;
@@ -654,7 +654,8 @@ namespace EpicLoot
             return new MagicItemEffect(effectDef.Type, value);
         }
 
-        public static List<MagicItemEffect> RollEffects(List<MagicItemEffectDefinition> availableEffects, ItemRarity itemRarity, int count, bool removeOnSelect = true)
+
+        public static List<MagicItemEffect> RollEffects(List<MagicItemEffectDefinition> availableEffects, ItemRarity itemRarity, string itemName, int count, bool removeOnSelect = true)
         {
             var results = new List<MagicItemEffect>();
 
@@ -668,7 +669,7 @@ namespace EpicLoot
                     EpicLoot.LogError($"EffectDef was null! RollEffects({itemRarity}, {count})");
                     continue;
                 }
-                results.Add(RollEffect(effectDef, itemRarity));
+                results.Add(RollEffect(effectDef, itemRarity, itemName));
             }
 
             return results;
@@ -851,7 +852,7 @@ namespace EpicLoot
 
             for (var i = 0; i < augmentChoices && i < availableEffects.Count; i++)
             {
-                var newEffect = RollEffects(availableEffects, rarity, 1, false).FirstOrDefault();
+                var newEffect = RollEffects(availableEffects, rarity, item.m_shared.m_name, 1, false).FirstOrDefault();
                 if (newEffect == null)
                 {
                     EpicLoot.LogError($"Rolled a null effect: item:{item.m_shared.m_name}, index:{effectIndex}");
@@ -870,12 +871,12 @@ namespace EpicLoot
             return results;
         }
 
-        public static void AddDebugMagicEffects(MagicItem item)
+        public static void AddDebugMagicEffects(MagicItem item, string itemName)
         {
             if (!string.IsNullOrEmpty(ForcedMagicEffect) && !item.HasEffect(ForcedMagicEffect))
             {
                 EpicLoot.Log($"AddDebugMagicEffect {ForcedMagicEffect}");
-                item.Effects.Add(RollEffect(MagicItemEffectDefinitions.Get(ForcedMagicEffect), item.Rarity));
+                item.Effects.Add(RollEffect(MagicItemEffectDefinitions.Get(ForcedMagicEffect), item.Rarity, itemName));
             }
         }
 
