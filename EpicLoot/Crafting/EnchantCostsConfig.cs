@@ -21,6 +21,14 @@ namespace EpicLoot.Crafting
     }
 
     [Serializable]
+    public class DisenchantCostsAlternativeConfig
+    {
+        public List<string> ItemTypes = new List<string>();
+        public List<string> ItemNames = new List<string>();
+        public List<ItemAmountConfig> Cost = new List<ItemAmountConfig>();
+    }
+
+    [Serializable]
     public class DisenchantProductsConfig
     {
         public bool IsMagic;
@@ -52,6 +60,7 @@ namespace EpicLoot.Crafting
     public class EnchantingCostsConfig
     {
         public DisenchantCostsConfig DisenchantCosts = new DisenchantCostsConfig();
+        public List<DisenchantCostsAlternativeConfig> DisenchantCostsAlternative = new List<DisenchantCostsAlternativeConfig>();
         public List<DisenchantProductsConfig> DisenchantProducts = new List<DisenchantProductsConfig>();
         public List<EnchantCostConfig> EnchantCosts = new List<EnchantCostConfig>();
         public List<AugmentCostConfig> AugmentCosts = new List<AugmentCostConfig>();

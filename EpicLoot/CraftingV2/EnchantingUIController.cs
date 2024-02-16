@@ -647,32 +647,56 @@ namespace EpicLoot.CraftingV2
             if (item == null || !item.IsMagic())
                 return result;
 
-            var rarity = item.GetRarity();
             List<ItemAmountConfig> costList;
-            switch (rarity)
+            if (EpicLoot.EnchantingTableAlternativeDisenchantCosts.Value && EnchantCostsHelper.Config.DisenchantCostsAlternative.Count > 0)
             {
-                case ItemRarity.Magic:
-                    costList = EnchantCostsHelper.Config.DisenchantCosts.Magic;
-                    break;
+                var type = item.m_shared.m_itemType;
+                var name = item.m_shared.m_name;
 
-                case ItemRarity.Rare:
-                    costList = EnchantCostsHelper.Config.DisenchantCosts.Rare;
-                    break;
+                var configEntry = EnchantCostsHelper.Config.DisenchantCostsAlternative.Find(x => {
+                    if (x.ItemTypes?.Count > 0 && !x.ItemTypes.Contains(type.ToString()))
+                    {
+                        return false;
+                    }
 
-                case ItemRarity.Epic:
-                    costList = EnchantCostsHelper.Config.DisenchantCosts.Epic;
-                    break;
+                    if (x.ItemNames?.Count > 0 && !x.ItemNames.Contains(name))
+                    {
+                        return false;
+                    }
 
-                case ItemRarity.Legendary:
-                    costList = EnchantCostsHelper.Config.DisenchantCosts.Legendary;
-                    break;
+                    return true;
+                });
 
-                // TODO: Mythic Hookup
-                case ItemRarity.Mythic:
-                    return result;
+                costList = configEntry.Cost;
+            }
+            else
+            {
+                var rarity = item.GetRarity();
+                switch (rarity)
+                {
+                    case ItemRarity.Magic:
+                        costList = EnchantCostsHelper.Config.DisenchantCosts.Magic;
+                        break;
 
-                default:
-                    throw new ArgumentOutOfRangeException();
+                    case ItemRarity.Rare:
+                        costList = EnchantCostsHelper.Config.DisenchantCosts.Rare;
+                        break;
+
+                    case ItemRarity.Epic:
+                        costList = EnchantCostsHelper.Config.DisenchantCosts.Epic;
+                        break;
+
+                    case ItemRarity.Legendary:
+                        costList = EnchantCostsHelper.Config.DisenchantCosts.Legendary;
+                        break;
+
+                    // TODO: Mythic Hookup
+                    case ItemRarity.Mythic:
+                        return result;
+
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
             }
 
             var featureValues = EnchantingTableUI.instance.SourceTable.GetFeatureCurrentValue(EnchantingFeature.Disenchant);
@@ -697,7 +721,7 @@ namespace EpicLoot.CraftingV2
                 }
 
                 var costItem = itemDrop.m_itemData.Clone();
-                costItem.m_stack = itemAmountConfig.Amount - reducedCost;
+                costItem.m_stack = Math.Max(0, itemAmountConfig.Amount - reducedCost);
                 result.Add(new InventoryItemListElement() { Item = costItem });
             }
 
