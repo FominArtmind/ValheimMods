@@ -138,7 +138,8 @@ namespace EpicLoot
         public static ConfigEntry<bool> EnableLimitedBountiesInProgress;
         public static ConfigEntry<int> MaxInProgressBounties;
         public static ConfigEntry<EnchantingTabs> EnchantingTableActivatedTabs;
-        
+        public static ConfigEntry<bool> EnchantingTableAlternativeDisenchantCosts;
+
         public static Dictionary<string, CustomSyncedValue<string>> SyncedJsonFiles = new Dictionary<string, CustomSyncedValue<string>>();
         public static Dictionary<string, ConfigValue<string>> NonSyncedJsonFiles = new Dictionary<string, ConfigValue<string>>();
 
@@ -250,7 +251,8 @@ namespace EpicLoot
             //Enchanting Table
             EnchantingTableUpgradesActive = SyncedConfig("Enchanting Table", "Upgrades Active", true, "Toggles Enchanting Table Upgrade Capabilities. If false, enchanting table features will be unlocked set to Level 1");
             EnchantingTableActivatedTabs = SyncedConfig("Enchanting Table", $"Table Features Active", EnchantingTabs.Sacrifice | EnchantingTabs.Augment | EnchantingTabs.Enchant | EnchantingTabs.Disenchant | EnchantingTabs.Upgrade | EnchantingTabs.ConvertMaterials, $"Toggles Enchanting Table Feature on and off completely.");
-            
+            EnchantingTableAlternativeDisenchantCosts = SyncedConfig("Enchanting Table", "Alternative Disenchant Costs", false, "If set to true, disenchant costs will scale based on the resulting item, not on its initial rarity");
+
             //Limiting Bounties
             EnableLimitedBountiesInProgress = SyncedConfig("Bounty Management", "Enable Bounty Limit", false, "Toggles limiting bounties. Players unable to purchase if enabled and maximum bounty in-progress count is met");
             MaxInProgressBounties = SyncedConfig("Bounty Management", "Max Bounties Per Player", 5, "Max amount of in-progress bounties allowed per player.");
