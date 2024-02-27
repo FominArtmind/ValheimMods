@@ -10,9 +10,9 @@ namespace EpicLoot.MagicItemEffects
 		[UsedImplicitly]
 		private static void Postfix(Player __instance, Skills.SkillType skill, ref float __result)
 		{
-			if (skill == Skills.SkillType.Bows && __instance.GetTotalActiveMagicEffectValue(MagicEffectType.QuickDraw, 0.01f) is float bowDrawTimeReduction)
+			if (skill == Skills.SkillType.Bows && __instance.GetTotalActiveMagicEffectValue(MagicEffectType.QuickDraw, 0.01f) is float bowAttackSpeedIncrease)
 			{
-				__result = Math.Min(1, __result + bowDrawTimeReduction);
+				__result = Math.Min(1, __result * (1 + bowAttackSpeedIncrease));
 			}
 		}
 	}
