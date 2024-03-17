@@ -185,8 +185,9 @@ namespace EpicLoot.Crafting
         public static List<KeyValuePair<ItemDrop, int>> GetAugmentCosts(ItemDrop.ItemData item, int recipeEffectIndex)
         {
             var rarity = item.GetRarity();
+            var quality = item.GetMagicItem().Quality;
 
-            var augmentCostDef = EnchantCostsHelper.GetAugmentCost(item, rarity, recipeEffectIndex);
+            var augmentCostDef = EnchantCostsHelper.GetAugmentCost(item, rarity, quality, recipeEffectIndex);
             if (augmentCostDef == null)
             {
                 return null;

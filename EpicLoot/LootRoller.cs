@@ -336,7 +336,7 @@ namespace EpicLoot
                     if (prefab != null)
                     {
                         var itemType = prefab.GetComponent<ItemDrop>().m_itemData.m_shared.m_itemType;
-                        var disenchantProducts = EnchantCostsHelper.GetSacrificeProducts(true, itemType, rarity);
+                        var disenchantProducts = EnchantCostsHelper.GetSacrificeProducts(true, itemType, rarity, quality);
                         if (disenchantProducts != null)
                         {
                             foreach (var itemAmountConfig in disenchantProducts)
