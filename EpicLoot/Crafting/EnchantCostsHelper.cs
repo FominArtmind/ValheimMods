@@ -55,10 +55,21 @@ namespace EpicLoot.Crafting
                 return true;
             });
 
-            return configEntry?.Products;
+            var quality = isMagic ? item.GetMagicItem().Quality : ItemQuality.Normal;
+
+            switch(quality)
+            {
+                case ItemQuality.Elite:
+                    return configEntry?.ProductsElite;
+                case ItemQuality.Exceptional:
+                    return configEntry?.ProductsExceptional;
+                default:
+                case ItemQuality.Normal:
+                    return configEntry?.Products;
+            }
         }
 
-        public static List<ItemAmountConfig> GetSacrificeProducts(bool isMagic, ItemDrop.ItemData.ItemType type, ItemRarity rarity )
+        public static List<ItemAmountConfig> GetSacrificeProducts(bool isMagic, ItemDrop.ItemData.ItemType type, ItemRarity rarity, ItemQuality quality)
         {
             var configEntry = Config.DisenchantProducts.Find(x => {
                 if (x.IsMagic && !isMagic)
@@ -79,7 +90,16 @@ namespace EpicLoot.Crafting
                 return true;
             });
 
-            return configEntry?.Products;
+            switch (quality)
+            {
+                case ItemQuality.Elite:
+                    return configEntry?.ProductsElite;
+                case ItemQuality.Exceptional:
+                    return configEntry?.ProductsExceptional;
+                default:
+                case ItemQuality.Normal:
+                    return configEntry?.Products;
+            }
         }
 
         public static List<ItemAmountConfig> GetEnchantCost(ItemDrop.ItemData item, ItemRarity rarity)
@@ -103,7 +123,7 @@ namespace EpicLoot.Crafting
             return configEntry?.Cost;
         }
 
-        public static List<ItemAmountConfig> GetAugmentCost(ItemDrop.ItemData item, ItemRarity rarity, int recipeEffectIndex)
+        public static List<ItemAmountConfig> GetAugmentCost(ItemDrop.ItemData item, ItemRarity rarity, ItemQuality quality, int recipeEffectIndex)
         {
             var type = item.m_shared.m_itemType;
 
@@ -126,9 +146,23 @@ namespace EpicLoot.Crafting
                 return new List<ItemAmountConfig>();
             }
 
+            List<ItemAmountConfig> cost;
+            switch (quality)
+            {
+                case ItemQuality.Elite:
+                    cost = configEntry.CostElite.ToList();
+                    break;
+                case ItemQuality.Exceptional:
+                    cost = configEntry.CostExceptional.ToList();
+                    break;
+                default:
+                case ItemQuality.Normal:
+                    cost = configEntry.Cost.ToList();
+                    break;
+            }
+
             if (configEntry != null && !item.GetMagicItem().IsEffectAugmented(recipeEffectIndex))
             {
-                var cost = configEntry.Cost.ToList();
                 var reaugmentCost = GetReAugmentCost(item, recipeEffectIndex);
                 if (reaugmentCost != null)
                 {
@@ -137,7 +171,7 @@ namespace EpicLoot.Crafting
                 return cost;
             }
 
-            return configEntry?.Cost;
+            return cost;
         }
 
         public static ItemAmountConfig GetReAugmentCost(ItemDrop.ItemData item, int indexToAugment)
