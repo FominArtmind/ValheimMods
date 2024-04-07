@@ -406,7 +406,7 @@ namespace EpicLoot.CraftingV2
             
             foreach (var effectDef in availableEffects)
             {
-                var values = effectDef.GetValuesForRarity(rarity, item.m_shared.m_name, ItemQuality.Normal);
+                var values = effectDef.GetValuesForRarity(rarity, item.m_shared.m_name, quality);
                 var valueDisplay = values != null ? Mathf.Approximately(values.MinValue, values.MaxValue) ? $"{values.MinValue}" : $"({values.MinValue}-{values.MaxValue})" : "";
                 sb.AppendLine($"‣ {string.Format(Localization.instance.Localize(effectDef.DisplayText), valueDisplay)}");
             }
