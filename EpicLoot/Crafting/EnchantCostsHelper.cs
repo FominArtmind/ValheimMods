@@ -102,7 +102,7 @@ namespace EpicLoot.Crafting
             }
         }
 
-        public static List<ItemAmountConfig> GetEnchantCost(ItemDrop.ItemData item, ItemRarity rarity)
+        public static List<ItemAmountConfig> GetEnchantCost(ItemDrop.ItemData item, ItemRarity rarity, ItemQuality quality)
         {
             var type = item.m_shared.m_itemType;
             var name = item.m_shared.m_name;
@@ -126,6 +126,14 @@ namespace EpicLoot.Crafting
                 return true;
             });
 
+            if(quality == ItemQuality.Elite && configEntry?.CostElite.Count() > 0)
+            {
+                return configEntry?.CostElite;
+            }
+            else if (quality == ItemQuality.Exceptional && configEntry?.CostExceptional.Count() > 0)
+            {
+                return configEntry?.CostExceptional;
+            }
             return configEntry?.Cost;
         }
 

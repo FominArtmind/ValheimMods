@@ -4,11 +4,11 @@ namespace EpicLoot.Crafting
 {
     public class EnchantHelper
     {
-        public static List<KeyValuePair<ItemDrop, int>> GetEnchantCosts(ItemDrop.ItemData item, ItemRarity rarity)
+        public static List<KeyValuePair<ItemDrop, int>> GetEnchantCosts(ItemDrop.ItemData item, ItemRarity rarity, ItemQuality quality)
         {
             var costList = new List<KeyValuePair<ItemDrop, int>>();
 
-            var enchantCostDef = EnchantCostsHelper.GetEnchantCost(item, rarity);
+            var enchantCostDef = EnchantCostsHelper.GetEnchantCost(item, rarity, quality);
             if (enchantCostDef == null)
             {
                 return costList;

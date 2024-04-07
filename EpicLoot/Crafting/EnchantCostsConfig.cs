@@ -47,6 +47,8 @@ namespace EpicLoot.Crafting
         public List<string> ItemTypes = new List<string>();
         public List<string> ItemNames = new List<string>();
         public List<ItemAmountConfig> Cost = new List<ItemAmountConfig>();
+        public List<ItemAmountConfig> CostExceptional = new List<ItemAmountConfig>();
+        public List<ItemAmountConfig> CostElite = new List<ItemAmountConfig>();
     }
 
     [Serializable]
