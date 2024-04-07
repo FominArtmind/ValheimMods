@@ -184,6 +184,7 @@
     <Compile Include="Humanoid_Patch.cs" />
     <Compile Include="Integrations\HarmonyPatches\ArmorStand_Patch.cs" />
     <Compile Include="Integrations\HarmonyPatches\ItemStand_Patch.cs" />
+    <Compile Include="KnownQualityItems_Patch.cs" />
     <Compile Include="LegendarySystem\LegendaryItemConfig.cs" />
     <Compile Include="LegendarySystem\UniqueLegendaryHelper.cs" />
     <Compile Include="LootBeams\AlwaysPointUp.cs" />

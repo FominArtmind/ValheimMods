@@ -351,14 +351,32 @@ namespace EpicLoot.CraftingV2
             var sb = new StringBuilder();
             var rarityColor = EpicLoot.GetRarityColor(rarity);
             var rarityDisplay = EpicLoot.GetRarityDisplayName(rarity);
-            sb.AppendLine($"{item.m_shared.m_name} \u2794 <color={rarityColor}>{rarityDisplay}</color> {item.GetDecoratedName(rarityColor)}");
+            var quality = ItemQuality.Normal;
+            var qualityText = "";
+            var player = Player.m_localPlayer;
+            var eliteKey = "EpicLoot_PlayerSeen_" + item.m_shared.m_name + ItemQuality.Elite;
+            if (player.m_customData.ContainsKey(eliteKey))
+            {
+                quality = ItemQuality.Elite;
+                qualityText = "Elite";
+            }
+            else
+            {
+                var exceptionalKey = "EpicLoot_PlayerSeen_" + item.m_shared.m_name + ItemQuality.Exceptional;
+                if (player.m_customData.ContainsKey(exceptionalKey))
+                {
+                    quality = ItemQuality.Exceptional;
+                    qualityText = "Exceptional";
+                }
+            }
+            sb.AppendLine($"{item.m_shared.m_name} \u2794 <color={rarityColor}>{qualityText} {rarityDisplay}</color> {item.GetDecoratedName(rarityColor)}");
             sb.AppendLine($"<color={rarityColor}>");
 
             var featureValues = EnchantingTableUI.instance.SourceTable.GetFeatureCurrentValue(EnchantingFeature.Enchant);
             var highValueBonus = float.IsNaN(featureValues.Item1) ? 0 : featureValues.Item1;
             var midValueBonus = float.IsNaN(featureValues.Item2) ? 0 : featureValues.Item2;
 
-            var effectCountWeights = LootRoller.GetEffectCountsPerRarity(rarity, ItemQuality.Normal, true);
+            var effectCountWeights = LootRoller.GetEffectCountsPerRarity(rarity, quality, true);
             float totalWeight = effectCountWeights.Sum(x => x.Value);
             for (var index = 0; index < effectCountWeights.Count; index++)
             {
@@ -400,7 +418,23 @@ namespace EpicLoot.CraftingV2
 
         private static List<InventoryItemListElement> GetEnchantCost(ItemDrop.ItemData item, MagicRarityUnity _rarity)
         {
-            return EnchantHelper.GetEnchantCosts(item, (ItemRarity)_rarity).Select(entry =>
+            var quality = ItemQuality.Normal;
+            var player = Player.m_localPlayer;
+            var eliteKey = "EpicLoot_PlayerSeen_" + item.m_shared.m_name + ItemQuality.Elite;
+            if (player.m_customData.ContainsKey(eliteKey))
+            {
+                quality = ItemQuality.Elite;
+            }
+            else
+            {
+                var exceptionalKey = "EpicLoot_PlayerSeen_" + item.m_shared.m_name + ItemQuality.Exceptional;
+                if (player.m_customData.ContainsKey(exceptionalKey))
+                {
+                    quality = ItemQuality.Exceptional;
+                }
+            }
+
+            return EnchantHelper.GetEnchantCosts(item, (ItemRarity)_rarity, quality).Select(entry =>
             {
                 var itemData = entry.Key.m_itemData.Clone();
                 itemData.m_dropPrefab = entry.Key.gameObject;
@@ -411,14 +445,28 @@ namespace EpicLoot.CraftingV2
 
         private static GameObject EnchantItemAndReturnSuccessDialog(ItemDrop.ItemData item, MagicRarityUnity rarity)
         {
+            var quality = ItemQuality.Normal;
             var player = Player.m_localPlayer;
-  
+            var eliteKey = "EpicLoot_PlayerSeen_" + item.m_shared.m_name + ItemQuality.Elite;
+            if (player.m_customData.ContainsKey(eliteKey))
+            {
+                quality = ItemQuality.Elite;
+            }
+            else
+            {
+                var exceptionalKey = "EpicLoot_PlayerSeen_" + item.m_shared.m_name + ItemQuality.Exceptional;
+                if (player.m_customData.ContainsKey(exceptionalKey))
+                {
+                    quality = ItemQuality.Exceptional;
+                }
+            }
+
             float previousDurabilityPercent = 0;
             if (item.m_shared.m_useDurability)
                 previousDurabilityPercent = item.m_durability / item.GetMaxDurability();
 
             var luckFactor = player.GetTotalActiveMagicEffectValue(MagicEffectType.Luck, 0.01f);
-            var magicItem = LootRoller.RollMagicItem((ItemRarity)rarity, ItemQuality.Normal, item, luckFactor);
+            var magicItem = LootRoller.RollMagicItem((ItemRarity)rarity, quality, item, luckFactor);
 
             var magicItemComponent = item.Data().GetOrCreate<MagicItemComponent>();
             magicItemComponent.SetMagicItem(magicItem);
