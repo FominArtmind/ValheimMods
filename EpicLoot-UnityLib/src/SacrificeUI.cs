@@ -50,7 +50,7 @@ namespace EpicLoot_UnityLib
 
             foreach (var selectedItem in selectedItems)
             {
-                InventoryManagement.Instance.RemoveItem(selectedItem.Item1.GetItem().m_shared.m_name, selectedItem.Item2);
+                InventoryManagement.Instance.RemoveExactItem(selectedItem.Item1.GetItem(), selectedItem.Item2);
             }
 
             GiveItemsToPlayer(sacrificeProducts);

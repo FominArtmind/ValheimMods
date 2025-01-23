@@ -241,8 +241,7 @@ namespace EpicLoot_UnityLib
 
                         foreach (var costElement in cost)
                         {
-                            var costItem = costElement.GetItem();
-                            InventoryManagement.Instance.RemoveItem(costItem.m_shared.m_name, costItem.m_stack);
+                            InventoryManagement.Instance.RemoveItem(costElement.GetItem());
                         }
                     }
 

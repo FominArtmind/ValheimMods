@@ -166,6 +166,13 @@ public class InventoryManagement
             itemDrop.m_itemData.m_stack, itemDrop.m_itemData.GetIcon());
     }
 
+    public void RemoveExactItem(ItemDrop.ItemData item, int amount)
+    {
+        Inventory inventory = GetInventory();
+
+        inventory.RemoveItem(item, amount);
+    }
+
     public void RemoveItem(ItemDrop.ItemData item)
     {
         RemoveItem(item.m_shared.m_name, item.m_stack);
