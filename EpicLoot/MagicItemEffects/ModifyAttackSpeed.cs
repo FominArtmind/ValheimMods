@@ -8,25 +8,17 @@ namespace EpicLoot.MagicItemEffects
     {
         public static double ModifyAttackSpeed(Character character, double speed)
         {
-            if (character is not Player player || !player.InAttack())
+            if (character is Player player && player.InAttack() && player.m_currentAttack != null)
             {
-                return speed;
+                double bonus = 0.0;
+                
+                ModifyWithLowHealth.Apply(player, MagicEffectType.ModifyAttackSpeed, effect =>
+                {
+                    bonus += player.GetTotalActiveMagicEffectValue(effect, 0.01f);
+                });
+
+                speed *= (1.0 + bonus);
             }
-
-            var currentAttack = player.m_currentAttack;
-            if (currentAttack == null)
-            {
-                return speed;
-            }
-
-            double bonus = 0.0;
-            
-            ModifyWithLowHealth.Apply(player, MagicEffectType.ModifyAttackSpeed, effect =>
-            {
-                bonus += player.GetTotalActiveMagicEffectValue(effect, 0.01f);
-            });
-
-            speed *= (1.0 + bonus);
 
             return speed;
         }

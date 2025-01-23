@@ -128,7 +128,6 @@
     <Compile Include="Adventure\BountyManagmentSystem.cs" />
     <Compile Include="Adventure\Feature\Bosses.cs" />
     <Compile Include="Adventure\Feature\BountyLedger.cs" />
-    <Compile Include="Adventure\Game_Patch.cs" />
     <Compile Include="Adventure\MinimapController.cs" />
     <Compile Include="Attack_Patch.cs" />
     <Compile Include="LootFilter.cs" />
