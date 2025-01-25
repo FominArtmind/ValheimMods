@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading;
+using System.Threading;
 using AdventureBackpacks.API;
 using BepInEx;
 using BepInEx.Configuration;
@@ -99,7 +100,7 @@ namespace EpicLoot
     {
         public const string PluginId = "randyknapp.mods.epicloot";
         public const string DisplayName = "Epic Loot";
-        public const string Version = "0.9.38";
+        public const string Version = "0.9.39";
 
         private readonly ConfigSync _configSync = new ConfigSync(PluginId) { DisplayName = DisplayName, CurrentVersion = Version, MinimumRequiredVersion = "0.9.35" };
 
@@ -108,14 +109,12 @@ namespace EpicLoot
         private static ConfigEntry<string> _rareRarityColor;
         private static ConfigEntry<string> _epicRarityColor;
         private static ConfigEntry<string> _legendaryRarityColor;
-        // TODO: Mythic Hookup
-        //private static ConfigEntry<string> _mythicRarityColor;
+        private static ConfigEntry<string> _mythicRarityColor;
         private static ConfigEntry<int> _magicMaterialIconColor;
         private static ConfigEntry<int> _rareMaterialIconColor;
         private static ConfigEntry<int> _epicMaterialIconColor;
         private static ConfigEntry<int> _legendaryMaterialIconColor;
-        // TODO: Mythic Hookup
-        //private static ConfigEntry<int> _mythicMaterialIconColor;
+        private static ConfigEntry<int> _mythicMaterialIconColor;
         public static ConfigEntry<bool> UseScrollingCraftDescription;
         public static ConfigEntry<bool> TransferMagicItemToCrafts;
         public static ConfigEntry<EffectValueRollDistributionTypes> EffectValueRollDistribution;
@@ -213,24 +212,68 @@ namespace EpicLoot
         {
             _instance = this;
 
-            _magicRarityColor = Config.Bind("Item Colors", "Magic Rarity Color", "Blue", "The color of Magic rarity items, the lowest magic item tier. (Optional, use an HTML hex color starting with # to have a custom color.) Available options: Red, Orange, Yellow, Green, Teal, Blue, Indigo, Purple, Pink, Gray");
-            _magicMaterialIconColor = Config.Bind("Item Colors", "Magic Crafting Material Icon Index", 5, "Indicates the color of the icon used for magic crafting materials. A number between 0 and 9. Available options: 0=Red, 1=Orange, 2=Yellow, 3=Green, 4=Teal, 5=Blue, 6=Indigo, 7=Purple, 8=Pink, 9=Gray");
-            _rareRarityColor = Config.Bind("Item Colors", "Rare Rarity Color", "Yellow", "The color of Rare rarity items, the second magic item tier. (Optional, use an HTML hex color starting with # to have a custom color.) Available options: Red, Orange, Yellow, Green, Teal, Blue, Indigo, Purple, Pink, Gray");
-            _rareMaterialIconColor = Config.Bind("Item Colors", "Rare Crafting Material Icon Index", 2, "Indicates the color of the icon used for rare crafting materials. A number between 0 and 9. Available options: 0=Red, 1=Orange, 2=Yellow, 3=Green, 4=Teal, 5=Blue, 6=Indigo, 7=Purple, 8=Pink, 9=Gray");
-            _epicRarityColor = Config.Bind("Item Colors", "Epic Rarity Color", "Purple", "The color of Epic rarity items, the third magic item tier. (Optional, use an HTML hex color starting with # to have a custom color.) Available options: Red, Orange, Yellow, Green, Teal, Blue, Indigo, Purple, Pink, Gray");
-            _epicMaterialIconColor = Config.Bind("Item Colors", "Epic Crafting Material Icon Index", 7, "Indicates the color of the icon used for epic crafting materials. A number between 0 and 9. Available options: 0=Red, 1=Orange, 2=Yellow, 3=Green, 4=Teal, 5=Blue, 6=Indigo, 7=Purple, 8=Pink, 9=Gray");
-            _legendaryRarityColor = Config.Bind("Item Colors", "Legendary Rarity Color", "Teal", "The color of Legendary rarity items, the highest magic item tier. (Optional, use an HTML hex color starting with # to have a custom color.) Available options: Red, Orange, Yellow, Green, Teal, Blue, Indigo, Purple, Pink, Gray");
-            _legendaryMaterialIconColor = Config.Bind("Item Colors", "Legendary Crafting Material Icon Index", 4, "Indicates the color of the icon used for legendary crafting materials. A number between 0 and 9. Available options: 0=Red, 1=Orange, 2=Yellow, 3=Green, 4=Teal, 5=Blue, 6=Indigo, 7=Purple, 8=Pink, 9=Gray");
-            // TODO: Mythic hookup
-            //_mythicRarityColor = Config.Bind("Item Colors", "Mythic Rarity Color", "Orange", "The color of Legendary rarity items, the highest magic item tier. (Optional, use an HTML hex color starting with # to have a custom color.) Available options: Red, Orange, Yellow, Green, Teal, Blue, Indigo, Purple, Pink, Gray");
-            //_mythicMaterialIconColor = Config.Bind("Item Colors", "Mythic Crafting Material Icon Index", 1, "Indicates the color of the icon used for legendary crafting materials. A number between 0 and 9. Available options: 0=Red, 1=Orange, 2=Yellow, 3=Green, 4=Teal, 5=Blue, 6=Indigo, 7=Purple, 8=Pink, 9=Gray");
-            _setItemColor = Config.Bind("Item Colors", "Set Item Color", "#26ffff", "The color of set item text and the set item icon. Use a hex color, default is cyan");
-            UseScrollingCraftDescription = Config.Bind("Crafting UI", "Use Scrolling Craft Description", true, "Changes the item description in the crafting panel to scroll instead of scale when it gets too long for the space.");
-            CraftingTabStyle = Config.Bind("Crafting UI", "Crafting Tab Style", Crafting.CraftingTabStyle.HorizontalSquish, "Sets the layout style for crafting tabs, if you've got too many. Horizontal is the vanilla method, but might overlap other mods or run off the screen. HorizontalSquish makes the buttons narrower, works okay with 6 or 7 buttons. Vertical puts the tabs in a column to the left the crafting window. Angled tries to make more room at the top of the crafting panel by angling the tabs, works okay with 6 or 7 tabs.");
-            ShowEquippedAndHotbarItemsInSacrificeTab = Config.Bind("Crafting UI", "ShowEquippedAndHotbarItemsInSacrificeTab", false, "If set to false, hides the items that are equipped or on your hotbar in the Sacrifice items list.");
+            // Item Colors
+            _magicRarityColor = Config.Bind("Item Colors", "Magic Rarity Color", "Blue",
+                "The color of Magic rarity items, the lowest magic item tier. " +
+                "(Optional, use an HTML hex color starting with # to have a custom color.) " +
+                "Available options: Red, Orange, Yellow, Green, Teal, Blue, Indigo, Purple, Pink, Gray");
+            _magicMaterialIconColor = Config.Bind("Item Colors", "Magic Crafting Material Icon Index", 5,
+                "Indicates the color of the icon used for magic crafting materials. A number between 0 and 9. " +
+                "Available options: 0=Red, 1=Orange, 2=Yellow, 3=Green, 4=Teal, 5=Blue, 6=Indigo, 7=Purple, 8=Pink, 9=Gray");
+            _rareRarityColor = Config.Bind("Item Colors", "Rare Rarity Color", "Yellow",
+                "The color of Rare rarity items, the second magic item tier. " +
+                "(Optional, use an HTML hex color starting with # to have a custom color.) " +
+                "Available options: Red, Orange, Yellow, Green, Teal, Blue, Indigo, Purple, Pink, Gray");
+            _rareMaterialIconColor = Config.Bind("Item Colors", "Rare Crafting Material Icon Index", 2,
+                "Indicates the color of the icon used for rare crafting materials. A number between 0 and 9. " +
+                "Available options: 0=Red, 1=Orange, 2=Yellow, 3=Green, 4=Teal, 5=Blue, 6=Indigo, 7=Purple, 8=Pink, 9=Gray");
+            _epicRarityColor = Config.Bind("Item Colors", "Epic Rarity Color", "Purple",
+                "The color of Epic rarity items, the third magic item tier. " +
+                "(Optional, use an HTML hex color starting with # to have a custom color.) " +
+                "Available options: Red, Orange, Yellow, Green, Teal, Blue, Indigo, Purple, Pink, Gray");
+            _epicMaterialIconColor = Config.Bind("Item Colors", "Epic Crafting Material Icon Index", 7,
+                "Indicates the color of the icon used for epic crafting materials. A number between 0 and 9. " +
+                "Available options: 0=Red, 1=Orange, 2=Yellow, 3=Green, 4=Teal, 5=Blue, 6=Indigo, 7=Purple, 8=Pink, 9=Gray");
+            _legendaryRarityColor = Config.Bind("Item Colors", "Legendary Rarity Color", "Teal",
+                "The color of Legendary rarity items, the fourth magic item tier. " +
+                "(Optional, use an HTML hex color starting with # to have a custom color.) " +
+                "Available options: Red, Orange, Yellow, Green, Teal, Blue, Indigo, Purple, Pink, Gray");
+            _legendaryMaterialIconColor = Config.Bind("Item Colors", "Legendary Crafting Material Icon Index", 4, 
+                "Indicates the color of the icon used for legendary crafting materials. A number between 0 and 9. " +
+                "Available options: 0=Red, 1=Orange, 2=Yellow, 3=Green, 4=Teal, 5=Blue, 6=Indigo, 7=Purple, 8=Pink, 9=Gray");
+            _mythicRarityColor = Config.Bind("Item Colors", "Mythic Rarity Color", "Orange",
+                "The color of Mythic rarity items, the highest magic item tier. " +
+                "(Optional, use an HTML hex color starting with # to have a custom color.) " +
+                "Available options: Red, Orange, Yellow, Green, Teal, Blue, Indigo, Purple, Pink, Gray");
+            _mythicMaterialIconColor = Config.Bind("Item Colors", "Mythic Crafting Material Icon Index", 1,
+                "Indicates the color of the icon used for legendary crafting materials. A number between 0 and 9. " +
+                "Available options: 0=Red, 1=Orange, 2=Yellow, 3=Green, 4=Teal, 5=Blue, 6=Indigo, 7=Purple, 8=Pink, 9=Gray");
+            _setItemColor = Config.Bind("Item Colors", "Set Item Color", "#26ffff",
+                "The color of set item text and the set item icon. Use a hex color, default is cyan");
+            
+            // Crafting UI
+            UseScrollingCraftDescription = Config.Bind("Crafting UI", "Use Scrolling Craft Description", true,
+                "Changes the item description in the crafting panel to scroll instead of scale when it gets too " +
+                "long for the space.");
+            CraftingTabStyle = Config.Bind("Crafting UI", "Crafting Tab Style", Crafting.CraftingTabStyle.HorizontalSquish,
+                "Sets the layout style for crafting tabs, if you've got too many. " +
+                "Horizontal is the vanilla method, but might overlap other mods or run off the screen. " +
+                "HorizontalSquish makes the buttons narrower, works okay with 6 or 7 buttons. " +
+                "Vertical puts the tabs in a column to the left the crafting window. " +
+                "Angled tries to make more room at the top of the crafting panel by angling the tabs, " +
+                "works okay with 6 or 7 tabs.");
+            ShowEquippedAndHotbarItemsInSacrificeTab = Config.Bind("Crafting UI",
+                "ShowEquippedAndHotbarItemsInSacrificeTab", false,
+                "If set to false, hides the items that are equipped or on your hotbar in the Sacrifice items list.");
+            
+            // Logging
             _loggingEnabled = Config.Bind("Logging", "Logging Enabled", false, "Enable logging");
             _logLevel = Config.Bind("Logging", "Log Level", LogLevel.Info, "Only log messages of the selected level or higher");
+
+            // General
             UseGeneratedMagicItemNames = Config.Bind("General", "Use Generated Magic Item Names", true, "If true, magic items uses special, randomly generated names based on their rarity, type, and magic effects.");
+            
+            // Balance
             _gatedItemTypeModeConfig = SyncedConfig("Balance", "Item Drop Limits", GatedItemTypeMode.BossKillUnlocksCurrentBiomeItems, "Sets how the drop system limits what item types can drop. Unlimited: no limits, exactly what's in the loot table will drop. BossKillUnlocksCurrentBiomeItems: items will drop for the current biome if the that biome's boss has been killed (Leather gear will drop once Eikthyr is killed). BossKillUnlocksNextBiomeItems: items will only drop for the current biome if the previous biome's boss is killed (Bronze gear will drop once Eikthyr is killed). PlayerMustKnowRecipe: (local world only) the item can drop if the player can craft it. PlayerMustHaveCraftedItem: (local world only) the item can drop if the player has already crafted it or otherwise picked it up. If an item type cannot drop, it will be converted into materials.");
             AllowItemDropLimitsExceptions = SyncedConfig("Balance", "Allow Item Drop Limits Exceptions", false, "Allows specific items (configured in loottables.json) to be dropped even if not permitted by current Item Drop Limits mode");
             BossBountyMode = SyncedConfig("Balance", "Gated Bounty Mode", GatedBountyMode.Unlimited, "Sets whether available bounties are ungated or gated by boss kills.");
@@ -251,9 +294,11 @@ namespace EpicLoot
             EffectValueRollDistribution = SyncedConfig("Balance", "Effect Value Roll Distribution", EffectValueRollDistributionTypes.Linear, "Function to be used for rolling effect values on an item. Linear: any number in the possible effect value range can be rolled with equal chance. TendsToLowAverage: values close to min and especially max of the range are very unlikely to be rolled. Default: Linear.");
             UseLootFilters = SyncedConfig("Balance", "Use Loot Filters", false, "If set to true, all item drop will be affected by loot filters (defined in lootfilters.json). Loot filters allow to prevent dropping of the items you don't need anymore or auto sacrifice the unneeded items into materials on drop.");
 
+            // Debug
             AlwaysShowWelcomeMessage = Config.Bind("Debug", "AlwaysShowWelcomeMessage", false, "Just a debug flag for testing the welcome message, do not use.");
             OutputPatchedConfigFiles = Config.Bind("Debug", "OutputPatchedConfigFiles", false, "Just a debug flag for testing the patching system, do not use.");
 
+            // Abilities
             AbilityKeyCodes[0] = Config.Bind("Abilities", "Ability Hotkey 1", "g", "Hotkey for Ability Slot 1.");
             AbilityKeyCodes[1] = Config.Bind("Abilities", "Ability Hotkey 2", "h", "Hotkey for Ability Slot 2.");
             AbilityKeyCodes[2] = Config.Bind("Abilities", "Ability Hotkey 3", "j", "Hotkey for Ability Slot 3.");
@@ -262,12 +307,12 @@ namespace EpicLoot
             AbilityBarLayoutAlignment = Config.Bind("Abilities", "Ability Bar Layout Alignment", TextAnchor.LowerLeft, "The Ability Bar is a Horizontal Layout Group. This value indicates how the elements inside are aligned. Choices with 'Center' in them will keep the items centered on the bar, even if there are fewer than the maximum allowed. 'Left' will be left aligned, and similar for 'Right'.");
             AbilityBarIconSpacing = Config.Bind("Abilities", "Ability Bar Icon Spacing", 8.0f, "The number of units between the icons on the ability bar.");
 
-            //Enchanting Table
+            // Enchanting Table
             EnchantingTableUpgradesActive = SyncedConfig("Enchanting Table", "Upgrades Active", true, "Toggles Enchanting Table Upgrade Capabilities. If false, enchanting table features will be unlocked set to Level 1");
             EnchantingTableActivatedTabs = SyncedConfig("Enchanting Table", $"Table Features Active", EnchantingTabs.Sacrifice | EnchantingTabs.Augment | EnchantingTabs.Enchant | EnchantingTabs.Disenchant | EnchantingTabs.Upgrade | EnchantingTabs.ConvertMaterials, $"Toggles Enchanting Table Feature on and off completely.");
             EnchantingTableAlternativeDisenchantCosts = SyncedConfig("Enchanting Table", "Alternative Disenchant Costs", false, "If set to true, disenchant costs will scale based on the resulting item, not on its initial rarity");
 
-            //Limiting Bounties
+            // Bounty Management
             EnableLimitedBountiesInProgress = SyncedConfig("Bounty Management", "Enable Bounty Limit", false, "Toggles limiting bounties. Players unable to purchase if enabled and maximum bounty in-progress count is met");
             MaxInProgressBounties = SyncedConfig("Bounty Management", "Max Bounties Per Player", 5, "Max amount of in-progress bounties allowed per player.");
             
@@ -590,34 +635,6 @@ namespace EpicLoot
         {
             _instance.Logger.LogError(message);
         }
-
-        /*private void Update()
-        {
-            PointerEventData pointerData = new PointerEventData(EventSystem.current)
-            {
-                position = Input.mousePosition
-            };
-
-            List<RaycastResult> results = new List<RaycastResult>();
-            EventSystem.current.RaycastAll(pointerData, results);
-
-            EpicLoot.LogWarning("== Objects under cursor: ==");
-            if (Input.GetKeyDown(KeyCode.I))
-            {
-                results.ForEach((result) => {
-                    EpicLoot.Log($"- {result.gameObject.name} ({result.gameObject.transform.parent.name})");
-                });
-            }
-        }*/
-
-        /*[UsedImplicitly]
-        private void Update()
-        {
-            if (Input.GetKey(KeyCode.RightControl) && Input.GetKeyDown(KeyCode.Backspace))
-            {
-                Time.timeScale = Time.timeScale == 0 ? 1 : 0;
-            }
-        }*/
 
         private void LoadAssets()
         {
@@ -1340,7 +1357,7 @@ namespace EpicLoot
             t.AppendLine(GetMagicEffectCountTableLine(ItemRarity.Rare));
             t.AppendLine(GetMagicEffectCountTableLine(ItemRarity.Epic));
             t.AppendLine(GetMagicEffectCountTableLine(ItemRarity.Legendary));
-            //t.AppendLine(GetMagicEffectCountTableLine(ItemRarity.Mythic));
+            t.AppendLine(GetMagicEffectCountTableLine(ItemRarity.Mythic));
             t.AppendLine();
 
             var rarities = new List<ItemRarity>();
@@ -1446,6 +1463,11 @@ namespace EpicLoot
                         var v = def.ValuesPerRarity.Legendary;
                         t.AppendLine($"> |Legendary|{v.MinValue}|{v.MaxValue}|{v.Increment}|");
                     }
+                    if (def.ValuesPerRarity.Mythic != null)
+                    {
+                        var v = def.ValuesPerRarity.Legendary;
+                        t.AppendLine($"> |Mythic|{v.MinValue}|{v.MaxValue}|{v.Increment}|");
+                    }
                 }
                 if (!string.IsNullOrEmpty(def.Comment))
                 {
@@ -1543,8 +1565,8 @@ namespace EpicLoot
         private static void WriteLootList(StringBuilder t, int level, LootDrop[] lootList)
         {
             var levelDisplay = level > 0 ? $" (lvl {level})" : "";
-            t.AppendLine($"> | Items{levelDisplay} | Weight (Chance) | Magic | Rare | Epic | Legendary |");
-            t.AppendLine("> | -- | -- | -- | -- | -- | -- |");
+            t.AppendLine($"> | Items{levelDisplay} | Weight (Chance) | Magic | Rare | Epic | Legendary | Mythic |");
+            t.AppendLine("> | -- | -- | -- | -- | -- | -- | -- |");
 
             float totalLootWeight = lootList.Sum(x => x.Weight);
             foreach (var lootDrop in lootList)
@@ -1552,7 +1574,8 @@ namespace EpicLoot
                 var percentChance = lootDrop.Weight / totalLootWeight * 100;
                 if (lootDrop.Rarity == null || lootDrop.Rarity.Length == 0)
                 {
-                    t.AppendLine($"> | {lootDrop.Item} | {lootDrop.Weight} ({percentChance:0.#}%) | 1 (100%) | 0 (0%) | 0 (0%) | 0 (0%) |");
+                    t.AppendLine($"> | {lootDrop.Item} | {lootDrop.Weight} ({percentChance:0.#}%) | " +
+                        $"1 (100%) | 0 (0%) | 0 (0%) | 0 (0%) | 0 (0%) |");
                     continue;
                 }
 
@@ -1563,12 +1586,14 @@ namespace EpicLoot
                     lootDrop.Rarity[1] / rarityTotal * 100,
                     lootDrop.Rarity[2] / rarityTotal * 100,
                     lootDrop.Rarity[3] / rarityTotal * 100,
+                    lootDrop.Rarity[4] / rarityTotal * 100
                 };
                 t.AppendLine($"> | {lootDrop.Item} | {lootDrop.Weight} ({percentChance:0.#}%) " +
                              $"| {lootDrop.Rarity[0]} ({rarityPercent[0]:0.#}%) " +
                              $"| {lootDrop.Rarity[1]} ({rarityPercent[1]:0.#}%) " +
                              $"| {lootDrop.Rarity[2]:0.#} ({rarityPercent[2]:0.#}%) " +
-                             $"| {lootDrop.Rarity[3]} ({rarityPercent[3]:0.#}%) |");
+                             $"| {lootDrop.Rarity[3]} ({rarityPercent[3]:0.#}%) |" +
+                             $"| {lootDrop.Rarity[4]} ({rarityPercent[4]:0.#}%) |");
             }
 
             t.AppendLine();
@@ -1579,7 +1604,7 @@ namespace EpicLoot
             var effectCounts = LootRoller.GetEffectCountsPerRarity(rarity, ItemQuality.Normal, false);
             float total = effectCounts.Sum(x => x.Value);
             var result = $"|{rarity}|";
-            for (var i = 1; i <= 6; ++i)
+            for (var i = 1; i <= 7; ++i)
             {
                 var valueString = " ";
                 var i1 = i;
@@ -1631,8 +1656,7 @@ namespace EpicLoot
                 case ItemRarity.Legendary:
                     return GetColor(_legendaryRarityColor.Value);
                 case ItemRarity.Mythic:
-                    // TODO: Mythic Hookup
-                    return GetColor("Orange"/*_mythicRarityColor.Value*/);
+                    return GetColor(_mythicRarityColor.Value);
                 default:
                     return "#FFFFFF";
             }
@@ -1673,8 +1697,7 @@ namespace EpicLoot
                 case ItemRarity.Legendary:
                     return Mathf.Clamp(_legendaryMaterialIconColor.Value, 0, 9);
                 case ItemRarity.Mythic:
-                    // TODO: Mythic Hookup
-                    return 1; //Mathf.Clamp(_mythicMaterialIconColor.Value, 0, 9);
+                    return Mathf.Clamp(_mythicMaterialIconColor.Value, 0, 9);
                 default:
                     throw new ArgumentOutOfRangeException(nameof(rarity), rarity, null);
             }
