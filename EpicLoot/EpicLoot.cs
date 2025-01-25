@@ -100,9 +100,9 @@ namespace EpicLoot
     {
         public const string PluginId = "randyknapp.mods.epicloot";
         public const string DisplayName = "Epic Loot";
-        public const string Version = "0.10.2";
+        public const string Version = "0.10.3";
 
-        private readonly ConfigSync _configSync = new ConfigSync(PluginId) { DisplayName = DisplayName, CurrentVersion = Version, MinimumRequiredVersion = "0.9.35" };
+        private readonly ConfigSync _configSync = new ConfigSync(PluginId) { DisplayName = DisplayName, CurrentVersion = Version, MinimumRequiredVersion = "0.10.0" };
 
         private static ConfigEntry<string> _setItemColor;
         private static ConfigEntry<string> _magicRarityColor;
@@ -126,6 +126,7 @@ namespace EpicLoot
         private static ConfigEntry<GatedItemTypeMode> _gatedItemTypeModeConfig;
         public static ConfigEntry<bool> AllowItemDropLimitsExceptions;
         public static ConfigEntry<GatedBountyMode> BossBountyMode;
+        public static ConfigEntry<GatedPieceTypeMode> GatedFreebuildMode;
         private static ConfigEntry<BossDropMode> _bossTrophyDropMode;
         private static ConfigEntry<float> _bossTrophyDropPlayerRange;
         private static ConfigEntry<int> _andvaranautRange;
@@ -277,6 +278,7 @@ namespace EpicLoot
             _gatedItemTypeModeConfig = SyncedConfig("Balance", "Item Drop Limits", GatedItemTypeMode.BossKillUnlocksCurrentBiomeItems, "Sets how the drop system limits what item types can drop. Unlimited: no limits, exactly what's in the loot table will drop. BossKillUnlocksCurrentBiomeItems: items will drop for the current biome if the that biome's boss has been killed (Leather gear will drop once Eikthyr is killed). BossKillUnlocksNextBiomeItems: items will only drop for the current biome if the previous biome's boss is killed (Bronze gear will drop once Eikthyr is killed). PlayerMustKnowRecipe: (local world only) the item can drop if the player can craft it. PlayerMustHaveCraftedItem: (local world only) the item can drop if the player has already crafted it or otherwise picked it up. If an item type cannot drop, it will be converted into materials.");
             AllowItemDropLimitsExceptions = SyncedConfig("Balance", "Allow Item Drop Limits Exceptions", false, "Allows specific items (configured in loottables.json) to be dropped even if not permitted by current Item Drop Limits mode");
             BossBountyMode = SyncedConfig("Balance", "Gated Bounty Mode", GatedBountyMode.Unlimited, "Sets whether available bounties are ungated or gated by boss kills.");
+            GatedFreebuildMode = Config.Bind("Balance", "Gated Freebuild Mode", GatedPieceTypeMode.BossKillUnlocksCurrentBiomePieces, "Sets whether available pieces for the Freebuild effect are ungated or gated by boss kills.");
             _bossTrophyDropMode = SyncedConfig("Balance", "Boss Trophy Drop Mode", BossDropMode.OnePerPlayerNearBoss, "Sets bosses to drop a number of trophies equal to the number of players. Optionally set it to only include players within a certain distance, use 'Boss Trophy Drop Player Range' to set the range.");
             _bossTrophyDropPlayerRange = SyncedConfig("Balance", "Boss Trophy Drop Player Range", 100.0f, "Sets the range that bosses check when dropping multiple trophies using the OnePerPlayerNearBoss drop mode.");
             _bossCryptKeyDropMode = SyncedConfig("Balance", "Crypt Key Drop Mode", BossDropMode.OnePerPlayerNearBoss, "Sets bosses to drop a number of crypt keys equal to the number of players. Optionally set it to only include players within a certain distance, use 'Crypt Key Drop Player Range' to set the range.");
