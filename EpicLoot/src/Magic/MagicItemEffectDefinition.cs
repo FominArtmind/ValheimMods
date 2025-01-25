@@ -17,6 +17,7 @@ namespace EpicLoot
         public bool NoRoll;
         public bool ExclusiveSelf = true;
         public List<string> ExclusiveEffectTypes = new List<string>();
+        public List<string> MustHaveEffectTypes = new List<string>();
         public List<string> AllowedItemTypes = new List<string>();
         public List<string> ExcludedItemTypes = new List<string>();
         public List<ItemRarity> AllowedRarities = new List<ItemRarity>();
@@ -64,6 +65,11 @@ namespace EpicLoot
             if (ExclusiveEffectTypes != null && ExclusiveEffectTypes.Count > 0)
             {
                 _sb.AppendLine($"> > **ExclusiveEffectTypes:** `{string.Join(", ", ExclusiveEffectTypes)}`");
+            }
+
+            if (MustHaveEffectTypes != null && MustHaveEffectTypes.Count > 0)
+            {
+                _sb.AppendLine($"> > **MustHaveEffectTypes:** `{string.Join(", ", MustHaveEffectTypes)}`");
             }
 
             if (AllowedItemTypes != null && AllowedItemTypes.Count > 0)
@@ -125,7 +131,8 @@ namespace EpicLoot
             if (AllowedByItemInfoType(itemData))
                 return true;
 
-            var itemIsStaff = itemData.m_shared.m_itemType == ItemDrop.ItemData.ItemType.TwoHandedWeapon && itemData.m_shared.m_animationState == ItemDrop.ItemData.AnimationState.Staves;
+            var itemIsStaff = itemData.m_shared.m_skillType == Skills.SkillType.BloodMagic ||
+                itemData.m_shared.m_skillType == Skills.SkillType.ElementalMagic;
             if (itemIsStaff && AllowedItemTypes.Contains("Staff"))
                 return true;
 
@@ -154,7 +161,8 @@ namespace EpicLoot
             if (ExcludedByItemInfoType(itemData))
                 return false;
 
-            var itemIsStaff = itemData.m_shared.m_itemType == ItemDrop.ItemData.ItemType.TwoHandedWeapon && itemData.m_shared.m_animationState == ItemDrop.ItemData.AnimationState.Staves;
+            var itemIsStaff = itemData.m_shared.m_skillType == Skills.SkillType.BloodMagic ||
+                itemData.m_shared.m_skillType == Skills.SkillType.ElementalMagic;
             if (itemIsStaff && ExcludedItemTypes.Contains("Staff"))
                 return true;
 
@@ -187,6 +195,26 @@ namespace EpicLoot
             if (ExclusiveEffectTypes?.Count > 0 && magicItem.HasAnyEffect(ExclusiveEffectTypes))
             {
                 return false;
+            }
+
+            if (MustHaveEffectTypes?.Count > 0)
+            {
+                foreach(var effect in MustHaveEffectTypes)
+                {
+                    if (effect.Equals("Throwable", StringComparison.InvariantCultureIgnoreCase) &&
+                        itemData.m_shared.m_skillType == Skills.SkillType.Spears)
+                    {
+                        continue;
+                    }
+                    else if (magicItem.HasEffect(effect))
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
             }
 
             if (!AllowByItemType(itemData))
@@ -371,9 +399,7 @@ namespace EpicLoot
                     case ItemRarity.Rare: return ValueForQuality(normal?.Rare, exceptional?.Rare, elite?.Rare);
                     case ItemRarity.Epic: return ValueForQuality(normal?.Epic, exceptional?.Epic, elite?.Epic);
                     case ItemRarity.Legendary: return ValueForQuality(normal?.Legendary, exceptional?.Legendary, elite?.Legendary);
-                    case ItemRarity.Mythic:
-                        // TODO: Mythic Hookup
-                        return null;//ValuesPerRarity.Mythic;
+                    case ItemRarity.Mythic: return ValueForQuality(normal?.Mythic, exceptional?.Mythic, elite?.Mythic);
                     default:
                         throw new ArgumentOutOfRangeException(nameof(itemRarity), itemRarity, null);
                 }

@@ -307,9 +307,9 @@ namespace EpicLoot
             if (itemData.IsMagic())
             {
                 var magicItem = itemData.GetMagicItem();
-                if (magicItem.IsUniqueLegendary() && UniqueLegendaryHelper.TryGetLegendaryInfo(magicItem.LegendaryID, out var legendaryInfo))
+                if (magicItem.IsUniqueLegendary() && UniqueLegendaryHelper.TryGetLegendaryInfo(magicItem.LegendaryID, out var itemInfo))
                 {
-                    return legendaryInfo.Description;
+                    return itemInfo.Description;
                 }
             }
             return itemData.m_shared.m_description;
@@ -354,7 +354,7 @@ namespace EpicLoot
 
         public static LegendarySetInfo GetLegendarySetInfo(this ItemDrop.ItemData itemData)
         {
-            UniqueLegendaryHelper.TryGetLegendarySetInfo(itemData.GetSetID(), out var setInfo);
+            UniqueLegendaryHelper.TryGetLegendarySetInfo(itemData.GetSetID(), out var setInfo, out ItemRarity rarity);
             return setInfo;
         }
 
@@ -382,7 +382,7 @@ namespace EpicLoot
                 {
                     return itemData.m_shared.m_setSize;
                 }
-                else if (UniqueLegendaryHelper.TryGetLegendarySetInfo(setID, out var setInfo))
+                else if (UniqueLegendaryHelper.TryGetLegendarySetInfo(setID, out var setInfo, out ItemRarity rarity))
                 {
                     return setInfo.LegendaryIDs.Count;
                 }
@@ -393,7 +393,7 @@ namespace EpicLoot
 
         public static List<string> GetSetPieces(string setName)
         {
-            if (UniqueLegendaryHelper.TryGetLegendarySetInfo(setName, out var setInfo))
+            if (UniqueLegendaryHelper.TryGetLegendarySetInfo(setName, out var setInfo, out ItemRarity rarity))
             {
                 return setInfo.LegendaryIDs;
             }
@@ -543,9 +543,9 @@ namespace EpicLoot
             {
                 return setItemName;
             }
-            else if (UniqueLegendaryHelper.TryGetLegendaryInfo(setItemName, out var legendaryInfo))
+            else if (UniqueLegendaryHelper.TryGetLegendaryInfo(setItemName, out var itemInfo))
             {
-                return legendaryInfo.Name;
+                return itemInfo.Name;
             }
 
             return setItemName;
@@ -713,7 +713,7 @@ namespace EpicLoot
             {
                 if (itemData.IsMagic(out var magicItem) && magicItem.IsLegendarySetItem())
                 {
-                    if (UniqueLegendaryHelper.TryGetLegendarySetInfo(magicItem.SetID, out var setInfo))
+                    if (UniqueLegendaryHelper.TryGetLegendarySetInfo(magicItem.SetID, out var setInfo, out ItemRarity rarity))
                     {
                         sets.Add(setInfo);
                     }

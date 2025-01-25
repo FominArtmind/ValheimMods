@@ -757,7 +757,8 @@ namespace EpicLoot.CraftingV2
 
                     // TODO: Mythic Hookup
                     case ItemRarity.Mythic:
-                        return result;
+                        costList = EnchantCostsHelper.Config.DisenchantCosts.Mythic;
+                        break;
 
                     default:
                         throw new ArgumentOutOfRangeException();

@@ -34,19 +34,40 @@ namespace EpicLoot.GatedItemType
                
                 foreach (var itemID in info.Items)
                 {
-                    ItemInfoByID.Add(itemID, info);
+                    if (!ItemInfoByID.ContainsKey(itemID))
+                    {
+                        ItemInfoByID.Add(itemID, info);
+                    }
+                    else
+                    {
+                        EpicLoot.LogWarning($"Duplicate entry found for ItemInfo: {itemID}. " +
+                            $"Please fix your configuration.");
+                    }
                 }
 
                 foreach (var entry in info.ItemsByBoss)
                 {
                     if (ItemsPerBoss.ContainsKey(entry.Key))
+                    {
                         ItemsPerBoss[entry.Key].AddRange(entry.Value);
+                    }
                     else
+                    {
                         ItemsPerBoss.Add(entry.Key, entry.Value.ToList());
+                    }
 
                     foreach (var itemID in entry.Value)
                     {
-                        BossPerItem.Add(itemID, entry.Key);
+                        if (!BossPerItem.ContainsKey(itemID))
+                        {
+                            BossPerItem.Add(itemID, entry.Key);
+                        }
+                        else
+                        {
+                            EpicLoot.LogWarning($"Duplicate entry found for ItemInfo, " +
+                                $"BossPerItem: {itemID} with boss {entry.Key}. " +
+                                $"Please fix your configuration.");
+                        }
                     }
                 }
             }

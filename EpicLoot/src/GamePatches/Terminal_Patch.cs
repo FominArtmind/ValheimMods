@@ -40,11 +40,19 @@ namespace EpicLoot
             }), true);
             new Terminal.ConsoleCommand("magicitemlegendary", "", (args =>
             {
-                SpawnLegendaryMagicItem(args.Context, args.Args);
+                SpawnLegendaryMagicItem(args.Context, args.Args, ItemRarity.Legendary);
             }), true);
             new Terminal.ConsoleCommand("milegend", "", (args =>
             {
-                SpawnLegendaryMagicItem(args.Context, args.Args);
+                SpawnLegendaryMagicItem(args.Context, args.Args, ItemRarity.Legendary);
+            }), true);
+            new Terminal.ConsoleCommand("magicitemmythic", "", (args =>
+            {
+                SpawnLegendaryMagicItem(args.Context, args.Args, ItemRarity.Mythic);
+            }), true);
+            new Terminal.ConsoleCommand("mimythic", "", (args =>
+            {
+                SpawnLegendaryMagicItem(args.Context, args.Args, ItemRarity.Mythic);
             }), true);
             new Terminal.ConsoleCommand("magicitemset", "", (args =>
             {
@@ -284,8 +292,7 @@ namespace EpicLoot
             foreach (var itemPrefab in EpicLoot.RegisteredItemPrefabs)
             {
                 var itemDrop = UnityEngine.Object.Instantiate(itemPrefab, Player.m_localPlayer.transform.position + Player.m_localPlayer.transform.forward * 2f + Vector3.up, Quaternion.identity).GetComponent<ItemDrop>();
-                // TODO: Mythic Hookup
-                if (itemDrop.m_itemData.IsMagicCraftingMaterial() || itemDrop.m_itemData.IsRunestone() && itemDrop.m_itemData.GetCraftingMaterialRarity() != ItemRarity.Mythic)
+                if (itemDrop.m_itemData.IsMagicCraftingMaterial() || itemDrop.m_itemData.IsRunestone())
                 {
                     itemDrop.m_itemData.m_stack = itemDrop.m_itemData.m_shared.m_maxStackSize / 2;
                 }
@@ -429,23 +436,26 @@ namespace EpicLoot
             switch (rarityName.ToLowerInvariant())
             {
                 case "magic":
-                    rarityTable = new float[] {1, 0, 0, 0};
+                    rarityTable = new float[] {1, 0, 0, 0, 0};
                     break;
                 case "rare":
-                    rarityTable = new float[] {0, 1, 0, 0};
+                    rarityTable = new float[] {0, 1, 0, 0, 0 };
                     break;
                 case "epic":
-                    rarityTable = new float[] {0, 0, 1, 0};
+                    rarityTable = new float[] {0, 0, 1, 0, 0 };
                     break;
                 case "legendary":
-                    rarityTable = new float[] {0, 0, 0, 1};
+                    rarityTable = new float[] {0, 0, 0, 1, 0 };
+                    break;
+                case "mythic":
+                    rarityTable = new float[] { 0, 0, 0, 0, 1 };
                     break;
             }
 
             return rarityTable;
         }
 
-        private static void SpawnLegendaryMagicItem(Terminal context, string[] args)
+        private static void SpawnLegendaryMagicItem(Terminal context, string[] args, ItemRarity rarity = ItemRarity.Legendary)
         {
             if (args.Length < 2)
             {
@@ -456,11 +466,19 @@ namespace EpicLoot
             var legendaryID = args[1];
             var itemType = args.Length >= 3 ? args[2] : null;
 
-            context.AddString($"magicitemlegendary - legendaryID:{legendaryID}");
-            SpawnLegendaryItemHelper(legendaryID, itemType, context);
+            if (rarity == ItemRarity.Legendary)
+            {
+                context.AddString($"magicitemlegendary - legendaryID:{legendaryID}");
+            }
+            else
+            {
+                context.AddString($"magicitemmythic - legendaryID:{legendaryID}");
+            }
+
+            SpawnLegendaryItemHelper(legendaryID, itemType, context, rarity);
         }
 
-        private static void SpawnLegendaryItemHelper(string legendaryID, string itemType, Terminal context)
+        private static void SpawnLegendaryItemHelper(string legendaryID, string itemType, Terminal context, ItemRarity rarity)
         {
             if (!UniqueLegendaryHelper.TryGetLegendaryInfo(legendaryID, out var legendaryInfo))
             {
@@ -473,7 +491,7 @@ namespace EpicLoot
 
             if (string.IsNullOrEmpty(itemType))
             {
-                var dummyMagicItem = new MagicItem { Rarity = ItemRarity.Legendary };
+                var dummyMagicItem = new MagicItem { Rarity = rarity };
                 var allowedItems = new List<ItemDrop>();
                 foreach (var itemName in GatedItemTypeHelper.ItemInfoByID.Keys)
                 {
@@ -508,7 +526,7 @@ namespace EpicLoot
                 return;
             }
 
-            var loot = new LootTable
+            LootTable loot = new LootTable
             {
                 Object = "Console",
                 Drops = new[] { new float[] { 1, 1 } },
@@ -517,22 +535,32 @@ namespace EpicLoot
                     new LootDrop
                     {
                         Item = itemType,
-                        Rarity = new float[]{ 0, 0, 0, 1 }
+                        Rarity = GetRarityTable(rarity.ToString())
                     }
                 }
             };
 
-            LootRoller.CheatForceLegendary = legendaryID;
+            if (rarity == ItemRarity.Legendary)
+            {
+                LootRoller.CheatForceLegendary = legendaryID;
+            }
+            else
+            {
+                LootRoller.CheatForceMythic = legendaryID;
+            }
+
             var previousDisableGatingState = LootRoller.CheatDisableGating;
             LootRoller.CheatDisableGating = true;
 
             var randomOffset = UnityEngine.Random.insideUnitSphere;
-            var dropPoint = Player.m_localPlayer.transform.position + Player.m_localPlayer.transform.forward * 3 + Vector3.up * 1.5f + randomOffset;
+            var dropPoint = Player.m_localPlayer.transform.position +
+                Player.m_localPlayer.transform.forward * 3 + Vector3.up * 1.5f + randomOffset;
             LootRoller.CheatRollingItem = true;
             LootRoller.RollLootTableAndSpawnObjects(loot, 1, loot.Object, dropPoint);
-            LootRoller.CheatRollingItem = false;
 
+            LootRoller.CheatRollingItem = false;
             LootRoller.CheatForceLegendary = null;
+            LootRoller.CheatForceMythic = null;
             LootRoller.CheatDisableGating = previousDisableGatingState;
         }
 
@@ -547,15 +575,18 @@ namespace EpicLoot
             var setID = args[1];
             terminal.AddString($"magicitemset - setID:{setID}");
 
-            if (!UniqueLegendaryHelper.TryGetLegendarySetInfo(setID, out var setInfo))
+            if (!UniqueLegendaryHelper.TryGetLegendarySetInfo(setID, out var setInfo, out ItemRarity rarity))
             {
                 terminal.AddString($"> Could not find set info for setID: ({setID})");
                 return;
             }
 
-            foreach (var legendaryID in setInfo.LegendaryIDs)
+            if (setInfo != null)
             {
-                SpawnLegendaryItemHelper(legendaryID, null, terminal);
+                foreach (var legendaryID in setInfo.LegendaryIDs)
+                {
+                    SpawnLegendaryItemHelper(legendaryID, null, terminal, rarity);
+                }
             }
         }
 

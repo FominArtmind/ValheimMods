@@ -71,7 +71,7 @@ namespace EpicLoot
 
         public string GetTooltip()
         {
-            var showRange = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
+            var showRange = ZInput.GetKey(KeyCode.LeftShift) || ZInput.GetKey(KeyCode.RightShift);
 
             var color = GetColorString();
             var tooltip = new StringBuilder();
@@ -222,8 +222,8 @@ namespace EpicLoot
         {
             if (IsUniqueLegendary())
             {
-                UniqueLegendaryHelper.TryGetLegendaryInfo(LegendaryID, out var legendaryInfo);
-                return legendaryInfo;
+                UniqueLegendaryHelper.TryGetLegendaryInfo(LegendaryID, out var itemInfo);
+                return itemInfo;
             }
 
             return null;

@@ -30,12 +30,14 @@ namespace EpicLoot
         private static WeightedRandomCollection<KeyValuePair<ItemRarity, float>> _weightedRarityTable;
         private static WeightedRandomCollection<KeyValuePair<ItemQuality, float>> _weightedQualityTable;
         private static WeightedRandomCollection<LegendaryInfo> _weightedLegendaryTable;
+        private static WeightedRandomCollection<LegendaryInfo> _weightedMythicTable;
         public static bool CheatRollingItem = false;
         public static int CheatEffectCount;
         public static bool CheatDisableGating;
         public static bool CheatForceMagicEffect;
         public static string ForcedMagicEffect = "";
         public static string CheatForceLegendary;
+        public static string CheatForceMythic;
 
         public static void Initialize(LootConfig lootConfig)
         {
@@ -49,6 +51,7 @@ namespace EpicLoot
             _weightedRarityTable = new WeightedRandomCollection<KeyValuePair<ItemRarity, float>>(_random);
             _weightedQualityTable = new WeightedRandomCollection<KeyValuePair<ItemQuality, float>>(_random);
             _weightedLegendaryTable = new WeightedRandomCollection<LegendaryInfo>(_random);
+            _weightedMythicTable = new WeightedRandomCollection<LegendaryInfo>(_random);
 
             ItemSets.Clear();
             LootTables.Clear();
@@ -507,7 +510,13 @@ namespace EpicLoot
         public static MagicItem RollMagicItem(ItemRarity rarity, ItemQuality quality, ItemDrop.ItemData baseItem, float luckFactor)
         {
             var cheatLegendary = !string.IsNullOrEmpty(CheatForceLegendary);
-            if (cheatLegendary)
+            var cheatMythic = !string.IsNullOrEmpty(CheatForceMythic);
+            
+            if (cheatMythic)
+            {
+                rarity = ItemRarity.Mythic;
+            }
+            else if (cheatLegendary)
             {
                 rarity = ItemRarity.Legendary;
             }
@@ -516,53 +525,67 @@ namespace EpicLoot
 
             var effectCount = CheatEffectCount >= 1 ? CheatEffectCount : RollEffectCountPerRarity(magicItem.Rarity, magicItem.Quality);
 
-            if (rarity == ItemRarity.Legendary)
+            if (rarity == ItemRarity.Legendary || rarity == ItemRarity.Mythic)
             {
-                LegendaryInfo legendary = null;
-                if (cheatLegendary)
+                LegendaryInfo itemInfo = null;
+                if (cheatMythic)
                 {
-                    UniqueLegendaryHelper.TryGetLegendaryInfo(CheatForceLegendary, out legendary);
+                    UniqueLegendaryHelper.TryGetLegendaryInfo(CheatForceMythic, out itemInfo);
                 }
-                
-                if (legendary == null)
+                else if (cheatLegendary)
+                {
+                    UniqueLegendaryHelper.TryGetLegendaryInfo(CheatForceLegendary, out itemInfo);
+                }
+
+                if (itemInfo == null)
                 {
                     var roll = Random.Range(0.0f, 1.0f);
                     var rollSetItem = roll < EpicLoot.SetItemDropChance.Value;
-                    EpicLoot.Log($"Rolling Legendary: set={rollSetItem} ({roll:#.##}/{EpicLoot.SetItemDropChance.Value})");
-                    var availableLegendaries = UniqueLegendaryHelper.GetAvailableLegendaries(baseItem, magicItem, rollSetItem);
-                    EpicLoot.Log($"Available Legendaries: {string.Join(", ", availableLegendaries.Select(x => x.ID))}");
-                    _weightedLegendaryTable.Setup(availableLegendaries, x => x.SelectionWeight);
-                    legendary = _weightedLegendaryTable.Roll();
+                    EpicLoot.Log($"Rolling Legendary/Mythic: set={rollSetItem} ({roll:#.##}/{EpicLoot.SetItemDropChance.Value})");
+                    if (rarity == ItemRarity.Legendary)
+                    {
+                        var availableLegendaries = UniqueLegendaryHelper.GetAvailableLegendaries(baseItem, magicItem, rollSetItem);
+                        EpicLoot.Log($"Available Legendaries: {string.Join(", ", availableLegendaries.Select(x => x.ID))}");
+                        _weightedLegendaryTable.Setup(availableLegendaries, x => x.SelectionWeight);
+                        itemInfo = _weightedLegendaryTable.Roll();
+                    }
+                    else
+                    {
+                        var availableMythics = UniqueLegendaryHelper.GetAvailableMythics(baseItem, magicItem, rollSetItem);
+                        EpicLoot.Log($"Available Mythics: {string.Join(", ", availableMythics.Select(x => x.ID))}");
+                        _weightedMythicTable.Setup(availableMythics, x => x.SelectionWeight);
+                        itemInfo = _weightedMythicTable.Roll();
+                    }
                 }
 
-                if (legendary.IsSetItem)
+                if (itemInfo.IsSetItem)
                 {
-                    var setID = UniqueLegendaryHelper.GetSetForLegendaryItem(legendary);
+                    var setID = UniqueLegendaryHelper.GetSetForLegendaryItem(itemInfo);
                     magicItem.SetID = setID;
                 }
 
-                if (!UniqueLegendaryHelper.IsGenericLegendary(legendary))
+                if (!UniqueLegendaryHelper.IsGenericLegendary(itemInfo))
                 {
                     magicItem.LegendaryID = legendary.ID;
                     magicItem.DisplayName = legendary.Name;
 
-                    if (legendary.GuaranteedEffectCount > 0)
+                    if (itemInfo.GuaranteedEffectCount > 0)
                     {
-                        effectCount = legendary.GuaranteedEffectCount;
+                        effectCount = itemInfo.GuaranteedEffectCount;
                     }
 
                     List<GuaranteedMagicEffect> guaranteedMagicEffects;
-                    if (quality == ItemQuality.Elite && legendary.GuaranteedMagicEffectsElite.Count() > 0)
+                    if (quality == ItemQuality.Elite && itemInfo.GuaranteedMagicEffectsElite.Count() > 0)
                     {
-                        guaranteedMagicEffects = legendary.GuaranteedMagicEffectsElite;
+                        guaranteedMagicEffects = itemInfo.GuaranteedMagicEffectsElite;
                     }
-                    else if (quality == ItemQuality.Exceptional && legendary.GuaranteedMagicEffectsExceptional.Count() > 0)
+                    else if (quality == ItemQuality.Exceptional && itemInfo.GuaranteedMagicEffectsExceptional.Count() > 0)
                     {
-                        guaranteedMagicEffects = legendary.GuaranteedMagicEffectsExceptional;
+                        guaranteedMagicEffects = itemInfo.GuaranteedMagicEffectsExceptional;
                     }
                     else
                     {
-                        guaranteedMagicEffects = legendary.GuaranteedMagicEffects;
+                        guaranteedMagicEffects = itemInfo.GuaranteedMagicEffects;
                     }
 
                     foreach (var guaranteedMagicEffect in guaranteedMagicEffects)
@@ -570,11 +593,11 @@ namespace EpicLoot
                         var effectDef = MagicItemEffectDefinitions.Get(guaranteedMagicEffect.Type);
                         if (effectDef == null)
                         {
-                            EpicLoot.LogError($"Could not find magic effect (Type={guaranteedMagicEffect.Type}) while creating legendary item (ID={legendary.ID})");
+                            EpicLoot.LogError($"Could not find magic effect (Type={guaranteedMagicEffect.Type}) while creating legendary item (ID={itemInfo.ID})");
                             continue;
                         }
 
-                        var effect = RollEffect(effectDef, ItemRarity.Legendary, magicItem.Quality, baseItem.m_shared.m_name, guaranteedMagicEffect.Values);
+                        var effect = RollEffect(effectDef, rarity, magicItem.Quality, baseItem.m_shared.m_name, guaranteedMagicEffect.Values);
                         magicItem.Effects.Add(effect);
                         effectCount--;
                     }
@@ -656,8 +679,8 @@ namespace EpicLoot
                     break;
 
                 case ItemRarity.Mythic:
-                    // TODO: Mythic Hookup
-                    return new List<KeyValuePair<int, float>>();//config.Mythic.Select(x => new KeyValuePair<int, float>((int)x[0], x[1])).ToList();
+                    result = Config..Mythic.Select(x => new KeyValuePair<int, float>((int)x[0], x[1])).ToList();
+                    break;
 
                 default:
                     throw new ArgumentOutOfRangeException(nameof(rarity), rarity, null);
@@ -772,9 +795,11 @@ namespace EpicLoot
                 { ItemRarity.Magic, rarity.Length >= 1 ? rarity[0] : 0 },
                 { ItemRarity.Rare, rarity.Length >= 2 ? rarity[1] : 0 },
                 { ItemRarity.Epic, rarity.Length >= 3 ? rarity[2] : 0 },
-                { ItemRarity.Legendary, rarity.Length >= 4 ? rarity[3] : 0 }
+                { ItemRarity.Legendary, rarity.Length >= 4 ? rarity[3] : 0 },
+                { ItemRarity.Mythic, rarity.Length >= 5 ? rarity[4] : 0 }
             };
 
+            // TO DO: start with Mythic
             for (var r = ItemRarity.Legendary; r >= ItemRarity.Magic; r--)
             {
                 if (rarityWeights[r] > 0)
@@ -1080,7 +1105,20 @@ namespace EpicLoot
             lootDrop = ResolveLootDrop(lootDrop);
             var rarity = lootDrop.Rarity;
 
-            Debug.LogWarning($"> rarity=[ {rarity[0]}, {rarity[1]}, {rarity[2]}, {rarity[3]} ]");
+            if (rarity.Length < 1)
+            {
+                return;
+            }
+
+            string rarityStr = "> rarity=[ ";
+            for (int i = 0; i < rarity.Length - 1; i++)
+            {
+                rarityStr += $"{rarity[i]},";
+            }
+
+            rarityStr += $"{rarity[rarity.Length - 1]} ]";
+
+            Debug.LogWarning(rarityStr);
         }
     }
 }
