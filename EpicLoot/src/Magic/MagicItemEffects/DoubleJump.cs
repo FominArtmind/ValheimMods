@@ -137,7 +137,7 @@ namespace EpicLoot.MagicItemEffects
             }
 
             var player = character.IsPlayer() ? character as Player : null;
-            if (player != null && player.HasActiveMagicEffect(MagicEffectType.DoubleJump))
+            if (player != null && player.HasActiveMagicEffect(MagicEffectType.DoubleJump, out float effectValue))
             {
                 // TODO: multiple charges
                 const int doubleJumpCharges = 1;

@@ -28,7 +28,7 @@ namespace EpicLoot.MagicItemEffects
             __state = piece.m_craftingStation;
 
             if (piece.m_craftingStation != null && piece.m_craftingStation.name != null &&
-                Player.m_localPlayer.HasActiveMagicEffect(MagicEffectType.FreeBuild))
+                Player.m_localPlayer.HasActiveMagicEffect(MagicEffectType.FreeBuild, out float magicEffect))
             {
                 if (CanBeFreeBuilt(piece))
                 {

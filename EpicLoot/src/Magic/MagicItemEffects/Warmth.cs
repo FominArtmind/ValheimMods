@@ -2,36 +2,34 @@
 
 namespace EpicLoot.MagicItemEffects
 {
-    public static class Waterproof
+    public static class Warmth
     {
-        public static int AddingStatusFromEnv;
+        public static bool AddingStatusFromEnv;
 
         //public void UpdateEnvStatusEffects(float dt)
         [HarmonyPatch(typeof(Player), nameof(Player.UpdateEnvStatusEffects))]
-        public static class Waterproof_Player_UpdateEnvStatusEffects_Patch
+        public static class Warmth_Player_UpdateEnvStatusEffects_Patch
         {
-            public static bool Prefix()
+            public static void Prefix()
             {
-                AddingStatusFromEnv++;
-                return true;
+                AddingStatusFromEnv = true;
             }
 
             public static void Postfix(Player __instance)
             {
-                AddingStatusFromEnv--;
+                AddingStatusFromEnv = false;
             }
         }
 
         [HarmonyPatch(typeof(SEMan), nameof(SEMan.AddStatusEffect), typeof(int), typeof(bool), typeof(int), typeof(float))]
-        public static class Waterproof_SEMan_AddStatusEffect_Patch
+        public static class Warmth_SEMan_AddStatusEffect_Patch
         {
             public static bool Prefix(SEMan __instance, int nameHash)
             {
-                if (AddingStatusFromEnv > 0 && __instance.m_character.IsPlayer() && nameHash == "Wet".GetHashCode())
+                if (AddingStatusFromEnv && __instance.m_character is Player player &&
+                    (nameHash == "Freezing".GetHashCode() || nameHash == "Cold".GetHashCode())) //todo
                 {
-                    var player = (Player) __instance.m_character;
-                    var hasWaterproofEquipment = player.HasActiveMagicEffect(MagicEffectType.Waterproof, out float effectValue);
-                    if (hasWaterproofEquipment)
+                    if (player.HasActiveMagicEffect(MagicEffectType.Warmth, out float effectValue))
                     {
                         return false;
                     }

@@ -74,26 +74,37 @@ namespace EpicLoot.MagicItemEffects
             return 0;
         }
 
-        public static bool HasActiveMagicEffect(Player player, ItemDrop.ItemData itemData, string effectType)
+        public static bool HasActiveMagicEffect(Player player, ItemDrop.ItemData itemData, string effectType, out float effectValue)
         {
-            return HasActiveMagicEffect(player, itemData.GetMagicItem(), effectType);
+            return HasActiveMagicEffect(player, itemData.GetMagicItem(), effectType, out effectValue);
         }
 
-        public static bool HasActiveMagicEffect(Player player, MagicItem magicItem, string effectType)
+        public static bool HasActiveMagicEffect(Player player, MagicItem magicItem, string effectType, out float effectValue)
         {
+            effectValue = 0f;
             if (player != null)
-                return player.HasActiveMagicEffect(effectType);
+            {
+                return player.HasActiveMagicEffect(effectType, out effectValue);
+            }
             else if (magicItem != null)
+            {
                 return magicItem.HasEffect(effectType);
+            }
             return false;
         }
 
-        public static bool HasActiveMagicEffectOnWeapon(Player player, ItemDrop.ItemData itemData, string effectType)
+        public static bool HasActiveMagicEffectOnWeapon(Player player, ItemDrop.ItemData itemData, string effectType,
+            out float effectValue, float scale = 1.0f)
         {
+            effectValue = 0f;
             if (player != null)
-                return player.HasActiveMagicEffect(effectType, GetIgnoreWeapon(player, itemData));
+            {
+                return player.HasActiveMagicEffect(effectType, out effectValue, scale, GetIgnoreWeapon(player, itemData));
+            }
             else if (itemData.IsMagic(out var magicItem))
+            {
                 return magicItem.HasEffect(effectType);
+            }
             return false;
         }
 

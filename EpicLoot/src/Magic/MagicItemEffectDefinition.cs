@@ -26,16 +26,20 @@ namespace EpicLoot
         public List<Skills.SkillType> ExcludedSkillTypes = new List<Skills.SkillType>();
         public List<string> AllowedItemNames = new List<string>();
         public List<string> ExcludedItemNames = new List<string>();
-        public bool ItemHasPhysicalDamage;
-        public bool ItemHasElementalDamage;
-        public bool ItemUsesDurability;
-        public bool ItemHasNegativeMovementSpeedModifier;
-        public bool ItemHasBlockPower;
-        public bool ItemHasParryPower;
-        public bool ItemHasNoParryPower;
-        public bool ItemHasArmor;
-        public bool ItemHasBackstabBonus;
-        public bool ItemUsesStaminaOnAttack;
+        public bool? ItemHasPhysicalDamage;
+        public bool? ItemHasElementalDamage;
+        public bool? ItemHasChopDamage;
+        public bool? ItemUsesDurability;
+        public bool? ItemHasNegativeMovementSpeedModifier;
+        public bool? ItemHasBlockPower;
+        public bool? ItemHasParryPower;
+        public bool? ItemHasNoParryPower;
+        public bool? ItemHasArmor;
+        public bool? ItemHasBackstabBonus;
+        public bool? ItemUsesStaminaOnAttack;
+        public bool? ItemUsesEitrOnAttack;
+        public bool? ItemUsesHealthOnAttack;
+        public bool? ItemUsesDrawStaminaOnAttack;
 
         public List<string> CustomFlags;
 
@@ -46,16 +50,20 @@ namespace EpicLoot
 
             if (NoRoll) _flags.Add(nameof(NoRoll));
             if (ExclusiveSelf) _flags.Add(nameof(ExclusiveSelf));
-            if (ItemHasPhysicalDamage) _flags.Add(nameof(ItemHasPhysicalDamage));
-            if (ItemHasElementalDamage) _flags.Add(nameof(ItemHasElementalDamage));
-            if (ItemUsesDurability) _flags.Add(nameof(ItemUsesDurability));
-            if (ItemHasNegativeMovementSpeedModifier) _flags.Add(nameof(ItemHasNegativeMovementSpeedModifier));
-            if (ItemHasBlockPower) _flags.Add(nameof(ItemHasBlockPower));
-            if (ItemHasParryPower) _flags.Add(nameof(ItemHasParryPower));
-            if (ItemHasNoParryPower) _flags.Add(nameof(ItemHasNoParryPower));
-            if (ItemHasArmor) _flags.Add(nameof(ItemHasArmor));
-            if (ItemHasBackstabBonus) _flags.Add(nameof(ItemHasBackstabBonus));
-            if (ItemUsesStaminaOnAttack) _flags.Add(nameof(ItemUsesStaminaOnAttack));
+            if (ItemHasPhysicalDamage != null) _flags.Add(nameof(ItemHasPhysicalDamage));
+            if (ItemHasElementalDamage != null) _flags.Add(nameof(ItemHasElementalDamage));
+            if (ItemHasChopDamage != null) _flags.Add(nameof(ItemHasChopDamage));
+            if (ItemUsesDurability != null) _flags.Add(nameof(ItemUsesDurability));
+            if (ItemHasNegativeMovementSpeedModifier != null) _flags.Add(nameof(ItemHasNegativeMovementSpeedModifier));
+            if (ItemHasBlockPower != null) _flags.Add(nameof(ItemHasBlockPower));
+            if (ItemHasParryPower != null) _flags.Add(nameof(ItemHasParryPower));
+            if (ItemHasNoParryPower != null) _flags.Add(nameof(ItemHasNoParryPower));
+            if (ItemHasArmor != null) _flags.Add(nameof(ItemHasArmor));
+            if (ItemHasBackstabBonus != null) _flags.Add(nameof(ItemHasBackstabBonus));
+            if (ItemUsesStaminaOnAttack != null) _flags.Add(nameof(ItemUsesStaminaOnAttack));
+            if (ItemUsesEitrOnAttack != null) _flags.Add(nameof(ItemUsesEitrOnAttack));
+            if (ItemUsesHealthOnAttack != null) _flags.Add(nameof(ItemUsesHealthOnAttack));
+            if (ItemUsesDrawStaminaOnAttack != null) _flags.Add(nameof(ItemUsesDrawStaminaOnAttack));
 
             if (_flags.Count > 0)
             {
@@ -243,62 +251,101 @@ namespace EpicLoot
                 return false;
             }
 
-            if (AllowedItemNames?.Count > 0 && !(AllowedItemNames.Contains(itemData.m_shared.m_name) || AllowedItemNames.Contains(itemData.m_dropPrefab?.name)))
+            if (AllowedItemNames?.Count > 0 && !(AllowedItemNames.Contains(itemData.m_shared.m_name) ||
+                AllowedItemNames.Contains(itemData.m_dropPrefab?.name)))
             {
                 return false;
             }
 
-            if (ExcludedItemNames?.Count > 0 && (ExcludedItemNames.Contains(itemData.m_shared.m_name) || ExcludedItemNames.Contains(itemData.m_dropPrefab?.name)))
+            if (ExcludedItemNames?.Count > 0 && (ExcludedItemNames.Contains(itemData.m_shared.m_name) ||
+                ExcludedItemNames.Contains(itemData.m_dropPrefab?.name)))
             {
                 return false;
             }
 
-            if (ItemHasPhysicalDamage && itemData.m_shared.m_damages.GetTotalPhysicalDamage() <= 0)
+            if (ItemHasPhysicalDamage != null &&
+                (ItemHasPhysicalDamage == itemData.m_shared.m_damages.GetTotalPhysicalDamage() <= 0))
             {
                 return false;
             }
 
-            if (ItemHasElementalDamage && itemData.m_shared.m_damages.GetTotalElementalDamage() <= 0)
+            if (ItemHasElementalDamage != null &&
+                (ItemHasElementalDamage == itemData.m_shared.m_damages.GetTotalElementalDamage() <= 0))
+            {
+                return false;
+            }
+            
+            if (ItemHasChopDamage != null &&
+                (ItemHasChopDamage == itemData.m_shared.m_damages.m_chop <= 0))
             {
                 return false;
             }
 
-            if (ItemUsesDurability && !itemData.m_shared.m_useDurability)
+            if (ItemUsesDurability != null &&
+                (ItemUsesDurability == !itemData.m_shared.m_useDurability))
             {
                 return false;
             }
 
-            if (ItemHasNegativeMovementSpeedModifier && itemData.m_shared.m_movementModifier >= 0)
+            if (ItemHasNegativeMovementSpeedModifier != null &&
+                (ItemHasNegativeMovementSpeedModifier == itemData.m_shared.m_movementModifier >= 0))
             {
                 return false;
             }
 
-            if (ItemHasBlockPower && itemData.m_shared.m_blockPower <= 0)
+            if (ItemHasBlockPower != null && (ItemHasBlockPower == itemData.m_shared.m_blockPower <= 0))
             {
                 return false;
             }
 
-            if (ItemHasParryPower && itemData.m_shared.m_timedBlockBonus <= 0)
+            if (ItemHasParryPower != null && (ItemHasParryPower == itemData.m_shared.m_timedBlockBonus <= 0))
             {
                 return false;
             }
 
-            if (ItemHasNoParryPower && itemData.m_shared.m_timedBlockBonus > 0)
+            if (ItemHasNoParryPower != null && (ItemHasNoParryPower == itemData.m_shared.m_timedBlockBonus > 0))
             {
                 return false;
             }
 
-            if (ItemHasArmor && itemData.m_shared.m_armor <= 0)
+            if (ItemHasArmor != null && (ItemHasArmor == itemData.m_shared.m_armor <= 0))
             {
                 return false;
             }
 
-            if (ItemHasBackstabBonus && itemData.m_shared.m_backstabBonus <= 0)
+            if (ItemHasBackstabBonus != null && (ItemHasBackstabBonus == itemData.m_shared.m_backstabBonus <= 0))
             {
                 return false;
             }
 
-            if (ItemUsesStaminaOnAttack && itemData.m_shared.m_attack.m_attackStamina <= 0 && itemData.m_shared.m_secondaryAttack.m_attackStamina <= 0)
+            if (ItemUsesStaminaOnAttack != null &&
+                ((ItemUsesStaminaOnAttack == itemData.m_shared.m_attack.m_attackStamina <= 0) ||
+                (ItemUsesStaminaOnAttack == itemData.m_shared.m_secondaryAttack.m_attackStamina <= 0)))
+            {
+                return false;
+            }
+            
+            if (ItemUsesEitrOnAttack != null &&
+                ((ItemUsesEitrOnAttack == itemData.m_shared.m_attack.m_attackEitr <= 0) ||
+                (ItemUsesEitrOnAttack == itemData.m_shared.m_attack.m_drawEitrDrain <= 0) ||
+                (ItemUsesEitrOnAttack == itemData.m_shared.m_attack.m_reloadEitrDrain <= 0) ||
+                (ItemUsesEitrOnAttack == itemData.m_shared.m_secondaryAttack.m_attackEitr <= 0) ||
+                (ItemUsesEitrOnAttack == itemData.m_shared.m_secondaryAttack.m_drawEitrDrain <= 0) ||
+                (ItemUsesEitrOnAttack == itemData.m_shared.m_secondaryAttack.m_reloadEitrDrain <= 0)))
+            {
+                return false;
+            }
+            
+            if (ItemUsesHealthOnAttack != null &&
+                ((ItemUsesHealthOnAttack == itemData.m_shared.m_attack.m_attackHealth <= 0) ||
+                (ItemUsesHealthOnAttack == itemData.m_shared.m_secondaryAttack.m_attackHealth <= 0)))
+            {
+                return false;
+            }
+            
+            if (ItemUsesDrawStaminaOnAttack != null &&
+                ((ItemUsesDrawStaminaOnAttack == itemData.m_shared.m_attack.m_drawStaminaDrain <= 0) ||
+                (ItemUsesDrawStaminaOnAttack == itemData.m_shared.m_secondaryAttack.m_drawStaminaDrain <= 0)))
             {
                 return false;
             }

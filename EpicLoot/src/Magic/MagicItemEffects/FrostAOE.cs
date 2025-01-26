@@ -23,7 +23,8 @@ namespace EpicLoot.MagicItemEffects
                 {
                     var player = (Player) __instance.m_character;
                     var weaponDamage = __instance.GetWeapon()?.GetDamage();
-                    if (player.HasActiveMagicEffect(MagicEffectType.FrostDamageAOE) && weaponDamage.HasValue && weaponDamage.Value.m_frost > 0)
+                    if (player.HasActiveMagicEffect(MagicEffectType.FrostDamageAOE, out float magicEffect)
+                        && weaponDamage.HasValue && weaponDamage.Value.m_frost > 0)
                     {
                         Modified = true;
 
@@ -36,7 +37,8 @@ namespace EpicLoot.MagicItemEffects
 
                         var transform = player.transform;
                         var attackOrigin = __instance.GetAttackOrigin();
-                        var effectPosition = attackOrigin.position + Vector3.up * __instance.m_attackHeight + transform.forward * __instance.m_attackRange + transform.right * __instance.m_attackOffset;
+                        var effectPosition = attackOrigin.position + Vector3.up * __instance.m_attackHeight +
+                            transform.forward * __instance.m_attackRange + transform.right * __instance.m_attackOffset;
 
                         var collider = Object.Instantiate(colliderPrefab, effectPosition, transform.rotation, attackOrigin);
                         

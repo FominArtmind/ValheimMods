@@ -13,11 +13,11 @@ namespace EpicLoot.MagicItemEffects
         private static void Prefix(Character __instance, HitData hit)
         {
             var attacker = hit.GetAttacker();
-            if (__instance is Player player && player.HasActiveMagicEffect(MagicEffectType.ReflectDamage) && 
-                attacker != null && attacker != __instance && !_isApplyingReflectiveDmg)
+            if (__instance is Player player &&
+                attacker != null && attacker != __instance && !_isApplyingReflectiveDmg &&
+                player.HasActiveMagicEffect(MagicEffectType.ReflectDamage, out float effectValue, 0.01f))
             {
-                var reflectiveDamage = player.GetTotalActiveMagicEffectValue(MagicEffectType.ReflectDamage, 0.01f);
-                if (reflectiveDamage > 0)
+                if (effectValue > 0)
                 {
                     var hitData = new HitData()
                     {
@@ -25,7 +25,7 @@ namespace EpicLoot.MagicItemEffects
                         m_dir = hit.m_dir * -1,
                         m_point = attacker.transform.localPosition,
                         m_damage = { m_pierce = 
-                            (hit.GetTotalPhysicalDamage() + hit.GetTotalElementalDamage()) * reflectiveDamage }
+                            (hit.GetTotalPhysicalDamage() + hit.GetTotalElementalDamage()) * effectValue }
                     };
                     try
                     {

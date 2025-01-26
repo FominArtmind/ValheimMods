@@ -763,7 +763,8 @@ namespace EpicLoot
             return effectValues.Sum();
         }
 
-        public static float GetTotalActiveMagicEffectValue(this Player player, string effectType, float scale = 1.0f, ItemDrop.ItemData ignoreThisItem = null)
+        public static float GetTotalActiveMagicEffectValue(this Player player, string effectType,
+            float scale = 1.0f, ItemDrop.ItemData ignoreThisItem = null)
         {
             var allValues = player.GetAllActiveMagicEffects(effectType).Select(x => x.EffectValue).ToList();
 
@@ -786,9 +787,11 @@ namespace EpicLoot
             return totalValue;
         }
 
-        public static bool HasActiveMagicEffect(this Player player, string effectType, ItemDrop.ItemData ignoreThisItem = null)
+        public static bool HasActiveMagicEffect(this Player player, string effectType, out float effectValue,
+            float scale = 1.0f, ItemDrop.ItemData ignoreThisItem = null)
         {
-            return GetTotalActiveMagicEffectValue(player, effectType, 1, ignoreThisItem) > 0;
+            effectValue = GetTotalActiveMagicEffectValue(player, effectType, scale, ignoreThisItem);
+            return effectValue > 0;
         }
 
         public static List<ItemDrop.ItemData> GetEquippedSetPieces(this Player player, string setName)
@@ -1128,7 +1131,8 @@ namespace EpicLoot
         }
     }
 
-    [HarmonyPatch(typeof(Player), nameof(Player.GetActionProgress))]
+    [HarmonyPatch(typeof(Player), nameof(Player.GetActionProgress),
+        new Type[] { typeof(string), typeof(float) }, new ArgumentType[] { ArgumentType.Out, ArgumentType.Out })]
     public static class Player_GetActionProgress_Patch
     {
         public static void Postfix(Player __instance, ref string name)

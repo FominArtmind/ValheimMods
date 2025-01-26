@@ -30,19 +30,14 @@ namespace EpicLoot.MagicItemEffects
 
         public static void OnDamaged(Character __instance, HitData hit)
         {
-            if (hit.GetAttacker()?.IsPlayer() != true)
+            if (hit.GetAttacker()?.IsPlayer() != true || hit.GetTotalDamage() <= 0.0)
             {
                 return;
             }
 
             var player = (Player)hit.GetAttacker();
-            if (player.HasActiveMagicEffect(MagicEffectType.Paralyze))
+            if (player.HasActiveMagicEffect(MagicEffectType.Paralyze, out float effectValue))
             {
-                if (hit.GetTotalDamage() <= 0.0)
-                {
-                    return;
-                }
-
                 var seParalyze = __instance.m_seman.GetStatusEffect("Paralyze".GetHashCode()) as SE_Paralyzed;
                 if (seParalyze == null)
                 {
@@ -63,11 +58,13 @@ namespace EpicLoot.MagicItemEffects
                     main.startColor = Color.yellow;
                 }*/
 
-                float totalParalyzeTime;
+                float totalParalyzeTime = effectValue;
                 if (Attack_Patch.ActiveAttack != null)
-                    totalParalyzeTime = MagicEffectsHelper.GetTotalActiveMagicEffectValueForWeapon(player, Attack_Patch.ActiveAttack.m_weapon, MagicEffectType.Paralyze);
-                else
-                    totalParalyzeTime = player.GetTotalActiveMagicEffectValue(MagicEffectType.Paralyze);
+                {
+                    totalParalyzeTime = MagicEffectsHelper.GetTotalActiveMagicEffectValueForWeapon(
+                        player, Attack_Patch.ActiveAttack.m_weapon, MagicEffectType.Paralyze);
+                }
+
                 seParalyze.Setup(totalParalyzeTime);
             }
         }

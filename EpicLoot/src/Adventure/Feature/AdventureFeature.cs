@@ -203,7 +203,7 @@ namespace EpicLoot.Adventure.Feature
                     randomPoint = normalized * actualMag;
                     var spawnPoint = new Vector3(randomPoint.x, 0, randomPoint.y);
 
-                    var zoneId = ZoneSystem.instance.GetZone(spawnPoint);
+                    var zoneId = ZoneSystem.GetZone(spawnPoint);
                     while (!ZoneSystem.instance.SpawnZone(zoneId, ZoneSystem.SpawnMode.Client, out _))
                     {
                         yield return null;

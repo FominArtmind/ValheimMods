@@ -22,7 +22,7 @@ namespace EpicLoot.MagicItemEffects
                 
                 EquipmentEffectCache.Reset(player);
 
-                var shouldHaveFeatherFall = player.HasActiveMagicEffect(MagicEffectType.FeatherFall);
+                var shouldHaveFeatherFall = player.HasActiveMagicEffect(MagicEffectType.FeatherFall, out float magicEffect);
                 var hasFeatherFall = player.m_equipmentStatusEffects.Contains(slowFall);
                 if (!hasFeatherFall && shouldHaveFeatherFall)
                 {
