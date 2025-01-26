@@ -318,36 +318,51 @@ namespace EpicLoot
                 return false;
             }
 
-            if (ItemUsesStaminaOnAttack != null &&
-                ((ItemUsesStaminaOnAttack == itemData.m_shared.m_attack.m_attackStamina <= 0) ||
-                (ItemUsesStaminaOnAttack == itemData.m_shared.m_secondaryAttack.m_attackStamina <= 0)))
+            if (ItemUsesStaminaOnAttack != null)
             {
-                return false;
+                bool hasStamina = itemData.m_shared.m_attack.m_attackStamina > 0 ||
+                    itemData.m_shared.m_secondaryAttack.m_attackStamina > 0;
+                if (ItemUsesStaminaOnAttack.Value != hasStamina)
+                {
+                    return false;
+                }
+            }
+
+            if (ItemUsesEitrOnAttack != null)
+            {
+                bool hasEitr = itemData.m_shared.m_attack.m_attackEitr > 0 ||
+                    itemData.m_shared.m_attack.m_drawEitrDrain > 0 ||
+                    itemData.m_shared.m_attack.m_reloadEitrDrain > 0 ||
+                    itemData.m_shared.m_secondaryAttack.m_attackEitr > 0 ||
+                    itemData.m_shared.m_secondaryAttack.m_drawEitrDrain > 0 ||
+                    itemData.m_shared.m_secondaryAttack.m_reloadEitrDrain > 0;
+
+                if (ItemUsesEitrOnAttack.Value != hasEitr)
+                {
+                    return false;
+                }
             }
             
-            if (ItemUsesEitrOnAttack != null &&
-                ((ItemUsesEitrOnAttack == itemData.m_shared.m_attack.m_attackEitr <= 0) ||
-                (ItemUsesEitrOnAttack == itemData.m_shared.m_attack.m_drawEitrDrain <= 0) ||
-                (ItemUsesEitrOnAttack == itemData.m_shared.m_attack.m_reloadEitrDrain <= 0) ||
-                (ItemUsesEitrOnAttack == itemData.m_shared.m_secondaryAttack.m_attackEitr <= 0) ||
-                (ItemUsesEitrOnAttack == itemData.m_shared.m_secondaryAttack.m_drawEitrDrain <= 0) ||
-                (ItemUsesEitrOnAttack == itemData.m_shared.m_secondaryAttack.m_reloadEitrDrain <= 0)))
+            if (ItemUsesHealthOnAttack != null)
             {
-                return false;
+                bool usesHealth = itemData.m_shared.m_attack.m_attackHealth > 0 ||
+                    itemData.m_shared.m_secondaryAttack.m_attackHealth > 0;
+
+                if (ItemUsesHealthOnAttack.Value != usesHealth)
+                {
+                    return false;
+                }
             }
-            
-            if (ItemUsesHealthOnAttack != null &&
-                ((ItemUsesHealthOnAttack == itemData.m_shared.m_attack.m_attackHealth <= 0) ||
-                (ItemUsesHealthOnAttack == itemData.m_shared.m_secondaryAttack.m_attackHealth <= 0)))
+
+            if (ItemUsesDrawStaminaOnAttack != null)
             {
-                return false;
-            }
-            
-            if (ItemUsesDrawStaminaOnAttack != null &&
-                ((ItemUsesDrawStaminaOnAttack == itemData.m_shared.m_attack.m_drawStaminaDrain <= 0) ||
-                (ItemUsesDrawStaminaOnAttack == itemData.m_shared.m_secondaryAttack.m_drawStaminaDrain <= 0)))
-            {
-                return false;
+                bool drawStamina = itemData.m_shared.m_attack.m_drawStaminaDrain > 0 ||
+                    ItemUsesDrawStaminaOnAttack == itemData.m_shared.m_secondaryAttack.m_drawStaminaDrain > 0;
+
+                if (ItemUsesDrawStaminaOnAttack.Value != drawStamina)
+                {
+                    return false;
+                }
             }
 
             return true;

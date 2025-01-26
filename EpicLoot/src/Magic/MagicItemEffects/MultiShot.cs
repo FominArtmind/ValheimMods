@@ -28,7 +28,7 @@ namespace EpicLoot.MagicItemEffects
 
         [HarmonyPatch(typeof(Attack), nameof(Attack.FireProjectileBurst))]
         [HarmonyPrefix]
-        public static void Attack_FireProjectileBurst_Prefix(Attack __instance, ref HitData.DamageTypes __state)
+        public static void Attack_FireProjectileBurst_Prefix(Attack __instance, ref HitData.DamageTypes? __state)
         {
             if (__instance?.GetWeapon() == null || __instance.m_character == null || !__instance.m_character.IsPlayer())
             {
@@ -79,9 +79,12 @@ namespace EpicLoot.MagicItemEffects
         }
 
         [HarmonyPatch(typeof(Attack), nameof(Attack.FireProjectileBurst))]
-        public static void Postfix(Attack __instance, ref HitData.DamageTypes __state)
+        public static void Postfix(Attack __instance, ref HitData.DamageTypes? __state)
         {
-            __instance.GetWeapon().m_shared.m_damages = __state;
+            if (__state != null)
+            {
+                __instance.GetWeapon().m_shared.m_damages = __state.Value;
+            }
         }
     }
 
@@ -97,7 +100,7 @@ namespace EpicLoot.MagicItemEffects
 
             var removeItemMethod = AccessTools.Method(typeof(Inventory), nameof(Inventory.RemoveItem),
                 new Type[] { typeof(ItemDrop.ItemData), typeof(int) });
-            
+
             for (int i = 0; i < code.Count; i++)
             {
                 if (code[i].Calls(removeItemMethod))
@@ -108,7 +111,7 @@ namespace EpicLoot.MagicItemEffects
 
             return code.AsEnumerable();
         }
-        
+
         public static bool CustomRemoveItem(Inventory inventory, ItemDrop.ItemData item, int amount)
         {
             if (MultiShot.isTripleShotActive)
