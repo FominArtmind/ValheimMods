@@ -24,7 +24,7 @@ namespace EpicLoot.MagicItemEffects
 			var totalParryBonusMod = 0f;
 			ModifyWithLowHealth.Apply(player, MagicEffectType.ModifyParry, effect =>
 			{
-				if (player.HasActiveMagicEffect(effect))
+				if (player.HasActiveMagicEffect(effect, out float effectValue))
 				{
 					if (!Override)
 					{

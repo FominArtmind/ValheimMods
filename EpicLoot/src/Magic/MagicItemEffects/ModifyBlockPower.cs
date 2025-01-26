@@ -16,7 +16,7 @@ namespace EpicLoot.MagicItemEffects
                 totalBlockPowerMod += MagicEffectsHelper.GetTotalActiveMagicEffectValue(player, __instance, effect, 0.01f);
             });
 
-            if (player != null && player.m_leftItem == null && player.HasActiveMagicEffect(MagicEffectType.Duelist))
+            if (player != null && player.m_leftItem == null && player.HasActiveMagicEffect(MagicEffectType.Duelist, out float effectValue))
             {
                 totalBlockPowerMod += player.GetTotalActiveMagicEffectValue(MagicEffectType.Duelist, 0.01f);
             }

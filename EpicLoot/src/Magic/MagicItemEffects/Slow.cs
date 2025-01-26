@@ -66,7 +66,7 @@ namespace EpicLoot.MagicItemEffects
 		[UsedImplicitly]
 		private static void Postfix(Character __instance, HitData hit)
 		{
-			if (!__instance.IsBoss() && hit.GetAttacker() is Player player && player.HasActiveMagicEffect(MagicEffectType.Slow))
+			if (!__instance.IsBoss() && hit.GetAttacker() is Player player && player.HasActiveMagicEffect(MagicEffectType.Slow, out float effectValue))
 			{
                 var slowMultiplier = 1 - player.GetTotalActiveMagicEffectValue(MagicEffectType.Slow, 0.01f);
                 if (!Mathf.Approximately(slowMultiplier, 1))

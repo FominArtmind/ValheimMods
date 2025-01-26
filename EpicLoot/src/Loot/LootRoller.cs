@@ -566,8 +566,8 @@ namespace EpicLoot
 
                 if (!UniqueLegendaryHelper.IsGenericLegendary(itemInfo))
                 {
-                    magicItem.LegendaryID = legendary.ID;
-                    magicItem.DisplayName = legendary.Name;
+                    magicItem.LegendaryID = itemInfo.ID;
+                    magicItem.DisplayName = itemInfo.Name;
 
                     if (itemInfo.GuaranteedEffectCount > 0)
                     {
@@ -679,7 +679,7 @@ namespace EpicLoot
                     break;
 
                 case ItemRarity.Mythic:
-                    result = Config..Mythic.Select(x => new KeyValuePair<int, float>((int)x[0], x[1])).ToList();
+                    result = config.Mythic.Select(x => new KeyValuePair<int, float>((int)x[0], x[1])).ToList();
                     break;
 
                 default:

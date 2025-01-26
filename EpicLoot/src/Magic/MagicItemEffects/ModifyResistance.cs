@@ -12,23 +12,24 @@ namespace EpicLoot.MagicItemEffects
         {
             var damageMods = new List<HitData.DamageModPair>();
 
-            if (__instance.HasActiveMagicEffect(MagicEffectType.AddFireResistance))
+            float effectValue;
+            if (__instance.HasActiveMagicEffect(MagicEffectType.AddFireResistance, out effectValue))
             {
                 damageMods.Add(new HitData.DamageModPair() { m_type = HitData.DamageType.Fire, m_modifier = HitData.DamageModifier.Resistant});
             }
-            if (__instance.HasActiveMagicEffect(MagicEffectType.AddFrostResistance))
+            if (__instance.HasActiveMagicEffect(MagicEffectType.AddFrostResistance, out effectValue))
             {
                 damageMods.Add(new HitData.DamageModPair() { m_type = HitData.DamageType.Frost, m_modifier = HitData.DamageModifier.Resistant });
             }
-            if (__instance.HasActiveMagicEffect(MagicEffectType.AddLightningResistance))
+            if (__instance.HasActiveMagicEffect(MagicEffectType.AddLightningResistance, out effectValue))
             {
                 damageMods.Add(new HitData.DamageModPair() { m_type = HitData.DamageType.Lightning, m_modifier = HitData.DamageModifier.Resistant });
             }
-            if (__instance.HasActiveMagicEffect(MagicEffectType.AddPoisonResistance))
+            if (__instance.HasActiveMagicEffect(MagicEffectType.AddPoisonResistance, out effectValue))
             {
                 damageMods.Add(new HitData.DamageModPair() { m_type = HitData.DamageType.Poison, m_modifier = HitData.DamageModifier.Resistant });
             }
-            if (__instance.HasActiveMagicEffect(MagicEffectType.AddSpiritResistance))
+            if (__instance.HasActiveMagicEffect(MagicEffectType.AddSpiritResistance, out effectValue))
             {
                 damageMods.Add(new HitData.DamageModPair() { m_type = HitData.DamageType.Spirit, m_modifier = HitData.DamageModifier.Resistant });
             }

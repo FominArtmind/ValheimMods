@@ -77,7 +77,8 @@ namespace EpicLoot.Adventure.Feature
                     gatingMode = GatedItemTypeMode.PlayerMustKnowRecipe;
                 }
 
-                var itemId = GatedItemTypeHelper.GetItemFromCategory(itemConfig, gatingMode, 0);
+                // TO DO - removed 0 just for compilation
+                var itemId = GatedItemTypeHelper.GetItemFromCategory(itemConfig, gatingMode);
                 if (string.IsNullOrEmpty(itemId))
                 {
                     EpicLoot.LogWarning($"[AdventureData] Could not find item id from Category (orig={itemConfig})!");

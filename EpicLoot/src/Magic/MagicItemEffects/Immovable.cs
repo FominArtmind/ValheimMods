@@ -10,7 +10,7 @@ namespace EpicLoot.MagicItemEffects
         [UsedImplicitly]
         private static bool Prefix(Character __instance)
         {
-            return !(__instance is Player player) || !player.HasActiveMagicEffect(MagicEffectType.Immovable) || !player.IsBlocking();
+            return !(__instance is Player player) || !player.HasActiveMagicEffect(MagicEffectType.Immovable, out float effectValue) || !player.IsBlocking();
         }
     }
     
@@ -20,7 +20,7 @@ namespace EpicLoot.MagicItemEffects
         [UsedImplicitly]
         private static bool Prefix(Character __instance)
         {
-            return !(__instance is Player player) || !player.HasActiveMagicEffect(MagicEffectType.Immovable) || !player.IsBlocking();
+            return !(__instance is Player player) || !player.HasActiveMagicEffect(MagicEffectType.Immovable, out float effectValue) || !player.IsBlocking();
         }
     }
 }

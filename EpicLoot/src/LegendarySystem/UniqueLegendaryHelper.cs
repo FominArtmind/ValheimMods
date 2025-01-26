@@ -40,14 +40,17 @@ namespace EpicLoot.LegendarySystem
 
         private static void AddLegendaryInfo([NotNull] IEnumerable<LegendaryInfo> legendaryItems)
         {
-            if (!LegendaryInfo.ContainsKey(legendaryInfo.ID))
+            foreach (var legendaryInfo in legendaryItems)
             {
-                LegendaryInfo.Add(legendaryInfo.ID, legendaryInfo);
-            }
-            else
-            {
-                EpicLoot.LogWarning($"Duplicate entry found for LegendaryInfo: {legendaryInfo.ID}. " +
-                    $"Please fix your configuration.");
+                if (!LegendaryInfo.ContainsKey(legendaryInfo.ID))
+                {
+                    LegendaryInfo.Add(legendaryInfo.ID, legendaryInfo);
+                }
+                else
+                {
+                    EpicLoot.LogWarning($"Duplicate entry found for LegendaryInfo: {legendaryInfo.ID}. " +
+                        $"Please fix your configuration.");
+                }
             }
         }
 
@@ -201,7 +204,7 @@ namespace EpicLoot.LegendarySystem
             return null;
         }
 
-        public static bool TryGetLegendarySetInfo(string setID, out LegendarySetInfo legendarySetInfo)
+        public static bool TryGetLegendarySetInfo(string setID, out LegendarySetInfo legendarySetInfo, out ItemRarity rarity)
         {
             if (string.IsNullOrEmpty(setID))
             {
