@@ -21,11 +21,12 @@ namespace EpicLoot.CraftingV2
             var root = ui.Root;
             EpicLootAuga.ReplaceBackground(root, true);
 
-            foreach (var tabData in ui.TabHandler.m_tabs)
+            // TO DO: fix if needed
+/*            foreach (var tabData in ui.TabHandler.m_tabs)
             {
                 var newButton = EpicLootAuga.ReplaceVerticalLargeTab(tabData.m_button);
                 tabData.m_button = newButton;
-            }
+            }*/
 
             foreach (var panelBase in ui.Panels)
             {
