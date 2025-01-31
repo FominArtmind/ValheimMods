@@ -279,7 +279,17 @@ namespace EpicLoot
                 var rarityLength = lootDrop?.Rarity?.Length != null ? lootDrop.Rarity.Length : -1;
                 EpicLoot.Log($"Item: {itemName} - Rarity Count: {rarityLength} - Weight: {lootDrop.Weight}");
 
-                var itemID = (CheatDisableGating) ? lootDrop.Item : GatedItemTypeHelper.GetGatedItemID(lootDrop.Item, Config.ItemDropLimitsExceptions);
+                bool IsMaterial(string itemName) {
+                    string[] materials = new string[]{
+                        "ShardMagic", "DustMagic", "ReagentMagic", "EssenceMagic",
+                        "ShardRare", "DustRare", "ReagentRare", "EssenceRare",
+                        "ShardEpic", "DustEpic", "ReagentEpic", "EssenceEpic",
+                    };
+
+                    return materials.Contains(itemName);
+                }
+
+                var itemID = (CheatDisableGating || IsMaterial(itemName)) ? lootDrop.Item : GatedItemTypeHelper.GetGatedItemID(lootDrop.Item, Config.ItemDropLimitsExceptions);
 
                 var rarity = RollItemRarity(lootDrop, luckFactor);
                 var cheatLegendary = !string.IsNullOrEmpty(CheatForceLegendary);
