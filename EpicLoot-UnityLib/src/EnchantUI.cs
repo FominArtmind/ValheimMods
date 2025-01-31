@@ -43,7 +43,7 @@ namespace EpicLoot_UnityLib
                 _toggleGroup.EnsureValidState();
             }
 
-            for (var index = 0; index < RarityButtons.Count; index++)
+            for (var index = 0; index < RarityButtons.Count - 1; index++)
             {
                 var rarityButton = RarityButtons[index];
                 rarityButton.onValueChanged.AddListener((isOn) => {
@@ -61,6 +61,9 @@ namespace EpicLoot_UnityLib
             RarityButtons[0].isOn = true;
             var items = GetEnchantableItems();
             AvailableItems.SetItems(items.Cast<IListElement>().ToList());
+
+            // TO DO: remove this workaround for legendary button
+            RarityButtons[RarityButtons.Count - 1].interactable = false;
         }
 
         public override void Update()
@@ -71,7 +74,7 @@ namespace EpicLoot_UnityLib
             {
                 if (ZInput.GetButtonDown("JoyButtonY"))
                 {
-                    var nextModeIndex = ((int)_rarity + 1) % RarityButtons.Count;
+                    var nextModeIndex = ((int)_rarity) % RarityButtons.Count;
                     RarityButtons[nextModeIndex].isOn = true;
                     ZInput.ResetButtonStatus("JoyButtonY");
                 }
@@ -95,7 +98,7 @@ namespace EpicLoot_UnityLib
         public void RefreshRarity()
         {
             var prevRarity = _rarity;
-            for (var index = 0; index < RarityButtons.Count; index++)
+            for (var index = 0; index < RarityButtons.Count - 1; index++)
             {
                 var button = RarityButtons[index];
                 if (button.isOn)
@@ -231,11 +234,13 @@ namespace EpicLoot_UnityLib
         public override void Unlock()
         {
             base.Unlock();
-
-            foreach (var modeButton in RarityButtons)
+            
+            // TO DO: remove this Legendary button workaround
+            for (var index = 0; index < RarityButtons.Count - 1; index++)
             {
-                modeButton.interactable = true;
+                RarityButtons[index].interactable = true;
             }
+            RarityButtons[RarityButtons.Count - 1].interactable = false;
         }
 
         public override void DeselectAll()

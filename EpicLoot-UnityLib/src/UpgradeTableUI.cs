@@ -180,12 +180,13 @@ namespace EpicLoot_UnityLib
             var maxLevel = EnchantingTableUpgrades.GetFeatureMaxLevel(feature);
             sb.AppendLine(Localization.instance.Localize($"<size=26>{EnchantingTableUpgrades.GetFeatureName(feature)}</size>"));
             sb.AppendLine();
-            if (locked)
-                sb.AppendLine(Localization.instance.Localize("$mod_epicloot_currentlevel: <color=#AD1616><b>$mod_epicloot_featurelocked</b></color>"));
-            else if (currentLevel == 0)
-                sb.AppendLine(Localization.instance.Localize($"$mod_epicloot_currentlevel: <color=#1AACEF><b>$mod_epicloot_featureunlocked</b></color> / {maxLevel}"));
-            else
-                sb.AppendLine(Localization.instance.Localize($"$mod_epicloot_currentlevel: <color=#EAA800><b>{currentLevel}</b></color> / {maxLevel}"));
+            // TO DO : remove in a more gentle way in accordance with upgrade availability settings
+            // if (locked)
+            //     sb.AppendLine(Localization.instance.Localize("$mod_epicloot_currentlevel: <color=#AD1616><b>$mod_epicloot_featurelocked</b></color>"));
+            // else if (currentLevel == 0)
+            //     sb.AppendLine(Localization.instance.Localize($"$mod_epicloot_currentlevel: <color=#1AACEF><b>$mod_epicloot_featureunlocked</b></color> / {maxLevel}"));
+            // else
+            //     sb.AppendLine(Localization.instance.Localize($"$mod_epicloot_currentlevel: <color=#EAA800><b>{currentLevel}</b></color> / {maxLevel}"));
             sb.AppendLine();
 
             sb.AppendLine(Localization.instance.Localize(EnchantingTableUpgrades.GetFeatureDescription(feature)));

@@ -17,6 +17,7 @@ using JetBrains.Annotations;
 using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.UI;
+using static ItemDrop;
 using CodeInstruction = HarmonyLib.CodeInstruction;
 using Object = UnityEngine.Object;
 // ReSharper disable RedundantAssignment
@@ -323,6 +324,12 @@ namespace EpicLoot
         public static bool CanBeAugmented(this ItemDrop.ItemData itemData)
         {
             if (!itemData.IsMagic())
+            {
+                return false;
+            }
+
+            var rarity = itemData.GetRarity();
+            if (rarity == ItemRarity.Legendary || rarity == ItemRarity.Mythic)
             {
                 return false;
             }
