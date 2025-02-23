@@ -252,7 +252,8 @@ namespace EpicLoot
                 var itemName = lootDrop?.Item ?? "Invalid/Null";
                 var rarity = lootDrop?.Rarity?.Length ?? -1;
                 var weight = lootDrop?.Weight ?? -1;
-                EpicLoot.Log($"Item: {itemName} - Rarity Count: {rarity} - Weight: {weight}");
+                var count = lootDrop?.Count ?? -1;
+                EpicLoot.Log($"Item: {itemName} - Rarity Count: {rarity} - Weight: {weight} - Count: {count}");
             }
             
             _weightedLootTable.Setup(loot, x => x.Weight);
@@ -281,9 +282,9 @@ namespace EpicLoot
 
                 bool IsMaterial(string itemName) {
                     string[] materials = new string[]{
-                        "ShardMagic", "DustMagic", "ReagentMagic", "EssenceMagic",
-                        "ShardRare", "DustRare", "ReagentRare", "EssenceRare",
-                        "ShardEpic", "DustEpic", "ReagentEpic", "EssenceEpic",
+                        "RunestoneMagic", "ShardMagic", "DustMagic", "ReagentMagic", "EssenceMagic",
+                        "RunestoneRare", "ShardRare", "DustRare", "ReagentRare", "EssenceRare",
+                        "RunestoneEpic", "ShardEpic", "DustEpic", "ReagentEpic", "EssenceEpic",
                     };
 
                     return materials.Contains(itemName);
@@ -398,6 +399,8 @@ namespace EpicLoot
                 }
                 var item = SpawnLootForDrop(itemPrefab, dropPoint, initializeObject);
                 var itemDrop = item.GetComponent<ItemDrop>();
+                EpicLoot.LogError($"COUNT {lootDrop.Count} STACK SIZE {itemDrop.m_itemData.m_stack}, VALUE {itemDrop.m_itemData.m_shared.m_value}");
+                itemDrop.m_itemData.m_stack = lootDrop.Count;
                 if (EpicLoot.CanBeMagicItem(itemDrop.m_itemData) && !ArrayUtils.IsNullOrEmpty(lootDrop.Rarity))
                 {
                     var itemData = itemDrop.m_itemData;
@@ -419,7 +422,8 @@ namespace EpicLoot
 
                 results.Add(item);
             }
-            
+
+
             return results;
         }
 

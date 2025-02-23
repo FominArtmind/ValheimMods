@@ -10,6 +10,7 @@ namespace EpicLoot
         public float Weight = 1;
         public float[] Rarity;
         public float[] Quality;
+        public int Count = 1;
     }
 
     [Serializable]
