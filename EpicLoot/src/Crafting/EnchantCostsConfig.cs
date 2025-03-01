@@ -71,5 +71,22 @@ namespace EpicLoot.Crafting
         public List<EnchantCostConfig> EnchantCosts = new List<EnchantCostConfig>();
         public List<AugmentCostConfig> AugmentCosts = new List<AugmentCostConfig>();
         public List<ItemAmountConfig> ReAugmentCosts = new List<ItemAmountConfig>();
+        public ReAugmentCostsAlternativeConfig ReAugmentCostsAlternative = new ReAugmentCostsAlternativeConfig();
+    }
+
+    [Serializable]
+    public class ReAugmentCostsAlternativeItemsConfig
+    {
+        public List<string> ItemNames = new List<string>();
+        public int Multiplier = 1;
+    }
+
+    [Serializable]
+    public class ReAugmentCostsAlternativeConfig
+    {
+        public List<ItemAmountConfig> Costs = new List<ItemAmountConfig>();
+        public int ExceptionalMultiplier = 1;
+        public int EliteMultiplier = 1;
+        public List<ReAugmentCostsAlternativeItemsConfig> Items = new List<ReAugmentCostsAlternativeItemsConfig>();
     }
 }

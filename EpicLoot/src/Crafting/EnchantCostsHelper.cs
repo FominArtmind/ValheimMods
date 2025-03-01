@@ -213,7 +213,7 @@ namespace EpicLoot.Crafting
                 return null;
             }
 
-            var featureValues = EnchantingTableUI.instance.SourceTable.GetFeatureCurrentValue(EnchantingFeature.Augment);
+/*            var featureValues = EnchantingTableUI.instance.SourceTable.GetFeatureCurrentValue(EnchantingFeature.Augment);
             var reenchantCostReduction = float.IsNaN(featureValues.Item2) ? 0 : (featureValues.Item2 / 100.0f);
 
             var reaugmentCostIndex = Mathf.Clamp(totalAugments - 1, 0, Config.ReAugmentCosts.Count - 1);
@@ -222,6 +222,27 @@ namespace EpicLoot.Crafting
             {
                 Item = baseCost.Item,
                 Amount = Mathf.CeilToInt(baseCost.Amount * (1.0f - Mathf.Clamp01(reenchantCostReduction)))
+            };*/
+
+            var reaugmentCostIndex = Mathf.Clamp(totalAugments - 1, 0, Config.ReAugmentCostsAlternative.Costs.Count - 1);
+            var baseCost = Config.ReAugmentCostsAlternative.Costs[reaugmentCostIndex];
+            
+            var qualityMultiplier = 1;
+            if(magicItem.Quality == ItemQuality.Exceptional)
+            {
+                qualityMultiplier = Config.ReAugmentCostsAlternative.ExceptionalMultiplier;
+            }
+            else if(magicItem.Quality == ItemQuality.Elite)
+            {
+                qualityMultiplier = Config.ReAugmentCostsAlternative.EliteMultiplier;
+            }
+
+            var baseItemMultiplier = Config.ReAugmentCostsAlternative.Items.Find(value => value.ItemNames.Contains(item.m_shared.m_name))?.Multiplier ?? 1;
+
+            return new ItemAmountConfig()
+            {
+                Item = baseCost.Item,
+                Amount = baseCost.Amount * qualityMultiplier * baseItemMultiplier
             };
         }
 
