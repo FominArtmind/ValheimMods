@@ -25,6 +25,7 @@ namespace EpicLoot.LegendarySystem
     {
         public string ID;
         public string Name;
+        public string Item;
         public string Description;
         public MagicItemEffectRequirements Requirements;
         public List<GuaranteedMagicEffect> GuaranteedMagicEffects = new List<GuaranteedMagicEffect>();

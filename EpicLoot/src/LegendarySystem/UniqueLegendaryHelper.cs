@@ -145,6 +145,24 @@ namespace EpicLoot.LegendarySystem
             return legendaryInfo == GenericLegendaryInfo;
         }
 
+        public static bool IsLegendaryItem(string name, out string allowedPrefabName)
+        {
+            allowedPrefabName = "";
+
+            if (!LegendaryInfo.ContainsKey(name))
+            {
+                return false;
+            }
+
+            allowedPrefabName = LegendaryInfo[name].Item;
+            return true;
+        }
+
+        public static LegendaryInfo GetItem(string name)
+        {
+            return LegendaryInfo[name];
+        }
+
         public static IList<LegendaryInfo> GetAvailableLegendaries(ItemDrop.ItemData baseItem, MagicItem magicItem, bool rollSetItem)
         {
             var availableLegendaries = LegendaryInfo.Values.Where(x => (x.IsSetItem == rollSetItem || EpicLoot.AlwaysDropUniqueLegendaries.Value) && x.Requirements.CheckRequirements(baseItem, magicItem)).AddItem(GenericLegendaryInfo).ToList();
