@@ -1,5 +1,7 @@
 ﻿using System.Linq;
 using HarmonyLib;
+using UnityEngine;
+using Raido;
 
 namespace EpicLoot
 {
@@ -15,32 +17,30 @@ namespace EpicLoot
                 return;
             }
 
-            var containerName = __instance.m_piece.name.Replace("(Clone)", "").Trim();
-            var lootTables = LootRoller.GetLootTable(containerName);
-            if (lootTables != null && lootTables.Count > 0)
-            {
-                __instance.m_inventory.RemoveAll();
-            }
+            __instance.m_inventory.RemoveAll();
         }
 
         public static void Postfix(Container __instance)
         {
+            static string GetContainerCleanName(Container container)
+            {
+                return container.m_piece.name.Replace("(Clone)", "").Trim();
+            }
+
             if (__instance == null || __instance.m_piece == null)
             {
                 return;
             }
 
-            var containerName = __instance.m_piece.name.Replace("(Clone)", "").Trim();
-            var lootTables = LootRoller.GetLootTable(containerName);
-            if (lootTables != null && lootTables.Count > 0)
+            __instance.m_inventory.RemoveAll();
+
+            var containerName = GetContainerCleanName(__instance);
+
+            var items = Raido.DropEngine.RollContainerDrop(containerName, __instance.transform.position);
+            int distanceFromWorldCenter = (int)new Vector3(__instance.transform.position.x, 0, __instance.transform.position.z).magnitude;
+            foreach (var item in items)
             {
-                var items = LootRoller.RollLootTable(lootTables, 1, __instance.m_piece.name, __instance.transform.position);
-                EpicLoot.Log($"Rolling on loot table: {containerName}, spawned {items.Count} items at drop point({__instance.transform.position.ToString("0")}).");
-                foreach (var item in items)
-                {
-                    __instance.m_inventory.AddItem(item);
-                    EpicLoot.Log($"  - {item.m_shared.m_name}" + (item.IsMagic() ? $": {string.Join(", ", item.GetMagicItem().Effects.Select(x => x.EffectType.ToString()))}" : ""));
-                }
+                __instance.m_inventory.AddItem(item);
             }
         }
     }
@@ -60,12 +60,7 @@ namespace EpicLoot
 
             if (__instance.m_nview.IsOwner() && !__instance.m_nview.GetZDO().GetBool("EL_container_items_rolled".GetStableHashCode()))
             {
-                var containerName = __instance.m_piece.name.Replace("(Clone)", "").Trim();
-                var lootTables = LootRoller.GetLootTable(containerName);
-                if (lootTables != null && lootTables.Count > 0)
-                {
-                    __instance.AddDefaultItems();
-                }
+                __instance.AddDefaultItems();
                 __instance.m_nview.GetZDO().Set("EL_container_items_rolled".GetStableHashCode(), value: true);
             }
         }
@@ -83,12 +78,7 @@ namespace EpicLoot
 
             if (__instance.m_nview.IsOwner() && !__instance.m_nview.GetZDO().GetBool("EL_container_items_rolled".GetStableHashCode()))
             {
-                var containerName = __instance.m_piece.name.Replace("(Clone)", "").Trim();
-                var lootTables = LootRoller.GetLootTable(containerName);
-                if (lootTables != null && lootTables.Count > 0)
-                {
-                    __instance.AddDefaultItems();
-                }
+                __instance.AddDefaultItems();
                 __instance.m_nview.GetZDO().Set("EL_container_items_rolled".GetStableHashCode(), value: true);
             }
         }

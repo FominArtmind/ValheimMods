@@ -15,6 +15,19 @@ using Random = System.Random;
 
 namespace EpicLoot
 {
+    public class ItemStat
+    {
+        public string name;
+        public int magic = 0;
+        public int rare = 0;
+        public int epic = 0;
+        public int normal = 0;
+        public int exceptional = 0;
+        public int elite = 0;
+        public int total = 0;
+        public int count = 0;
+    };
+
     [HarmonyPatch(typeof(Terminal), nameof(Terminal.InitTerminal))]
     public static class Terminal_Patch
     {
@@ -25,11 +38,11 @@ namespace EpicLoot
             new Terminal.ConsoleCommand("magicitem", "", (args =>
             {
                 MagicItem(args.Context, args.Args);
-            }), true);
+            }), false);
             new Terminal.ConsoleCommand("mi", "", (args =>
             {
                 MagicItem(args.Context, args.Args);
-            }), true);
+            }), false);
             new Terminal.ConsoleCommand("magicitemwitheffect", "", (args =>
             {
                 SpawnMagicItemWithEffect(args.Context, args.Args);
@@ -215,6 +228,201 @@ namespace EpicLoot
             new Terminal.ConsoleCommand("debugluck", "", (args => {
                 LootRoller.DebugLuckFactor();
             }));
+            new Terminal.ConsoleCommand("containerstat", "", (args =>
+            {
+                TestContainerStat(args[1]);
+            }));
+            new Terminal.ConsoleCommand("creaturestat", "", (args =>
+            {
+                TestCreatureStat(args[1]);
+            }));
+        }
+
+        private static void TestContainerStat(string containerName)
+        {
+            int tries = 10000;
+
+            EpicLoot.Log($"Container {containerName}, tries {tries}");
+            int[] distances = new int[] { 0, 500, 2000, 3500, 5000, 6500, 8000 };
+            for (int i = 0; i < 7; i++)
+            {
+                var itemMap = new Dictionary<string, ItemStat>();
+
+                for (int j = 0; j < tries; j++)
+                {
+                    var items = Raido.DropEngine.RollResolvedItems(containerName, -1, new Vector3(distances[i] * 1.0f, 0.0f, 0.0f));
+
+                    foreach(var item in items)
+                    {
+                        if(!itemMap.ContainsKey(item.Item))
+                        {
+                            itemMap[item.Item] = new ItemStat() { name = item.Item };
+                        }
+                        
+                        if(item.Rarity == ItemRarity.Magic)
+                        {
+                            itemMap[item.Item].magic++;
+                        }
+                        else if(item.Rarity == ItemRarity.Rare)
+                        {
+                            itemMap[item.Item].rare++;
+                        }
+                        else if(item.Rarity == ItemRarity.Epic)
+                        {
+                            itemMap[item.Item].epic++;
+                        }
+
+                        if(item.Quality == ItemQuality.Normal)
+                        {
+                            itemMap[item.Item].normal++;
+                        }
+                        else if (item.Quality == ItemQuality.Exceptional)
+                        {
+                            itemMap[item.Item].exceptional++;
+                        }
+                        else if(item.Quality == ItemQuality.Elite)
+                        {
+                            itemMap[item.Item].elite++;
+                        }
+
+                        itemMap[item.Item].count += item.Count ?? 1;
+
+                        itemMap[item.Item].total++;
+                    }
+                }
+
+                int divider = tries / 100;
+
+                // EpicLoot.Log($"Rolling {containerName}, distance {distances[i]}, {tries} tries");
+                EpicLoot.Log($"");
+
+                List<ItemStat> itemList = new List<ItemStat>();
+                foreach (var item in itemMap.Values)
+                {
+                    itemList.Add(item);
+                }
+
+                itemList = itemList.OrderByDescending(value => value.total).ToList();
+
+                var rounded = (float value) =>
+                {
+                    if (value > 100)
+                    {
+                        return Math.Round(value, 0);
+                    }
+                    if (value > 10)
+                    {
+                        return Math.Round(value, 1);
+                    }
+                    if (value > 1)
+                    {
+                        return Math.Round(value, 2);
+                    }
+                    if (value > 0.1)
+                    {
+                        return Math.Round(value, 3);
+                    }
+                    return Math.Round(value, 4);
+                };
+
+                foreach (var item in itemList)
+                {
+                    EpicLoot.Log($"{item.name}: {rounded(item.total / (1.0f * divider))}% Count per chest {rounded(item.count / (1.0f * tries))} M {item.magic} R {item.rare} E {item.epic} Norm {item.normal} Ex {item.exceptional} El {item.elite}");
+                }
+            }
+        }
+
+        private static void TestCreatureStat(string creatureName)
+        {
+            int tries = 10000;
+
+            EpicLoot.Log($"Creature {creatureName}, tries {tries}");
+            for (int i = 0; i < 4; i++)
+            {
+                var itemMap = new Dictionary<string, ItemStat>();
+
+                for (int j = 0; j < tries; j++)
+                {
+                    var items = Raido.DropEngine.RollResolvedItems(creatureName, i, new Vector3(0.0f, 0.0f, 0.0f));
+
+                    foreach (var item in items)
+                    {
+                        if (!itemMap.ContainsKey(item.Item))
+                        {
+                            itemMap[item.Item] = new ItemStat() { name = item.Item };
+                        }
+
+                        if (item.Rarity == ItemRarity.Magic)
+                        {
+                            itemMap[item.Item].magic++;
+                        }
+                        else if (item.Rarity == ItemRarity.Rare)
+                        {
+                            itemMap[item.Item].rare++;
+                        }
+                        else if (item.Rarity == ItemRarity.Epic)
+                        {
+                            itemMap[item.Item].epic++;
+                        }
+
+                        if (item.Quality == ItemQuality.Normal)
+                        {
+                            itemMap[item.Item].normal++;
+                        }
+                        else if (item.Quality == ItemQuality.Exceptional)
+                        {
+                            itemMap[item.Item].exceptional++;
+                        }
+                        else if (item.Quality == ItemQuality.Elite)
+                        {
+                            itemMap[item.Item].elite++;
+                        }
+
+                        itemMap[item.Item].count += item.Count ?? 1;
+
+                        itemMap[item.Item].total++;
+                    }
+                }
+
+                int divider = tries / 100;
+
+                // EpicLoot.Log($"Rolling {containerName}, distance {distances[i]}, {tries} tries");
+                EpicLoot.Log($"");
+
+                List<ItemStat> itemList = new List<ItemStat>();
+                foreach (var item in itemMap.Values)
+                {
+                    itemList.Add(item);
+                }
+
+                itemList = itemList.OrderByDescending(value => value.total).ToList();
+
+                var rounded = (float value) =>
+                {
+                    if (value > 100)
+                    {
+                        return Math.Round(value, 0);
+                    }
+                    if (value > 10)
+                    {
+                        return Math.Round(value, 1);
+                    }
+                    if (value > 1)
+                    {
+                        return Math.Round(value, 2);
+                    }
+                    if (value > 0.1)
+                    {
+                        return Math.Round(value, 3);
+                    }
+                    return Math.Round(value, 4);
+                };
+
+                foreach (var item in itemList)
+                {
+                    EpicLoot.Log($"{item.name}: {rounded(item.total / (1.0f * divider))}% Count per chest {rounded(item.count / (1.0f * tries))} M {item.magic} R {item.rare} E {item.epic} Norm {item.normal} Ex {item.exceptional} El {item.elite}");
+                }
+            }
         }
 
         private static void ResetMinimap()

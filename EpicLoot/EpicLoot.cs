@@ -29,6 +29,8 @@ using Debug = UnityEngine.Debug;
 using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
 
+using Raido;
+
 namespace EpicLoot
 {
     public enum LogLevel
@@ -212,7 +214,7 @@ namespace EpicLoot
         {
             _instance = this;
 
-            // Item Colors
+            // Item Colors;
             _magicRarityColor = Config.Bind("Item Colors", "Magic Rarity Color", "Blue",
                 "The color of Magic rarity items, the lowest magic item tier. " +
                 "(Optional, use an HTML hex color starting with # to have a custom color.) " +
@@ -540,6 +542,7 @@ namespace EpicLoot
         {
             LoadJsonFile<IDictionary<string, object>>("translations.json", LoadTranslations, ConfigType.Nonsynced);
             LoadJsonFile<LootConfig>("loottables.json", LootRoller.Initialize, ConfigType.Synced);
+            LoadJsonFile<Raido.DropConfig>("RaidoCreatureDrop.json", DropEngine.Initialize, ConfigType.Synced);
             LoadJsonFile<MagicItemEffectsList>("magiceffects.json", MagicItemEffectDefinitions.Initialize, ConfigType.Synced);
             LoadJsonFile<ItemInfoConfig>("iteminfo.json", GatedItemTypeHelper.Initialize, ConfigType.Synced);
             LoadJsonFile<RecipesConfig>("recipes.json", RecipesHelper.Initialize, ConfigType.Synced);
@@ -769,16 +772,19 @@ namespace EpicLoot
             var prefabs = new GameObject[5];
             foreach (ItemRarity rarity in Enum.GetValues(typeof(ItemRarity)))
             {
-                var assetName = $"{type}{rarity}";
-                var prefab = assetBundle.LoadAsset<GameObject>(assetName);
-                if (prefab == null)
+                if (rarity != ItemRarity.Common)
                 {
-                    LogErrorForce($"Tried to load asset {assetName} but it does not exist in the asset bundle!");
-                    continue;
+                    var assetName = $"{type}{rarity}";
+                    var prefab = assetBundle.LoadAsset<GameObject>(assetName);
+                    if (prefab == null)
+                    {
+                        LogErrorForce($"Tried to load asset {assetName} but it does not exist in the asset bundle!");
+                        continue;
+                    }
+                    prefabs[(int)rarity] = prefab;
+                    RegisteredPrefabs.Add(prefab);
+                    RegisteredItemPrefabs.Add(prefab);
                 }
-                prefabs[(int) rarity] = prefab;
-                RegisteredPrefabs.Add(prefab);
-                RegisteredItemPrefabs.Add(prefab);
             }
             Assets.CraftingMaterialPrefabs.Add(type, prefabs);
         }
@@ -1286,26 +1292,39 @@ namespace EpicLoot
 
         public static void OnCharacterDeath(string characterName, int level, Vector3 dropPoint)
         {
-            var lootTables = LootRoller.GetLootTable(characterName);
-            if (lootTables != null && lootTables.Count > 0)
+            var loot = Raido.DropEngine.RollCreatureDrop(characterName, level, dropPoint);
+            Log($"Rolling on loot table: {characterName} (lvl {level}), spawned {loot.Count} items at drop point({dropPoint}).");
+            DropItems(loot, dropPoint);
+            foreach (var l in loot)
             {
-                var loot = LootRoller.RollLootTableAndSpawnObjects(lootTables, level, characterName, dropPoint);
-                Log($"Rolling on loot table: {characterName} (lvl {level}), spawned {loot.Count} items at drop point({dropPoint}).");
-                DropItems(loot, dropPoint);
-                foreach (var l in loot)
+                var itemData = l.GetComponent<ItemDrop>().m_itemData;
+                var magicItem = itemData.GetMagicItem();
+                if (magicItem != null)
                 {
-                    var itemData = l.GetComponent<ItemDrop>().m_itemData;
-                    var magicItem = itemData.GetMagicItem();
-                    if (magicItem != null)
-                    {
-                        Log($"  - {itemData.m_shared.m_name} <{l.transform.position}>: {string.Join(", ", magicItem.Effects.Select(x => x.EffectType.ToString()))}");
-                    }
+                    Log($"  - {itemData.m_shared.m_name} <{l.transform.position}>: {string.Join(", ", magicItem.Effects.Select(x => x.EffectType.ToString()))}");
                 }
             }
-            else
-            {
-                Log($"Could not find loot table for: {characterName} (lvl {level})");
-            }
+
+            /*            var lootTables = LootRoller.GetLootTable(characterName);
+                        if (lootTables != null && lootTables.Count > 0)
+                        {
+                            var loot = LootRoller.RollLootTableAndSpawnObjects(lootTables, level, characterName, dropPoint);
+                            Log($"Rolling on loot table: {characterName} (lvl {level}), spawned {loot.Count} items at drop point({dropPoint}).");
+                            DropItems(loot, dropPoint);
+                            foreach (var l in loot)
+                            {
+                                var itemData = l.GetComponent<ItemDrop>().m_itemData;
+                                var magicItem = itemData.GetMagicItem();
+                                if (magicItem != null)
+                                {
+                                    Log($"  - {itemData.m_shared.m_name} <{l.transform.position}>: {string.Join(", ", magicItem.Effects.Select(x => x.EffectType.ToString()))}");
+                                }
+                            }
+                        }
+                        else
+                        {
+                            Log($"Could not find loot table for: {characterName} (lvl {level})");
+                        }*/
         }
 
         public static void DropItems(List<GameObject> loot, Vector3 centerPos, float dropHemisphereRadius = 0.5f)
@@ -1648,6 +1667,8 @@ namespace EpicLoot
         {
             switch (rarity)
             {
+                case ItemRarity.Common:
+                    return GetColor("Gray");
                 case ItemRarity.Magic:
                     return GetColor(_magicRarityColor.Value);
                 case ItemRarity.Rare:

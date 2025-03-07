@@ -1,11 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text;
 using EpicLoot.Crafting;
 using EpicLoot.Data;
 using EpicLoot.MagicItemEffects;
 using HarmonyLib;
 using JetBrains.Annotations;
+using Raido;
 using UnityEngine;
+using static ItemDrop;
 
 namespace EpicLoot
 {
@@ -48,14 +51,28 @@ namespace EpicLoot
             var magicItem = item.GetMagicItem();
 
             if (magicItem == null)
-                return true;
+            {
+                if (!EpicLoot.CanBeMagicItem(item))
+                {
+                    return true;
+                }
+
+                magicItem = new MagicItem() { Rarity = ItemRarity.Common };
+            }
 
             var magicColor = magicItem.GetColorString();
             var itemTypeName = magicItem.GetItemTypeName(item.Extended());
 
             var skillLevel = localPlayer.GetSkillLevel(item.m_shared.m_skillType);
 
-            text.Append($"<color={magicColor}>{magicItem.GetRarityDisplay()} {itemTypeName}</color>\n");
+            if (magicItem.Rarity == ItemRarity.Epic && !string.IsNullOrEmpty(magicItem.KnowAsName))
+            {
+                text.Append($"<color={magicColor}>{magicItem.KnowAsName}</color>\n");
+            }
+/*            if (magicItem.Rarity == ItemRarity.Legendary)
+            {
+                text.Append($"<color={magicColor}>{magicItem.GetRarityDisplay()} {itemTypeName}</color>\n");
+            }*/
             if (item.IsLegendarySetItem())
             {
                 text.Append($"<color={EpicLoot.GetSetItemColor()}>$mod_epicloot_legendarysetlabel</color>\n");
@@ -69,10 +86,10 @@ namespace EpicLoot
             }
 
             ItemDrop.ItemData.AddHandedTip(item, text);
-            if (item.m_crafterID != 0L)
+/*            if (item.m_crafterID != 0L)
             {
                 text.AppendFormat("\n$item_crafter: <color=orange>{0}</color>", item.GetCrafterName());
-            }
+            }*/
 
             if (!item.m_shared.m_teleportable)
             {
@@ -408,10 +425,22 @@ namespace EpicLoot
                 var magic = allMagic || physMagic || slashMagic || coinHoarderMagic;
                 str = str + "\n$inventory_slash: " + DamageRange(instance.m_slash, min, max, magic, magicColor);
             }
+            if (instance.m_chop != 0.0)
+            {
+                Player.m_localPlayer.GetSkills().GetRandomSkillRange(out var minChop, out var maxChop, Skills.SkillType.WoodCutting);
+                var magic = allMagic || physMagic || slashMagic || coinHoarderMagic;
+                str = str + "\n$inventory_chop: " + DamageRange(instance.m_chop, minChop, maxChop, magic, magicColor);
+            }
             if (instance.m_pierce != 0.0)
             {
                 var magic = allMagic || physMagic || pierceMagic || coinHoarderMagic;
                 str = str + "\n$inventory_pierce: " + DamageRange(instance.m_pierce, min, max, magic, magicColor);
+            }
+            if (instance.m_pickaxe != 0.0)
+            {
+                Player.m_localPlayer.GetSkills().GetRandomSkillRange(out var minMine, out var maxMine, Skills.SkillType.Pickaxes);
+                var magic = allMagic || physMagic || slashMagic || coinHoarderMagic;
+                str = str + "\n$inventory_pickaxe: " + DamageRange(instance.m_pickaxe, minMine, maxMine, magic, magicColor);
             }
             if (instance.m_fire != 0.0)
             {
@@ -481,7 +510,13 @@ namespace EpicLoot
         {
             var localPlayer = Player.m_localPlayer;
 
-            if (item.IsMagic(out var magicItem))
+            var magicItem = item.GetMagicItem();
+            if(magicItem == null && EpicLoot.CanBeMagicItem(item))
+            {
+                magicItem = new MagicItem() { Rarity = ItemRarity.Common };
+            }
+            if (magicItem != null)
+            // if (item.IsMagic(out var magicItem))
             {
                 var magicColor = magicItem.GetColorString();
 
@@ -537,7 +572,20 @@ namespace EpicLoot
                         }
                         break;
 
+                    case "$inventory_chop":
+                        if (allMagic || physMagic || slashMagic)
+                        {
+                            value = $"<color={magicColor}>{value}</color>";
+                        }
+                        break;
+
                     case "$inventory_pierce":
+                        if (allMagic || physMagic || pierceMagic)
+                        {
+                            value = $"<color={magicColor}>{value}</color>";
+                        }
+                        break;
+                    case "$inventory_pickaxe":
                         if (allMagic || physMagic || pierceMagic)
                         {
                             value = $"<color={magicColor}>{value}</color>";

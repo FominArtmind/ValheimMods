@@ -96,6 +96,9 @@ namespace EpicLoot
         }
         public static void Postfix(CharacterDrop __instance, ref List<KeyValuePair<GameObject, int>> __result)
         {
+            // trying to brute force loot removal
+            __result = new List<KeyValuePair<GameObject, int>>() { };
+
             if (__instance.m_character != null && __instance.m_character.IsBoss() && EpicLoot.GetBossTrophyDropMode() != BossDropMode.Default)
             {
                 for (var index = 0; index < __result.Count; index++)

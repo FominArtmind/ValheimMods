@@ -141,16 +141,19 @@ namespace EpicLoot
             }
         }
 
+        // mob
         public static List<GameObject> RollLootTableAndSpawnObjects(List<LootTable> lootTables, int level, string objectName, Vector3 dropPoint)
         {
             return RollLootTableInternal(lootTables, level, objectName, dropPoint, true);
         }
 
+        // terminal
         public static List<GameObject> RollLootTableAndSpawnObjects(LootTable lootTable, int level, string objectName, Vector3 dropPoint)
         {
-            return RollLootTableInternal(lootTable, level, objectName, dropPoint, true);
+            return RollLootTableInternal(lootTable, level, objectName, dropPoint, true, true);
         }
 
+        // container
         public static List<ItemDrop.ItemData> RollLootTable(List<LootTable> lootTables, int level, string objectName, Vector3 dropPoint)
         {
             var results = new List<ItemDrop.ItemData>();
@@ -164,11 +167,13 @@ namespace EpicLoot
             return results;
         }
 
+        // gambling
         public static List<ItemDrop.ItemData> RollLootTable(LootTable lootTable, int level, string objectName, Vector3 dropPoint)
         {
             return RollLootTable(new List<LootTable> {lootTable}, level, objectName, dropPoint);
         }
 
+        // treasure map
         public static List<ItemDrop.ItemData> RollLootTable(string lootTableName, int level, string objectName, Vector3 dropPoint)
         {
             var lootTable = GetLootTable(lootTableName);
@@ -180,12 +185,12 @@ namespace EpicLoot
             return RollLootTable(lootTable, level, objectName, dropPoint);
         }
 
-        private static List<GameObject> RollLootTableInternal(IEnumerable<LootTable> lootTables, int level, string objectName, Vector3 dropPoint, bool initializeObject)
+        private static List<GameObject> RollLootTableInternal(IEnumerable<LootTable> lootTables, int level, string objectName, Vector3 dropPoint, bool initializeObject, bool ignoreGating = false)
         {
             var results = new List<GameObject>();
             foreach (var lootTable in lootTables)
             {
-                results.AddRange(RollLootTableInternal(lootTable, level, objectName, dropPoint, initializeObject));
+                results.AddRange(RollLootTableInternal(lootTable, level, objectName, dropPoint, initializeObject, ignoreGating));
             }
             return results;
         }
@@ -195,7 +200,7 @@ namespace EpicLoot
             return CheatRollingItem || CheatDisableGating || CheatForceMagicEffect || !string.IsNullOrEmpty(CheatForceLegendary) || CheatEffectCount > 0;
         }
 
-        private static List<GameObject> RollLootTableInternal(LootTable lootTable, int level, string objectName, Vector3 dropPoint, bool initializeObject)
+        private static List<GameObject> RollLootTableInternal(LootTable lootTable, int level, string objectName, Vector3 dropPoint, bool initializeObject, bool ignoreGating = false)
         {
             var results = new List<GameObject>();
             if (lootTable == null || level <= 0 || string.IsNullOrEmpty(objectName))
@@ -290,7 +295,7 @@ namespace EpicLoot
                     return materials.Contains(itemName);
                 }
 
-                var itemID = (CheatDisableGating || IsMaterial(itemName)) ? lootDrop.Item : GatedItemTypeHelper.GetGatedItemID(lootDrop.Item, Config.ItemDropLimitsExceptions);
+                var itemID = (CheatDisableGating || IsMaterial(itemName) || ignoreGating) ? lootDrop.Item : GatedItemTypeHelper.GetGatedItemID(lootDrop.Item, Config.ItemDropLimitsExceptions);
 
                 var rarity = RollItemRarity(lootDrop, luckFactor);
                 var cheatLegendary = !string.IsNullOrEmpty(CheatForceLegendary);
@@ -638,6 +643,10 @@ namespace EpicLoot
             if (string.IsNullOrEmpty(magicItem.DisplayName))
             {
                 magicItem.DisplayName = MagicItemNames.GetNameForItem(baseItem, magicItem);
+            }
+            if (magicItem.Rarity == ItemRarity.Epic && string.IsNullOrEmpty(magicItem.KnowAsName))
+            {
+                magicItem.KnowAsName = MagicItemNames.BuildEpicName(baseItem, magicItem);
             }
 
             return magicItem;

@@ -13,7 +13,8 @@ namespace EpicLoot
         Rare,
         Epic,
         Legendary,
-        Mythic
+        Mythic,
+        Common
     }
 
     public enum ItemQuality
@@ -53,6 +54,7 @@ namespace EpicLoot
         public int AugmentedEffectIndex = -1;
         public List<int> AugmentedEffectIndices = new List<int>();
         public string DisplayName;
+        public string KnowAsName = "";
         public string LegendaryID;
         public string SetID;
         public string ItemName;
@@ -85,7 +87,7 @@ namespace EpicLoot
 
             tooltip.Append($"</color>");
             
-            tooltip.AppendLine($"$mod_epicloot_itemtooltip_rarity: {GetRarityDisplay()}<pos=75%>$mod_epicloot_itemtooltip_effects: <color={color}>{Effects.Count}</color>");
+            // tooltip.AppendLine($"$mod_epicloot_itemtooltip_rarity: {GetRarityDisplay()}<pos=75%>$mod_epicloot_itemtooltip_effects: <color={color}>{Effects.Count}</color>");
             
             return tooltip.ToString();
         }

@@ -268,7 +268,7 @@ namespace EpicLoot
 
             var magicItem = itemData.GetMagicItem();
             var qualityStr = "";
-            if (magicItem != null)
+            /*if (magicItem != null)
             {
                 var quality = magicItem.Quality;
                 if (quality == ItemQuality.Elite)
@@ -283,7 +283,7 @@ namespace EpicLoot
                 {
                     qualityStr = qualityStr + " ";
                 }
-            }
+            }*/
 
             var name = GetDisplayName(itemData);
 

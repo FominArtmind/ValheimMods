@@ -57,7 +57,48 @@ namespace EpicLoot
             var rarity = magicItem.Rarity;
             switch (rarity)
             {
+                case ItemRarity.Common:
                 case ItemRarity.Magic:
+                case ItemRarity.Rare:
+                case ItemRarity.Epic:
+                    var magicFormat = Localization.instance.Localize("$mod_epicloot_basicanyitemnameformat");
+
+                    var qualityStr = "";
+                    switch (magicItem.Quality)
+                    {
+                        case ItemQuality.Exceptional:
+                            qualityStr = Localization.instance.Localize("$mod_epicloot_exceptional");
+                            break;
+                        case ItemQuality.Elite:
+                            qualityStr = Localization.instance.Localize("$mod_epicloot_elite");
+                            break;
+                        default:
+                            break;
+                    }
+
+                    var rarityStr = "";
+                    switch (magicItem.Rarity)
+                    {
+                        case ItemRarity.Common:
+                            rarityStr = Localization.instance.Localize("$mod_epicloot_common");
+                            break;
+                        case ItemRarity.Magic:
+                            rarityStr = Localization.instance.Localize("$mod_epicloot_magic");
+                            break;
+                        case ItemRarity.Rare:
+                            rarityStr = Localization.instance.Localize("$mod_epicloot_rare");
+                            break;
+                        case ItemRarity.Epic:
+                            rarityStr = Localization.instance.Localize("$mod_epicloot_epic");
+                            break;
+                        default:
+                            rarityStr = Localization.instance.Localize("$mod_epicloot_common");
+                            break;
+                    }
+
+                    return string.Format(magicFormat, qualityStr, rarityStr, baseName).Trim();
+
+/*                case ItemRarity.Magic:
                     var magicFormat = Localization.instance.Localize("$mod_epicloot_basicmagicnameformat");
                     return string.Format(magicFormat, baseName);
 
@@ -69,7 +110,7 @@ namespace EpicLoot
                     return string.Format(fullNameFormat, prefix, baseName, suffix);
 
                 case ItemRarity.Epic:
-                    return BuildEpicName(item, magicItem);
+                    return BuildEpicName(item, magicItem);*/
 
                 case ItemRarity.Legendary:
                     return GetLegendaryName(item, magicItem);

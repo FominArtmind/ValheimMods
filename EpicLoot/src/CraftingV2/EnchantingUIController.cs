@@ -681,10 +681,10 @@ namespace EpicLoot.CraftingV2
                 magicItem.AugmentedEffectIndices.Remove(effectIndex);
             }
 
-            if (magicItem.Rarity == ItemRarity.Rare)
+/*            if (magicItem.Rarity == ItemRarity.Rare)
             {
                 magicItem.DisplayName = MagicItemNames.GetNameForItem(item, magicItem);
-            }
+            }*/
 
             item.SaveMagicItem(magicItem);
 
