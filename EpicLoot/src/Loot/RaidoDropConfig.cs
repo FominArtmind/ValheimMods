@@ -15,6 +15,7 @@ namespace Raido
     public class DefaultStarQualityRatesConfig
     {
         public int Level;
+        public float Inferior;
         public float Normal;
         public float Exceptional;
         public float Elite;
@@ -24,6 +25,7 @@ namespace Raido
     public class DefaultBiomeLevelQualityRatesConfig
     {
         public int Level;
+        public float Inferior;
         public float Normal;
         public float Exceptional;
         public float Elite;
@@ -49,13 +51,15 @@ namespace Raido
     {
         public string Item;
         // public string From;
-        public int Every;
-        public int? Min;
-        public int? Max;
+        public int Every = 1;
+        public int Min = 1;
+        public int Max = 1;
         public float? Rare;
         public float? Epic;
+        public float? Normal;
         public float? Exceptional;
         public float? Elite;
+        public int Repeat = 1;
     }
 
     [Serializable]

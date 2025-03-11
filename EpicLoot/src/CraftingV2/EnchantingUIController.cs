@@ -354,14 +354,16 @@ namespace EpicLoot.CraftingV2
             var sb = new StringBuilder();
             var rarityColor = EpicLoot.GetRarityColor(rarity);
             var rarityDisplay = EpicLoot.GetRarityDisplayName(rarity);
-            var quality = ItemQuality.Normal;
-            var qualityText = "";
+            var quality = ItemQuality.Inferior;
+            var qualityText = Localization.instance.Localize("$mod_epicloot_inferior");
             var player = Player.m_localPlayer;
             var eliteKey = "EpicLoot_PlayerSeen_" + item.m_shared.m_name + ItemQuality.Elite;
+            var inferior = true;
             if (player.m_customData.ContainsKey(eliteKey))
             {
                 quality = ItemQuality.Elite;
-                qualityText = "Elite";
+                qualityText = Localization.instance.Localize("$mod_epicloot_elite");
+                inferior = false;
             }
             else
             {
@@ -369,7 +371,18 @@ namespace EpicLoot.CraftingV2
                 if (player.m_customData.ContainsKey(exceptionalKey))
                 {
                     quality = ItemQuality.Exceptional;
-                    qualityText = "Exceptional";
+                    qualityText = Localization.instance.Localize("$mod_epicloot_exceptional");
+                    inferior = false;
+                }
+                else
+                {
+                    var normalKey = "EpicLoot_PlayerSeen_" + item.m_shared.m_name + ItemQuality.Normal;
+                    if (player.m_customData.ContainsKey(normalKey))
+                    {
+                        quality = ItemQuality.Normal;
+                        qualityText = Localization.instance.Localize("$mod_epicloot_normal");
+                        inferior = false;
+                    }
                 }
             }
             sb.AppendLine($"{item.m_shared.m_name} \u2794 <color={rarityColor}>{qualityText} {rarityDisplay}</color> {item.GetDecoratedName(rarityColor)}");
@@ -412,14 +425,36 @@ namespace EpicLoot.CraftingV2
             sb.AppendLine(Localization.instance.Localize("$mod_epicloot_augment_availableeffects"));
             sb.AppendLine($"<color={rarityColor}>");
 
-            var tempMagicItem = new MagicItem() { Rarity = rarity };
+
+            var tempMagicItem = new MagicItem() { Rarity = rarity, Quality = inferior ? ItemQuality.Inferior : ItemQuality.Normal };
             var availableEffects = MagicItemEffectDefinitions.GetAvailableEffects(item, tempMagicItem);
+            availableEffects = availableEffects.OrderByDescending(value => value.SelectionWeight).ToList();
+
+            var effectsWeightSum = availableEffects.Sum(value => value.SelectionWeight);
+            var effectChance = (float weight) =>
+            {
+                double value = 100.0 * weight / effectsWeightSum;
+                if (value >= 10)
+                {
+                    value = Math.Round(value, 0);
+                }
+                else if (value >= 1)
+                {
+                    value = Math.Round(value, 1);
+                }
+                else
+                {
+                    value = Math.Round(value, 2);
+                }
+
+                return $"{value}%";
+            };
             
             foreach (var effectDef in availableEffects)
             {
                 var values = effectDef.GetValuesForRarity(rarity, item.m_shared.m_name, quality);
                 var valueDisplay = values != null ? Mathf.Approximately(values.MinValue, values.MaxValue) ? $"{values.MinValue}" : $"({values.MinValue}-{values.MaxValue})" : "";
-                sb.AppendLine($"‣ {string.Format(Localization.instance.Localize(effectDef.DisplayText), valueDisplay)}");
+                sb.AppendLine($"‣ {effectChance(effectDef.SelectionWeight)} {string.Format(Localization.instance.Localize(effectDef.DisplayText), valueDisplay)}");
             }
 
             sb.Append("</color>");
@@ -429,7 +464,7 @@ namespace EpicLoot.CraftingV2
 
         private static List<InventoryItemListElement> GetEnchantCost(ItemDrop.ItemData item, MagicRarityUnity _rarity)
         {
-            var quality = ItemQuality.Normal;
+            var quality = ItemQuality.Inferior;
             var player = Player.m_localPlayer;
             var eliteKey = "EpicLoot_PlayerSeen_" + item.m_shared.m_name + ItemQuality.Elite;
             if (player.m_customData.ContainsKey(eliteKey))
@@ -442,6 +477,14 @@ namespace EpicLoot.CraftingV2
                 if (player.m_customData.ContainsKey(exceptionalKey))
                 {
                     quality = ItemQuality.Exceptional;
+                }
+                else
+                {
+                    var normalKey = "EpicLoot_PlayerSeen_" + item.m_shared.m_name + ItemQuality.Normal;
+                    if (player.m_customData.ContainsKey(normalKey))
+                    {
+                        quality = ItemQuality.Normal;
+                    }
                 }
             }
 
@@ -456,7 +499,7 @@ namespace EpicLoot.CraftingV2
 
         private static GameObject EnchantItemAndReturnSuccessDialog(ItemDrop.ItemData item, MagicRarityUnity rarity)
         {
-            var quality = ItemQuality.Normal;
+            var quality = ItemQuality.Inferior;
             var player = Player.m_localPlayer;
             var eliteKey = "EpicLoot_PlayerSeen_" + item.m_shared.m_name + ItemQuality.Elite;
             if (player.m_customData.ContainsKey(eliteKey))
@@ -469,6 +512,14 @@ namespace EpicLoot.CraftingV2
                 if (player.m_customData.ContainsKey(exceptionalKey))
                 {
                     quality = ItemQuality.Exceptional;
+                }
+                else
+                {
+                    var normalKey = "EpicLoot_PlayerSeen_" + item.m_shared.m_name + ItemQuality.Normal;
+                    if (player.m_customData.ContainsKey(normalKey))
+                    {
+                        quality = ItemQuality.Normal;
+                    }
                 }
             }
 
@@ -583,7 +634,28 @@ namespace EpicLoot.CraftingV2
             }
 
             var availableEffects = MagicItemEffectDefinitions.GetAvailableEffects(item.Extended(), item.GetMagicItem(), valuelessEffect ? -1 : augmentindex);
-            
+            availableEffects = availableEffects.OrderByDescending(value => value.SelectionWeight).ToList();
+
+            var effectsWeightSum = availableEffects.Sum(value => value.SelectionWeight);
+            var effectChance = (float weight) =>
+            {
+                double value = 100.0 * weight / effectsWeightSum;
+                if (value >= 10)
+                {
+                    value = Math.Round(value, 0);
+                }
+                else if (value >= 1)
+                {
+                    value = Math.Round(value, 1);
+                }
+                else
+                {
+                    value = Math.Round(value, 2);
+                }
+
+                return $"{value}%";
+            };
+
             var sb = new StringBuilder();
             sb.Append($"<color={rarityColor}>");
             if (EpicLoot.EffectValueRollDistribution.Value == EffectValueRollDistributionTypes.TendsToLowAverage)
@@ -599,7 +671,7 @@ namespace EpicLoot.CraftingV2
             {
                 var values = effectDef.GetValuesForRarity(item.GetRarity(), item.m_shared.m_name, magicItem.Quality);
                 var valueDisplay = values != null ? Mathf.Approximately(values.MinValue, values.MaxValue) ? $"{values.MinValue}" : $"({values.MinValue}-{values.MaxValue})" : "";
-                sb.AppendLine($"‣ {string.Format(Localization.instance.Localize(effectDef.DisplayText), valueDisplay)}");
+                sb.AppendLine($"‣ {effectChance(effectDef.SelectionWeight)} {string.Format(Localization.instance.Localize(effectDef.DisplayText), valueDisplay)}");
             }
             sb.Append("</color>");
 

@@ -15,7 +15,7 @@ namespace EpicLoot
                 if (item.IsMagic())
                 {
                     var magicItem = item.GetMagicItem();
-                    if(magicItem.Quality == ItemQuality.Exceptional || magicItem.Quality == ItemQuality.Elite)
+                    if(magicItem.Quality == ItemQuality.Normal || magicItem.Quality == ItemQuality.Exceptional || magicItem.Quality == ItemQuality.Elite)
                     {
                         var key = "EpicLoot_PlayerSeen_" + item.m_shared.m_name + magicItem.Quality;
                         if(!player.m_customData.ContainsKey(key))
@@ -46,7 +46,7 @@ namespace EpicLoot
                 if (item.IsMagic())
                 {
                     var magicItem = item.GetMagicItem();
-                    if (magicItem.Quality == ItemQuality.Exceptional || magicItem.Quality == ItemQuality.Elite)
+                    if (magicItem.Quality == ItemQuality.Normal || magicItem.Quality == ItemQuality.Exceptional || magicItem.Quality == ItemQuality.Elite)
                     {
                         var key = "EpicLoot_PlayerSeen_" + item.m_shared.m_name + magicItem.Quality;
                         if (!player.m_customData.ContainsKey(key))

@@ -65,6 +65,7 @@ namespace EpicLoot.Crafting
                     return configEntry?.ProductsExceptional;
                 default:
                 case ItemQuality.Normal:
+                case ItemQuality.Inferior:
                     return configEntry?.Products;
             }
         }
@@ -98,6 +99,7 @@ namespace EpicLoot.Crafting
                     return configEntry?.ProductsExceptional;
                 default:
                 case ItemQuality.Normal:
+                case ItemQuality.Inferior:
                     return configEntry?.Products;
             }
         }
@@ -177,6 +179,7 @@ namespace EpicLoot.Crafting
                     break;
                 default:
                 case ItemQuality.Normal:
+                case ItemQuality.Inferior:
                     cost = configEntry.Cost.ToList();
                     break;
             }

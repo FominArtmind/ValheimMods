@@ -75,7 +75,7 @@ namespace EpicLoot
             }*/
             if (item.IsLegendarySetItem())
             {
-                text.Append($"<color={EpicLoot.GetSetItemColor()}>$mod_epicloot_legendarysetlabel</color>\n");
+                // text.Append($"<color={EpicLoot.GetSetItemColor()}>$mod_epicloot_legendarysetlabel</color>\n");
             }
             text.Append(item.GetDescription());
             

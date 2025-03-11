@@ -15,6 +15,7 @@ namespace EpicLoot
         private static List<string> _flags = new List<string>();
 
         public bool NoRoll;
+        public bool NotInferior;
         public bool ExclusiveSelf = true;
         public List<string> ExclusiveEffectTypes = new List<string>();
         public List<string> MustHaveEffectTypes = new List<string>();
@@ -49,6 +50,7 @@ namespace EpicLoot
             _flags.Clear();
 
             if (NoRoll) _flags.Add(nameof(NoRoll));
+            if (NotInferior) _flags.Add(nameof(NotInferior));
             if (ExclusiveSelf) _flags.Add(nameof(ExclusiveSelf));
             if (ItemHasPhysicalDamage != null) _flags.Add(nameof(ItemHasPhysicalDamage));
             if (ItemHasElementalDamage != null) _flags.Add(nameof(ItemHasElementalDamage));
@@ -191,6 +193,11 @@ namespace EpicLoot
         public bool CheckRequirements([NotNull] ItemDrop.ItemData itemData, [NotNull] MagicItem magicItem, string magicEffectType = null)
         {
             if (NoRoll)
+            {
+                return false;
+            }
+
+            if (NotInferior && magicItem.Quality == ItemQuality.Inferior)
             {
                 return false;
             }
@@ -440,6 +447,8 @@ namespace EpicLoot
 
         public ValueDef GetValuesForRarity(ItemRarity itemRarity, string itemName, ItemQuality quality)
         {
+            // EpicLoot.Log($"GetValuesForRarity: {itemRarity}, {itemName}, {quality}");
+
             ValueDef ValueForQuality(ValueDef normal, ValueDef exceptional, ValueDef elite)
             {
                 if (quality == ItemQuality.Elite && elite != null)
@@ -450,6 +459,22 @@ namespace EpicLoot
                 {
                     return exceptional;
                 }
+                if (quality == ItemQuality.Inferior && normal != null)
+                {
+                    // EpicLoot.Log($"ValueForQuality: creating ValueDef");
+
+                    ValueDef temp = new ValueDef()
+                    {
+                        MinValue = (float)Math.Ceiling(normal.MinValue / 1.67),
+                        MaxValue = (float)Math.Ceiling(normal.MaxValue / 1.67),
+                        Increment = normal.Increment
+                    };
+
+                    // EpicLoot.Log($"ValueForQuality: ValueDef {temp.MinValue}, {temp.MaxValue}, {temp.Increment}");
+
+                    return temp;
+                }
+
                 return normal;
             }
 

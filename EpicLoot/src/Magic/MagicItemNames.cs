@@ -66,6 +66,9 @@ namespace EpicLoot
                     var qualityStr = "";
                     switch (magicItem.Quality)
                     {
+                        case ItemQuality.Inferior:
+                            qualityStr = Localization.instance.Localize("$mod_epicloot_inferior");
+                            break;
                         case ItemQuality.Exceptional:
                             qualityStr = Localization.instance.Localize("$mod_epicloot_exceptional");
                             break;

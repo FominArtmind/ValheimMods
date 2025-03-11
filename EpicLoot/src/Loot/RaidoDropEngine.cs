@@ -114,8 +114,10 @@ namespace Raido
                     Max = item.Max,
                     Rare = item.Rare ?? defaultRarityRates.Rare,
                     Epic = item.Epic ?? defaultRarityRates.Epic,
+                    Normal = item.Normal ?? defaultQualityRates.Normal,
                     Exceptional = item.Exceptional ?? defaultQualityRates.Exceptional,
-                    Elite = item.Elite ?? defaultQualityRates.Elite
+                    Elite = item.Elite ?? defaultQualityRates.Elite,
+                    Repeat = item.Repeat
                 };
 
                 items.Add(temp);
@@ -177,8 +179,10 @@ namespace Raido
                     Max = item.Max,
                     Rare = item.Rare ?? defaultRarityRates.Rare,
                     Epic = item.Epic ?? defaultRarityRates.Epic,
+                    Normal = item.Normal ?? defaultQualityRates.Normal,
                     Exceptional = item.Exceptional ?? defaultQualityRates.Exceptional,
-                    Elite = item.Elite ?? defaultQualityRates.Elite
+                    Elite = item.Elite ?? defaultQualityRates.Elite,
+                    Repeat = item.Repeat
                 };
 
                 items.Add(temp);
@@ -198,8 +202,10 @@ namespace Raido
                 Max = item.Max,
                 Rare = item.Rare,
                 Epic = item.Epic,
+                Normal = item.Normal,
                 Exceptional = item.Exceptional,
-                Elite = item.Elite
+                Elite = item.Elite,
+                Repeat = item.Repeat
             };
 
             while (true)
@@ -235,6 +241,25 @@ namespace Raido
                 }
             }
         }
+        public static float GetLuckFactor(Vector3 fromPoint, out int extraRolls)
+        {
+            var luckFactor = 0.0f;
+            extraRolls = 0;
+            var players = new List<Player>();
+            Player.GetPlayersInRange(fromPoint, 100f, players);
+
+            if (players.Count > 0)
+            {
+                var totalLuckFactor = players
+                    .Select(x => x.m_nview.GetZDO().GetInt("el-luk") * 0.01f)
+                    .DefaultIfEmpty(0)
+                    .Sum();
+                luckFactor += totalLuckFactor;
+            }
+
+            extraRolls = (int)Math.Floor(luckFactor);
+            return luckFactor - extraRolls;
+        }
 
         private static ItemRarity _RollItemRarity(DropUnit item)
         {
@@ -259,10 +284,14 @@ namespace Raido
             {
                 return ItemQuality.Exceptional;
             }
-            return ItemQuality.Normal;
+            if (item.Normal != null && _random.NextDouble() * 100.0 < item.Normal)
+            {
+                return ItemQuality.Normal;
+            }
+            return ItemQuality.Inferior;
         }
 
-        private static List<ResolvedItem> _RollItems(List<DropUnit> items, int? limit = null, bool log = true)
+        private static List<ResolvedItem> _RollItems(List<DropUnit> items, Vector3 dropPoint, int? limit = null, bool log = true)
         {
             var result = new List<ResolvedItem>();
             var sortedItems = items.OrderByDescending(value => value.Every).ToList();
@@ -276,39 +305,57 @@ namespace Raido
                     _Log($"Group {entity.Item} resolved to {item.Item}");
                 }
 
-                // since checking for 0 every time results look suspicious
-                var rollBase = _random.Next(item.Every);
-                var roll = _random.Next(item.Every);
-                if (log)
-                {
-                    _Log($"For {item.Item} rolled base {rollBase}, roll {roll} of {item.Every}");
-                }
-                if (roll == rollBase)
-                {
-                    if (limit != null && droppedCount >= limit)
-                    {
-                        _Log($"Reaching limit {limit} for drop count");
-                        break;
-                    }
-                    droppedCount++;
+                var rolls = item.Repeat;
 
-                    var resolvedItem = new ResolvedItem
+                if (!_PlainItem(item.Item))
+                {
+                    var luckFactor = GetLuckFactor(dropPoint, out int extraRolls);
+                    rolls += extraRolls;
+                    if (_random.NextDouble() < luckFactor)
                     {
-                        Item = item.Item,
-                        Rarity = _RollItemRarity(item),
-                        Quality = _RollItemQuality(item)
-                    };
-                    if (item.Min != null && item.Max != null)
+                        rolls++;
+                        _Log($"For{item.Item} initial rolls {item.Repeat}, luck increased rolls {rolls} (luck < 100 proc)");
+                    }
+                    else
                     {
-                        var count = _random.Next(item.Min ?? 1, (item.Max ?? 1) + 1);
+                        _Log($"For{item.Item} initial rolls {item.Repeat}, luck increased rolls {rolls}");
+                    }
+                }
+
+                for (int n = 0; n < rolls; n++)
+                {
+                    // since checking for 0 every time results look suspicious
+                    var rollBase = _random.Next(item.Every);
+                    var roll = _random.Next(item.Every);
+                    if (log)
+                    {
+                        _Log($"For {item.Item} rolled base {rollBase}, roll {roll} of {item.Every}");
+                    }
+                    if (roll == rollBase)
+                    {
+                        if (limit != null && droppedCount >= limit)
+                        {
+                            _Log($"Reaching limit {limit} for drop count");
+                            break;
+                        }
+                        droppedCount++;
+
+                        var resolvedItem = new ResolvedItem
+                        {
+                            Item = item.Item,
+                            Rarity = _RollItemRarity(item),
+                            Quality = _RollItemQuality(item)
+                        };
+
+                        var count = _random.Next(item.Min, item.Max + 1);
                         if (log)
                         {
                             _Log($"For {item.Item} rolled count {count} of ({item.Min} - {item.Max})");
                         }
                         resolvedItem.Count = count;
-                    }
 
-                    result.Add(resolvedItem);
+                        result.Add(resolvedItem);
+                    }
                 }
             }
 
@@ -444,12 +491,9 @@ namespace Raido
         }
 
         // level == -1 for chests
-        private static List<GameObject> RollLootTableInternal(string objectName, int level, Vector3 dropPoint, bool initializeObject)
+        private static List<GameObject> RollDropInternal(string objectName, int level, Vector3 dropPoint, bool initializeObject)
         {
             var results = new List<GameObject>();
-
-            // TO DO
-            // var luckFactor = GetLuckFactor(dropPoint);
 
             int distanceFromWorldCenter = (int)new Vector3(dropPoint.x, 0, dropPoint.z).magnitude;
 
@@ -471,7 +515,7 @@ namespace Raido
                 _Log($"Item {item.Item}, Every {item.Every}, Rare {item.Rare} Epic {item.Epic} Ex {item.Exceptional} El {item.Elite}, Min {item.Min} Max {item.Max}");
             }
 
-            List<ResolvedItem> rolledItems = _RollItems(items, limit);
+            List<ResolvedItem> rolledItems = _RollItems(items, dropPoint, limit);
 
             if (rolledItems.Count == 0)
             {
@@ -490,7 +534,7 @@ namespace Raido
                 var itemName = rolledItem.Item;
 
                 ItemRarity rarity = ItemRarity.Magic;
-                ItemQuality quality = ItemQuality.Normal;
+                ItemQuality quality = ItemQuality.Inferior;
 
                 if (_PlainItem(itemName))
                 {
@@ -499,7 +543,7 @@ namespace Raido
                 else
                 {
                     rarity = rolledItem.Rarity ?? ItemRarity.Magic;
-                    quality = rolledItem.Quality ?? ItemQuality.Normal;
+                    quality = rolledItem.Quality ?? ItemQuality.Inferior;
 
                     var lootFilterForcedSacrifice = false;
 
@@ -508,6 +552,11 @@ namespace Raido
                     {
                         itemName = legendaryBasePrefabName;
                         rarity = ItemRarity.Legendary;
+
+                        if(quality == ItemQuality.Inferior)
+                        {
+                            quality = ItemQuality.Normal;
+                        }
                     }
                     else
                     {
@@ -554,13 +603,23 @@ namespace Raido
                                     return true;
                                 }
 
-                                if (quality == ItemQuality.Normal)
+                                if (quality != ItemQuality.Exceptional)
                                 {
                                     var exceptionalKey = "EpicLoot_PlayerSeen_" + itemName + ItemQuality.Exceptional;
                                     if (player.m_customData.ContainsKey(exceptionalKey))
                                     {
                                         _Log($"Item replaced with materials due to player has already seen Exceptional quality of it");
                                         return true;
+                                    }
+
+                                    if (quality != ItemQuality.Normal)
+                                    {
+                                        var normalKey = "EpicLoot_PlayerSeen_" + itemName + ItemQuality.Normal;
+                                        if (player.m_customData.ContainsKey(normalKey))
+                                        {
+                                            _Log($"Item replaced with materials due to player has already seen Normal quality of it");
+                                            return true;
+                                        }
                                     }
                                 }
                             }
@@ -662,7 +721,7 @@ namespace Raido
         public static List<ItemDrop.ItemData> RollContainerDrop(string objectName, Vector3 dropPoint)
         {
             var results = new List<ItemDrop.ItemData>();
-            var gameObjects = RollLootTableInternal(objectName, -1, dropPoint, false);
+            var gameObjects = RollDropInternal(objectName, -1, dropPoint, false);
             foreach (var itemObject in gameObjects)
             {
                 results.Add(itemObject.GetComponent<ItemDrop>().m_itemData.Clone());
@@ -674,7 +733,7 @@ namespace Raido
 
         public static List<GameObject> RollCreatureDrop(string objectName, int level, Vector3 dropPoint)
         {
-            return RollLootTableInternal(objectName, level - 1, dropPoint, true);
+            return RollDropInternal(objectName, level - 1, dropPoint, true);
         }
 
         public static List<ResolvedItem> RollResolvedItems(string objectName, int level, Vector3 dropPoint)
@@ -692,7 +751,7 @@ namespace Raido
                 items = _ResolveCreatureItems(objectName, level);
             }
 
-            List<ResolvedItem> rolledItems = _RollItems(items, limit, false);
+            List<ResolvedItem> rolledItems = _RollItems(items, dropPoint, limit, false);
 
             return rolledItems;
         }

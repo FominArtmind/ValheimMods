@@ -19,6 +19,7 @@ namespace EpicLoot
 
     public enum ItemQuality
     {
+        Inferior,
         Normal,
         Exceptional,
         Elite
