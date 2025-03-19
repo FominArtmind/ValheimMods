@@ -9,6 +9,8 @@ namespace EpicLoot
         {
             EpicLoot.TryRegisterItems();
             EpicLoot.TryRegisterRecipes();
+
+            Raido.ItemChanges.ChangeItems();
         }
     }
 
@@ -19,6 +21,8 @@ namespace EpicLoot
         {
             EpicLoot.TryRegisterItems();
             EpicLoot.TryRegisterRecipes();
+
+            Raido.ItemChanges.ChangeItems();
         }
     }
 }

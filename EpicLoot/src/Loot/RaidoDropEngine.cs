@@ -376,8 +376,25 @@ namespace Raido
                     magicItem.SetID = setID;
                 }
 
+                var legendaryNameFormat = Localization.instance.Localize("$mod_epicloot_basiclegendarynameformat");
+                var qualityStr = "";
+                switch (magicItem.Quality)
+                {
+                    case ItemQuality.Inferior:
+                        qualityStr = Localization.instance.Localize("$mod_epicloot_inferior");
+                        break;
+                    case ItemQuality.Exceptional:
+                        qualityStr = Localization.instance.Localize("$mod_epicloot_exceptional");
+                        break;
+                    case ItemQuality.Elite:
+                        qualityStr = Localization.instance.Localize("$mod_epicloot_elite");
+                        break;
+                    default:
+                        break;
+                }
+
                 magicItem.LegendaryID = itemInfo.ID;
-                magicItem.DisplayName = itemInfo.Name;
+                magicItem.DisplayName = string.Format(legendaryNameFormat, qualityStr, itemInfo.Name).Trim();
 
                 List<GuaranteedMagicEffect> guaranteedMagicEffects;
                 if (quality == ItemQuality.Elite && itemInfo.GuaranteedMagicEffectsElite.Count() > 0)
@@ -459,6 +476,10 @@ namespace Raido
 
         private static bool _PlainItem(string itemName)
         {
+            if(itemName == "Wishbone") {
+                return true;
+            }
+
             string legendaryBasePrefabName = null;
             if (UniqueLegendaryHelper.IsLegendaryItem(itemName, out legendaryBasePrefabName))
             {
@@ -576,6 +597,11 @@ namespace Raido
                         {
                             _Log($"Item replaced with materials due to its id being null");
                             return true;
+                        }
+
+                        // TO DO : other special items if needed
+                        if (itemName == "Wishbone") {
+                            return false;
                         }
 
                         if (lootFilterForcedSacrifice)
