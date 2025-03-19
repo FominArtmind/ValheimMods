@@ -161,7 +161,7 @@ namespace EpicLoot
                                     __instance.m_spawnRadius = 2.28f;
                                     __instance.m_maxNear = 3;
                                     __instance.m_maxTotal = 200;
-                                    __instance.m_spawnIntervalSec = 5;
+                                    __instance.m_spawnIntervalSec = 15;
                                     __instance.m_triggerDistance = 180;
                                 }
                                 else if (distance > 3500)
@@ -173,7 +173,7 @@ namespace EpicLoot
                                     __instance.m_spawnRadius = 2.28f;
                                     __instance.m_maxNear = 3;
                                     __instance.m_maxTotal = 200;
-                                    __instance.m_spawnIntervalSec = 5;
+                                    __instance.m_spawnIntervalSec = 15;
                                     __instance.m_triggerDistance = 135;
                                 }
                                 else
@@ -185,7 +185,7 @@ namespace EpicLoot
                                     __instance.m_spawnRadius = 2.28f;
                                     __instance.m_maxNear = 3;
                                     __instance.m_maxTotal = 200;
-                                    __instance.m_spawnIntervalSec = 5;
+                                    __instance.m_spawnIntervalSec = 15;
                                     __instance.m_triggerDistance = 90;
                                 }
                             }
@@ -279,7 +279,7 @@ namespace EpicLoot
                                     __instance.m_spawnRadius = 3;
                                     __instance.m_maxNear = 4;
                                     __instance.m_maxTotal = 200;
-                                    __instance.m_spawnIntervalSec = 5;
+                                    __instance.m_spawnIntervalSec = 8;
                                     __instance.m_triggerDistance = 90;
                                 }
                                 else if (distance > 3500)
@@ -291,7 +291,7 @@ namespace EpicLoot
                                     __instance.m_spawnRadius = 3;
                                     __instance.m_maxNear = 4;
                                     __instance.m_maxTotal = 200;
-                                    __instance.m_spawnIntervalSec = 5;
+                                    __instance.m_spawnIntervalSec = 8;
                                     __instance.m_triggerDistance = 75;
                                 }
                                 else
@@ -303,7 +303,7 @@ namespace EpicLoot
                                     __instance.m_spawnRadius = 3;
                                     __instance.m_maxNear = 4;
                                     __instance.m_maxTotal = 200;
-                                    __instance.m_spawnIntervalSec = 5;
+                                    __instance.m_spawnIntervalSec = 8;
                                     __instance.m_triggerDistance = 60;
                                 }
                             }
@@ -319,7 +319,7 @@ namespace EpicLoot
                                     __instance.m_spawnRadius = 3;
                                     __instance.m_maxNear = 2;
                                     __instance.m_maxTotal = 200;
-                                    __instance.m_spawnIntervalSec = 5;
+                                    __instance.m_spawnIntervalSec = 8;
                                     __instance.m_triggerDistance = 180;
                                 }
                                 else if (distance > 3500)
@@ -331,7 +331,7 @@ namespace EpicLoot
                                     __instance.m_spawnRadius = 3;
                                     __instance.m_maxNear = 2;
                                     __instance.m_maxTotal = 200;
-                                    __instance.m_spawnIntervalSec = 5;
+                                    __instance.m_spawnIntervalSec = 8;
                                     __instance.m_triggerDistance = 135;
                                 }
                                 else
@@ -343,7 +343,7 @@ namespace EpicLoot
                                     __instance.m_spawnRadius = 3;
                                     __instance.m_maxNear = 2;
                                     __instance.m_maxTotal = 200;
-                                    __instance.m_spawnIntervalSec = 5;
+                                    __instance.m_spawnIntervalSec = 8;
                                     __instance.m_triggerDistance = 90;
                                 }
                             }
