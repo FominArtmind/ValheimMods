@@ -7,7 +7,6 @@ using System.Text;
 using System.Xml.Linq;
 using Common;
 using EpicLoot;
-using EpicLoot.Adventure.Feature;
 using EpicLoot.Crafting;
 using EpicLoot.Data;
 using EpicLoot.GatedItemType;
@@ -307,7 +306,7 @@ namespace Raido
 
                 var rolls = item.Repeat;
 
-                if (!_PlainItem(item.Item))
+                if (!_Creature(item.Item) && !_PlainItem(item.Item))
                 {
                     var luckFactor = GetLuckFactor(dropPoint, out int extraRolls);
                     rolls += extraRolls;
@@ -463,15 +462,33 @@ namespace Raido
             if (!itemPrefab)
             {
                 _Log($"Item prefab {prefabName} not found!");
+                return null;
             }
 
             var itemDrop = itemPrefab.GetComponent<ItemDrop>();
             if (!itemDrop)
             {
                 _Log($"Item drop for {prefabName} not found!");
+                return null;
             }
 
             return itemDrop;
+        }
+
+        private static bool _Creature(string itemName)
+        {
+            var creaturePrefab = ZNetScene.instance.GetPrefab(itemName);
+            if (creaturePrefab != null)
+            {
+                var character = creaturePrefab.GetComponent<Character>();
+                if (character)
+                {
+                    _Log($"Is creature: {itemName}");
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         private static bool _PlainItem(string itemName)
@@ -492,7 +509,7 @@ namespace Raido
         {
             var itemDrop = _ItemDrop(itemName);
 
-            return Player.m_localPlayer != null && Player.m_localPlayer.m_knownMaterial.Contains(itemDrop.m_itemData.m_shared.m_name);
+            return itemDrop != null && Player.m_localPlayer != null && Player.m_localPlayer.m_knownMaterial.Contains(itemDrop.m_itemData.m_shared.m_name);
         }
 
         private static bool _ItemAllowed(string itemName)
@@ -557,7 +574,7 @@ namespace Raido
                 ItemRarity rarity = ItemRarity.Magic;
                 ItemQuality quality = ItemQuality.Inferior;
 
-                if (_PlainItem(itemName))
+                if (_Creature(itemName) || _PlainItem(itemName))
                 {
                     // nothing to do yet
                 }
@@ -709,37 +726,59 @@ namespace Raido
                     }
                 }
 
-                GameObject itemPrefab = null;
-
-                itemPrefab = ObjectDB.instance.GetItemPrefab(itemName);
-                var item = LootRoller.SpawnLootForDrop(itemPrefab, dropPoint, initializeObject);
-                var itemDrop = item.GetComponent<ItemDrop>();
-
-                if (_PlainItem(itemName))
+                if (_Creature(itemName))
                 {
-                    itemDrop.m_itemData.m_stack = rolledItem.Count ?? 1;
+                    // creating creature right here since there is no sense to put it into container etc
+                    var creaturePrefab = ZNetScene.instance.GetPrefab(itemName);
+
+                    for (int i = 0; i < rolledItem.Count; i++)
+                    {
+                        var spawnPoint = new Vector3(dropPoint.x, dropPoint.y, dropPoint.z);
+                        var randomSpacing = UnityEngine.Random.insideUnitSphere * 2;
+                        spawnPoint += randomSpacing;
+                        ZoneSystem.instance.GetSolidHeight(spawnPoint, out var height);
+                        spawnPoint.y = height;
+
+                        var creature = Object.Instantiate(creaturePrefab, spawnPoint, Quaternion.identity);
+                    }
                 }
                 else
                 {
-                    var itemData = itemDrop.m_itemData;
-                    var magicItemComponent = itemData.Data().GetOrCreate<MagicItemComponent>();
-                    var magicItem = RollMagicItem(rolledItem.Item, rarity, quality, itemData, 0.0f);
+                    GameObject itemPrefab = null;
 
-                    magicItemComponent.SetMagicItem(magicItem);
-                    itemDrop.m_itemData = itemData;
-                    itemDrop.Save();
+                    itemPrefab = ObjectDB.instance.GetItemPrefab(itemName);
 
-                    Indestructible.MakeItemIndestructible(itemData);
-                    if (itemData.m_shared.m_useDurability)
+                    if (itemPrefab != null)
                     {
-                        itemData.m_durability = itemData.GetMaxDurability();
-                        // Random.Range(0.2f, 1.0f) * itemData.GetMaxDurability();
+                        var item = LootRoller.SpawnLootForDrop(itemPrefab, dropPoint, initializeObject);
+                        var itemDrop = item.GetComponent<ItemDrop>();
+
+                        if (_PlainItem(itemName))
+                        {
+                            itemDrop.m_itemData.m_stack = rolledItem.Count ?? 1;
+                        }
+                        else
+                        {
+                            var itemData = itemDrop.m_itemData;
+                            var magicItemComponent = itemData.Data().GetOrCreate<MagicItemComponent>();
+                            var magicItem = RollMagicItem(rolledItem.Item, rarity, quality, itemData, 0.0f);
+
+                            magicItemComponent.SetMagicItem(magicItem);
+                            itemDrop.m_itemData = itemData;
+                            itemDrop.Save();
+
+                            Indestructible.MakeItemIndestructible(itemData);
+                            if (itemData.m_shared.m_useDurability)
+                            {
+                                itemData.m_durability = itemData.GetMaxDurability();
+                                // Random.Range(0.2f, 1.0f) * itemData.GetMaxDurability();
+                            }
+                        }
+
+                        results.Add(item);
                     }
                 }
-
-                results.Add(item);
             }
-
 
             return results;
         }
