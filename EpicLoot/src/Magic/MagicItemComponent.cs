@@ -144,7 +144,7 @@ namespace EpicLoot
 
             foreach (var effect in MagicItem.Effects)
             {
-                if (MagicItemEffectDefinitions.IsValuelessEffect(effect.EffectType, MagicItem.Rarity) && !Mathf.Approximately(effect.EffectValue, 1))
+                if (Raido.DropEngine.EffectsConfig.IsValuelessEffect(effect.EffectType) && !Mathf.Approximately(effect.EffectValue, 1))
                 {
                     EpicLoot.Log($"Fixing up effect on {MagicItem.DisplayName}: effect={effect.EffectType}");
                     effect.EffectValue = 1;
@@ -334,7 +334,7 @@ namespace EpicLoot
                 return false;
             }
 
-            return itemData.GetMagicItem().Effects.Select(effect => MagicItemEffectDefinitions.Get(effect.EffectType)).Any(effectDef => effectDef.CanBeAugmented);
+            return itemData.GetMagicItem().Effects.Select(effect => Raido.DropEngine.EffectsConfig.GetEffectMetadata(effect.EffectType)).Any(value => value.CanBeAugmented);
         }
 
         public static string GetSetID(this ItemDrop.ItemData itemData, out bool isMundane)
@@ -391,7 +391,7 @@ namespace EpicLoot
                 }
                 else if (UniqueLegendaryHelper.TryGetLegendarySetInfo(setID, out var setInfo, out ItemRarity rarity))
                 {
-                    return setInfo.LegendaryIDs.Count;
+                    return setInfo.Items.Count;
                 }
             }
 
@@ -402,7 +402,7 @@ namespace EpicLoot
         {
             if (UniqueLegendaryHelper.TryGetLegendarySetInfo(setName, out var setInfo, out ItemRarity rarity))
             {
-                return setInfo.LegendaryIDs;
+                return setInfo.Items;
             }
 
             return GetMundaneSetPieces(ObjectDB.instance, setName);
@@ -523,10 +523,10 @@ namespace EpicLoot
                     foreach (var setBonusInfo in setBonuses.OrderBy(x => x.Count))
                     {
                         var hasEquipped = currentSetEquipped.Count >= setBonusInfo.Count;
-                        var effectDef = MagicItemEffectDefinitions.Get(setBonusInfo.Effect.Type);
+                        var effectDef = Raido.DropEngine.EffectsConfig.GetEffectMetadata(setBonusInfo.Effect.Type);
                         if (effectDef == null)
                         {
-                            EpicLoot.LogError($"Set Tooltip: Could not find effect ({setBonusInfo.Effect.Type}) for set ({setInfo.ID}) bonus ({setBonusInfo.Count})!");
+                            EpicLoot.LogError($"Set Tooltip: Could not find effect ({setBonusInfo.Effect.Type}) for set ({setInfo.Id}) bonus ({setBonusInfo.Count})!");
                             continue;
                         }
 
@@ -674,7 +674,7 @@ namespace EpicLoot
             var equippedSets = player.GetEquippedSets();
             foreach (var setInfo in equippedSets)
             {
-                var equippedSetPieces = player.GetEquippedSetPieces(setInfo.ID);
+                var equippedSetPieces = player.GetEquippedSetPieces(setInfo.Id);
                 var count = equippedSetPieces.Count;
                 ItemQuality minQuality = ItemQuality.Elite;
                 foreach(var piece in equippedSetPieces)

@@ -37,6 +37,7 @@ namespace Raido
         public string Item;
         // public string From;
         public int Weight;
+        public string Class;
     }
 
     [Serializable]
@@ -50,7 +51,7 @@ namespace Raido
     public class DropUnit
     {
         public string Item;
-        // public string From;
+        public string Class;
         public int Every = 1;
         public int Min = 1;
         public int Max = 1;

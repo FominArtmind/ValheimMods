@@ -15,17 +15,12 @@ namespace EpicLoot
                 if (item.IsMagic())
                 {
                     var magicItem = item.GetMagicItem();
-                    if(magicItem.Quality == ItemQuality.Normal || magicItem.Quality == ItemQuality.Exceptional || magicItem.Quality == ItemQuality.Elite)
+
+                    if (magicItem.Rarity != ItemRarity.Legendary)
                     {
-                        var key = "EpicLoot_PlayerSeen_" + item.m_shared.m_name + magicItem.Quality;
-                        if(!player.m_customData.ContainsKey(key))
+                        if (magicItem.Quality == ItemQuality.Normal || magicItem.Quality == ItemQuality.Exceptional || magicItem.Quality == ItemQuality.Elite)
                         {
-                            player.m_customData.Add(key, "1");
-                            EpicLoot.Log("Added " + key);
-                        }
-                        else
-                        {
-                            EpicLoot.Log("Not added " + key);
+                            Raido.Raido.SetPlayerKnowsItem(item);
                         }
                     }
                 }
@@ -46,12 +41,12 @@ namespace EpicLoot
                 if (item.IsMagic())
                 {
                     var magicItem = item.GetMagicItem();
-                    if (magicItem.Quality == ItemQuality.Normal || magicItem.Quality == ItemQuality.Exceptional || magicItem.Quality == ItemQuality.Elite)
+
+                    if (magicItem.Rarity != ItemRarity.Legendary)
                     {
-                        var key = "EpicLoot_PlayerSeen_" + item.m_shared.m_name + magicItem.Quality;
-                        if (!player.m_customData.ContainsKey(key))
+                        if (magicItem.Quality == ItemQuality.Normal || magicItem.Quality == ItemQuality.Exceptional || magicItem.Quality == ItemQuality.Elite)
                         {
-                            player.m_customData.Add(key, "1");
+                            Raido.Raido.SetPlayerKnowsItem(item);
                         }
                     }
                 }

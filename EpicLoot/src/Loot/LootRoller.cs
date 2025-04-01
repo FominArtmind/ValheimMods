@@ -564,15 +564,15 @@ namespace EpicLoot
                     if (rarity == ItemRarity.Legendary)
                     {
                         var availableLegendaries = UniqueLegendaryHelper.GetAvailableLegendaries(baseItem, magicItem, rollSetItem);
-                        EpicLoot.Log($"Available Legendaries: {string.Join(", ", availableLegendaries.Select(x => x.ID))}");
-                        _weightedLegendaryTable.Setup(availableLegendaries, x => x.SelectionWeight);
+                        EpicLoot.Log($"Available Legendaries: {string.Join(", ", availableLegendaries.Select(x => x.Id))}");
+                        _weightedLegendaryTable.Setup(availableLegendaries, x => 1);
                         itemInfo = _weightedLegendaryTable.Roll();
                     }
                     else
                     {
                         var availableMythics = UniqueLegendaryHelper.GetAvailableMythics(baseItem, magicItem, rollSetItem);
-                        EpicLoot.Log($"Available Mythics: {string.Join(", ", availableMythics.Select(x => x.ID))}");
-                        _weightedMythicTable.Setup(availableMythics, x => x.SelectionWeight);
+                        EpicLoot.Log($"Available Mythics: {string.Join(", ", availableMythics.Select(x => x.Id))}");
+                        _weightedMythicTable.Setup(availableMythics, x => 1);
                         itemInfo = _weightedMythicTable.Roll();
                     }
                 }
@@ -585,47 +585,43 @@ namespace EpicLoot
 
                 if (!UniqueLegendaryHelper.IsGenericLegendary(itemInfo))
                 {
-                    magicItem.LegendaryID = itemInfo.ID;
+                    magicItem.LegendaryID = itemInfo.Id;
                     magicItem.DisplayName = itemInfo.Name;
 
-                    if (itemInfo.GuaranteedEffectCount > 0)
+                    List<MagicEffect> guaranteedMagicEffects;
+                    if (quality == ItemQuality.Elite && itemInfo.Elite.Count() > 0)
                     {
-                        effectCount = itemInfo.GuaranteedEffectCount;
+                        guaranteedMagicEffects = itemInfo.Elite;
                     }
-
-                    List<GuaranteedMagicEffect> guaranteedMagicEffects;
-                    if (quality == ItemQuality.Elite && itemInfo.GuaranteedMagicEffectsElite.Count() > 0)
+                    else if (quality == ItemQuality.Exceptional && itemInfo.Exceptional.Count() > 0)
                     {
-                        guaranteedMagicEffects = itemInfo.GuaranteedMagicEffectsElite;
-                    }
-                    else if (quality == ItemQuality.Exceptional && itemInfo.GuaranteedMagicEffectsExceptional.Count() > 0)
-                    {
-                        guaranteedMagicEffects = itemInfo.GuaranteedMagicEffectsExceptional;
+                        guaranteedMagicEffects = itemInfo.Exceptional;
                     }
                     else
                     {
-                        guaranteedMagicEffects = itemInfo.GuaranteedMagicEffects;
+                        guaranteedMagicEffects = itemInfo.Normal;
                     }
+                    effectCount = guaranteedMagicEffects.Count;
 
                     foreach (var guaranteedMagicEffect in guaranteedMagicEffects)
                     {
-                        var effectDef = MagicItemEffectDefinitions.Get(guaranteedMagicEffect.Type);
+/*                        var effectDef = MagicItemEffectDefinitions.Get(guaranteedMagicEffect.Type);
                         if (effectDef == null)
                         {
-                            EpicLoot.LogError($"Could not find magic effect (Type={guaranteedMagicEffect.Type}) while creating legendary item (ID={itemInfo.ID})");
+                            EpicLoot.LogError($"Could not find magic effect (Type={guaranteedMagicEffect.Type}) while creating legendary item (ID={itemInfo.Id})");
                             continue;
                         }
 
                         var effect = RollEffect(effectDef, rarity, magicItem.Quality, baseItem.m_shared.m_name, guaranteedMagicEffect.Values);
                         magicItem.Effects.Add(effect);
-                        effectCount--;
+                        effectCount--;*/
                     }
                 }
             }
 
             for (var i = 0; i < effectCount; i++)
             {
-                var availableEffects = MagicItemEffectDefinitions.GetAvailableEffects(baseItem, magicItem);
+/*                var availableEffects = MagicItemEffectDefinitions.GetAvailableEffects(baseItem, magicItem);
                 if (availableEffects.Count == 0)
                 {
                     EpicLoot.LogWarning($"Tried to add more effects to magic item ({baseItem.m_shared.m_name}) but there were no more available effects. " +
@@ -637,7 +633,7 @@ namespace EpicLoot
                 var effectDef = _weightedEffectTable.Roll();
 
                 var effect = RollEffect(effectDef, magicItem.Rarity, magicItem.Quality, baseItem.m_shared.m_name);
-                magicItem.Effects.Add(effect);
+                magicItem.Effects.Add(effect);*/
             }
 
             if (string.IsNullOrEmpty(magicItem.DisplayName))
@@ -997,7 +993,7 @@ namespace EpicLoot
         {
             var results = new List<MagicItemEffect>();
 
-            if (item == null || magicItem == null)
+    /*        if (item == null || magicItem == null)
             {
                 EpicLoot.LogError($"[RollAugmentEffects] Null inputs: item={item}, magicItem={magicItem}");
                 return results;
@@ -1037,18 +1033,18 @@ namespace EpicLoot
                 {
                     availableEffects.RemoveAll(x => x.Type == newEffect.EffectType);
                 }
-            }
+            }*/
 
             return results;
         }
 
         public static void AddDebugMagicEffects(MagicItem item, string itemName)
         {
-            if (!string.IsNullOrEmpty(ForcedMagicEffect) && !item.HasEffect(ForcedMagicEffect))
+/*            if (!string.IsNullOrEmpty(ForcedMagicEffect) && !item.HasEffect(ForcedMagicEffect))
             {
                 EpicLoot.Log($"AddDebugMagicEffect {ForcedMagicEffect}");
                 item.Effects.Add(RollEffect(MagicItemEffectDefinitions.Get(ForcedMagicEffect), item.Rarity, item.Quality, itemName));
-            }
+            }*/
         }
 
         public static float GetLuckFactor(Vector3 fromPoint)

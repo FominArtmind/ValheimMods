@@ -1,23 +1,14 @@
 using System;
 using System.Collections.Generic;
-using System.IO.Ports;
 using System.Linq;
-using System.Reflection.Emit;
-using System.Text;
-using System.Xml.Linq;
-using Common;
 using EpicLoot;
 using EpicLoot.Crafting;
 using EpicLoot.Data;
-using EpicLoot.GatedItemType;
 using EpicLoot.LegendarySystem;
 using EpicLoot.MagicItemEffects;
-using EpicLoot_UnityLib;
-using JetBrains.Annotations;
 using UnityEngine;
-using static CharacterDrop;
+using static PrivilegeManager;
 using Object = UnityEngine.Object;
-using Random = UnityEngine.Random;
 
 namespace Raido
 {
@@ -25,6 +16,7 @@ namespace Raido
     {
         public string Item;
         public int? Count;
+        public string Class;
         public ItemRarity? Rarity;
         public ItemQuality? Quality;
     }
@@ -32,30 +24,29 @@ namespace Raido
     public static class DropEngine
     {
         public static DropConfig Config;
+        public static MagicEffectsConfig EffectsConfig; 
+        public static ItemClassesConfig ClassesConfig;
         private static System.Random _random;
 
-        private static WeightedRandomCollection<MagicItemEffectDefinition> _weightedEffectTable;
+       //  private static WeightedRandomCollection<MagicItemEffectDefinition> _weightedEffectTable;
 
-        public static void Initialize(DropConfig dropConfig)
+        public static void InitializeDropConfig(DropConfig dropConfig)
         {
             Config = dropConfig;
 
             _random = new System.Random();
-            _weightedEffectTable = new WeightedRandomCollection<MagicItemEffectDefinition>(_random);
+            // _weightedEffectTable = new WeightedRandomCollection<MagicItemEffectDefinition>(_random);
+        }
 
-            /*            for(int i = 1; i < 170; i++)
-                        {
-                            int[] distrib = new int[i];
+        public static void InitializeEffectsConfig(MagicEffectsConfig effectsConfig)
+        {
+            EffectsConfig = effectsConfig;
+        }
 
-                            int tries = 10000;
-                            for (int j = 0; j < tries; j++)
-                            {
-                                var roll = _random.Next(i);
-                                distrib[roll]++;
-                            }
-
-                            _Log($"Expected chance for {i} is {1.0 / i}, got {distrib[0] * 1.0 / tries}");
-                        }*/
+        public static void InitializeClassesConfig(ItemClassesConfig classesConfig)
+        {
+            ClassesConfig = classesConfig;
+            ClassesConfig.Initialize(EffectsConfig);
         }
 
         private static void _Log(string message)
@@ -107,8 +98,8 @@ namespace Raido
                 DropUnit temp = new DropUnit
                 {
                     Every = item.Every,
-                    // From = item.From,
                     Item = item.Item,
+                    Class = item.Class,
                     Min = item.Min,
                     Max = item.Max,
                     Rare = item.Rare ?? defaultRarityRates.Rare,
@@ -172,8 +163,8 @@ namespace Raido
                 DropUnit temp = new DropUnit
                 {
                     Every = item.Every,
-                    // From = item.From,
                     Item = item.Item,
+                    Class = item.Class,
                     Min = item.Min,
                     Max = item.Max,
                     Rare = item.Rare ?? defaultRarityRates.Rare,
@@ -195,8 +186,8 @@ namespace Raido
             var result = new DropUnit
             {
                 Every = item.Every,
-                // From = item.From,
                 Item = item.Item,
+                Class = item.Class,
                 Min = item.Min,
                 Max = item.Max,
                 Rare = item.Rare,
@@ -235,6 +226,7 @@ namespace Raido
                     if (roll < sumWeight)
                     {
                         result.Item = entity.Item;
+                        result.Class = entity.Class;
                         break;
                     }
                 }
@@ -258,6 +250,37 @@ namespace Raido
 
             extraRolls = (int)Math.Floor(luckFactor);
             return luckFactor - extraRolls;
+        }
+
+        private static string _RollItemClass(DropUnit item)
+        {
+            if(item.Class != null)
+            {
+                return item.Class;
+            }
+
+            var classes = ClassesConfig.GetAvailableClasses(item.Item);
+            var str = "";
+            foreach (var c in classes)
+            {
+                str += $"{c.Key}: {c.Value} ";
+            }
+            _Log($"Classes for {item.Item} {str}");
+
+            var total = classes.Sum(value => value.Value);
+            var roll = _random.Next(total);
+            var sumWeight = 0;
+            foreach (var entity in classes)
+            {
+                sumWeight += entity.Value;
+                if (roll < sumWeight)
+                {
+                    return entity.Key;
+                }
+            }
+
+            _Log($"Class for {item.Item} not found, rolling Chaotic");
+            return "Chaotic";
         }
 
         private static ItemRarity _RollItemRarity(DropUnit item)
@@ -288,6 +311,145 @@ namespace Raido
                 return ItemQuality.Normal;
             }
             return ItemQuality.Inferior;
+        }
+
+        private static int _RollEffectCount(ItemRarity rarity, ItemQuality quality)
+        {
+            EffectCountConfig qualityConfig;
+            switch (quality)
+            {
+                case ItemQuality.Elite:
+                    qualityConfig = EffectsConfig.EffectCountDistribution.Elite;
+                    break;
+                case ItemQuality.Exceptional:
+                    qualityConfig = EffectsConfig.EffectCountDistribution.Exceptional;
+                    break;
+                case ItemQuality.Normal:
+                    qualityConfig = EffectsConfig.EffectCountDistribution.Normal;
+                    break;
+                default:
+                case ItemQuality.Inferior:
+                    qualityConfig = EffectsConfig.EffectCountDistribution.Inferior;
+                    break;
+            }
+
+            List<KeyValuePair<int, int>> config;
+            switch (rarity)
+            {
+                case ItemRarity.Epic:
+                    config = qualityConfig.Epic.Select(x => new KeyValuePair<int, int>(x[0], x[1])).ToList();
+                    break;
+                case ItemRarity.Rare:
+                    config = qualityConfig.Rare.Select(x => new KeyValuePair<int, int>(x[0], x[1])).ToList();
+                    break;
+                default:
+                case ItemRarity.Magic:
+                    config = qualityConfig.Magic.Select(x => new KeyValuePair<int, int>(x[0], x[1])).ToList();
+                    break;
+            }
+
+            int total = 0;
+            foreach(var item in config)
+            {
+                total += item.Value;
+            }
+            
+            var roll = _random.Next(total);
+            int sum = 0;
+            foreach (var item in config)
+            {
+                sum += item.Value;
+                if(sum >= roll)
+                {
+                    return item.Key;
+                }
+            }
+
+            return 0;
+        }
+
+        private static float _RollEffectValue(ItemResolvedEffect effect)
+        {
+            var min = effect.Min != null ? effect.Min.Value : 0.0f;
+            var max = effect.Max != null ? effect.Max.Value : 0.0f;
+            var step = effect.Step != null ? effect.Step.Value : 0.0f;
+
+            var value = min;
+            if (step > 0.0f)
+            {
+                _Log($"RollEffect: {effect.Type} value={value} (min={effect.Min} max={effect.Max})");
+                var incrementCount = (int)((max - min) / step);
+
+                double v = Math.Pow(_random.NextDouble() * _random.NextDouble(), 0.7);
+
+                value = min + (int)(v * (incrementCount + 1)) * step;
+            }
+
+            return value;
+        }
+
+        private static EpicLoot.MagicItemEffect _RollEffect(List<ItemResolvedEffect> effects)
+        {
+            int total = 0;
+            foreach (var item in effects)
+            {
+                total += item.Weight;
+            }
+
+            var roll = _random.Next(total);
+            var selected = effects[0];
+            int sum = 0;
+            foreach (var item in effects)
+            {
+                sum += item.Weight;
+                if (sum >= roll)
+                {
+                    selected = item;
+                    break;
+                }
+            }
+
+            ItemResolvedGroupEffect selectedGroupEffect = null;
+            if (selected.Group != null && selected.Group.Count > 0)
+            {
+                int total2 = 0;
+                foreach (var item in selected.Group)
+                {
+                    total2 += item.Weight;
+                }
+
+                var roll2 = _random.Next(total2);
+                selectedGroupEffect = selected.Group[0];
+                int sum2 = 0;
+                foreach (var item in selected.Group)
+                {
+                    sum2 += item.Weight;
+                    if (sum2 >= roll2)
+                    {
+                        selectedGroupEffect = item;
+                        break;
+                    }
+                }
+            }
+
+            if(selectedGroupEffect != null)
+            {
+                selected = new ItemResolvedEffect()
+                {
+                    Type = selectedGroupEffect.Type,
+                    Min = selectedGroupEffect.Min,
+                    Max = selectedGroupEffect.Max,
+                    Step = selectedGroupEffect.Step
+                };
+            }
+
+            EpicLoot.MagicItemEffect result = new EpicLoot.MagicItemEffect() { EffectType = selected.Type };
+            if(!EffectsConfig.IsValuelessEffect(selected.Type))
+            {
+                result.EffectValue = _RollEffectValue(selected);
+            }
+
+            return result;
         }
 
         private static List<ResolvedItem> _RollItems(List<DropUnit> items, Vector3 dropPoint, int? limit = null, bool log = true)
@@ -342,6 +504,7 @@ namespace Raido
                         var resolvedItem = new ResolvedItem
                         {
                             Item = item.Item,
+                            Class = _RollItemClass(item),
                             Rarity = _RollItemRarity(item),
                             Quality = _RollItemQuality(item)
                         };
@@ -361,9 +524,29 @@ namespace Raido
             return result;
         }
 
-        public static MagicItem RollMagicItem(string itemName, ItemRarity rarity, ItemQuality quality, ItemDrop.ItemData baseItem, float luckFactor)
+        public static void AddGuaranteedEffects(MagicItem magicItem, List<MagicEffect> guaranteedMagicEffects)
         {
-            var magicItem = new MagicItem { Rarity = rarity, Quality = quality, ItemName = baseItem.m_shared.m_name };
+            foreach (var guaranteedMagicEffect in guaranteedMagicEffects)
+            {
+                var magicItemEffect = new MagicItemEffect() { EffectType = guaranteedMagicEffect.Type };
+                if (!EffectsConfig.IsValuelessEffect(guaranteedMagicEffect.Type))
+                {
+                    magicItemEffect.EffectValue = _RollEffectValue(new ItemResolvedEffect()
+                    {
+                        Type = guaranteedMagicEffect.Type,
+                        Min = guaranteedMagicEffect.Values.MinValue,
+                        Max = guaranteedMagicEffect.Values.MaxValue,
+                        Step = guaranteedMagicEffect.Values.Increment
+                    });
+                }
+
+                magicItem.Effects.Add(magicItemEffect);
+            }
+        }
+
+        public static MagicItem RollMagicItem(string itemName, string itemClass, ItemRarity rarity, ItemQuality quality, ItemDrop.ItemData baseItem)
+        {
+            var magicItem = new MagicItem { ItemName = baseItem.m_shared.m_name, Class = itemClass, Rarity = rarity, Quality = quality };
 
             if (rarity == ItemRarity.Legendary)
             {
@@ -392,55 +575,63 @@ namespace Raido
                         break;
                 }
 
-                magicItem.LegendaryID = itemInfo.ID;
+                magicItem.LegendaryID = itemInfo.Id;
                 magicItem.DisplayName = string.Format(legendaryNameFormat, qualityStr, itemInfo.Name).Trim();
 
-                List<GuaranteedMagicEffect> guaranteedMagicEffects;
-                if (quality == ItemQuality.Elite && itemInfo.GuaranteedMagicEffectsElite.Count() > 0)
+                List<MagicEffect> guaranteedMagicEffects;
+                if (quality == ItemQuality.Elite && itemInfo.Elite.Count() > 0)
                 {
-                    guaranteedMagicEffects = itemInfo.GuaranteedMagicEffectsElite;
+                    guaranteedMagicEffects = itemInfo.Elite;
                 }
-                else if (quality == ItemQuality.Exceptional && itemInfo.GuaranteedMagicEffectsExceptional.Count() > 0)
+                else if (quality == ItemQuality.Exceptional && itemInfo.Exceptional.Count() > 0)
                 {
-                    guaranteedMagicEffects = itemInfo.GuaranteedMagicEffectsExceptional;
+                    guaranteedMagicEffects = itemInfo.Exceptional;
                 }
                 else
                 {
-                    guaranteedMagicEffects = itemInfo.GuaranteedMagicEffects;
+                    guaranteedMagicEffects = itemInfo.Normal;
                 }
 
-                foreach (var guaranteedMagicEffect in guaranteedMagicEffects)
-                {
-                    var effectDef = MagicItemEffectDefinitions.Get(guaranteedMagicEffect.Type);
-                    if (effectDef == null)
-                    {
-                        _Log($"Could not find magic effect (Type={guaranteedMagicEffect.Type}) while creating legendary item (ID={itemInfo.ID})");
-                        continue;
-                    }
-
-                    var effect = LootRoller.RollEffect(effectDef, rarity, magicItem.Quality, baseItem.m_shared.m_name, guaranteedMagicEffect.Values);
-                    magicItem.Effects.Add(effect);
-                }
+                AddGuaranteedEffects(magicItem, guaranteedMagicEffects);
             }
             else
             {
-                var effectCount = LootRoller.RollEffectCountPerRarity(magicItem.Rarity, magicItem.Quality);
+                var effectCount = _RollEffectCount(magicItem.Rarity, magicItem.Quality);
+
+                var skippedEffectsNames = new List<string>();
+                var availableEffects = ClassesConfig.GetAvailableEnchantEffects(itemName, magicItem.Class, magicItem.Quality, magicItem.Rarity, skippedEffectsNames);
+                var coreOrRequiredEffects = availableEffects.Where(value => value.Core || value.Weight == 0).ToList();
+                foreach (var effect in coreOrRequiredEffects)
+                {
+                    var magicItemEffect = new MagicItemEffect() { EffectType = effect.Type };
+                    if (!EffectsConfig.IsValuelessEffect(effect.Type))
+                    {
+                        magicItemEffect.EffectValue = _RollEffectValue(effect);
+                    }
+
+                    magicItem.Effects.Add(magicItemEffect);
+                    skippedEffectsNames.Add(magicItemEffect.EffectType);
+
+                    if(!effect.Core)
+                    {
+                        effectCount--;
+                    }
+                }
 
                 for (var i = 0; i < effectCount; i++)
                 {
-                    var availableEffects = MagicItemEffectDefinitions.GetAvailableEffects(baseItem, magicItem);
-                    if (availableEffects.Count == 0)
+                    var remainingEffects = ClassesConfig.GetAvailableEnchantEffects(itemName, magicItem.Class, magicItem.Quality, magicItem.Rarity, skippedEffectsNames);
+                    if (remainingEffects.Count == 0)
                     {
                         _Log($"Tried to add more effects to magic item ({baseItem.m_shared.m_name}) but there were no more available effects. " +
                                             $"Current Effects: {(string.Join(", ", magicItem.Effects.Select(x => x.EffectType.ToString())))}");
                         break;
                     }
 
-                    _weightedEffectTable.Setup(availableEffects, x => x.SelectionWeight);
-                    var effectDef = _weightedEffectTable.Roll();
+                    var magicItemEffect = _RollEffect(remainingEffects);
 
-                    var effect = LootRoller.RollEffect(effectDef, magicItem.Rarity, magicItem.Quality, baseItem.m_shared.m_name);
-                    magicItem.Effects.Add(effect);
+                    magicItem.Effects.Add(magicItemEffect);
+                    skippedEffectsNames.Add(magicItemEffect.EffectType);
                 }
             }
 
@@ -564,13 +755,14 @@ namespace Raido
             _Log($"\r\nRolled items for {objectName} level {level}:");
             foreach (var item in rolledItems)
             {
-                _Log($"Item {item.Item}, Rarity {item.Rarity}, Quality {item.Quality}, Count {item.Count}");
+                _Log($"Item {item.Item}, Class {item.Class} Rarity {item.Rarity}, Quality {item.Quality}, Count {item.Count}");
             }
 
             foreach (var rolledItem in rolledItems)
             {
                 var itemName = rolledItem.Item;
 
+                string itemClass = "Chaotic";
                 ItemRarity rarity = ItemRarity.Magic;
                 ItemQuality quality = ItemQuality.Inferior;
 
@@ -580,6 +772,7 @@ namespace Raido
                 }
                 else
                 {
+                    itemClass = rolledItem.Class;
                     rarity = rolledItem.Rarity ?? ItemRarity.Magic;
                     quality = rolledItem.Quality ?? ItemQuality.Inferior;
 
@@ -637,30 +830,25 @@ namespace Raido
                         {
                             if (quality != ItemQuality.Elite)
                             {
-                                var player = Player.m_localPlayer;
-
-                                var eliteKey = "EpicLoot_PlayerSeen_" + itemName + ItemQuality.Elite;
-                                if (player.m_customData.ContainsKey(eliteKey))
+                                if (Raido.PlayerKnowsItemClassAndQuality(itemName, itemClass, ItemQuality.Elite))
                                 {
-                                    _Log($"Item replaced with materials due to player has already seen Elity quality of it");
+                                    _Log($"Item replaced with materials due to player has already seen Elity quality of such base and class");
                                     return true;
                                 }
 
                                 if (quality != ItemQuality.Exceptional)
                                 {
-                                    var exceptionalKey = "EpicLoot_PlayerSeen_" + itemName + ItemQuality.Exceptional;
-                                    if (player.m_customData.ContainsKey(exceptionalKey))
+                                    if (Raido.PlayerKnowsItemClassAndQuality(itemName, itemClass, ItemQuality.Exceptional))
                                     {
-                                        _Log($"Item replaced with materials due to player has already seen Exceptional quality of it");
+                                        _Log($"Item replaced with materials due to player has already seen Exceptional quality of such base and class");
                                         return true;
                                     }
 
                                     if (quality != ItemQuality.Normal)
                                     {
-                                        var normalKey = "EpicLoot_PlayerSeen_" + itemName + ItemQuality.Normal;
-                                        if (player.m_customData.ContainsKey(normalKey))
+                                        if (Raido.PlayerKnowsItemClassAndQuality(itemName, itemClass, ItemQuality.Normal))
                                         {
-                                            _Log($"Item replaced with materials due to player has already seen Normal quality of it");
+                                            _Log($"Item replaced with materials due to player has already seen Normal quality of such base and class");
                                             return true;
                                         }
                                     }
@@ -761,7 +949,7 @@ namespace Raido
                         {
                             var itemData = itemDrop.m_itemData;
                             var magicItemComponent = itemData.Data().GetOrCreate<MagicItemComponent>();
-                            var magicItem = RollMagicItem(rolledItem.Item, rarity, quality, itemData, 0.0f);
+                            var magicItem = RollMagicItem(rolledItem.Item, itemClass, rarity, quality, itemData);
 
                             magicItemComponent.SetMagicItem(magicItem);
                             itemDrop.m_itemData = itemData;

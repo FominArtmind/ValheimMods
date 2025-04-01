@@ -60,6 +60,7 @@ namespace EpicLoot
         public string SetID;
         public string ItemName;
         public ItemQuality Quality;
+        public string Class;
 
         public string GetItemTypeName(ItemDrop.ItemData baseItem)
         {
@@ -83,7 +84,7 @@ namespace EpicLoot
             {
                 var effect = Effects[index];
                 var pip = EpicLoot.GetMagicEffectPip(IsEffectAugmented(index));
-                tooltip.AppendLine($"{pip} {GetEffectText(effect, Rarity, Quality, ItemName, showRange, LegendaryID)}");
+                tooltip.AppendLine($"{pip} {GetEffectText(effect, GetClass(), Rarity, Quality, ItemName, showRange, LegendaryID)}");
             }
 
             tooltip.Append($"</color>");
@@ -117,6 +118,17 @@ namespace EpicLoot
             return GetEffects(effectType).Sum(x => x.EffectValue) * scale;
         }
 
+        public string GetClass()
+        {
+            if(Class != null)
+            {
+                return Class;
+            }
+
+            // stub for older items
+            return "Chaotic";
+        }
+
         public bool HasEffect(string effectType)
         {
             return Effects.Exists(x => x.EffectType == effectType);
@@ -129,19 +141,19 @@ namespace EpicLoot
 
         public bool CanBeDisenchanted()
         {
-            return !Effects.Any(x => !MagicItemEffectDefinitions.Get(x.EffectType)?.CanBeDisenchanted ?? false);
+            return !Effects.Any(x => !Raido.DropEngine.EffectsConfig.GetEffectMetadata(x.EffectType)?.CanBeDisenchanted ?? false);
         }
 
-        public static string GetEffectText(MagicItemEffectDefinition effectDef, float value)
+        public static string GetEffectText(Raido.EffectMetadataConfig effectDef, float value)
         {
             var localizedDisplayText = Localization.instance.Localize(effectDef.DisplayText);
             var result = string.Format(localizedDisplayText, value);
             return result;
         }
 
-        public static string GetEffectText(MagicItemEffect effect, ItemRarity rarity, ItemQuality quality, string itemName, bool showRange, string legendaryID, MagicItemEffectDefinition.ValueDef valuesOverride)
+        public static string GetEffectText(MagicItemEffect effect, string itemClass, ItemRarity rarity, ItemQuality quality, string itemName, bool showRange, string legendaryID, MagicItemEffectDefinition.ValueDef valuesOverride)
         {
-            var effectDef = MagicItemEffectDefinitions.Get(effect.EffectType);
+            var effectDef = Raido.DropEngine.EffectsConfig.GetEffectMetadata(effect.EffectType);
             var result = GetEffectText(effectDef, effect.EffectValue);
             MagicItemEffectDefinition.ValueDef values = null;
             if (valuesOverride != null)
@@ -156,7 +168,8 @@ namespace EpicLoot
                 }
                 if (values == null)
                 {
-                    values = effectDef.GetValuesForRarity(rarity, itemName, quality);
+                    var range = Raido.DropEngine.ClassesConfig.GetEffectRangeForItem(effect.EffectType, itemName, itemClass, quality, rarity);
+                    values = new MagicItemEffectDefinition.ValueDef() { MinValue = range[0], MaxValue = range[1] };
                 }
             }
             if (showRange && values != null)
@@ -169,9 +182,9 @@ namespace EpicLoot
             return result;
         }
 
-        public static string GetEffectText(MagicItemEffect effect, ItemRarity rarity, ItemQuality quality, string itemName, bool showRange, string legendaryID = null)
+        public static string GetEffectText(MagicItemEffect effect, string itemClass, ItemRarity rarity, ItemQuality quality, string itemName, bool showRange, string legendaryID = null)
         {
-            return GetEffectText(effect, rarity, quality, itemName, showRange, legendaryID, null);
+            return GetEffectText(effect, itemClass, rarity, quality, itemName, showRange, legendaryID, null);
         }
 
         public void ReplaceEffect(int index, MagicItemEffect newEffect)
@@ -234,7 +247,7 @@ namespace EpicLoot
 
         public string GetFirstEquipEffect(out FxAttachMode mode)
         {
-            foreach (var effect in Effects)
+/*            foreach (var effect in Effects)
             {
                 var effectDef = MagicItemEffectDefinitions.Get(effect.EffectType);
                 if (effectDef != null && !string.IsNullOrEmpty(effectDef.EquipFx))
@@ -242,7 +255,7 @@ namespace EpicLoot
                     mode = effectDef.EquipFxMode;
                     return effectDef.EquipFx;
                 }
-            }
+            }*/
 
             mode = FxAttachMode.None;
             return null;

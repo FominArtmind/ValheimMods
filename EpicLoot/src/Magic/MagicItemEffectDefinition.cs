@@ -514,7 +514,7 @@ namespace EpicLoot
         public List<MagicItemEffectDefinition> MagicItemEffects = new List<MagicItemEffectDefinition>();
     }
 
-    public static class MagicItemEffectDefinitions
+    public static class MagicItemEffectDefinitionsDeprecated
     {
         public static readonly Dictionary<string, MagicItemEffectDefinition> AllDefinitions = new Dictionary<string, MagicItemEffectDefinition>();
         public static event Action OnSetupMagicItemEffectDefinitions;

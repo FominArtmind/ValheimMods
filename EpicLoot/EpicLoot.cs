@@ -542,14 +542,16 @@ namespace EpicLoot
         {
             LoadJsonFile<IDictionary<string, object>>("translations.json", LoadTranslations, ConfigType.Nonsynced);
             LoadJsonFile<LootConfig>("loottables.json", LootRoller.Initialize, ConfigType.Synced);
-            LoadJsonFile<Raido.DropConfig>("RaidoCreatureDrop.json", DropEngine.Initialize, ConfigType.Synced);
-            LoadJsonFile<MagicItemEffectsList>("magiceffects.json", MagicItemEffectDefinitions.Initialize, ConfigType.Synced);
+            LoadJsonFile<Raido.DropConfig>("RaidoCreatureDrop.json", DropEngine.InitializeDropConfig, ConfigType.Synced);
+            LoadJsonFile<Raido.MagicEffectsConfig>("RaidoMagicEffects.json", DropEngine.InitializeEffectsConfig, ConfigType.Synced);
+            LoadJsonFile<Raido.ItemClassesConfig>("RaidoItemClasses.json", DropEngine.InitializeClassesConfig, ConfigType.Synced);
+            // LoadJsonFile<MagicItemEffectsList>("magiceffects.json", MagicItemEffectDefinitions.Initialize, ConfigType.Synced);
             LoadJsonFile<ItemInfoConfig>("iteminfo.json", GatedItemTypeHelper.Initialize, ConfigType.Synced);
             LoadJsonFile<RecipesConfig>("recipes.json", RecipesHelper.Initialize, ConfigType.Synced);
             LoadJsonFile<EnchantingCostsConfig>("enchantcosts.json", EnchantCostsHelper.Initialize, ConfigType.Synced);
             LoadJsonFile<ItemNameConfig>("itemnames.json", MagicItemNames.Initialize, ConfigType.Synced);
             LoadJsonFile<AdventureDataConfig>("adventuredata.json", AdventureDataManager.Initialize, ConfigType.Synced);
-            LoadJsonFile<LegendaryItemConfig>("legendaries.json", UniqueLegendaryHelper.Initialize, ConfigType.Synced);
+            LoadJsonFile<LegendaryItemConfig>("RaidoLegendaries.json", UniqueLegendaryHelper.Initialize, ConfigType.Synced);
             LoadJsonFile<AbilityConfig>("abilities.json", AbilityDefinitions.Initialize, ConfigType.Synced);
             LoadJsonFile<MaterialConversionsConfig>("materialconversions.json", MaterialConversions.Initialize, ConfigType.Synced);
             LoadJsonFile<EnchantingUpgradesConfig>("enchantingupgrades.json", EnchantingTableUpgrades.InitializeConfig, ConfigType.Synced);
@@ -1426,7 +1428,7 @@ namespace EpicLoot
             t.AppendLine("  * **Value Per Rarity:** This effect may only be rolled on items of a rarity included in this table. The value is rolled using a linear distribution between Min and Max and divisible by the Increment.");
             t.AppendLine();
 
-            foreach (var definitionEntry in MagicItemEffectDefinitions.AllDefinitions)
+/*            foreach (var definitionEntry in MagicItemEffectDefinitions.AllDefinitions)
             {
                 var def = definitionEntry.Value;
                 t.AppendLine($"## {def.Type}");
@@ -1496,7 +1498,7 @@ namespace EpicLoot
                 }
 
                 t.AppendLine();
-            }
+            }*/
 
             // Item Sets
             t.AppendLine("# Item Sets");

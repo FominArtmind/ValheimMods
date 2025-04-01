@@ -19,10 +19,10 @@ namespace EpicLoot_UnityLib
         public AudioClip[] EnchantCompleteSFX;
 
         public delegate List<InventoryItemListElement> GetEnchantableItemsDelegate();
-        public delegate string GetEnchantInfoDelegate(ItemDrop.ItemData item, MagicRarityUnity rarity);
-        public delegate List<InventoryItemListElement> GetEnchantCostDelegate(ItemDrop.ItemData item, MagicRarityUnity rarity);
+        public delegate string GetEnchantInfoDelegate(ItemDrop.ItemData item, string itemClass, MagicRarityUnity rarity);
+        public delegate List<InventoryItemListElement> GetEnchantCostDelegate(ItemDrop.ItemData item, string itemClass, MagicRarityUnity rarity);
         // Returns the success dialog
-        public delegate GameObject EnchantItemDelegate(ItemDrop.ItemData item, MagicRarityUnity rarity);
+        public delegate GameObject EnchantItemDelegate(ItemDrop.ItemData item, string itemClass, MagicRarityUnity rarity);
 
         public static GetEnchantableItemsDelegate GetEnchantableItems;
         public static GetEnchantInfoDelegate GetEnchantInfo;
@@ -30,6 +30,7 @@ namespace EpicLoot_UnityLib
         public static EnchantItemDelegate EnchantItem;
 
         private ToggleGroup _toggleGroup;
+        private string _itemClass;
         private MagicRarityUnity _rarity;
         private GameObject _successDialog;
 
@@ -56,6 +57,8 @@ namespace EpicLoot_UnityLib
         [UsedImplicitly]
         public void OnEnable()
         {
+            // TO DO: setting class in UI
+            _itemClass = "Chaotic";
             _rarity = MagicRarityUnity.Magic;
             OnRarityChanged();
             RarityButtons[0].isOn = true;
@@ -124,13 +127,13 @@ namespace EpicLoot_UnityLib
             }
 
             var item = selectedItem.Item1.GetItem();
-            var info = GetEnchantInfo(item, _rarity);
+            var info = GetEnchantInfo(item, _itemClass, _rarity);
 
             EnchantInfo.text = info;
             ScrollEnchantInfoToTop();
 
             CostLabel.enabled = true;
-            var cost = GetEnchantCost(item, _rarity);
+            var cost = GetEnchantCost(item, _itemClass, _rarity);
             CostList.SetItems(cost.Cast<IListElement>().ToList());
 
             var canAfford = LocalPlayerCanAffordCost(cost);
@@ -155,7 +158,7 @@ namespace EpicLoot_UnityLib
             }
 
             var item = selectedItem.Item1.GetItem();
-            var cost = GetEnchantCost(item, _rarity);
+            var cost = GetEnchantCost(item, _itemClass, _rarity);
 
             var player = Player.m_localPlayer;
             if (!player.NoCostCheat())
@@ -180,7 +183,7 @@ namespace EpicLoot_UnityLib
             DeselectAll();
             Lock();
 
-            _successDialog = EnchantItem(item, _rarity);
+            _successDialog = EnchantItem(item, _itemClass, _rarity);
 
             RefreshAvailableItems();
         }

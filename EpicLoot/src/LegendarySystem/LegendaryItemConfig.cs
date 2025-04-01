@@ -5,7 +5,7 @@ using Common;
 namespace EpicLoot.LegendarySystem
 {
     [Serializable]
-    public class GuaranteedMagicEffect
+    public class MagicEffect
     {
         public string Type;
         public MagicItemEffectDefinition.ValueDef Values;
@@ -23,16 +23,14 @@ namespace EpicLoot.LegendarySystem
     [Serializable]
     public class LegendaryInfo
     {
-        public string ID;
+        public string Id;
         public string Name;
         public string Item;
         public string Description;
         public MagicItemEffectRequirements Requirements;
-        public List<GuaranteedMagicEffect> GuaranteedMagicEffects = new List<GuaranteedMagicEffect>();
-        public List<GuaranteedMagicEffect> GuaranteedMagicEffectsExceptional = new List<GuaranteedMagicEffect>();
-        public List<GuaranteedMagicEffect> GuaranteedMagicEffectsElite = new List<GuaranteedMagicEffect>();
-        public int GuaranteedEffectCount = -1;
-        public float SelectionWeight = 1;
+        public List<MagicEffect> Normal = new List<MagicEffect>();
+        public List<MagicEffect> Exceptional = new List<MagicEffect>();
+        public List<MagicEffect> Elite = new List<MagicEffect>();
         public string EquipFx;
         public FxAttachMode EquipFxMode = FxAttachMode.Player;
         public List<TextureReplacement> TextureReplacements = new List<TextureReplacement>();
@@ -45,15 +43,15 @@ namespace EpicLoot.LegendarySystem
     public class SetBonusInfo
     {
         public int Count;
-        public GuaranteedMagicEffect Effect;
+        public MagicEffect Effect;
     }
 
     [Serializable]
     public class LegendarySetInfo
     {
-        public string ID;
+        public string Id;
         public string Name;
-        public List<string> LegendaryIDs = new List<string>();
+        public List<string> Items = new List<string>();
         public List<SetBonusInfo> SetBonuses = new List<SetBonusInfo>();
         public List<SetBonusInfo> SetBonusesExceptional = new List<SetBonusInfo>();
         public List<SetBonusInfo> SetBonusesElite = new List<SetBonusInfo>();

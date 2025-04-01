@@ -43,14 +43,14 @@ namespace EpicLoot
             {
                 MagicItem(args.Context, args.Args);
             }), false);
-            new Terminal.ConsoleCommand("magicitemwitheffect", "", (args =>
+/*            new Terminal.ConsoleCommand("magicitemwitheffect", "", (args =>
             {
                 SpawnMagicItemWithEffect(args.Context, args.Args);
             }), true);
             new Terminal.ConsoleCommand("mieffect", "", (args =>
             {
                 SpawnMagicItemWithEffect(args.Context, args.Args);
-            }), true);
+            }), true);*/
             new Terminal.ConsoleCommand("magicitemlegendary", "", (args =>
             {
                 SpawnLegendaryMagicItem(args.Context, args.Args, ItemRarity.Legendary);
@@ -575,7 +575,7 @@ namespace EpicLoot
             LootRoller.CheatEffectCount = -1;
         }
 
-        public static void SpawnMagicItemWithEffect(Terminal context, string[] args)
+/*        public static void SpawnMagicItemWithEffect(Terminal context, string[] args)
         {
             if (args.Length < 3)
             {
@@ -636,7 +636,7 @@ namespace EpicLoot
             LootRoller.CheatForceMagicEffect = false;
             LootRoller.ForcedMagicEffect = string.Empty;
             LootRoller.CheatRollingItem = false;
-        }
+        }*/
 
         private static float[] GetRarityTable(string rarityName)
         {
@@ -791,7 +791,7 @@ namespace EpicLoot
 
             if (setInfo != null)
             {
-                foreach (var legendaryID in setInfo.LegendaryIDs)
+                foreach (var legendaryID in setInfo.Items)
                 {
                     SpawnLegendaryItemHelper(legendaryID, null, terminal, rarity);
                 }
@@ -874,7 +874,7 @@ namespace EpicLoot
 
         private static MagicItemEffectDefinition GetReplacementEffectDef(MagicItemEffect effect)
         {
-            switch (effect.EffectType)
+/*            switch (effect.EffectType)
             {
                 case "AddFireResistance":
                     return MagicItemEffectDefinitions.Get(MagicEffectType.AddFireResistancePercentage);
@@ -886,7 +886,7 @@ namespace EpicLoot
                     return MagicItemEffectDefinitions.Get(MagicEffectType.AddPoisonResistancePercentage);
                 case "AddSpiritResistance":
                     return MagicItemEffectDefinitions.Get(MagicEffectType.AddElementalResistancePercentage);
-            }
+            }*/
             return null;
         }
     }

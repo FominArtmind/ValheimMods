@@ -18,7 +18,7 @@ namespace EpicLoot.LegendarySystem
 
         public static readonly LegendaryInfo GenericLegendaryInfo = new LegendaryInfo
         {
-            ID = nameof(GenericLegendaryInfo)
+            Id = nameof(GenericLegendaryInfo)
         };
 
         public static void Initialize(LegendaryItemConfig config)
@@ -42,13 +42,13 @@ namespace EpicLoot.LegendarySystem
         {
             foreach (var legendaryInfo in legendaryItems)
             {
-                if (!LegendaryInfo.ContainsKey(legendaryInfo.ID))
+                if (!LegendaryInfo.ContainsKey(legendaryInfo.Id))
                 {
-                    LegendaryInfo.Add(legendaryInfo.ID, legendaryInfo);
+                    LegendaryInfo.Add(legendaryInfo.Id, legendaryInfo);
                 }
                 else
                 {
-                    EpicLoot.LogWarning($"Duplicate entry found for LegendaryInfo: {legendaryInfo.ID}. " +
+                    EpicLoot.LogWarning($"Duplicate entry found for LegendaryInfo: {legendaryInfo.Id}. " +
                         $"Please fix your configuration.");
                 }
             }
@@ -58,13 +58,13 @@ namespace EpicLoot.LegendarySystem
         {
             foreach (var mythicInfo in mythicItems)
             {
-                if (!MythicInfo.ContainsKey(mythicInfo.ID))
+                if (!MythicInfo.ContainsKey(mythicInfo.Id))
                 {
-                    MythicInfo.Add(mythicInfo.ID, mythicInfo);
+                    MythicInfo.Add(mythicInfo.Id, mythicInfo);
                 }
                 else
                 {
-                    EpicLoot.LogWarning($"Duplicate entry found for MythicInfo: {mythicInfo.ID}. " +
+                    EpicLoot.LogWarning($"Duplicate entry found for MythicInfo: {mythicInfo.Id}. " +
                         $"Please fix your configuration.");
                 }
             }
@@ -74,18 +74,18 @@ namespace EpicLoot.LegendarySystem
         {
             foreach (var legendarySetInfo in legendarySets)
             {
-                if (!LegendarySets.ContainsKey(legendarySetInfo.ID))
+                if (!LegendarySets.ContainsKey(legendarySetInfo.Id))
                 {
-                    LegendarySets.Add(legendarySetInfo.ID, legendarySetInfo);
+                    LegendarySets.Add(legendarySetInfo.Id, legendarySetInfo);
                 }
                 else
                 {
-                    EpicLoot.LogWarning($"Duplicate entry found for LegendarySetInfo: {legendarySetInfo.ID}. " +
+                    EpicLoot.LogWarning($"Duplicate entry found for LegendarySetInfo: {legendarySetInfo.Id}. " +
                         $"Please fix your configuration.");
                     continue;
                 }
 
-                foreach (var legendaryID in legendarySetInfo.LegendaryIDs)
+                foreach (var legendaryID in legendarySetInfo.Items)
                 {
                     if (!_legendaryItemsToSetMap.ContainsKey(legendaryID))
                     {
@@ -93,7 +93,7 @@ namespace EpicLoot.LegendarySystem
                     }
                     else
                     {
-                        EpicLoot.LogWarning($"Duplicate entry found for LegendarySet {legendarySetInfo.ID}: {legendaryID}. " +
+                        EpicLoot.LogWarning($"Duplicate entry found for LegendarySet {legendarySetInfo.Id}: {legendaryID}. " +
                             $"Please fix your configuration.");
                     }
                 }
@@ -104,18 +104,18 @@ namespace EpicLoot.LegendarySystem
         {
             foreach (var mythicSetInfo in mythicSets)
             {
-                if (!MythicSets.ContainsKey(mythicSetInfo.ID))
+                if (!MythicSets.ContainsKey(mythicSetInfo.Id))
                 {
-                    MythicSets.Add(mythicSetInfo.ID, mythicSetInfo);
+                    MythicSets.Add(mythicSetInfo.Id, mythicSetInfo);
                 }
                 else
                 {
-                    EpicLoot.LogWarning($"Duplicate entry found for MythicSetInfo: {mythicSetInfo.ID}. " +
+                    EpicLoot.LogWarning($"Duplicate entry found for MythicSetInfo: {mythicSetInfo.Id}. " +
                         $"Please fix your configuration.");
                     continue;
                 }
 
-                foreach (var mythicID in mythicSetInfo.LegendaryIDs)
+                foreach (var mythicID in mythicSetInfo.Items)
                 {
                     if (!_mythicItemsToSetMap.ContainsKey(mythicID))
                     {
@@ -123,7 +123,7 @@ namespace EpicLoot.LegendarySystem
                     }
                     else
                     {
-                        EpicLoot.LogWarning($"Duplicate entry found for MythicSet {mythicSetInfo.ID}: {mythicID}. " +
+                        EpicLoot.LogWarning($"Duplicate entry found for MythicSet {mythicSetInfo.Id}: {mythicID}. " +
                             $"Please fix your configuration.");
                     }
                 }
@@ -191,7 +191,7 @@ namespace EpicLoot.LegendarySystem
         {
             if (MythicInfo.TryGetValue(legendaryID, out var mythicInfo))
             {
-                if (mythicInfo.GuaranteedMagicEffects.TryFind(x => x.Type == effectType, out var guaranteedMagicEffect))
+                if (mythicInfo.Normal.TryFind(x => x.Type == effectType, out var guaranteedMagicEffect))
                 {
                     return guaranteedMagicEffect.Values;
                 }
@@ -201,20 +201,20 @@ namespace EpicLoot.LegendarySystem
             {
                 if (quality == ItemQuality.Elite)
                 {
-                    if (legendaryInfo.GuaranteedMagicEffectsElite.Count() > 0 && legendaryInfo.GuaranteedMagicEffectsElite.TryFind(x => x.Type == effectType, out var guaranteedMagicEffectElite))
+                    if (legendaryInfo.Elite.Count() > 0 && legendaryInfo.Elite.TryFind(x => x.Type == effectType, out var guaranteedMagicEffectElite))
                     {
                         return guaranteedMagicEffectElite.Values;
                     }
                 }
                 else if (quality == ItemQuality.Exceptional)
                 {
-                    if (legendaryInfo.GuaranteedMagicEffectsExceptional.Count() > 0 && legendaryInfo.GuaranteedMagicEffectsExceptional.TryFind(x => x.Type == effectType, out var guaranteedMagicEffectExceptional))
+                    if (legendaryInfo.Exceptional.Count() > 0 && legendaryInfo.Exceptional.TryFind(x => x.Type == effectType, out var guaranteedMagicEffectExceptional))
                     {
                         return guaranteedMagicEffectExceptional.Values;
                     }
                 }
 
-                if (legendaryInfo.GuaranteedMagicEffects.TryFind(x => x.Type == effectType, out var guaranteedMagicEffect))
+                if (legendaryInfo.Normal.TryFind(x => x.Type == effectType, out var guaranteedMagicEffect))
                 {
                     return guaranteedMagicEffect.Values;
                 }
@@ -243,15 +243,15 @@ namespace EpicLoot.LegendarySystem
 
         public static string GetSetForLegendaryItem(LegendaryInfo legendary)
         {
-            if (legendary != null && legendary.IsSetItem && !string.IsNullOrEmpty(legendary.ID))
+            if (legendary != null && legendary.IsSetItem && !string.IsNullOrEmpty(legendary.Id))
             {
-                if (_mythicItemsToSetMap.TryGetValue(legendary.ID, out var mythicSetInfo))
+                if (_mythicItemsToSetMap.TryGetValue(legendary.Id, out var mythicSetInfo))
                 {
-                    return mythicSetInfo.ID;
+                    return mythicSetInfo.Id;
                 }
-                else if (_legendaryItemsToSetMap.TryGetValue(legendary.ID, out var setInfo))
+                else if (_legendaryItemsToSetMap.TryGetValue(legendary.Id, out var setInfo))
                 {
-                    return setInfo.ID;
+                    return setInfo.Id;
                 }
             }
 

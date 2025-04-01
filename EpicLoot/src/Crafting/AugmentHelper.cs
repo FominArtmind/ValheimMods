@@ -168,18 +168,19 @@ namespace EpicLoot.Crafting
             var valuelessEffect = false;
             if (recipe.EffectIndex >= 0 && recipe.EffectIndex < magicItem.Effects.Count)
             {
-                var currentEffectDef = MagicItemEffectDefinitions.Get(magicItem.Effects[recipe.EffectIndex].EffectType);
-                valuelessEffect = currentEffectDef.GetValuesForRarity(rarity, item.m_shared.m_name, magicItem.Quality) == null;
+                valuelessEffect = Raido.DropEngine.EffectsConfig.IsValuelessEffect(magicItem.Effects[recipe.EffectIndex].EffectType);
             }
 
-            return MagicItemEffectDefinitions.GetAvailableEffects(item.Extended(), item.GetMagicItem(), valuelessEffect ? -1 : recipe.EffectIndex);
+            // TO DO
+            return new List<MagicItemEffectDefinition>();
+            // return MagicItemEffectDefinitions.GetAvailableEffects(item.Extended(), item.GetMagicItem(), valuelessEffect ? -1 : recipe.EffectIndex);
         }
 
         public static string GetAugmentSelectorText(MagicItem magicItem, int i, IReadOnlyList<MagicItemEffect> augmentableEffects, ItemRarity rarity)
         {
             var pip = EpicLoot.GetMagicEffectPip(magicItem.IsEffectAugmented(i));
             bool free = EnchantCostsHelper.EffectIsDeprecated(augmentableEffects[i].EffectType);
-            return $"{pip} {Localization.instance.Localize(MagicItem.GetEffectText(augmentableEffects[i], rarity, magicItem.Quality, magicItem.ItemName, true, magicItem.LegendaryID))}{(free ? " [<color=yellow>*FREE</color>]" : "")}";
+            return $"{pip} {Localization.instance.Localize(MagicItem.GetEffectText(augmentableEffects[i], magicItem.GetClass(), rarity, magicItem.Quality, magicItem.ItemName, true, magicItem.LegendaryID))}{(free ? " [<color=yellow>*FREE</color>]" : "")}";
         }
 
         public static List<KeyValuePair<ItemDrop, int>> GetAugmentCosts(ItemDrop.ItemData item, int recipeEffectIndex)

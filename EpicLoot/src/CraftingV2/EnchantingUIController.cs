@@ -8,6 +8,7 @@ using EpicLoot.Data;
 using EpicLoot_UnityLib;
 using TMPro;
 using UnityEngine;
+using static ClutterSystem;
 using Random = UnityEngine.Random;
 
 namespace EpicLoot.CraftingV2
@@ -348,18 +349,18 @@ namespace EpicLoot.CraftingV2
                 .ToList();
         }
 
-        private static string GetEnchantInfo(ItemDrop.ItemData item, MagicRarityUnity _rarity)
+        private static string GetEnchantInfo(ItemDrop.ItemData item, string itemClass, MagicRarityUnity _rarity)
         {
+            var itemName = Raido.Raido.GetPrefabName(item);
             var rarity = (ItemRarity)_rarity;
             var sb = new StringBuilder();
             var rarityColor = EpicLoot.GetRarityColor(rarity);
             var rarityDisplay = EpicLoot.GetRarityDisplayName(rarity);
             var quality = ItemQuality.Inferior;
             var qualityText = Localization.instance.Localize("$mod_epicloot_inferior");
-            var player = Player.m_localPlayer;
-            var eliteKey = "EpicLoot_PlayerSeen_" + item.m_shared.m_name + ItemQuality.Elite;
             var inferior = true;
-            if (player.m_customData.ContainsKey(eliteKey))
+
+            if (Raido.Raido.PlayerKnowsItemClassAndQuality(item, itemClass, ItemQuality.Elite))
             {
                 quality = ItemQuality.Elite;
                 qualityText = Localization.instance.Localize("$mod_epicloot_elite");
@@ -367,8 +368,7 @@ namespace EpicLoot.CraftingV2
             }
             else
             {
-                var exceptionalKey = "EpicLoot_PlayerSeen_" + item.m_shared.m_name + ItemQuality.Exceptional;
-                if (player.m_customData.ContainsKey(exceptionalKey))
+                if (Raido.Raido.PlayerKnowsItemClassAndQuality(item, itemClass, ItemQuality.Exceptional))
                 {
                     quality = ItemQuality.Exceptional;
                     qualityText = Localization.instance.Localize("$mod_epicloot_exceptional");
@@ -376,8 +376,7 @@ namespace EpicLoot.CraftingV2
                 }
                 else
                 {
-                    var normalKey = "EpicLoot_PlayerSeen_" + item.m_shared.m_name + ItemQuality.Normal;
-                    if (player.m_customData.ContainsKey(normalKey))
+                    if (Raido.Raido.PlayerKnowsItemClassAndQuality(item, itemClass, ItemQuality.Normal))
                     {
                         quality = ItemQuality.Normal;
                         qualityText = Localization.instance.Localize("$mod_epicloot_normal");
@@ -427,13 +426,26 @@ namespace EpicLoot.CraftingV2
 
 
             var tempMagicItem = new MagicItem() { Rarity = rarity, Quality = inferior ? ItemQuality.Inferior : ItemQuality.Normal };
-            var availableEffects = MagicItemEffectDefinitions.GetAvailableEffects(item, tempMagicItem);
-            availableEffects = availableEffects.OrderByDescending(value => value.SelectionWeight).ToList();
-
-            var effectsWeightSum = availableEffects.Sum(value => value.SelectionWeight);
-            var effectChance = (float weight) =>
+            var availableEffects = Raido.DropEngine.ClassesConfig.GetAvailableEnchantEffects(itemName, itemClass, quality, rarity);
+                // MagicItemEffectDefinitions.GetAvailableEffects(item, tempMagicItem);
+            availableEffects = availableEffects.OrderByDescending(value => (value.Core || value.Weight == 0) ? 1000 : value.Weight).ToList();
+            foreach(var effect in availableEffects)
             {
-                double value = 100.0 * weight / effectsWeightSum;
+                if(effect.Group != null && effect.Group.Count > 0)
+                {
+                    effect.Group = effect.Group.OrderByDescending(value => value.Weight).ToList();
+                }
+            }
+
+            var effectsWeightSum = availableEffects.Sum(value => value.Weight);
+            var effectChance = (float weight, float sum) =>
+            {
+                if(weight == 0)
+                {
+                    return "100%";
+                }
+
+                double value = 100.0 * weight / sum;
                 if (value >= 10)
                 {
                     value = Math.Round(value, 0);
@@ -450,11 +462,27 @@ namespace EpicLoot.CraftingV2
                 return $"{value}%";
             };
             
-            foreach (var effectDef in availableEffects)
+            foreach (var effect in availableEffects)
             {
-                var values = effectDef.GetValuesForRarity(rarity, item.m_shared.m_name, quality);
-                var valueDisplay = values != null ? Mathf.Approximately(values.MinValue, values.MaxValue) ? $"{values.MinValue}" : $"({values.MinValue}-{values.MaxValue})" : "";
-                sb.AppendLine($"‣ {effectChance(effectDef.SelectionWeight)} {string.Format(Localization.instance.Localize(effectDef.DisplayText), valueDisplay)}");
+                if (effect.Group != null && effect.Group.Count > 0)
+                {
+                    sb.AppendLine($"‣ {effectChance(effect.Weight, effectsWeightSum)}:");
+                    var groupWeightSum = effect.Group.Sum(value => value.Weight);
+                    foreach (var groupEffect in effect.Group)
+                    {
+                        var v = Raido.DropEngine.ClassesConfig.GetEffectRangeForItem(groupEffect.Type, itemName, itemClass, quality, rarity);
+                        var vDisplay = (!Raido.DropEngine.EffectsConfig.IsValuelessEffect(groupEffect.Type) && v != null) ? Mathf.Approximately(v[0], v[1]) ? $"{v[0]}" : $"({v[0]}-{v[1]})" : "";
+                        var m = Raido.DropEngine.EffectsConfig.GetEffectMetadata(groupEffect.Type);
+                        sb.AppendLine($"‣ {effectChance(groupEffect.Weight, groupWeightSum)} {string.Format(Localization.instance.Localize(m.DisplayText), vDisplay)}");
+                    }
+                }
+                else
+                {
+                    var values = Raido.DropEngine.ClassesConfig.GetEffectRangeForItem(effect.Type, itemName, itemClass, quality, rarity);
+                    var valueDisplay = (!Raido.DropEngine.EffectsConfig.IsValuelessEffect(effect.Type) && values != null) ? Mathf.Approximately(values[0], values[1]) ? $"{values[0]}" : $"({values[0]}-{values[1]})" : "";
+                    var metadata = Raido.DropEngine.EffectsConfig.GetEffectMetadata(effect.Type);
+                    sb.AppendLine($"‣ {effectChance(effect.Weight, effectsWeightSum)} {string.Format(Localization.instance.Localize(metadata.DisplayText), valueDisplay)}");
+                }
             }
 
             sb.Append("</color>");
@@ -462,26 +490,22 @@ namespace EpicLoot.CraftingV2
             return Localization.instance.Localize(sb.ToString());
         }
 
-        private static List<InventoryItemListElement> GetEnchantCost(ItemDrop.ItemData item, MagicRarityUnity _rarity)
+        private static List<InventoryItemListElement> GetEnchantCost(ItemDrop.ItemData item, string itemClass, MagicRarityUnity _rarity)
         {
             var quality = ItemQuality.Inferior;
-            var player = Player.m_localPlayer;
-            var eliteKey = "EpicLoot_PlayerSeen_" + item.m_shared.m_name + ItemQuality.Elite;
-            if (player.m_customData.ContainsKey(eliteKey))
+            if (Raido.Raido.PlayerKnowsItemClassAndQuality(item, itemClass, ItemQuality.Elite))
             {
                 quality = ItemQuality.Elite;
             }
             else
             {
-                var exceptionalKey = "EpicLoot_PlayerSeen_" + item.m_shared.m_name + ItemQuality.Exceptional;
-                if (player.m_customData.ContainsKey(exceptionalKey))
+                if (Raido.Raido.PlayerKnowsItemClassAndQuality(item, itemClass, ItemQuality.Exceptional))
                 {
                     quality = ItemQuality.Exceptional;
                 }
                 else
                 {
-                    var normalKey = "EpicLoot_PlayerSeen_" + item.m_shared.m_name + ItemQuality.Normal;
-                    if (player.m_customData.ContainsKey(normalKey))
+                    if (Raido.Raido.PlayerKnowsItemClassAndQuality(item, itemClass, ItemQuality.Normal))
                     {
                         quality = ItemQuality.Normal;
                     }
@@ -497,26 +521,22 @@ namespace EpicLoot.CraftingV2
             }).ToList();
         }
 
-        private static GameObject EnchantItemAndReturnSuccessDialog(ItemDrop.ItemData item, MagicRarityUnity rarity)
+        private static GameObject EnchantItemAndReturnSuccessDialog(ItemDrop.ItemData item, string itemClass, MagicRarityUnity rarity)
         {
             var quality = ItemQuality.Inferior;
-            var player = Player.m_localPlayer;
-            var eliteKey = "EpicLoot_PlayerSeen_" + item.m_shared.m_name + ItemQuality.Elite;
-            if (player.m_customData.ContainsKey(eliteKey))
+            if (Raido.Raido.PlayerKnowsItemClassAndQuality(item, itemClass, ItemQuality.Elite))
             {
                 quality = ItemQuality.Elite;
             }
             else
             {
-                var exceptionalKey = "EpicLoot_PlayerSeen_" + item.m_shared.m_name + ItemQuality.Exceptional;
-                if (player.m_customData.ContainsKey(exceptionalKey))
+                if (Raido.Raido.PlayerKnowsItemClassAndQuality(item, itemClass, ItemQuality.Exceptional))
                 {
                     quality = ItemQuality.Exceptional;
                 }
                 else
                 {
-                    var normalKey = "EpicLoot_PlayerSeen_" + item.m_shared.m_name + ItemQuality.Normal;
-                    if (player.m_customData.ContainsKey(normalKey))
+                    if (Raido.Raido.PlayerKnowsItemClassAndQuality(item, itemClass, ItemQuality.Normal))
                     {
                         quality = ItemQuality.Normal;
                     }
@@ -527,6 +547,7 @@ namespace EpicLoot.CraftingV2
             if (item.m_shared.m_useDurability)
                 previousDurabilityPercent = item.m_durability / item.GetMaxDurability();
 
+            var player = Player.m_localPlayer;
             var luckFactor = player.GetTotalActiveMagicEffectValue(MagicEffectType.Luck, 0.01f);
             var magicItem = LootRoller.RollMagicItem((ItemRarity)rarity, quality, item, luckFactor);
 
@@ -602,7 +623,7 @@ namespace EpicLoot.CraftingV2
                 for (var index = 0; index < augmentableEffects.Count; index++)
                 {
                     var augmentableEffect = augmentableEffects[index];
-                    var effectDef = MagicItemEffectDefinitions.Get(augmentableEffect.EffectType);
+                    var effectDef = Raido.DropEngine.EffectsConfig.GetEffectMetadata(augmentableEffect.EffectType);
                     var canAugment = effectDef != null && effectDef.CanBeAugmented;
 
                     var text = AugmentHelper.GetAugmentSelectorText(magicItem, index, augmentableEffects, rarity);
@@ -623,23 +644,31 @@ namespace EpicLoot.CraftingV2
             if (magicItem == null)
                 return string.Empty;
 
+            var itemClass = magicItem.Class;
+            var quality = magicItem.Quality;
             var rarity = magicItem.Rarity;
             var rarityColor = EpicLoot.GetRarityColor(rarity);
 
-            var valuelessEffect = false;
-            if (augmentindex >= 0 && augmentindex < magicItem.Effects.Count)
+            var availableEffects = Raido.DropEngine.ClassesConfig.GetAvailableAugmentEffects(item, augmentindex);
+
+            availableEffects = availableEffects.OrderByDescending(value => (value.Core || value.Weight == 0) ? 1000 : value.Weight).ToList();
+            foreach (var effect in availableEffects)
             {
-                var currentEffectDef = MagicItemEffectDefinitions.Get(magicItem.Effects[augmentindex].EffectType);
-                valuelessEffect = currentEffectDef.GetValuesForRarity(rarity, item.m_shared.m_name, magicItem.Quality) == null;
+                if (effect.Group != null && effect.Group.Count > 0)
+                {
+                    effect.Group = effect.Group.OrderByDescending(value => value.Weight).ToList();
+                }
             }
 
-            var availableEffects = MagicItemEffectDefinitions.GetAvailableEffects(item.Extended(), item.GetMagicItem(), valuelessEffect ? -1 : augmentindex);
-            availableEffects = availableEffects.OrderByDescending(value => value.SelectionWeight).ToList();
-
-            var effectsWeightSum = availableEffects.Sum(value => value.SelectionWeight);
-            var effectChance = (float weight) =>
+            var effectsWeightSum = availableEffects.Sum(value => value.Weight);
+            var effectChance = (float weight, float sum) =>
             {
-                double value = 100.0 * weight / effectsWeightSum;
+                if (weight == 0)
+                {
+                    return "100%";
+                }
+
+                double value = 100.0 * weight / sum;
                 if (value >= 10)
                 {
                     value = Math.Round(value, 0);
@@ -667,11 +696,28 @@ namespace EpicLoot.CraftingV2
                 sb.AppendLine();
             }
 
-            foreach (var effectDef in availableEffects)
+            var itemName = Raido.Raido.GetPrefabName(item);
+            foreach (var effect in availableEffects)
             {
-                var values = effectDef.GetValuesForRarity(item.GetRarity(), item.m_shared.m_name, magicItem.Quality);
-                var valueDisplay = values != null ? Mathf.Approximately(values.MinValue, values.MaxValue) ? $"{values.MinValue}" : $"({values.MinValue}-{values.MaxValue})" : "";
-                sb.AppendLine($"‣ {effectChance(effectDef.SelectionWeight)} {string.Format(Localization.instance.Localize(effectDef.DisplayText), valueDisplay)}");
+                if (effect.Group != null && effect.Group.Count > 0)
+                {
+                    sb.AppendLine($"‣ {effectChance(effect.Weight, effectsWeightSum)}:");
+                    var groupWeightSum = effect.Group.Sum(value => value.Weight);
+                    foreach (var groupEffect in effect.Group)
+                    {
+                        var v = Raido.DropEngine.ClassesConfig.GetEffectRangeForItem(groupEffect.Type, itemName, itemClass, quality, rarity);
+                        var vDisplay = (!Raido.DropEngine.EffectsConfig.IsValuelessEffect(groupEffect.Type) && v != null) ? Mathf.Approximately(v[0], v[1]) ? $"{v[0]}" : $"({v[0]}-{v[1]})" : "";
+                        var m = Raido.DropEngine.EffectsConfig.GetEffectMetadata(groupEffect.Type);
+                        sb.AppendLine($"‣ {effectChance(groupEffect.Weight, groupWeightSum)} {string.Format(Localization.instance.Localize(m.DisplayText), vDisplay)}");
+                    }
+                }
+                else
+                {
+                    var values = Raido.DropEngine.ClassesConfig.GetEffectRangeForItem(effect.Type, itemName, itemClass, quality, rarity);
+                    var valueDisplay = (!Raido.DropEngine.EffectsConfig.IsValuelessEffect(effect.Type) && values != null) ? Mathf.Approximately(values[0], values[1]) ? $"{values[0]}" : $"({values[0]}-{values[1]})" : "";
+                    var metadata = Raido.DropEngine.EffectsConfig.GetEffectMetadata(effect.Type);
+                    sb.AppendLine($"‣ {effectChance(effect.Weight, effectsWeightSum)} {string.Format(Localization.instance.Localize(metadata.DisplayText), valueDisplay)}");
+                }
             }
             sb.Append("</color>");
 

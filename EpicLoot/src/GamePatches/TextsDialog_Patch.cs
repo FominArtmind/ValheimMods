@@ -55,7 +55,7 @@ namespace EpicLoot
             foreach (var entry in magicEffects)
             {
                 var effectType = entry.Key;
-                var effectDef = MagicItemEffectDefinitions.Get(effectType);
+                var effectDef = Raido.DropEngine.EffectsConfig.GetEffectMetadata(effectType);
                 float sum = (float)Math.Round(PlayerExtensions.GetEffectDiminishingReturnsTotalValue(entry.Value.Select(x => x.Key.EffectValue).ToList(), effectType));
                 var totalEffectText = MagicItem.GetEffectText(effectDef, sum);
                 var highestRarity = (ItemRarity) entry.Value.Max(x => (int) x.Value.GetRarity());
@@ -66,7 +66,7 @@ namespace EpicLoot
                     var effect = entry2.Key;
                     var item = entry2.Value;
                     var magicItem = item.GetMagicItem();
-                    t.AppendLine($" <color=#c0c0c0ff>- {MagicItem.GetEffectText(effect, item.GetRarity(), magicItem != null ? magicItem.Quality : ItemQuality.Normal, item.m_shared.m_name, false, magicItem?.LegendaryID)} ({item.GetDecoratedName()})</color>");
+                    t.AppendLine($" <color=#c0c0c0ff>- {MagicItem.GetEffectText(effect, magicItem.GetClass(), item.GetRarity(), magicItem != null ? magicItem.Quality : ItemQuality.Normal, item.m_shared.m_name, false, magicItem?.LegendaryID)} ({item.GetDecoratedName()})</color>");
                 }
 
                 t.AppendLine();
@@ -163,9 +163,9 @@ namespace EpicLoot
 
         public static void AddMagicEffectsExplainPage(TextsDialog textsDialog)
         {
-            var sortedMagicEffects = MagicItemEffectDefinitions.AllDefinitions
-                .Where(x => !x.Value.Requirements.NoRoll)
-                .Select(x => new KeyValuePair<string, string>(string.Format(Localization.instance.Localize(x.Value.DisplayText), "<b><color=yellow>X</color></b>"), Localization.instance.Localize(x.Value.Description)))
+            var sortedMagicEffects = Raido.DropEngine.EffectsConfig.EffectMetadata
+                // .Where(x => !x.Value.Requirements.NoRoll)
+                .Select(x => new KeyValuePair<string, string>(string.Format(Localization.instance.Localize(x.DisplayText), "<b><color=yellow>X</color></b>"), Localization.instance.Localize(x.Description)))
                 .OrderBy(x => x.Key);
 
             var t = new StringBuilder();

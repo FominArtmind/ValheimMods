@@ -99,7 +99,7 @@ namespace EpicLoot
                             break;
                     }
 
-                    return string.Format(magicFormat, qualityStr, rarityStr, baseName).Trim();
+                    return string.Format(magicFormat, qualityStr, rarityStr, magicItem.GetClass(), baseName).Trim();
 
 /*                case ItemRarity.Magic:
                     var magicFormat = Localization.instance.Localize("$mod_epicloot_basicmagicnameformat");
@@ -131,50 +131,6 @@ namespace EpicLoot
             var name = Localization.instance.Localize(baseName);
             var capName = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(name);
             return capName;
-        }
-
-        public static object GetPrefix(MagicItem magicItem)
-        {
-            if (magicItem.Effects.Count == 0)
-            {
-                return null;
-            }
-
-            var firstEffect = magicItem.Effects[0];
-            var effectDef = MagicItemEffectDefinitions.Get(firstEffect.EffectType);
-            if (effectDef == null)
-            {
-                return null;
-            }
-
-            var prefixes = effectDef.Prefixes ?? Config.Rare.GenericPrefixes;
-            var randomPrefix = GetRandomStringFromList(prefixes);
-
-            // Include trailing space
-            var format = Localization.instance.Localize("$mod_epicloot_prefixformat");
-            return string.IsNullOrEmpty(randomPrefix) ? null : string.Format(format, randomPrefix);
-        }
-
-        public static object GetSuffix(MagicItem magicItem)
-        {
-            if (magicItem.Effects.Count < 2)
-            {
-                return null;
-            }
-
-            var secondEffect = magicItem.Effects[1];
-            var effectDef = MagicItemEffectDefinitions.Get(secondEffect.EffectType);
-            if (effectDef == null)
-            {
-                return null;
-            }
-
-            var suffixes = effectDef.Suffixes ?? Config.Rare.GenericSuffixes;
-            var randomSuffix = GetRandomStringFromList(suffixes);
-
-            // Include " of "
-            var format = Localization.instance.Localize("$mod_epicloot_suffixformat");
-            return string.IsNullOrEmpty(randomSuffix) ? null : string.Format(format, randomSuffix);
         }
 
         public static string BuildEpicName(ItemDrop.ItemData item, MagicItem magicItem)

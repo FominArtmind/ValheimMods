@@ -107,7 +107,7 @@ namespace EpicLoot.Abilities
 
         private List<AbilityDefinition> GetAvailableAbilities()
         {
-            var effectsWithAbilities = _player.GetAllActiveMagicEffects()
+/*            var effectsWithAbilities = _player.GetAllActiveMagicEffects()
                 .Select(x => MagicItemEffectDefinitions.Get(x.EffectType))
                 .Where(x => !string.IsNullOrEmpty(x.Ability));
 
@@ -118,7 +118,9 @@ namespace EpicLoot.Abilities
                 {
                     availableAbilities.Add(abilityDef);
                 }
-            }
+            }*/
+
+            var availableAbilities = new HashSet<AbilityDefinition>();
 
             return availableAbilities.ToList();
         }
