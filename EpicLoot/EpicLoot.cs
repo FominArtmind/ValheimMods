@@ -4,7 +4,6 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
-using System.Threading;
 using AdventureBackpacks.API;
 using BepInEx;
 using BepInEx.Configuration;
