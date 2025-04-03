@@ -73,8 +73,6 @@ namespace EpicLoot.Adventure
             {
                 _minimap.m_icons.Add(new Minimap.SpriteData { m_name = EpicLoot.BountyPinType, m_icon = EpicLoot.Assets.MapIconBounty });
             }
-
-            // DrawDistanceLevelCircles();
         }
 
         private void Start()
@@ -96,14 +94,13 @@ namespace EpicLoot.Adventure
                 Task = MinimapPinQueueTask.RefreshAll
             };
             AddPinJobToQueue(pinJob);
-
-            // DrawDistanceLevelCircles();
         }
 
         public virtual void Update()
         {
             if(_drawingOfCirclesRequired)
             {
+                EpicLoot.Log("DRAWING CIRCLES ON THE MAP");
                 DrawDistanceLevelCircles();
                 _drawingOfCirclesRequired = false;
             }

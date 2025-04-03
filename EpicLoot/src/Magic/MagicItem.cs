@@ -126,7 +126,7 @@ namespace EpicLoot
             }
 
             // stub for older items
-            return "Chaotic";
+            return "Forgotten";
         }
 
         public bool HasEffect(string effectType)

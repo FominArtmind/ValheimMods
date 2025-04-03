@@ -279,8 +279,8 @@ namespace Raido
                 }
             }
 
-            _Log($"Class for {item.Item} not found, rolling Chaotic");
-            return "Chaotic";
+            _Log($"Class for {item.Item} not found, rolling Forgotten");
+            return "Forgotten";
         }
 
         private static ItemRarity _RollItemRarity(DropUnit item)
@@ -377,12 +377,17 @@ namespace Raido
             var value = min;
             if (step > 0.0f)
             {
-                _Log($"RollEffect: {effect.Type} value={value} (min={effect.Min} max={effect.Max})");
+                _Log($"RollEffectValue -> Rolling {effect.Type} (min={effect.Min} max={effect.Max} step={effect.Step})");
                 var incrementCount = (int)((max - min) / step);
 
                 double v = Math.Pow(_random.NextDouble() * _random.NextDouble(), 0.7);
 
                 value = min + (int)(v * (incrementCount + 1)) * step;
+                _Log($"RollEffectValue -> Rolled {value} (incrementCount={incrementCount} v={v})");
+            }
+            else
+            {
+                _Log($"RollEffectValue -> SKIPPING {effect.Type} (min={effect.Min} max={effect.Max} step={step}) due to 0 step value");
             }
 
             return value;
@@ -390,6 +395,8 @@ namespace Raido
 
         private static EpicLoot.MagicItemEffect _RollEffect(List<ItemResolvedEffect> effects)
         {
+            _Log($"Effects to select from: {effects.Count}");
+
             int total = 0;
             foreach (var item in effects)
             {
@@ -409,6 +416,8 @@ namespace Raido
                 }
             }
 
+            _Log($"Selected effect {selected.Type} weight {selected.Weight}, is group: {selected.Group != null && selected.Group.Count > 0} Step {selected.Step}");
+
             ItemResolvedGroupEffect selectedGroupEffect = null;
             if (selected.Group != null && selected.Group.Count > 0)
             {
@@ -420,6 +429,7 @@ namespace Raido
 
                 var roll2 = _random.Next(total2);
                 selectedGroupEffect = selected.Group[0];
+                _Log($"Changed selected effect to {selectedGroupEffect.Type} weight {selectedGroupEffect.Weight} Step {selectedGroupEffect.Step} as default group 0 effect");
                 int sum2 = 0;
                 foreach (var item in selected.Group)
                 {
@@ -427,6 +437,7 @@ namespace Raido
                     if (sum2 >= roll2)
                     {
                         selectedGroupEffect = item;
+                        _Log($"Changed selected effect to {selectedGroupEffect.Type} weight {selectedGroupEffect.Weight} Step {selectedGroupEffect.Step}");
                         break;
                     }
                 }
@@ -603,11 +614,7 @@ namespace Raido
                 var coreOrRequiredEffects = availableEffects.Where(value => value.Core || value.Weight == 0).ToList();
                 foreach (var effect in coreOrRequiredEffects)
                 {
-                    var magicItemEffect = new MagicItemEffect() { EffectType = effect.Type };
-                    if (!EffectsConfig.IsValuelessEffect(effect.Type))
-                    {
-                        magicItemEffect.EffectValue = _RollEffectValue(effect);
-                    }
+                    var magicItemEffect = _RollEffect(new List<ItemResolvedEffect>() { effect });
 
                     magicItem.Effects.Add(magicItemEffect);
                     skippedEffectsNames.Add(magicItemEffect.EffectType);
@@ -762,7 +769,7 @@ namespace Raido
             {
                 var itemName = rolledItem.Item;
 
-                string itemClass = "Chaotic";
+                string itemClass = "Forgotten";
                 ItemRarity rarity = ItemRarity.Magic;
                 ItemQuality quality = ItemQuality.Inferior;
 

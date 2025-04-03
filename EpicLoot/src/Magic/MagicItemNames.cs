@@ -99,7 +99,11 @@ namespace EpicLoot
                             break;
                     }
 
-                    return string.Format(magicFormat, qualityStr, rarityStr, magicItem.GetClass(), baseName).Trim();
+                    var itemClass = magicItem.GetClass();
+                    var className = Raido.DropEngine.ClassesConfig.GetClassName(itemClass);
+                    var classStr = Localization.instance.Localize(className);
+
+                    return string.Format(magicFormat, qualityStr, rarityStr, classStr, baseName).Trim();
 
 /*                case ItemRarity.Magic:
                     var magicFormat = Localization.instance.Localize("$mod_epicloot_basicmagicnameformat");
