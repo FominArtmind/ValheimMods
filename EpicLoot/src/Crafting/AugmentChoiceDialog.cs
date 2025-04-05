@@ -128,12 +128,20 @@ namespace EpicLoot.Crafting
             {
                 button.gameObject.SetActive(false);
             }
-            
-            var newEffectOptions = LootRoller.RollAugmentEffects(fromItem, magicItem, effectIndex);
-            
-            for (var index = 0; index < newEffectOptions.Count; index++)
+
+            var effectOptions = new List<MagicItemEffect>();
+            var replacedEffect = magicItem.GetEffects()[effectIndex];
+            effectOptions.Add(new MagicItemEffect(replacedEffect.EffectType, replacedEffect.EffectValue));
+
+            var newEffects = Raido.DropEngine.RollAugmentEffects(2, fromItem, effectIndex);
+            foreach(var newEffect in newEffects)
             {
-                var effect = newEffectOptions[index];
+                effectOptions.Add(newEffect);
+            }
+            
+            for (var index = 0; index < effectOptions.Count; index++)
+            {
+                var effect = effectOptions[index];
                 var button = EffectChoiceButtons[index];
                 button.gameObject.SetActive(true);
                 var text = button.GetComponentInChildren<TMP_Text>();

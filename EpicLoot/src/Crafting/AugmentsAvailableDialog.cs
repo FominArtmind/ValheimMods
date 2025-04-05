@@ -36,7 +36,6 @@ namespace EpicLoot.Crafting
             gameObject.SetActive(true);
 
             var item = recipe.FromItem;
-            var rarity = item.GetRarity();
             var magicItem = item.GetMagicItem();
             var rarityColor = item.GetRarityColor();
 
@@ -58,7 +57,7 @@ namespace EpicLoot.Crafting
 
             if (Description != null)
             {
-                var availableEffects = AugmentHelper.GetAvailableAugments(recipe, item, magicItem, rarity);
+                var availableEffects = AugmentHelper.GetAvailableAugments(recipe, item, magicItem);
                 var t = new StringBuilder();
                 if (availableEffects.Count < 20)
                 {

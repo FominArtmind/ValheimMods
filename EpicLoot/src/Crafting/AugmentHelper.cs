@@ -163,17 +163,19 @@ namespace EpicLoot.Crafting
             return newDialogT;
         }
 
-        public static List<MagicItemEffectDefinition> GetAvailableAugments(AugmentRecipe recipe, ItemDrop.ItemData item, MagicItem magicItem, ItemRarity rarity)
+        public static List<MagicItemEffectDefinition> GetAvailableAugments(AugmentRecipe recipe, ItemDrop.ItemData item, MagicItem magicItem)
         {
-            var valuelessEffect = false;
-            if (recipe.EffectIndex >= 0 && recipe.EffectIndex < magicItem.Effects.Count)
-            {
-                valuelessEffect = Raido.DropEngine.EffectsConfig.IsValuelessEffect(magicItem.Effects[recipe.EffectIndex].EffectType);
-            }
+            /*            var valuelessEffect = false;
+                        if (recipe.EffectIndex >= 0 && recipe.EffectIndex < magicItem.Effects.Count)
+                        {
+                            valuelessEffect = Raido.DropEngine.EffectsConfig.IsValuelessEffect(magicItem.Effects[recipe.EffectIndex].EffectType);
+                        }*/
 
             // TO DO
-            return new List<MagicItemEffectDefinition>();
             // return MagicItemEffectDefinitions.GetAvailableEffects(item.Extended(), item.GetMagicItem(), valuelessEffect ? -1 : recipe.EffectIndex);
+
+            // var availableEffects = Raido.DropEngine.ClassesConfig.GetAvailableAugmentEffects(item, recipe.EffectIndex);
+            return new List<MagicItemEffectDefinition>();
         }
 
         public static string GetAugmentSelectorText(MagicItem magicItem, int i, IReadOnlyList<MagicItemEffect> augmentableEffects, ItemRarity rarity)

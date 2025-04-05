@@ -248,7 +248,7 @@ namespace Raido
                         var eff = ResolveEffect(effect.Type, itemName, quality, rarity, effect.Weight, effect.Core, effect.Power);
                         if (eff != null)
                         {
-                            result.Add(new ItemResolvedEffect() { Weight = eff.Weight, Type = eff.Type, Core = eff.Core, Min = eff.Min, Max = eff.Max });
+                            result.Add(new ItemResolvedEffect() { Weight = eff.Weight, Type = eff.Type, Core = eff.Core, Min = eff.Min, Max = eff.Max, Step = eff.Step });
                         }
                         return result;
                     }
@@ -332,7 +332,7 @@ namespace Raido
                         var eff = ResolveEffect(effect.Type, itemName, quality, rarity, effect.Weight, effect.Core, effect.Power);
                         if (eff != null)
                         {
-                            result.Add(new ItemResolvedEffect() { Weight = eff.Weight, Type = eff.Type, Core = eff.Core, Min = eff.Min, Max = eff.Max });
+                            result.Add(new ItemResolvedEffect() { Weight = eff.Weight, Type = eff.Type, Core = eff.Core, Min = eff.Min, Max = eff.Max, Step = eff.Step });
                         }
                     }
                 }

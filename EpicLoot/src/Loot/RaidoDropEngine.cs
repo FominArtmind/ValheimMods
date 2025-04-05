@@ -1015,5 +1015,20 @@ namespace Raido
 
             return rolledItems;
         }
+
+        public static List<MagicItemEffect> RollAugmentEffects(int count, ItemDrop.ItemData item, int replacedEffectIndex)
+        {
+            var availableEffects = ClassesConfig.GetAvailableAugmentEffects(item, replacedEffectIndex);
+
+            List<MagicItemEffect> result = new List<MagicItemEffect>();
+
+            for (var i = 0; i < count; i++)
+            {
+                var effect = _RollEffect(availableEffects);
+                result.Add(effect);
+            }
+
+            return result;
+        }
     }
 }

@@ -583,7 +583,7 @@ namespace EpicLoot.CraftingV2
 
             var player = Player.m_localPlayer;
             var luckFactor = player.GetTotalActiveMagicEffectValue(MagicEffectType.Luck, 0.01f);
-            var magicItem = LootRoller.RollMagicItem((ItemRarity)rarity, quality, item, luckFactor);
+            var magicItem = Raido.DropEngine.RollMagicItem(Raido.Raido.GetPrefabName(item), itemClass, (ItemRarity)rarity, quality, item);
 
             var magicItemComponent = item.Data().GetOrCreate<MagicItemComponent>();
             magicItemComponent.SetMagicItem(magicItem);
