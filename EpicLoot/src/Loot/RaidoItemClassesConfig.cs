@@ -195,7 +195,15 @@ namespace Raido
                     }
                     if(group.Group.Count > 0)
                     {
-                        result.Add(group);
+                        if (group.Group.Count == 1)
+                        {
+                            var eff = group.Group[0];
+                            result.Add(new ItemResolvedEffect() { Weight = group.Weight, Type = eff.Type, Core = group.Core, Min = eff.Min, Max = eff.Max, Step = eff.Step });
+                        }
+                        else
+                        {
+                            result.Add(group);
+                        }
                     }
                 }
                 else
@@ -230,7 +238,7 @@ namespace Raido
             var rarity = magicItem.Rarity;
 
             string replacedType = null;
-            if (replacedEffectIndex > 0)
+            if (replacedEffectIndex >= 0)
             {
                 replacedType = magicItem.Effects[replacedEffectIndex].EffectType;
                 foreach (var effect in classData.Effects)
@@ -240,14 +248,14 @@ namespace Raido
                         var eff = ResolveEffect(effect.Type, itemName, quality, rarity, effect.Weight, effect.Core, effect.Power);
                         if (eff != null)
                         {
-                            result.Add(new ItemResolvedEffect() { Weight = eff.Weight, Type = eff.Type, Min = eff.Min, Max = eff.Max });
+                            result.Add(new ItemResolvedEffect() { Weight = eff.Weight, Type = eff.Type, Core = eff.Core, Min = eff.Min, Max = eff.Max });
                         }
                         return result;
                     }
 
                     if ((effect.Core || effect.Weight == 0) && effect.Group != null && effect.Group.Count > 0)
                     {
-                        var group = new ItemResolvedEffect() { Weight = effect.Weight };
+                        var group = new ItemResolvedEffect() { Weight = effect.Weight, Core = effect.Core };
                         bool found = false;
                         foreach (var groupEffect in effect.Group)
                         {
@@ -266,7 +274,15 @@ namespace Raido
                         {
                             if (group.Group.Count > 0)
                             {
-                                result.Add(group);
+                                if (group.Group.Count == 1)
+                                {
+                                    var eff = group.Group[0];
+                                    result.Add(new ItemResolvedEffect() { Weight = group.Weight, Type = eff.Type, Core = group.Core, Min = eff.Min, Max = eff.Max, Step = eff.Step });
+                                }
+                                else
+                                {
+                                    result.Add(group);
+                                }
                             }
                             return result;
                         }
@@ -284,7 +300,7 @@ namespace Raido
             {
                 if (effect.Group != null && effect.Group.Count > 0)
                 {
-                    var group = new ItemResolvedEffect() { Weight = effect.Weight };
+                    var group = new ItemResolvedEffect() { Weight = effect.Weight, Core = effect.Core };
                     foreach (var groupEffect in effect.Group)
                     {
                         if (skippedEffectsNames == null || !skippedEffectsNames.Contains(groupEffect.Type))
@@ -298,7 +314,15 @@ namespace Raido
                     }
                     if (group.Group.Count > 0)
                     {
-                        result.Add(group);
+                        if (group.Group.Count == 1)
+                        {
+                            var eff = group.Group[0];
+                            result.Add(new ItemResolvedEffect() { Weight = group.Weight, Type = eff.Type, Core = group.Core, Min = eff.Min, Max = eff.Max, Step = eff.Step });
+                        }
+                        else
+                        {
+                            result.Add(group);
+                        }
                     }
                 }
                 else
@@ -308,7 +332,7 @@ namespace Raido
                         var eff = ResolveEffect(effect.Type, itemName, quality, rarity, effect.Weight, effect.Core, effect.Power);
                         if (eff != null)
                         {
-                            result.Add(new ItemResolvedEffect() { Weight = eff.Weight, Type = eff.Type, Min = eff.Min, Max = eff.Max });
+                            result.Add(new ItemResolvedEffect() { Weight = eff.Weight, Type = eff.Type, Core = eff.Core, Min = eff.Min, Max = eff.Max });
                         }
                     }
                 }
