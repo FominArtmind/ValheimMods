@@ -173,24 +173,30 @@ namespace Raido
             foreach(var effect in classData.Effects) {
                 if (effect.Group != null && effect.Group.Count > 0)
                 {
-                    foreach (var groupEffect in effect.Group)
+                    if (skippedEffectsNames != null)
                     {
-                        if (skippedEffectsNames != null && skippedEffectsNames.Contains(groupEffect.Type))
+                        bool skipGroupEffect = false;
+                        foreach (var groupEffect in effect.Group)
                         {
-                            // all group effects are prohibited at the point
+                            if (skippedEffectsNames.Contains(groupEffect.Type))
+                            {
+                                skipGroupEffect = true;
+                                break;
+                            }
+                        }
+                        if (skipGroupEffect)
+                        {
                             continue;
                         }
                     }
 
-                    var group = new ItemResolvedEffect() { Weight = effect.Weight };
-                    foreach (var groupEffect in effect.Group) {
-                        if (skippedEffectsNames == null || !skippedEffectsNames.Contains(groupEffect.Type))
+                    var group = new ItemResolvedEffect() { Weight = effect.Weight, Core = effect.Core };
+                    foreach (var groupEffect in effect.Group)
+                    {
+                        var eff = ResolveEffect(groupEffect.Type, itemName, quality, rarity, groupEffect.Weight, groupEffect.Core, groupEffect.Power);
+                        if (eff != null)
                         {
-                            var eff = ResolveEffect(groupEffect.Type, itemName, quality, rarity, groupEffect.Weight, groupEffect.Core, groupEffect.Power);
-                            if (eff != null)
-                            {
-                                group.Group.Add(eff);
-                            }
+                            group.Group.Add(eff);
                         }
                     }
                     if(group.Group.Count > 0)
