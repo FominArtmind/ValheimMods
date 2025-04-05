@@ -44,7 +44,7 @@ namespace EpicLoot_UnityLib
                 _toggleGroup.EnsureValidState();
             }
 
-            for (var index = 0; index < RarityButtons.Count - 1; index++)
+            for (var index = 0; index < RarityButtons.Count; index++)
             {
                 var rarityButton = RarityButtons[index];
                 rarityButton.onValueChanged.AddListener((isOn) => {
@@ -64,9 +64,6 @@ namespace EpicLoot_UnityLib
             RarityButtons[0].isOn = true;
             var items = GetEnchantableItems();
             AvailableItems.SetItems(items.Cast<IListElement>().ToList());
-
-            // TO DO: remove this workaround for legendary button
-            RarityButtons[RarityButtons.Count - 1].interactable = false;
         }
 
         public override void Update()
@@ -101,7 +98,7 @@ namespace EpicLoot_UnityLib
         public void RefreshRarity()
         {
             var prevRarity = _rarity;
-            for (var index = 0; index < RarityButtons.Count - 1; index++)
+            for (var index = 0; index < RarityButtons.Count; index++)
             {
                 var button = RarityButtons[index];
                 if (button.isOn)
@@ -238,12 +235,10 @@ namespace EpicLoot_UnityLib
         {
             base.Unlock();
             
-            // TO DO: remove this Legendary button workaround
-            for (var index = 0; index < RarityButtons.Count - 1; index++)
+            for (var index = 0; index < RarityButtons.Count; index++)
             {
                 RarityButtons[index].interactable = true;
             }
-            RarityButtons[RarityButtons.Count - 1].interactable = false;
         }
 
         public override void DeselectAll()
