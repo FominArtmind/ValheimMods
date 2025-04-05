@@ -79,6 +79,23 @@ namespace Raido
             return player.m_customData.ContainsKey(key);
         }
 
+        public static bool PlayerKnowsItemClass(ItemDrop.ItemData item, string itemClass)
+        {
+            var player = Player.m_localPlayer;
+
+            var qualities = new List<ItemQuality>() { ItemQuality.Inferior, ItemQuality.Normal, ItemQuality.Exceptional, ItemQuality.Elite };
+            foreach(var quality in qualities )
+            {
+                var key = _MagicItemKnownKey(item.m_shared.m_name, itemClass, quality);
+                if(player.m_customData.ContainsKey(key))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         public static void SetPlayerKnowsItem(ItemDrop.ItemData item)
         {
             var player = Player.m_localPlayer;

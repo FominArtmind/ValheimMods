@@ -11,6 +11,8 @@ namespace EpicLoot_UnityLib
         public Text EnchantInfo;
         public Scrollbar EnchantInfoScrollbar;
         public List<Toggle> RarityButtons;
+        public Button ClassSelection;
+        public Text ClassSelectionText;
 
         [Header("Cost")]
         public Text CostLabel;
@@ -19,12 +21,16 @@ namespace EpicLoot_UnityLib
         public AudioClip[] EnchantCompleteSFX;
 
         public delegate List<InventoryItemListElement> GetEnchantableItemsDelegate();
+        public delegate List<string> GetAvailableItemClassesDelegate(ItemDrop.ItemData item);
+        public delegate string GetItemClassNameDelegate(string itemClass);
         public delegate string GetEnchantInfoDelegate(ItemDrop.ItemData item, string itemClass, MagicRarityUnity rarity);
         public delegate List<InventoryItemListElement> GetEnchantCostDelegate(ItemDrop.ItemData item, string itemClass, MagicRarityUnity rarity);
         // Returns the success dialog
         public delegate GameObject EnchantItemDelegate(ItemDrop.ItemData item, string itemClass, MagicRarityUnity rarity);
 
         public static GetEnchantableItemsDelegate GetEnchantableItems;
+        public static GetAvailableItemClassesDelegate GetAvailableItemClasses;
+        public static GetItemClassNameDelegate GetItemClassName;
         public static GetEnchantInfoDelegate GetEnchantInfo;
         public static GetEnchantCostDelegate GetEnchantCost;
         public static EnchantItemDelegate EnchantItem;
@@ -52,15 +58,42 @@ namespace EpicLoot_UnityLib
                         RefreshRarity();
                 });
             }
+
+            ClassSelection.onClick.AddListener(() =>
+            {
+                var selectedItem = AvailableItems.GetSingleSelectedItem<InventoryItemListElement>();
+                var item = selectedItem?.Item1?.GetItem();
+                if (item != null)
+                {
+                    var itemClasses = GetAvailableItemClasses(item);
+                    if (itemClasses.Count == 0)
+                    {
+                        SetItemClass("Forgotten");
+                    }
+                    else
+                    {
+                        var index = itemClasses.FindIndex((value) => value == _itemClass);
+                        if (index == -1)
+                        {
+                            SetItemClass(itemClasses[0]);
+                        }
+                        else
+                        {
+                            SetItemClass(itemClasses[(index + 1) % itemClasses.Count()]);
+                        }
+                    }
+
+                    ItemRarityOrClassChanged();
+                }
+            });
         }
 
         [UsedImplicitly]
         public void OnEnable()
         {
-            // TO DO: setting class in UI
-            _itemClass = "Chaotic";
+            SetItemClass("Forgotten");
             _rarity = MagicRarityUnity.Magic;
-            OnRarityChanged();
+            ItemRarityOrClassChanged();
             RarityButtons[0].isOn = true;
             var items = GetEnchantableItems();
             AvailableItems.SetItems(items.Cast<IListElement>().ToList());
@@ -108,10 +141,10 @@ namespace EpicLoot_UnityLib
             }
 
             if (prevRarity != _rarity)
-                OnRarityChanged();
+                ItemRarityOrClassChanged();
         }
 
-        public void OnRarityChanged()
+        public void ItemRarityOrClassChanged()
         {
             var selectedItem = AvailableItems.GetSingleSelectedItem<InventoryItemListElement>();
             if (selectedItem?.Item1.GetItem() == null)
@@ -124,6 +157,21 @@ namespace EpicLoot_UnityLib
             }
 
             var item = selectedItem.Item1.GetItem();
+
+            var itemClasses = GetAvailableItemClasses(item);
+            if (itemClasses.Count == 0)
+            {
+                SetItemClass("Forgotten");
+            }
+            else
+            {
+                var index = itemClasses.FindIndex((value) => value == _itemClass);
+                if (index == -1)
+                {
+                    SetItemClass(itemClasses[0]);
+                }
+            }
+
             var info = GetEnchantInfo(item, _itemClass, _rarity);
 
             EnchantInfo.text = info;
@@ -200,7 +248,7 @@ namespace EpicLoot_UnityLib
 
         protected override void OnSelectedItemsChanged()
         {
-            OnRarityChanged();
+            ItemRarityOrClassChanged();
         }
         
         public override bool CanCancel()
@@ -218,7 +266,7 @@ namespace EpicLoot_UnityLib
                 _successDialog = null;
             }
 
-            OnRarityChanged();
+            ItemRarityOrClassChanged();
         }
 
         public override void Lock()
@@ -229,6 +277,7 @@ namespace EpicLoot_UnityLib
             {
                 modeButton.interactable = false;
             }
+            ClassSelection.interactable = false;
         }
 
         public override void Unlock()
@@ -239,11 +288,23 @@ namespace EpicLoot_UnityLib
             {
                 RarityButtons[index].interactable = true;
             }
+            ClassSelection.interactable = true;
         }
 
         public override void DeselectAll()
         {
             AvailableItems.DeselectAll();
+        }
+
+        public void SetItemClass(string itemClass)
+        {
+            _itemClass = itemClass;
+
+            var name = GetItemClassName(_itemClass);
+            if(name != null)
+            {
+                ClassSelectionText.text = name;
+            }
         }
     }
 }

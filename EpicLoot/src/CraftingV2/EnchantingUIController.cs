@@ -40,6 +40,8 @@ namespace EpicLoot.CraftingV2
             ConvertUI.GetConversionRecipes = GetConversionRecipes;
             SetRarityColor.GetRarityColor = GetRarityColor;
             EnchantUI.GetEnchantableItems = GetEnchantableItems;
+            EnchantUI.GetAvailableItemClasses = GetAvailableItemClasses;
+            EnchantUI.GetItemClassName = GetItemClassName;
             EnchantUI.GetEnchantInfo = GetEnchantInfo;
             EnchantUI.GetEnchantCost = GetEnchantCost;
             EnchantUI.EnchantItem = EnchantItemAndReturnSuccessDialog;
@@ -349,6 +351,23 @@ namespace EpicLoot.CraftingV2
                 .ToList();
         }
 
+        private static List<string> GetAvailableItemClasses(ItemDrop.ItemData item)
+        {
+            var classList = Raido.DropEngine.ClassesConfig.GetAvailableClasses(Raido.Raido.GetPrefabName(item)).Select(value => value.Key).ToList();
+
+            return classList.Where(value => Raido.Raido.PlayerKnowsItemClass(item, value)).ToList();
+        }
+
+        private static string GetItemClassName(string itemClass)
+        {
+            EpicLoot.Log($"ITEM CLASS {itemClass}");
+            var className = Raido.DropEngine.ClassesConfig.GetClassName(itemClass);
+            EpicLoot.Log($"ITEM CLASS NAME {className}");
+            var classNameStr = Localization.instance.Localize(className);
+            EpicLoot.Log($"ITEM CLASS NAME STR {classNameStr}");
+            return classNameStr;
+        }
+
         private static float EffectChance(int effectWeight, int totalWeight)
         {
             if(effectWeight == 0)
@@ -417,7 +436,11 @@ namespace EpicLoot.CraftingV2
                     }
                 }
             }
-            sb.AppendLine($"{item.m_shared.m_name} \u2794 <color={rarityColor}>{qualityText} {rarityDisplay}</color> {item.GetDecoratedName(rarityColor)}");
+
+            var className = Raido.DropEngine.ClassesConfig.GetClassName(itemClass);
+            var classStr = Localization.instance.Localize(className);
+
+            sb.AppendLine($"{item.m_shared.m_name} \u2794 <color={rarityColor}>{qualityText} {rarityDisplay} {classStr}</color> {item.GetDecoratedName(rarityColor)}");
             sb.AppendLine($"<color={rarityColor}>");
             if (EpicLoot.EffectValueRollDistribution.Value == EffectValueRollDistributionTypes.TendsToLowAverage)
             {
