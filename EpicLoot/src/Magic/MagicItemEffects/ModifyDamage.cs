@@ -70,7 +70,7 @@ namespace EpicLoot.MagicItemEffects
             if (magicItemskillType == Skills.SkillType.Axes)
             {
                 __result.m_chop += totalDamage * MagicEffectsHelper.GetTotalActiveMagicEffectValueForWeapon(
-                    player, __instance, MagicEffectType.AddSlashingDamage, 1.0f, true);
+                    player, __instance, MagicEffectType.AddChoppingDamage, 1.0f, true);
             }
             else if (magicItemskillType == Skills.SkillType.Pickaxes)
             {

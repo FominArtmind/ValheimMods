@@ -35,6 +35,7 @@ namespace EpicLoot
         public static string AddBluntDamage = nameof(AddBluntDamage);
         public static string AddSlashingDamage = nameof(AddSlashingDamage);
         public static string AddPiercingDamage = nameof(AddPiercingDamage);
+        public static string AddChoppingDamage = nameof(AddChoppingDamage);
         public static string AddFireDamage = nameof(AddFireDamage);
         public static string AddFrostDamage = nameof(AddFrostDamage);
         public static string AddLightningDamage = nameof(AddLightningDamage);

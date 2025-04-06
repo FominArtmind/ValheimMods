@@ -130,7 +130,7 @@ namespace Raido
             return _effectRangeCache[_cacheKey];
         }
 
-        ItemResolvedGroupEffect ResolveEffect(string type, string itemName, ItemQuality quality, ItemRarity rarity, int weight, bool core, float power)
+        ItemResolvedGroupEffect ResolveEffect(string type, int weight, bool core, float power, List<ItemQuality> qualities, List<ItemRarity> rarities,  string itemName, ItemQuality quality, ItemRarity rarity)
         {
             var _cacheKey = $"{type}{itemName}{quality}{rarity}{power}";
             if (_resolvedEffectCache.ContainsKey(_cacheKey))
@@ -142,22 +142,35 @@ namespace Raido
             var effectMetadata = EffectsConfig.EffectMetadata.Find(value => value.Type == type);
             if (effectMetadata != null && effectMetadata.AllowedOnItem(type, itemName))
             {
-                var resolvedEffect = new ItemResolvedGroupEffect() { Weight = weight, Type = type, Core = core };
-                if (!EffectsConfig.IsValuelessEffect(type))
+                if ((qualities == null || qualities.Contains(quality)) && (rarities == null || rarities.Contains(rarity)))
                 {
-                    var range = EffectsConfig.GetEffectRangeForItem(type, itemName, quality, rarity, power, true);
-                    resolvedEffect.Min = range[0];
-                    resolvedEffect.Max = range[1];
-                    resolvedEffect.Step = range[2];
-                    _Log($"Generating resolved effect Min={resolvedEffect.Min} Max={resolvedEffect.Max} Step={resolvedEffect.Step}");
-                }
+                    var resolvedEffect = new ItemResolvedGroupEffect() { Weight = weight, Type = type, Core = core };
+                    if (!EffectsConfig.IsValuelessEffect(type))
+                    {
+                        var range = EffectsConfig.GetEffectRangeForItem(type, itemName, quality, rarity, power, true);
+                        resolvedEffect.Min = range[0];
+                        resolvedEffect.Max = range[1];
+                        resolvedEffect.Step = range[2];
+                        _Log($"Generating resolved effect Min={resolvedEffect.Min} Max={resolvedEffect.Max} Step={resolvedEffect.Step}");
+                    }
 
-                _resolvedEffectCache[_cacheKey] = resolvedEffect;
-                return resolvedEffect;
+                    _resolvedEffectCache[_cacheKey] = resolvedEffect;
+                    return resolvedEffect;
+                }
             }
 
             _resolvedEffectCache[_cacheKey] = null;
             return null;
+        }
+
+        ItemResolvedGroupEffect ResolveEffect(ItemClassGroupEffectConfig effect, string itemName, ItemQuality quality, ItemRarity rarity)
+        {
+            return ResolveEffect(effect.Type, effect.Weight, effect.Core, effect.Power, effect.Qualities, effect.Rarities, itemName, quality, rarity);
+        }
+
+        ItemResolvedGroupEffect ResolveEffect(ItemClassEffectConfig effect, string itemName, ItemQuality quality, ItemRarity rarity)
+        {
+            return ResolveEffect(effect.Type, effect.Weight, effect.Core, effect.Power, effect.Qualities, effect.Rarities, itemName, quality, rarity);
         }
 
         public List<ItemResolvedEffect> GetAvailableEnchantEffects(string itemName, string itemClass, ItemQuality quality, ItemRarity rarity, List<string> skippedEffectsNames = null)
@@ -193,7 +206,7 @@ namespace Raido
                     var group = new ItemResolvedEffect() { Weight = effect.Weight, Core = effect.Core };
                     foreach (var groupEffect in effect.Group)
                     {
-                        var eff = ResolveEffect(groupEffect.Type, itemName, quality, rarity, groupEffect.Weight, groupEffect.Core, groupEffect.Power);
+                        var eff = ResolveEffect(groupEffect, itemName, quality, rarity);
                         if (eff != null)
                         {
                             group.Group.Add(eff);
@@ -216,7 +229,7 @@ namespace Raido
                 {
                     if (skippedEffectsNames == null || !skippedEffectsNames.Contains(effect.Type))
                     {
-                        var eff = ResolveEffect(effect.Type, itemName, quality, rarity, effect.Weight, effect.Core, effect.Power);
+                        var eff = ResolveEffect(effect, itemName, quality, rarity);
                         if (eff != null)
                         {
                             result.Add(new ItemResolvedEffect() { Weight = eff.Weight, Type = eff.Type, Core = eff.Core, Min = eff.Min, Max = eff.Max, Step = eff.Step });
@@ -251,7 +264,7 @@ namespace Raido
                 {
                     if (effect.Type == replacedType && (effect.Core || effect.Weight == 0))
                     {
-                        var eff = ResolveEffect(effect.Type, itemName, quality, rarity, effect.Weight, effect.Core, effect.Power);
+                        var eff = ResolveEffect(effect, itemName, quality, rarity);
                         if (eff != null)
                         {
                             result.Add(new ItemResolvedEffect() { Weight = eff.Weight, Type = eff.Type, Core = eff.Core, Min = eff.Min, Max = eff.Max, Step = eff.Step });
@@ -265,7 +278,7 @@ namespace Raido
                         bool found = false;
                         foreach (var groupEffect in effect.Group)
                         {
-                            var eff = ResolveEffect(groupEffect.Type, itemName, quality, rarity, groupEffect.Weight, groupEffect.Core, groupEffect.Power);
+                            var eff = ResolveEffect(groupEffect, itemName, quality, rarity);
                             if (eff != null)
                             {
                                 group.Group.Add(eff);
@@ -311,7 +324,7 @@ namespace Raido
                     {
                         if (skippedEffectsNames == null || !skippedEffectsNames.Contains(groupEffect.Type))
                         {
-                            var eff = ResolveEffect(groupEffect.Type, itemName, quality, rarity, groupEffect.Weight, groupEffect.Core, groupEffect.Power);
+                            var eff = ResolveEffect(groupEffect, itemName, quality, rarity);
                             if (eff != null)
                             {
                                 group.Group.Add(eff);
@@ -335,7 +348,7 @@ namespace Raido
                 {
                     if (skippedEffectsNames == null || !skippedEffectsNames.Contains(effect.Type))
                     {
-                        var eff = ResolveEffect(effect.Type, itemName, quality, rarity, effect.Weight, effect.Core, effect.Power);
+                        var eff = ResolveEffect(effect, itemName, quality, rarity);
                         if (eff != null)
                         {
                             result.Add(new ItemResolvedEffect() { Weight = eff.Weight, Type = eff.Type, Core = eff.Core, Min = eff.Min, Max = eff.Max, Step = eff.Step });
