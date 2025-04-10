@@ -18,10 +18,7 @@ namespace EpicLoot
 
                     if (magicItem.Rarity != ItemRarity.Legendary)
                     {
-                        if (magicItem.Quality == ItemQuality.Normal || magicItem.Quality == ItemQuality.Exceptional || magicItem.Quality == ItemQuality.Elite)
-                        {
-                            Raido.Raido.SetPlayerKnowsItem(item);
-                        }
+                        Raido.Raido.SetPlayerKnowsItem(item);
                     }
                 }
             }
@@ -44,10 +41,7 @@ namespace EpicLoot
 
                     if (magicItem.Rarity != ItemRarity.Legendary)
                     {
-                        if (magicItem.Quality == ItemQuality.Normal || magicItem.Quality == ItemQuality.Exceptional || magicItem.Quality == ItemQuality.Elite)
-                        {
-                            Raido.Raido.SetPlayerKnowsItem(item);
-                        }
+                        Raido.Raido.SetPlayerKnowsItem(item);
                     }
                 }
             }
