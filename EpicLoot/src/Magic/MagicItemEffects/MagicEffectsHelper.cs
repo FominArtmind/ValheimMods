@@ -55,20 +55,20 @@ namespace EpicLoot.MagicItemEffects
             }
         }
 
-        private static ItemDrop.ItemData GetIgnoreWeapon(Player player, ItemDrop.ItemData equippedWeapon, bool excludeTorch = false)
+        private static ItemDrop.ItemData SkippedOtherHandItem(Player player, ItemDrop.ItemData equippedWeapon, bool offhadNotSkipped)
         {
-            if (player.m_rightItem == equippedWeapon && IsWeapon(player.m_leftItem) && (!excludeTorch || !IsTorch(player.m_leftItem)))
-                return player.m_leftItem;
-            if (player.m_leftItem == equippedWeapon && IsWeapon(player.m_rightItem) && (!excludeTorch || !IsTorch(player.m_rightItem)))
+            if (player.m_rightItem == equippedWeapon)
+                return offhadNotSkipped ? null : player.m_leftItem;
+            if (player.m_leftItem == equippedWeapon)
                 return player.m_rightItem;
 
             return null;
         }
 
-        public static float GetTotalActiveMagicEffectValueForWeapon(Player player, ItemDrop.ItemData itemData, string effectType, float scale = 1.0f, bool addOffhandTorchEffects = false)
+        public static float GetTotalActiveMagicEffectValueForWeapon(Player player, ItemDrop.ItemData itemData, string effectType, float scale = 1.0f, bool addOffhandEffect = false)
         {
             if (player != null)
-                return player.GetTotalActiveMagicEffectValue(effectType, scale, GetIgnoreWeapon(player, itemData, addOffhandTorchEffects));
+                return player.GetTotalActiveMagicEffectValue(effectType, scale, SkippedOtherHandItem(player, itemData, addOffhandEffect));
             if (itemData.IsMagic(out var magicItem))
                 return magicItem.GetTotalEffectValue(effectType, scale);
             return 0;
@@ -99,7 +99,7 @@ namespace EpicLoot.MagicItemEffects
             effectValue = 0f;
             if (player != null)
             {
-                return player.HasActiveMagicEffect(effectType, out effectValue, scale, GetIgnoreWeapon(player, itemData));
+                return player.HasActiveMagicEffect(effectType, out effectValue, scale, SkippedOtherHandItem(player, itemData, false));
             }
             else if (itemData.IsMagic(out var magicItem))
             {

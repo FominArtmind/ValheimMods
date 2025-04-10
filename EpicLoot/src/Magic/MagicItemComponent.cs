@@ -592,7 +592,7 @@ namespace EpicLoot
 
     public static class EquipmentEffectCache
     {
-        public static ConditionalWeakTable<Player, Dictionary<string, float?>> EquippedValues = new ConditionalWeakTable<Player, Dictionary<string, float?>>();
+        public static ConditionalWeakTable<Player, Dictionary<KeyValuePair<string, ItemDrop.ItemData>, float?>> EquippedValues = new ConditionalWeakTable<Player, Dictionary<KeyValuePair<string, ItemDrop.ItemData>, float?>>();
 
         [HarmonyPatch(typeof(Humanoid), nameof(Humanoid.UnequipItem))]
         public static class EquipmentEffectCache_Humanoid_UnequipItem_Patch
@@ -625,15 +625,16 @@ namespace EpicLoot
             EquippedValues.Remove(player);
         }
 
-        public static float? Get(Player player, string effect, Func<float?> calculate)
+        public static float? Get(Player player, string effect, ItemDrop.ItemData ignoredOtherHandItem, Func<float?> calculate)
         {
             var values = EquippedValues.GetOrCreateValue(player);
-            if (values.TryGetValue(effect, out float? value))
+            var key = new KeyValuePair<string, ItemDrop.ItemData>(effect, ignoredOtherHandItem);
+            if (values.TryGetValue(key, out float? value))
             {
                 return value;
             }
 
-            return values[effect] = calculate();
+            return values[key] = calculate();
         }
     }
 
@@ -659,10 +660,10 @@ namespace EpicLoot
             return results;
         }
 
-        public static List<MagicItemEffect> GetAllActiveMagicEffects(this Player player, string effectType = null)
+        public static List<MagicItemEffect> GetAllActiveMagicEffects(this Player player, string effectType = null, ItemDrop.ItemData ignoredOtherHandItem = null)
         {
             var equipEffects = player.GetEquipment()
-                .Where(x => x.IsMagic())
+                .Where(x => x != ignoredOtherHandItem && x.IsMagic())
                 .SelectMany(x => x.GetMagicItem().GetEffects(effectType));
             var setEffects = player.GetAllActiveSetMagicEffects(effectType);
             return equipEffects.Concat(setEffects).ToList();
@@ -771,18 +772,12 @@ namespace EpicLoot
         }
 
         public static float GetTotalActiveMagicEffectValue(this Player player, string effectType,
-            float scale = 1.0f, ItemDrop.ItemData ignoreThisItem = null)
+            float scale = 1.0f, ItemDrop.ItemData ignoredOtherHandItem = null)
         {
-            var allValues = player.GetAllActiveMagicEffects(effectType).Select(x => x.EffectValue).ToList();
-
-            if (ignoreThisItem != null && player.IsItemEquiped(ignoreThisItem) && ignoreThisItem.IsMagic(out var magicItem))
+            var totalValue = scale * (EquipmentEffectCache.Get(player, effectType, ignoredOtherHandItem,() =>
             {
-                var ignoredValue = magicItem.GetEffects(effectType).Sum(x => x.EffectValue);
-                allValues.Remove(ignoredValue);
-            }
+                var allValues = player.GetAllActiveMagicEffects(effectType, ignoredOtherHandItem).Select(x => x.EffectValue).ToList();
 
-            var totalValue = scale * (EquipmentEffectCache.Get(player, effectType, () =>
-            {
                 if (allValues.Count == 0)
                 {
                     return null;
