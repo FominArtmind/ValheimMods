@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using EpicLoot.Adventure;
 using HarmonyLib;
+using Raido;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -25,7 +26,8 @@ namespace EpicLoot
 
             AddMagicEffectsPage(__instance, player);
             AddMagicEffectsExplainPage(__instance);
-            AddTreasureAndBountiesPage(__instance, player);
+            AddKnownItemClassesPage(__instance);
+            // AddTreasureAndBountiesPage(__instance, player);
         }
 
         public static void AddMagicEffectsPage(TextsDialog textsDialog, Player player)
@@ -66,7 +68,7 @@ namespace EpicLoot
                     var effect = entry2.Key;
                     var item = entry2.Value;
                     var magicItem = item.GetMagicItem();
-                    t.AppendLine($" <color=#c0c0c0ff>- {MagicItem.GetEffectText(effect, magicItem.GetClass(), item.GetRarity(), magicItem != null ? magicItem.Quality : ItemQuality.Normal, item.m_shared.m_name, false, magicItem?.LegendaryID)} ({item.GetDecoratedName()})</color>");
+                    t.AppendLine($" <color=#c0c0c0ff>- {MagicItem.GetEffectText(effect, magicItem.GetClass(), item.GetRarity(), magicItem != null ? magicItem.Quality : ItemQuality.Normal, item, false, magicItem?.LegendaryID)} ({item.GetDecoratedName()})</color>");
                 }
 
                 t.AppendLine();
@@ -164,7 +166,7 @@ namespace EpicLoot
         public static void AddMagicEffectsExplainPage(TextsDialog textsDialog)
         {
             var sortedMagicEffects = Raido.DropEngine.EffectsConfig.EffectMetadata
-                // .Where(x => !x.Value.Requirements.NoRoll)
+                .Where(x => x.Description != null && x.Description.Length > 0)
                 .Select(x => new KeyValuePair<string, string>(string.Format(Localization.instance.Localize(x.DisplayText), "<b><color=yellow>X</color></b>"), Localization.instance.Localize(x.Description)))
                 .OrderBy(x => x.Key);
 
@@ -173,12 +175,112 @@ namespace EpicLoot
             {
                 t.AppendLine($"<size=24>{effectEntry.Key}</size>");
                 t.AppendLine($"<color=#c0c0c0ff>{effectEntry.Value}</color>");
-                t.AppendLine();
+                t.AppendLine("");
             }
 
             textsDialog.m_texts.Insert(EpicLoot.HasAuga ? 1 : 3,
                 new TextsDialog.TextInfo(
                     Localization.instance.Localize($"{EpicLoot.GetMagicEffectPip(false)} $mod_epicloot_me_explaintitle"),
+                    Localization.instance.Localize(t.ToString())));
+        }
+
+        public static void AddKnownItemClassesPage(TextsDialog textsDialog)
+        {
+            var classesConfig = Raido.DropEngine.ClassesConfig;
+
+            var knownItemsClasses = Raido.Raido.PlayerKnownItemsClasses();
+            
+            var allTierClasses = new List<Raido.KnownItemTierClasses>();
+            foreach(var tier in Raido.DropEngine.EffectsConfig.EffectLevelScaling)
+            {
+                /*                    public class KnownItemClasses
+                                    {
+                                        public string itemName;
+                                        public Dictionary<string, ItemQuality> classes;
+                                    }
+
+                                    public class KnownItemTierClasses
+                                    {
+                                        public string tier;
+                                        public List<KnownItemClasses> itemsClasses;
+                                    }*/
+
+                var singleTierClasses = new KnownItemTierClasses() { tier = tier.Tier, itemsClasses = new List<KnownItemClasses>() };
+                bool tierNotEmpty = false;
+                foreach (var item in tier.Items)
+                {
+                    var itemName = Raido.Raido.GetItemData(item).m_shared.m_name;
+                    if(knownItemsClasses.ContainsKey(itemName))
+                    {
+                        tierNotEmpty = true;
+
+                        var itemClasses = new KnownItemClasses() { prefabName = item, classes = new Dictionary<string, ItemQuality?>() };
+
+                        var availableClasses = Raido.DropEngine.ClassesConfig.GetAvailableClasses(item).Select(value => value.Key);
+                        foreach(var available in availableClasses)
+                        {
+                            if (knownItemsClasses[itemName].ContainsKey(available))
+                            {
+                                itemClasses.classes[available] = knownItemsClasses[itemName][available];
+                            }
+                            else
+                            {
+                                itemClasses.classes[available] = null;
+                            }
+                        }
+
+                        singleTierClasses.itemsClasses.Add(itemClasses);
+                    }
+                }
+
+                if (tierNotEmpty)
+                {
+                    allTierClasses.Add(singleTierClasses);
+                }
+            }
+
+            var t = new StringBuilder();
+            foreach (var tier in allTierClasses)
+            {   
+                t.AppendLine($"<size=24><color=#80fa70ff>{Localization.instance.Localize(tier.tier)}</color></size>");
+
+                foreach (var item in tier.itemsClasses)
+                {
+                    // var itemData = Raido.Raido.GetItemData(item.prefabName);
+                    // var name = itemData.GetMagicItem().GetItemTypeName(itemData.Extended());
+
+                    t.AppendLine($"<size=20><color=#ffff75ff>{item.prefabName}</color></size>");
+                    var list = item.classes.ToList();
+                    for (var i = 0; i < list.Count; i++)
+                    {
+                        var className = Raido.DropEngine.ClassesConfig.GetClassName(list[i].Key);
+                        var classStr = Localization.instance.Localize(className);
+                        if (list[i].Value != null)
+                        {
+                            t.Append($"<color=white>{list[i].Value} {classStr} </color>");
+                        }
+                        else
+                        {
+                            t.Append($"<color=#a0a0a0ff>{classStr} </color>");
+                        }
+
+                        if(i != list.Count - 1)
+                        {
+                            t.Append(", ");
+                        }
+                        else
+                        {
+                            t.Append("\n");
+                        }
+                    }
+                }
+                t.Append("\n");
+                t.Append("\n");
+            }
+
+            textsDialog.m_texts.Add(
+                new TextsDialog.TextInfo(
+                    Localization.instance.Localize($"{EpicLoot.GetMagicEffectPip(false)} $raido_known_item_classes"),
                     Localization.instance.Localize(t.ToString())));
         }
     }
