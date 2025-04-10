@@ -1,9 +1,24 @@
 using EpicLoot;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Xml.Linq;
+using static ClutterSystem;
 
 namespace Raido
 {
+    public class KnownItemClasses
+    {
+        public string prefabName;
+        public Dictionary<string, ItemQuality?> classes;
+    }
+
+    public class KnownItemTierClasses
+    {
+        public string tier;
+        public List<KnownItemClasses> itemsClasses;
+    }
+
     public static class Raido
     {
         // public static Dictionary<string, string> sharedToPrefabNames = new Dictionary<string, string>();
@@ -11,39 +26,11 @@ namespace Raido
         public static string GetPrefabName(ItemDrop.ItemData item)
         {
             return item.m_dropPrefab.name;
-/*            if (sharedToPrefabNames.Count == 0)
-            {
-                List<string> itemNames = new List<string>();
-                foreach(var items in DropEngine.EffectsConfig.EffectLevelScaling)
-                {
-                    foreach(var item in items.Items)
-                    {
-                        var prefab = ObjectDB.instance.GetItemPrefab(item);
-                        if(prefab != null)
-                        {
-                            var itemDrop = prefab.GetComponent<ItemDrop>();
-                            if(itemDrop != null)
-                            {
-                                var name = itemDrop?.m_itemData?.m_shared?.m_name;
-                                if(name != null)
-                                {
-                                    sharedToPrefabNames[name] = item;
-                                    _Log($"{name} -> {item}");
-                                }
-                            }
-                        }
-                    }
-                }
-
-                return sharedToPrefabNames[sharedName];
-            }
-
-            return sharedToPrefabNames[sharedName];*/
         }
 
-        public static ItemDrop.ItemData GetItemData(string itemName)
+        public static ItemDrop.ItemData GetItemData(string prefabName)
         {
-            var itemPrefab = ObjectDB.instance.GetItemPrefab(itemName);
+            var itemPrefab = ObjectDB.instance.GetItemPrefab(prefabName);
             var itemDrop = itemPrefab.GetComponent<ItemDrop>();
 
             return itemDrop.m_itemData;
@@ -51,7 +38,7 @@ namespace Raido
 
         private static string _MagicItemKnownKey(string itemName, string itemClass, ItemQuality quality)
         {
-            return $"Raido_PlayerKnows_{itemName}_{itemClass}_{quality}";
+            return $"Raido:ItemKnown:{itemName}:{itemClass}:{quality}";
         }
 
         public static bool PlayerKnowsItem(ItemDrop.ItemData item)
@@ -63,10 +50,10 @@ namespace Raido
             return player.m_customData.ContainsKey(key);
         }
 
-        public static bool PlayerKnowsItemClassAndQuality(string itemName, string itemClass, ItemQuality quality)
+        public static bool PlayerKnowsItemClassAndQuality(string prefabName, string itemClass, ItemQuality quality)
         {
             var player = Player.m_localPlayer;
-            var key = _MagicItemKnownKey(GetItemData(itemName).m_shared.m_name, itemClass, quality);
+            var key = _MagicItemKnownKey(GetItemData(prefabName).m_shared.m_name, itemClass, quality);
 
             return player.m_customData.ContainsKey(key);
         }
@@ -102,15 +89,63 @@ namespace Raido
             var magicItem = item.GetMagicItem();
             var key = _MagicItemKnownKey(item.m_shared.m_name, magicItem.GetClass(), magicItem.Quality);
 
+/*            foreach(var record in player.m_customData)
+            {
+                _Log($"{record.Key}: {record.Value}");
+            }*/
+
             if (!player.m_customData.ContainsKey(key))
             {
                 player.m_customData.Add(key, "1");
-                _Log($"Added known item {key}");
+                // _Log($"Added known item {key}");
             }
             else
             {
-                _Log($"Not added already known item {key}");
+                // _Log($"Not added already known item {key}");
             }
+        }
+
+        // item, class, quality
+        public static Dictionary<string, Dictionary<string, ItemQuality>> PlayerKnownItemsClasses()
+        {
+            var player = Player.m_localPlayer;
+
+            // Raido:ItemKnown:$item_helmet_bronze:MediumHelmet:Inferior 
+            var knownRecords = player.m_customData.Where(value => value.Key.StartsWith("Raido:ItemKnown:")).ToList().Select(value => value.Key).ToList();
+
+            var knownItemClasses = new Dictionary<string, Dictionary<string, ItemQuality>>();
+            foreach (var record in knownRecords)
+            {
+                var parts = record.Split(':');
+                var itemName = parts[2];
+                var itemClass = parts[3];
+
+                if (Enum.TryParse<ItemQuality>(parts[4], out var quality))
+                {
+                    if (knownItemClasses.TryGetValue(itemName, out var classes))
+                    {
+                        if (classes.TryGetValue(itemClass, out var topQuality))
+                        {
+                            if(quality > topQuality)
+                            {
+                                classes[itemClass] = quality;
+                            }
+                        }
+                        else
+                        {
+                            classes[itemClass] = quality;
+                        }
+                    }
+                    else
+                    {
+                        var itemClasses = new Dictionary<string, ItemQuality>();
+                        itemClasses[itemClass] = quality;
+                        knownItemClasses[itemName] = itemClasses;
+                    }
+                }
+            }
+
+            return knownItemClasses;
         }
 
         public static void _Log(string message)
