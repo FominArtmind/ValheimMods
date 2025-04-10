@@ -178,11 +178,12 @@ namespace EpicLoot.Crafting
             return new List<MagicItemEffectDefinition>();
         }
 
-        public static string GetAugmentSelectorText(MagicItem magicItem, int i, IReadOnlyList<MagicItemEffect> augmentableEffects, ItemRarity rarity)
+        public static string GetAugmentSelectorText(ItemDrop.ItemData item, int i, IReadOnlyList<MagicItemEffect> augmentableEffects, ItemRarity rarity)
         {
+            var magicItem = item?.GetMagicItem();
             var pip = EpicLoot.GetMagicEffectPip(magicItem.IsEffectAugmented(i));
             bool free = EnchantCostsHelper.EffectIsDeprecated(augmentableEffects[i].EffectType);
-            return $"{pip} {Localization.instance.Localize(MagicItem.GetEffectText(augmentableEffects[i], magicItem.GetClass(), rarity, magicItem.Quality, magicItem.ItemName, true, magicItem.LegendaryID))}{(free ? " [<color=yellow>*FREE</color>]" : "")}";
+            return $"{pip} {Localization.instance.Localize(MagicItem.GetEffectText(augmentableEffects[i], magicItem.GetClass(), rarity, magicItem.Quality, item, true, magicItem.LegendaryID))}{(free ? " [<color=yellow>*FREE</color>]" : "")}";
         }
 
         public static List<KeyValuePair<ItemDrop, int>> GetAugmentCosts(ItemDrop.ItemData item, int recipeEffectIndex)

@@ -73,7 +73,7 @@ namespace EpicLoot
             return $"<color={color}>{EpicLoot.GetRarityDisplayName(Rarity)}</color>";
         }
 
-        public string GetTooltip()
+        public string GetTooltip(ItemDrop.ItemData baseItem)
         {
             var showRange = ZInput.GetKey(KeyCode.LeftShift) || ZInput.GetKey(KeyCode.RightShift);
 
@@ -84,7 +84,7 @@ namespace EpicLoot
             {
                 var effect = Effects[index];
                 var pip = EpicLoot.GetMagicEffectPip(IsEffectAugmented(index));
-                tooltip.AppendLine($"{pip} {GetEffectText(effect, GetClass(), Rarity, Quality, ItemName, showRange, LegendaryID)}");
+                tooltip.AppendLine($"{pip} {GetEffectText(effect, GetClass(), Rarity, Quality, baseItem, showRange, LegendaryID)}");
             }
 
             tooltip.Append($"</color>");
@@ -151,7 +151,7 @@ namespace EpicLoot
             return result;
         }
 
-        public static string GetEffectText(MagicItemEffect effect, string itemClass, ItemRarity rarity, ItemQuality quality, string itemName, bool showRange, string legendaryID, MagicItemEffectDefinition.ValueDef valuesOverride)
+        public static string GetEffectText(MagicItemEffect effect, string itemClass, ItemRarity rarity, ItemQuality quality, ItemDrop.ItemData item, bool showRange, string legendaryID, MagicItemEffectDefinition.ValueDef valuesOverride)
         {
             var effectDef = Raido.DropEngine.EffectsConfig.GetEffectMetadata(effect.EffectType);
             var result = GetEffectText(effectDef, effect.EffectValue);
@@ -168,7 +168,7 @@ namespace EpicLoot
                 }
                 if (values == null)
                 {
-                    var range = Raido.DropEngine.ClassesConfig.GetEffectRangeForItem(effect.EffectType, itemName, itemClass, quality, rarity);
+                    var range = Raido.DropEngine.ClassesConfig.GetEffectRangeForItem(effect.EffectType, Raido.Raido.GetPrefabName(item), itemClass, quality, rarity);
                     values = new MagicItemEffectDefinition.ValueDef() { MinValue = range[0], MaxValue = range[1] };
                 }
             }
@@ -182,9 +182,9 @@ namespace EpicLoot
             return result;
         }
 
-        public static string GetEffectText(MagicItemEffect effect, string itemClass, ItemRarity rarity, ItemQuality quality, string itemName, bool showRange, string legendaryID = null)
+        public static string GetEffectText(MagicItemEffect effect, string itemClass, ItemRarity rarity, ItemQuality quality, ItemDrop.ItemData item, bool showRange, string legendaryID = null)
         {
-            return GetEffectText(effect, itemClass, rarity, quality, itemName, showRange, legendaryID, null);
+            return GetEffectText(effect, itemClass, rarity, quality, item, showRange, legendaryID, null);
         }
 
         public void ReplaceEffect(int index, MagicItemEffect newEffect)

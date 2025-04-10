@@ -403,7 +403,7 @@ namespace EpicLoot.CraftingV2
 
         private static string GetEnchantInfo(ItemDrop.ItemData item, string itemClass, MagicRarityUnity _rarity)
         {
-            var itemName = Raido.Raido.GetPrefabName(item);
+            var prefabName = Raido.Raido.GetPrefabName(item);
             var rarity = (ItemRarity)_rarity;
             var sb = new StringBuilder();
             var rarityColor = EpicLoot.GetRarityColor(rarity);
@@ -482,7 +482,7 @@ namespace EpicLoot.CraftingV2
 
 
             var tempMagicItem = new MagicItem() { Rarity = rarity, Quality = inferior ? ItemQuality.Inferior : ItemQuality.Normal };
-            var availableEffects = Raido.DropEngine.ClassesConfig.GetAvailableEnchantEffects(itemName, itemClass, quality, rarity);
+            var availableEffects = Raido.DropEngine.ClassesConfig.GetAvailableEnchantEffects(prefabName, itemClass, quality, rarity);
                 // MagicItemEffectDefinitions.GetAvailableEffects(item, tempMagicItem);
             availableEffects = availableEffects.OrderByDescending(value => (value.Core || value.Weight == 0) ? 1000 : value.Weight).ToList();
             foreach(var effect in availableEffects)
@@ -504,7 +504,7 @@ namespace EpicLoot.CraftingV2
                     var groupWeightSum = effect.Group.Sum(value => value.Weight);
                     foreach (var groupEffect in effect.Group)
                     {
-                        var v = Raido.DropEngine.ClassesConfig.GetEffectRangeForItem(groupEffect.Type, itemName, itemClass, quality, rarity);
+                        var v = Raido.DropEngine.ClassesConfig.GetEffectRangeForItem(groupEffect.Type, prefabName, itemClass, quality, rarity);
                         var vDisplay = (!Raido.DropEngine.EffectsConfig.IsValuelessEffect(groupEffect.Type) && v != null) ? Mathf.Approximately(v[0], v[1]) ? $"{v[0]}" : $"({v[0]}-{v[1]})" : "";
                         var m = Raido.DropEngine.EffectsConfig.GetEffectMetadata(groupEffect.Type);
                         sb.AppendLine($"   ‣ {EffectRoundedChance(groupChance * EffectChance(groupEffect.Weight, groupWeightSum))}% {string.Format(Localization.instance.Localize(m.DisplayText), vDisplay)}");
@@ -512,7 +512,7 @@ namespace EpicLoot.CraftingV2
                 }
                 else
                 {
-                    var values = Raido.DropEngine.ClassesConfig.GetEffectRangeForItem(effect.Type, itemName, itemClass, quality, rarity);
+                    var values = Raido.DropEngine.ClassesConfig.GetEffectRangeForItem(effect.Type, prefabName, itemClass, quality, rarity);
                     var valueDisplay = (!Raido.DropEngine.EffectsConfig.IsValuelessEffect(effect.Type) && values != null) ? Mathf.Approximately(values[0], values[1]) ? $"{values[0]}" : $"({values[0]}-{values[1]})" : "";
                     var metadata = Raido.DropEngine.EffectsConfig.GetEffectMetadata(effect.Type);
                     sb.AppendLine($"‣ {EffectRoundedChance(EffectChance(effect.Weight, effectsWeightSum))}%{(effect.Core ? " (Core)" : "")} {string.Format(Localization.instance.Localize(metadata.DisplayText), valueDisplay)}");
@@ -660,7 +660,7 @@ namespace EpicLoot.CraftingV2
                     var effectDef = Raido.DropEngine.EffectsConfig.GetEffectMetadata(augmentableEffect.EffectType);
                     var canAugment = effectDef != null && effectDef.CanBeAugmented;
 
-                    var text = AugmentHelper.GetAugmentSelectorText(magicItem, index, augmentableEffects, rarity);
+                    var text = AugmentHelper.GetAugmentSelectorText(item, index, augmentableEffects, rarity);
                     var color = EpicLoot.GetRarityColor(rarity);
                     var alpha = canAugment ? "FF" : "7F";
                     text = $"<color={color}{alpha}>{text}</color>";
@@ -705,7 +705,7 @@ namespace EpicLoot.CraftingV2
                 sb.AppendLine();
             }
 
-            var itemName = Raido.Raido.GetPrefabName(item);
+            var prefabName = Raido.Raido.GetPrefabName(item);
 
             var effectsWeightSum = availableEffects.Sum(value => value.Weight);
 
@@ -718,7 +718,7 @@ namespace EpicLoot.CraftingV2
                     var groupWeightSum = effect.Group.Sum(value => value.Weight);
                     foreach (var groupEffect in effect.Group)
                     {
-                        var v = Raido.DropEngine.ClassesConfig.GetEffectRangeForItem(groupEffect.Type, itemName, itemClass, quality, rarity);
+                        var v = Raido.DropEngine.ClassesConfig.GetEffectRangeForItem(groupEffect.Type, prefabName, itemClass, quality, rarity);
                         var vDisplay = (!Raido.DropEngine.EffectsConfig.IsValuelessEffect(groupEffect.Type) && v != null) ? Mathf.Approximately(v[0], v[1]) ? $"{v[0]}" : $"({v[0]}-{v[1]})" : "";
                         var m = Raido.DropEngine.EffectsConfig.GetEffectMetadata(groupEffect.Type);
                         sb.AppendLine($"   ‣ {EffectRoundedChance(groupChance * EffectChance(groupEffect.Weight, groupWeightSum))}% {string.Format(Localization.instance.Localize(m.DisplayText), vDisplay)}");
@@ -726,7 +726,7 @@ namespace EpicLoot.CraftingV2
                 }
                 else
                 {
-                    var values = Raido.DropEngine.ClassesConfig.GetEffectRangeForItem(effect.Type, itemName, itemClass, quality, rarity);
+                    var values = Raido.DropEngine.ClassesConfig.GetEffectRangeForItem(effect.Type, prefabName, itemClass, quality, rarity);
                     var valueDisplay = (!Raido.DropEngine.EffectsConfig.IsValuelessEffect(effect.Type) && values != null) ? Mathf.Approximately(values[0], values[1]) ? $"{values[0]}" : $"({values[0]}-{values[1]})" : "";
                     var metadata = Raido.DropEngine.EffectsConfig.GetEffectMetadata(effect.Type);
                     sb.AppendLine($"‣ {EffectRoundedChance(EffectChance(effect.Weight, effectsWeightSum))}%{(effect.Core ? " (Core)" : "")} {string.Format(Localization.instance.Localize(metadata.DisplayText), valueDisplay)}");

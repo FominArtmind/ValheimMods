@@ -673,15 +673,15 @@ namespace Raido
             return itemDrop;
         }
 
-        private static bool _Creature(string itemName)
+        private static bool _Creature(string prefabName)
         {
-            var creaturePrefab = ZNetScene.instance.GetPrefab(itemName);
+            var creaturePrefab = ZNetScene.instance.GetPrefab(prefabName);
             if (creaturePrefab != null)
             {
                 var character = creaturePrefab.GetComponent<Character>();
                 if (character)
                 {
-                    _Log($"Is creature: {itemName}");
+                    _Log($"Is creature: {prefabName}");
                     return true;
                 }
             }
@@ -689,37 +689,37 @@ namespace Raido
             return false;
         }
 
-        private static bool _PlainItem(string itemName)
+        private static bool _PlainItem(string prefabName)
         {
-            if(itemName == "Wishbone") {
+            if(prefabName == "Wishbone") {
                 return true;
             }
 
             string legendaryBasePrefabName = null;
-            if (UniqueLegendaryHelper.IsLegendaryItem(itemName, out legendaryBasePrefabName))
+            if (UniqueLegendaryHelper.IsLegendaryItem(prefabName, out legendaryBasePrefabName))
             {
                 return false;
             }
 
-            return !EpicLoot.EpicLoot.CanBeMagicItem(_ItemDrop(itemName).m_itemData);
+            return !EpicLoot.EpicLoot.CanBeMagicItem(_ItemDrop(prefabName).m_itemData);
         }
-        private static bool _PlayerKnowsItem(string itemName)
+        private static bool _PlayerKnowsItem(string prefabName)
         {
-            var itemDrop = _ItemDrop(itemName);
+            var itemDrop = _ItemDrop(prefabName);
 
             return itemDrop != null && Player.m_localPlayer != null && Player.m_localPlayer.m_knownMaterial.Contains(itemDrop.m_itemData.m_shared.m_name);
         }
 
-        private static bool _ItemAllowed(string itemName)
+        private static bool _ItemAllowed(string prefabName)
         {
-            if (_PlayerKnowsItem(itemName))
+            if (_PlayerKnowsItem(prefabName))
             {
                 return true;
             }
 
             var exceptions = LootRoller.Config.ItemDropLimitsExceptions;
 
-            if (EpicLoot.EpicLoot.AllowItemDropLimitsExceptions.Value && exceptions != null && exceptions.Contains(itemName))
+            if (EpicLoot.EpicLoot.AllowItemDropLimitsExceptions.Value && exceptions != null && exceptions.Contains(prefabName))
             {
                 return true;
             }
@@ -767,13 +767,13 @@ namespace Raido
 
             foreach (var rolledItem in rolledItems)
             {
-                var itemName = rolledItem.Item;
+                var prefabName = rolledItem.Item;
 
                 string itemClass = "Forgotten";
                 ItemRarity rarity = ItemRarity.Magic;
                 ItemQuality quality = ItemQuality.Inferior;
 
-                if (_Creature(itemName) || _PlainItem(itemName))
+                if (_Creature(prefabName) || _PlainItem(prefabName))
                 {
                     // nothing to do yet
                 }
@@ -786,9 +786,9 @@ namespace Raido
                     var lootFilterForcedSacrifice = false;
 
                     string legendaryBasePrefabName = null;
-                    if (UniqueLegendaryHelper.IsLegendaryItem(itemName, out legendaryBasePrefabName))
+                    if (UniqueLegendaryHelper.IsLegendaryItem(prefabName, out legendaryBasePrefabName))
                     {
-                        itemName = legendaryBasePrefabName;
+                        prefabName = legendaryBasePrefabName;
                         rarity = ItemRarity.Legendary;
 
                         if(quality == ItemQuality.Inferior)
@@ -798,11 +798,11 @@ namespace Raido
                     }
                     else
                     {
-                        if (LootFilterDefinitions.FilteredOut(itemName, rarity, quality, distanceFromWorldCenter, out lootFilterForcedSacrifice))
+                        if (LootFilterDefinitions.FilteredOut(prefabName, rarity, quality, distanceFromWorldCenter, out lootFilterForcedSacrifice))
                         {
                             if (!lootFilterForcedSacrifice)
                             {
-                                _Log($"Item filtered {itemName} out due to loot filters");
+                                _Log($"Item filtered {prefabName} out due to loot filters");
                                 continue;
                             }
                         }
@@ -810,14 +810,14 @@ namespace Raido
 
                     bool ReplaceWithMats()
                     {
-                        if (itemName == null)
+                        if (prefabName == null)
                         {
                             _Log($"Item replaced with materials due to its id being null");
                             return true;
                         }
 
                         // TO DO : other special items if needed
-                        if (itemName == "Wishbone") {
+                        if (prefabName == "Wishbone") {
                             return false;
                         }
 
@@ -827,7 +827,7 @@ namespace Raido
                             return true;
                         }
 
-                        if (!_ItemAllowed(itemName))
+                        if (!_ItemAllowed(prefabName))
                         {
                             _Log($"Item replaced with materials due to being not allowed yet");
                             return true;
@@ -837,7 +837,7 @@ namespace Raido
                         {
                             if (quality != ItemQuality.Elite)
                             {
-                                if (Raido.PlayerKnowsItemClassAndQuality(itemName, itemClass, ItemQuality.Elite))
+                                if (Raido.PlayerKnowsItemClassAndQuality(prefabName, itemClass, ItemQuality.Elite))
                                 {
                                     _Log($"Item replaced with materials due to player has already seen Elity quality of such base and class");
                                     return true;
@@ -845,7 +845,7 @@ namespace Raido
 
                                 if (quality != ItemQuality.Exceptional)
                                 {
-                                    if (Raido.PlayerKnowsItemClassAndQuality(itemName, itemClass, ItemQuality.Exceptional))
+                                    if (Raido.PlayerKnowsItemClassAndQuality(prefabName, itemClass, ItemQuality.Exceptional))
                                     {
                                         _Log($"Item replaced with materials due to player has already seen Exceptional quality of such base and class");
                                         return true;
@@ -853,7 +853,7 @@ namespace Raido
 
                                     if (quality != ItemQuality.Normal)
                                     {
-                                        if (Raido.PlayerKnowsItemClassAndQuality(itemName, itemClass, ItemQuality.Normal))
+                                        if (Raido.PlayerKnowsItemClassAndQuality(prefabName, itemClass, ItemQuality.Normal))
                                         {
                                             _Log($"Item replaced with materials due to player has already seen Normal quality of such base and class");
                                             return true;
@@ -872,11 +872,11 @@ namespace Raido
 
                         try
                         {
-                            prefab = ObjectDB.instance.GetItemPrefab(itemName);
+                            prefab = ObjectDB.instance.GetItemPrefab(prefabName);
                         }
                         catch (Exception e)
                         {
-                            _Log($"Unable to get Prefab for [{itemName}]. Continuing.");
+                            _Log($"Unable to get Prefab for [{prefabName}]. Continuing.");
                             _Log($"Error: {e.Message}");
                         }
 
@@ -921,10 +921,10 @@ namespace Raido
                     }
                 }
 
-                if (_Creature(itemName))
+                if (_Creature(prefabName))
                 {
                     // creating creature right here since there is no sense to put it into container etc
-                    var creaturePrefab = ZNetScene.instance.GetPrefab(itemName);
+                    var creaturePrefab = ZNetScene.instance.GetPrefab(prefabName);
 
                     for (int i = 0; i < rolledItem.Count; i++)
                     {
@@ -941,14 +941,14 @@ namespace Raido
                 {
                     GameObject itemPrefab = null;
 
-                    itemPrefab = ObjectDB.instance.GetItemPrefab(itemName);
+                    itemPrefab = ObjectDB.instance.GetItemPrefab(prefabName);
 
                     if (itemPrefab != null)
                     {
                         var item = LootRoller.SpawnLootForDrop(itemPrefab, dropPoint, initializeObject);
                         var itemDrop = item.GetComponent<ItemDrop>();
 
-                        if (_PlainItem(itemName))
+                        if (_PlainItem(prefabName))
                         {
                             itemDrop.m_itemData.m_stack = rolledItem.Count ?? 1;
                         }

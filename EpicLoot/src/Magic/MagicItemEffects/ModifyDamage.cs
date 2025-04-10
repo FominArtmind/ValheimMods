@@ -78,29 +78,35 @@ namespace EpicLoot.MagicItemEffects
                     player, __instance, MagicEffectType.AddPiercingDamage, 1.0f, true);
             }
 
-            // Then modify
-            if (MagicEffectsHelper.HasActiveMagicEffectOnWeapon(player, __instance,
-                MagicEffectType.ModifyPhysicalDamage, out float physicalDamageEffectValue, 0.01f))
-            {
-                var modifier = 1.0f + physicalDamageEffectValue;
+            var physModifier = 1.0f + 0.01f * MagicEffectsHelper.GetTotalActiveMagicEffectValueForWeapon(
+                player, __instance, MagicEffectType.ModifyPhysicalDamage, 1.0f, false);
 
-                __result.m_blunt *= modifier;
-                __result.m_slash *= modifier;
-                __result.m_pierce *= modifier;
-                __result.m_chop *= modifier;
-                __result.m_pickaxe *= modifier;
+            // Then modify
+/*            if (MagicEffectsHelper.HasActiveMagicEffectOnWeapon(player, __instance,
+                MagicEffectType.ModifyPhysicalDamage, out float physicalDamageEffectValue, 0.01f))*/
+            {
+                // var modifier = 1.0f + physicalDamageEffectValue;
+
+                __result.m_blunt *= physModifier;
+                __result.m_slash *= physModifier;
+                __result.m_pierce *= physModifier;
+                __result.m_chop *= physModifier;
+                __result.m_pickaxe *= physModifier;
             }
+
+            var elemModifier = 1.0f + 0.01f * MagicEffectsHelper.GetTotalActiveMagicEffectValueForWeapon(
+                player, __instance, MagicEffectType.ModifyElementalDamage, 1.0f, false);
 
             if (MagicEffectsHelper.HasActiveMagicEffectOnWeapon(player, __instance,
                 MagicEffectType.ModifyElementalDamage, out float elementalDamageEffectValue, 0.01f))
             {
-                var modifier = 1.0f + elementalDamageEffectValue;
+                // var modifier = 1.0f + elementalDamageEffectValue;
 
-                __result.m_fire *= modifier;
-                __result.m_frost *= modifier;
-                __result.m_lightning *= modifier;
-                __result.m_poison *= modifier;
-                __result.m_spirit *= modifier;
+                __result.m_fire *= elemModifier;
+                __result.m_frost *= elemModifier;
+                __result.m_lightning *= elemModifier;
+                __result.m_poison *= elemModifier;
+                __result.m_spirit *= elemModifier;
             }
 
             var damageMod = 0f;

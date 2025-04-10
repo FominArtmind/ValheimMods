@@ -468,7 +468,7 @@ namespace EpicLoot
                 //The following is used only for Crafting Result Panel.
                 Auga.API.ComplexTooltip_AddDivider(complexTooltip);
 
-                var magicItemText = magicItem.GetTooltip();
+                var magicItemText = magicItem.GetTooltip(item);
                 var textBox = Auga.API.ComplexTooltip_AddTwoColumnTextBox(complexTooltip);
                 magicItemText = magicItemText.Replace("\n\n", "");
                 Auga.API.TooltipTextBox_AddLine(textBox, magicItemText);

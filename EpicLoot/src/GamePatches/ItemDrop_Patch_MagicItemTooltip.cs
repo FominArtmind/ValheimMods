@@ -336,7 +336,7 @@ namespace EpicLoot
             }
 
             // Add magic item effects here
-            text.AppendLine(magicItem.GetTooltip());
+            text.AppendLine(magicItem.GetTooltip(item));
 
             // Set stuff
             if (item.IsSetItem())
