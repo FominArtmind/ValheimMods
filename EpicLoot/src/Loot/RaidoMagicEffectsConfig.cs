@@ -45,6 +45,7 @@ namespace Raido
     {
         // Effect Resulting Value = Value * (1.0 + EffectMetadata.Scaling * (EffectLevelScaling[Level -> ItemLevel].Power - 1.0))
         public int Level;
+        public string Tier;
         public float Power;
         public List<string> Items = new List<string>();
     }
@@ -77,9 +78,9 @@ namespace Raido
         public bool? ItemUsesDrawStaminaOnAttack;
         public string Ability;
 
-        public bool AllowedOnItem(string effectType, string itemName)
+        public bool AllowedOnItem(string prefabName)
         {
-            var itemData = Raido.GetItemData(itemName);
+            var itemData = Raido.GetItemData(prefabName);
 
             if (AllowedSkillTypes?.Count > 0 && !AllowedSkillTypes.Contains(itemData.m_shared.m_skillType))
             {
@@ -185,7 +186,7 @@ namespace Raido
             if (ItemUsesDrawStaminaOnAttack != null)
             {
                 bool drawStamina = itemData.m_shared.m_attack.m_drawStaminaDrain > 0 ||
-                    ItemUsesDrawStaminaOnAttack == itemData.m_shared.m_secondaryAttack.m_drawStaminaDrain > 0;
+                    itemData.m_shared.m_secondaryAttack.m_drawStaminaDrain > 0;
 
                 if (ItemUsesDrawStaminaOnAttack.Value != drawStamina)
                 {
@@ -216,7 +217,7 @@ namespace Raido
             return !EffectValues.ContainsKey(effectType);
         }
 
-        public float[] GetEffectRangeForItem(string effectType, string itemName, ItemQuality quality, ItemRarity rarity, float power = 1.0f, bool logging = false)
+        public float[] GetEffectRangeForItem(string effectType, string prefabName, ItemQuality quality, ItemRarity rarity, float power = 1.0f, bool logging = false)
         {
             if (IsValuelessEffect(effectType))
             {
@@ -233,7 +234,7 @@ namespace Raido
             var scaling = power;
             if (metadata.Scaling != 0.0f)
             {
-                var levelData = EffectLevelScaling.Find(value => value.Items.Contains(itemName));
+                var levelData = EffectLevelScaling.Find(value => value.Items.Contains(prefabName));
                 if (levelData != null)
                 {
                     scaling *= (1.0f + metadata.Scaling * (levelData.Power - 1.0f));
