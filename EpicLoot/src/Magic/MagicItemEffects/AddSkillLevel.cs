@@ -58,7 +58,8 @@ namespace EpicLoot.MagicItemEffects
     {
         public static bool Prefix(Skills __instance, out float min, out float max, SkillType skillType)
         {
-            var skillValue = Mathf.Lerp(0.4f, 1.0f, __instance.GetSkillFactor(skillType));
+			// var skillValue = Mathf.Lerp(0.4f, 1.0f, __instance.GetSkillFactor(skillType));
+			var skillValue = 0.4f + 0.6f * __instance.GetSkillFactor(skillType);
             min = Mathf.Max(0, skillValue - 0.15f);
             max = skillValue + 0.15f;
             return false;
