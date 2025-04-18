@@ -37,6 +37,7 @@
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="src\GamePatches\Map_Patch.cs" />
     <Compile Include="src\integrations\HarmonyPatches\ArmorStand_Patch.cs" />
     <Compile Include="src\integrations\HarmonyPatches\ItemStand_Patch.cs" />
     <Compile Include="src\Loot\LootBeams\AlwaysPointUp.cs" />
@@ -149,6 +150,7 @@
     <Compile Include="src\GamePatches\ItemDrop_Patch.cs" />
     <Compile Include="src\GamePatches\ItemDrop_Patch_MagicItemTooltip.cs" />
     <Compile Include="src\GamePatches\KnownQualityItems_Patch.cs" />
+    <Compile Include="src\GamePatches\Map_Patch.cs" />
     <Compile Include="src\GamePatches\Multiplayer_Player_Patch.cs" />
     <Compile Include="src\GamePatches\ObjectDB_Patch.cs" />
     <Compile Include="src\GamePatches\SpawnArea_Patch.cs" />
