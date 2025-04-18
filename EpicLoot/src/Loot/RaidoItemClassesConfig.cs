@@ -130,7 +130,7 @@ namespace Raido
             return _effectRangeCache[_cacheKey];
         }
 
-        ItemResolvedGroupEffect ResolveEffect(string type, int weight, bool core, float power, List<ItemQuality> qualities, List<ItemRarity> rarities,  string prefabName, ItemQuality quality, ItemRarity rarity)
+        ItemResolvedGroupEffect ResolveEffect(string type, int weight, bool core, float power, List<ItemQuality> qualities, List<ItemRarity> rarities, string prefabName, ItemQuality quality, ItemRarity rarity)
         {
             var _cacheKey = $"{type}{prefabName}{quality}{rarity}{power}";
             if (_resolvedEffectCache.ContainsKey(_cacheKey))

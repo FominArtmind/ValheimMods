@@ -530,7 +530,7 @@ namespace EpicLoot
                             continue;
                         }
 
-                        var display = MagicItem.GetEffectText(effectDef, setBonusInfo.Effect.Values?.MinValue ?? 0);
+                        var display = MagicItem.GetEffectText(effectDef, setBonusInfo.Effect.Values?.MinValue ?? 0, false);
                         text.Append($"\n<color={(hasEquipped ? EpicLoot.GetSetItemColor() : "#808080ff")}>({setBonusInfo.Count}) ‣ {display}</color>");
                     }
                 }
@@ -733,7 +733,25 @@ namespace EpicLoot
 
         public static float GetEffectDiminishingReturnsTotalValue(List<float> effectValues, string effectType = null)
         {
-            var LIMITED_EFFECTS = new List<string>() {
+            if(effectType != null)
+            {
+                var metadata = Raido.DropEngine.EffectsConfig.GetEffectMetadata(effectType);
+
+                if (metadata != null && metadata.Limited)
+                {
+                    var totalMultiplier = 1.0f;
+                    foreach (var value in effectValues)
+                    {
+                        totalMultiplier *= 1.0f / (1.0f - (value / (100.0f + value)));
+                    }
+
+                    totalMultiplier -= 1.0f;
+
+                    return metadata.Limit * (totalMultiplier / (1.0f + totalMultiplier));
+                }
+            }
+
+/*            var LIMITED_EFFECTS = new List<string>() {
                 MagicEffectType.AddPhysicalResistancePercentage,
                 MagicEffectType.AddBluntResistancePercentage,
                 MagicEffectType.AddSlashingResistancePercentage,
@@ -745,13 +763,20 @@ namespace EpicLoot
                 MagicEffectType.AddPoisonResistancePercentage,
                 MagicEffectType.AddSpiritResistancePercentage,
                 MagicEffectType.AddElementalResistancePercentage,
+                MagicEffectType.IncreaseHeatResistance,
                 MagicEffectType.AvoidDamageTaken,
                 MagicEffectType.AvoidDamageTakenLowHealth,
+                MagicEffectType.StaggerOnDamageTaken,
                 MagicEffectType.ModifyAttackStaminaUse,
+                MagicEffectType.ModifyDrawStaminaUse,
+                MagicEffectType.ModifyDodgeStaminaUse,
                 MagicEffectType.ModifyBlockStaminaUse,
                 MagicEffectType.ModifyJumpStaminaUse,
                 MagicEffectType.ModifySprintStaminaUse,
-                MagicEffectType.Slow
+                MagicEffectType.ModifyAttackEitrUse,
+                MagicEffectType.ModifyAttackHealthUse,
+                MagicEffectType.Slow,
+                MagicEffectType.DecreaseForsakenCooldown
             };
 
             if (effectType == null || LIMITED_EFFECTS.Contains(effectType))
@@ -766,7 +791,7 @@ namespace EpicLoot
                 }
 
                 return result;
-            }
+            }*/
 
             return effectValues.Sum();
         }

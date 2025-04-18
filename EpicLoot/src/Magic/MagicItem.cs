@@ -33,15 +33,17 @@ namespace EpicLoot
         public int Version = 1;
         public string EffectType { get; set; }
         public float EffectValue;
+        public bool Core;
 
         public MagicItemEffect()
         {
         }
 
-        public MagicItemEffect(string type, float value = DefaultValue)
+        public MagicItemEffect(string type, float value = DefaultValue, bool core = false)
         {
             EffectType = type;
             EffectValue = value;
+            Core = core;
         }
     }
 
@@ -144,9 +146,9 @@ namespace EpicLoot
             return !Effects.Any(x => !Raido.DropEngine.EffectsConfig.GetEffectMetadata(x.EffectType)?.CanBeDisenchanted ?? false);
         }
 
-        public static string GetEffectText(Raido.EffectMetadataConfig effectDef, float value)
+        public static string GetEffectText(Raido.EffectMetadataConfig effectDef, float value, bool core)
         {
-            var localizedDisplayText = Localization.instance.Localize(effectDef.DisplayText);
+            var localizedDisplayText = Localization.instance.Localize(effectDef.DisplayText) + (core ? " (Core)" : "");
             var result = string.Format(localizedDisplayText, value);
             return result;
         }
@@ -154,7 +156,7 @@ namespace EpicLoot
         public static string GetEffectText(MagicItemEffect effect, string itemClass, ItemRarity rarity, ItemQuality quality, ItemDrop.ItemData item, bool showRange, string legendaryID, MagicItemEffectDefinition.ValueDef valuesOverride)
         {
             var effectDef = Raido.DropEngine.EffectsConfig.GetEffectMetadata(effect.EffectType);
-            var result = GetEffectText(effectDef, effect.EffectValue);
+            var result = GetEffectText(effectDef, effect.EffectValue, effect.Core);
             MagicItemEffectDefinition.ValueDef values = null;
             if (valuesOverride != null)
             {

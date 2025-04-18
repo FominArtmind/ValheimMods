@@ -58,6 +58,9 @@ namespace Raido
         public string Description = "";
         public float Scaling = 0.0f;
         public float Rounding = 1.0f;
+        public bool Limited = false;
+        public float Limit = 100.0f;
+        public List<ItemDrop.ItemData.ItemType> ItemTypes = new List<ItemDrop.ItemData.ItemType>();
         public bool CanBeAugmented = true;
         public bool CanBeDisenchanted = true;
         public List<Skills.SkillType> AllowedSkillTypes = new List<Skills.SkillType>();
@@ -81,6 +84,14 @@ namespace Raido
         public bool AllowedOnItem(string prefabName)
         {
             var itemData = Raido.GetItemData(prefabName);
+
+            if(ItemTypes != null && ItemTypes.Count > 0)
+            {
+                if(!ItemTypes.Contains(itemData.m_shared.m_itemType))
+                {
+                    return false;
+                }
+            }
 
             if (AllowedSkillTypes?.Count > 0 && !AllowedSkillTypes.Contains(itemData.m_shared.m_skillType))
             {
@@ -283,6 +294,11 @@ namespace Raido
             if (logging)
                 _Log($"Effect base value {baseValue}");
 
+            float LimitedValue(float initialValue, float limit)
+            {
+                return limit * (initialValue / (100.0f + initialValue));
+            }
+
             float[] RoundRange(float[] range, float rounding)
             {
                 float RoundToNearest(float value)
@@ -301,7 +317,15 @@ namespace Raido
                 return new float[] { min, max, rounding };
             }
 
-            return RoundRange(new float[] { baseValue * qrPower[0] * scaling, baseValue * qrPower[1] * scaling }, metadata.Rounding);
+            var minScaled = baseValue * qrPower[0] * scaling;
+            var maxScaled = baseValue * qrPower[1] * scaling;
+            if (metadata.Limited)
+            {
+                minScaled = LimitedValue(minScaled, metadata.Limit);
+                maxScaled = LimitedValue(maxScaled, metadata.Limit);
+            }
+
+            return RoundRange(new float[] { minScaled, maxScaled }, metadata.Rounding);
         }
 
         private static void _Log(string message)

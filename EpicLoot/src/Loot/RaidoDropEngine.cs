@@ -454,7 +454,7 @@ namespace Raido
                 };
             }
 
-            EpicLoot.MagicItemEffect result = new EpicLoot.MagicItemEffect() { EffectType = selected.Type };
+            EpicLoot.MagicItemEffect result = new EpicLoot.MagicItemEffect() { EffectType = selected.Type, Core = selected.Core };
             if(!EffectsConfig.IsValuelessEffect(selected.Type))
             {
                 result.EffectValue = _RollEffectValue(selected);

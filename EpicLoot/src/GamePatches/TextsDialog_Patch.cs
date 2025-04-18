@@ -8,6 +8,7 @@ using Raido;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static CreatureLevelControl.OriginalItemData;
 using Object = UnityEngine.Object;
 
 namespace EpicLoot
@@ -59,7 +60,7 @@ namespace EpicLoot
                 var effectType = entry.Key;
                 var effectDef = Raido.DropEngine.EffectsConfig.GetEffectMetadata(effectType);
                 float sum = (float)Math.Round(PlayerExtensions.GetEffectDiminishingReturnsTotalValue(entry.Value.Select(x => x.Key.EffectValue).ToList(), effectType));
-                var totalEffectText = MagicItem.GetEffectText(effectDef, sum);
+                var totalEffectText = MagicItem.GetEffectText(effectDef, sum, false); // TO DO Core deducing
                 var highestRarity = (ItemRarity) entry.Value.Max(x => (int) x.Value.GetRarity());
 
                 t.AppendLine($"<size=20><color={EpicLoot.GetRarityColor(highestRarity)}>{totalEffectText}</color></size>");
@@ -251,27 +252,61 @@ namespace EpicLoot
 
                     t.AppendLine($"<size=20><color=#ffff75ff>{item.prefabName}</color></size>");
                     var list = item.classes.ToList();
-                    for (var i = 0; i < list.Count; i++)
+                    var combinedDict = new Dictionary<ItemQuality, List<string>>();
+                    var unknownList = new List<string>();
+                    foreach (var itemClass in list)
                     {
-                        var className = Raido.DropEngine.ClassesConfig.GetClassName(list[i].Key);
-                        var classStr = Localization.instance.Localize(className);
-                        if (list[i].Value != null)
+                        if (itemClass.Value != null)
                         {
-                            t.Append($"<color=white>{list[i].Value} {classStr} </color>");
+                            var value = itemClass.Value ?? ItemQuality.Inferior;
+                            if (!combinedDict.ContainsKey(value))
+                            {
+                                combinedDict[value] = new List<string>() { itemClass.Key };
+                            }
+                            else
+                            {
+                                combinedDict[value].Add(itemClass.Key);
+                            }
                         }
                         else
                         {
-                            t.Append($"<color=#a0a0a0ff>{classStr} </color>");
+                            unknownList.Add(itemClass.Key);
                         }
-
-                        if(i != list.Count - 1)
+                    }
+                    var combinedList = combinedDict.ToList();
+                    combinedList.Sort((a, b) =>
+                    {
+                        return a.Key > b.Key ? -1 : 1;
+                    });
+                    for (var i = 0; i < combinedList.Count; i++)
+                    {
+                        t.Append($"<color=white>{combinedList[i].Key} ");
+                        var classList = combinedList[i].Value.Select(value =>
+                        {
+                            var className = Raido.DropEngine.ClassesConfig.GetClassName(value);
+                            var classStr = Localization.instance.Localize(className);
+                            return classStr;
+                        }).ToList();
+                        t.Append(classList.Join(null, " / "));
+/*                        if (i != combinedList.Count - 1)
                         {
                             t.Append(", ");
-                        }
-                        else
+                        }*/
+                        t.Append("</color>");
+                        t.Append("\n");
+                    }
+                    if (unknownList.Count > 0)
+                    {
+                        t.Append($"<color=#a0a0a0ff>");
+                        var unknownClassList = unknownList.Select(value =>
                         {
-                            t.Append("\n");
-                        }
+                            var className = Raido.DropEngine.ClassesConfig.GetClassName(value);
+                            var classStr = Localization.instance.Localize(className);
+                            return classStr;
+                        }).ToList();
+                        t.Append(unknownClassList.Join(null, " / "));
+                        t.Append("</color>");
+                        t.Append("\n");
                     }
                 }
                 t.Append("\n");

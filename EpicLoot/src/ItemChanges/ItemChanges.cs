@@ -34,6 +34,15 @@ namespace Raido
             {
                 EpicLoot.EpicLoot.Log($"Not found CrossbowArbalest");
             }
+
+/*            var itemPrefab3 = ObjectDB.instance.GetItemPrefab("Torch");
+            if (itemPrefab3 != null)
+            {
+                EpicLoot.EpicLoot.Log($"Found {itemPrefab3}");
+                var itemDrop = itemPrefab.GetComponent<ItemDrop>();
+                itemDrop.m_itemData.m_durability = 100;
+                itemDrop.m_itemData.m_shared.m_maxDurability = 100;
+            }*/
         }
     }
 }

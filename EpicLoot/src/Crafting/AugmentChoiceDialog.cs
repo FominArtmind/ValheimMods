@@ -131,7 +131,7 @@ namespace EpicLoot.Crafting
 
             var effectOptions = new List<MagicItemEffect>();
             var replacedEffect = magicItem.GetEffects()[effectIndex];
-            effectOptions.Add(new MagicItemEffect(replacedEffect.EffectType, replacedEffect.EffectValue));
+            effectOptions.Add(new MagicItemEffect(replacedEffect.EffectType, replacedEffect.EffectValue, replacedEffect.Core));
 
             var newEffects = Raido.DropEngine.RollAugmentEffects(2, fromItem, effectIndex);
             foreach(var newEffect in newEffects)
