@@ -2,7 +2,6 @@
 using System.Linq;
 using BepInEx;
 using Common;
-using EpicLoot.Adventure.Feature;
 
 namespace EpicLoot.GatedItemType
 {
@@ -168,32 +167,7 @@ namespace EpicLoot.GatedItemType
 
         private static bool ItemNotAllowedYet(GatedItemTypeMode mode, string itemID, string itemName)
         {
-            if (mode == GatedItemTypeMode.PlayerMustKnowRecipe)
-            {
-                return Player.m_localPlayer != null && !Player.m_localPlayer.IsRecipeKnown(itemName);
-            }
-            else if (mode == GatedItemTypeMode.PlayerMustHaveCraftedItem)
-            {
-                return Player.m_localPlayer != null && !Player.m_localPlayer.m_knownMaterial.Contains(itemName);
-            }
-            else
-            {
-                if (!BossPerItem.ContainsKey(itemID))
-                {
-                    EpicLoot.LogWarning($"Item ({itemID}) was not registered in iteminfo.json with any particular boss");
-                    return false;
-                }
-
-                var bossKeyForItem = BossPerItem[itemID];
-                var prevBossKey = Bosses.GetPrevBossKey(bossKeyForItem);
-                //EpicLoot.Log($"Checking if item ({itemID}) needs gating (boss: {bossKeyForItem}, prev boss: {prevBossKey}");
-                switch (mode)
-                {
-                    case GatedItemTypeMode.BossKillUnlocksCurrentBiomeItems: return !ZoneSystem.instance.GetGlobalKey(bossKeyForItem);
-                    case GatedItemTypeMode.BossKillUnlocksNextBiomeItems: return !(string.IsNullOrEmpty(prevBossKey) || ZoneSystem.instance.GetGlobalKey(prevBossKey));
-                    default: return false;
-                }
-            }
+            return Player.m_localPlayer != null && !Player.m_localPlayer.m_knownMaterial.Contains(itemName);
         }
 
         public static string GetItemFromCategory(string itemCategory, GatedItemTypeMode mode, List<string> usedTypes = null)

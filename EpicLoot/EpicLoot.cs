@@ -9,7 +9,6 @@ using BepInEx;
 using BepInEx.Configuration;
 using Common;
 using EpicLoot.Abilities;
-using EpicLoot.Adventure;
 using EpicLoot.Crafting;
 using EpicLoot.CraftingV2;
 using EpicLoot.Data;
@@ -549,7 +548,6 @@ namespace EpicLoot
             LoadJsonFile<RecipesConfig>("recipes.json", RecipesHelper.Initialize, ConfigType.Synced);
             LoadJsonFile<EnchantingCostsConfig>("enchantcosts.json", EnchantCostsHelper.Initialize, ConfigType.Synced);
             LoadJsonFile<ItemNameConfig>("itemnames.json", MagicItemNames.Initialize, ConfigType.Synced);
-            LoadJsonFile<AdventureDataConfig>("adventuredata.json", AdventureDataManager.Initialize, ConfigType.Synced);
             LoadJsonFile<LegendaryItemConfig>("RaidoLegendaries.json", UniqueLegendaryHelper.Initialize, ConfigType.Synced);
             LoadJsonFile<AbilityConfig>("abilities.json", AbilityDefinitions.Initialize, ConfigType.Synced);
             LoadJsonFile<MaterialConversionsConfig>("materialconversions.json", MaterialConversions.Initialize, ConfigType.Synced);
@@ -718,7 +716,6 @@ namespace EpicLoot
             LoadItem(assetBundle, "LeatherBelt");
             LoadItem(assetBundle, "SilverRing");
             LoadItem(assetBundle, "GoldRubyRing");
-            LoadItem(assetBundle, "Andvaranaut", SetupAndvaranaut);
 
             LoadItem(assetBundle, "ForestToken");
             LoadItem(assetBundle, "IronBountyToken");
@@ -1006,51 +1003,6 @@ namespace EpicLoot
             }
 
             RecipesHelper.SetupRecipes();
-        }
-
-        private static void SetupAndvaranaut(ItemDrop prefab)
-        {
-            var andvaranaut = prefab.m_itemData;
-            var wishbone = ObjectDB.instance.GetItemPrefab("Wishbone").GetComponent<ItemDrop>().m_itemData;
-
-            // first, create custom status effect
-            var originalFinder = wishbone.m_shared.m_equipStatusEffect;
-            var wishboneFinder = ScriptableObject.CreateInstance<SE_CustomFinder>();
-
-            // Copy all values from finder
-            Common.Utils.CopyFields(originalFinder, wishboneFinder, typeof(SE_Finder));
-            wishboneFinder.name = "CustomWishboneFinder";
-
-            var andvaranautFinder = ScriptableObject.CreateInstance<SE_CustomFinder>();
-            Common.Utils.CopyFields(wishboneFinder, andvaranautFinder, typeof(SE_CustomFinder));
-            andvaranautFinder.name = "Andvaranaut";
-            andvaranautFinder.m_name = "$mod_epicloot_item_andvaranaut";
-            andvaranautFinder.m_icon = andvaranaut.GetIcon();
-            andvaranautFinder.m_tooltip = "$mod_epicloot_item_andvaranaut_tooltip";
-            andvaranautFinder.m_startMessage = "$mod_epicloot_item_andvaranaut_startmsg";
-
-            // Setup restrictions
-            andvaranautFinder.RequiredComponentTypes = new List<Type> { typeof(TreasureMapChest) };
-            wishboneFinder.DisallowedComponentTypes = new List<Type> { typeof(TreasureMapChest) };
-
-            // Add to list
-            ObjectDB.instance.m_StatusEffects.Remove(originalFinder);
-            ObjectDB.instance.m_StatusEffects.Add(andvaranautFinder);
-            ObjectDB.instance.m_StatusEffects.Add(wishboneFinder);
-
-            // Set new status effect
-            andvaranaut.m_shared.m_equipStatusEffect = andvaranautFinder;
-            wishbone.m_shared.m_equipStatusEffect = wishboneFinder;
-
-            // Setup magic item
-            var magicItem = new MagicItem
-            {
-                Rarity = ItemRarity.Epic,
-                TypeNameOverride = "$mod_epicloot_item_andvaranaut_type"
-            };
-            magicItem.Effects.Add(new MagicItemEffect(MagicEffectType.Andvaranaut));
-
-            prefab.m_itemData.SaveMagicItem(magicItem);
         }
 
         private static void SetupStatusEffects()

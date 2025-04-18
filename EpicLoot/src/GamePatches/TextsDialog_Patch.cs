@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using EpicLoot.Adventure;
 using HarmonyLib;
 using Raido;
 using TMPro;
@@ -78,64 +77,6 @@ namespace EpicLoot
             textsDialog.m_texts.Insert(EpicLoot.HasAuga ? 0 : 2, 
                 new TextsDialog.TextInfo(
                     Localization.instance.Localize($"{EpicLoot.GetMagicEffectPip(false)} $mod_epicloot_active_magic_effects"), 
-                    Localization.instance.Localize(t.ToString())));
-        }
-        
-        public static void AddTreasureAndBountiesPage(TextsDialog textsDialog, Player player)
-        {
-            var t = new StringBuilder();
-
-            var saveData = player.GetAdventureSaveData();
-
-            t.AppendLine("<color=orange><size=30>$mod_epicloot_merchant_treasuremaps</size></color>");
-            t.AppendLine();
-
-            var sortedTreasureMaps = saveData.TreasureMaps.Where(x => x.State == TreasureMapState.Purchased).OrderBy(x => GetBiomeOrder(x.Biome));
-            foreach (var treasureMap in sortedTreasureMaps)
-            {
-                t.AppendLine(Localization.instance.Localize($"$mod_epicloot_merchant_treasuremaps: <color={GetBiomeColor(treasureMap.Biome)}>$biome_{treasureMap.Biome.ToString().ToLower()} #{treasureMap.Interval + 1}</color>"));
-            }
-
-            t.AppendLine();
-            t.AppendLine();
-            t.AppendLine("<color=orange><size=30>$mod_epicloot_activebounties</size></color>");
-            t.AppendLine();
-
-            var sortedBounties = saveData.Bounties.OrderBy(x => x.State);
-            foreach (var bounty in sortedBounties)
-            {
-                if (bounty.State != BountyState.InProgress && bounty.State != BountyState.Complete)
-                {
-                    continue;
-                }
-
-                var targetName = AdventureDataManager.GetBountyName(bounty);
-                t.AppendLine($"<size=24>{targetName}</size>");
-                t.Append($"  <color=#c0c0c0ff>$mod_epicloot_activebounties_classification: <color=#d66660>{AdventureDataManager.GetMonsterName(bounty.Target.MonsterID)}</color>, ");
-                t.AppendLine($" $mod_epicloot_activebounties_biome: <color={GetBiomeColor(bounty.Biome)}>$biome_{bounty.Biome.ToString().ToLower()}</color></color>");
-
-                var status = "";
-                switch (bounty.State)
-                {
-                    case BountyState.InProgress:
-                        status = ("<color=#00f0ff>$mod_epicloot_bounties_tooltip_inprogress</color>");
-                        break;
-                    case BountyState.Complete:
-                        status = ("<color=#70f56c>$mod_epicloot_bounties_tooltip_vanquished</color>");
-                        break;
-                }
-
-                t.Append($"  <color=#c0c0c0ff>$mod_epicloot_bounties_tooltip_status {status}");
-
-                var iron = bounty.RewardIron;
-                var gold = bounty.RewardGold;
-                t.AppendLine($", $mod_epicloot_bounties_tooltip_rewards {(iron > 0 ? $"<color=white>{MerchantPanel.GetIronBountyTokenName()} x{iron}</color>" : "")}{(iron > 0 && gold > 0 ? ", " : "")}{(gold > 0 ? $"<color=#f5da53>{MerchantPanel.GetGoldBountyTokenName()} x{gold}</color>" : "")}</color>");
-                t.AppendLine();
-            }
-
-            textsDialog.m_texts.Insert(EpicLoot.HasAuga ? 2 : 4, 
-                new TextsDialog.TextInfo(
-                    Localization.instance.Localize($"{EpicLoot.GetMagicEffectPip(false)} $mod_epicloot_adventure_title"), 
                     Localization.instance.Localize(t.ToString())));
         }
         

@@ -4,8 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Common;
 using EpicLoot.Abilities;
-using EpicLoot.Adventure;
-using EpicLoot.Adventure.Feature;
 using EpicLoot.Crafting;
 using EpicLoot.GatedItemType;
 using EpicLoot.LegendarySystem;
@@ -92,76 +90,6 @@ namespace EpicLoot
                 LootRoller.CheatDisableGating = !LootRoller.CheatDisableGating;
                 args.Context.AddString($"> Disable gating for magic item drops: {LootRoller.CheatDisableGating}");
             }), true);
-            new Terminal.ConsoleCommand("testtreasuremap", "", (args =>
-            {
-                TestTreasureMap(args.Args);
-            }), true);
-            new Terminal.ConsoleCommand("testtm", "", (args =>
-            {
-                TestTreasureMap(args.Args);
-            }), true);
-            new Terminal.ConsoleCommand("resettreasuremap", "", (args =>
-            {
-                var player = Player.m_localPlayer;
-                var saveData = player.GetAdventureSaveData();
-                saveData.TreasureMaps.Clear();
-                saveData.NumberOfTreasureMapsOrBountiesStarted = 0;
-                ResetMinimap();
-            }));
-            new Terminal.ConsoleCommand("resettm", "", (args =>
-            {
-                var player = Player.m_localPlayer;
-                var saveData = player.GetAdventureSaveData();
-                saveData.TreasureMaps.Clear();
-                saveData.NumberOfTreasureMapsOrBountiesStarted = 0;
-                ResetMinimap();
-            }));
-            new Terminal.ConsoleCommand("debugtreasuremap", "", (args =>
-            {
-                MinimapController.DebugMode = !MinimapController.DebugMode;
-                args.Context.AddString($"> Treasure Map Debug Mode: {MinimapController.DebugMode}");
-            }));
-            new Terminal.ConsoleCommand("debugtm", "", (args =>
-            {
-                MinimapController.DebugMode = !MinimapController.DebugMode;
-                args.Context.AddString($"> Treasure Map Debug Mode: {MinimapController.DebugMode}");
-            }));
-            new Terminal.ConsoleCommand("resetbounties", "", (args =>
-            {
-                var player = Player.m_localPlayer;
-                var saveData = player.GetAdventureSaveData();
-                saveData.Bounties.Clear();
-                ResetMinimap();
-            }));
-            new Terminal.ConsoleCommand("testbountynames", "", (args =>
-            {
-                var random = new Random();
-                var count = (args.Length >= 2) ? int.Parse(args[1]) : 10;
-                for (var i = 0; i < count; ++i)
-                {
-                    var name = BountiesAdventureFeature.GenerateTargetName(random);
-                    args.Context.AddString(name);
-                }
-            }));
-            new Terminal.ConsoleCommand("resetadventure", "", (args =>
-            {
-                var player = Player.m_localPlayer;
-                var adventureComponent = player.GetComponent<AdventureComponent>();
-                adventureComponent.SaveData = new AdventureSaveDataList();
-                ResetMinimap();
-            }));
-            new Terminal.ConsoleCommand("bounties", "", (args =>
-            {
-                var interval = (args.Length >= 2) ? int.Parse(args[1]) : AdventureDataManager.Bounties.GetCurrentInterval();
-                var availableBounties = AdventureDataManager.Bounties.GetAvailableBounties(interval, false);
-                BountiesAdventureFeature.PrintBounties($"Bounties for Interval {interval}:", availableBounties);
-            }));
-            new Terminal.ConsoleCommand("playerbounties", "", (args =>
-            {
-                var player = Player.m_localPlayer;
-                var availableBounties = player.GetAdventureSaveData().Bounties;
-                BountiesAdventureFeature.PrintBounties($"Player Bounties:", availableBounties);
-            }));
             new Terminal.ConsoleCommand("gotomerchant", "", (args =>
             {
                 var player = Player.m_localPlayer;
@@ -423,70 +351,6 @@ namespace EpicLoot
                     EpicLoot.Log($"{item.name}: {rounded(item.total / (1.0f * divider))}% Count per chest {rounded(item.count / (1.0f * tries))} M {item.magic} R {item.rare} E {item.epic} Norm {item.normal} Ex {item.exceptional} El {item.elite}");
                 }
             }
-        }
-
-        private static void ResetMinimap()
-        {
-            var pinJob = new PinJob
-            {
-                Task = MinimapPinQueueTask.RefreshAll
-            };
-            MinimapController.AddPinJobToQueue(pinJob);
-        }
-
-        private static void TestTreasureMap(string[] args)
-        {
-            var player = Player.m_localPlayer;
-
-            var count = 1;
-            if (args.Length >= 2)
-            {
-                int.TryParse(args[1], out count);
-            }
-
-            var biome = Heightmap.Biome.None;
-            if (args.Length >= 3)
-            {
-                Enum.TryParse(args[2], out biome);
-            }
-
-            var overrideTreasureMapCount = -1;
-            if (args.Length >= 4)
-            {
-                int.TryParse(args[3], out overrideTreasureMapCount);
-            }
-
-            AdventureDataManager.CheatNumberOfBounties = overrideTreasureMapCount;
-            var saveData = player.GetAdventureSaveData();
-            player.StartCoroutine(TestTreasureMapCoroutine(saveData, biome, player, count));
-        }
-
-        private static IEnumerator TestTreasureMapCoroutine(AdventureSaveData saveData, Heightmap.Biome biome, Player player, int count)
-        {
-            var biomes = new[] { Heightmap.Biome.Meadows, Heightmap.Biome.BlackForest, Heightmap.Biome.Swamp, Heightmap.Biome.Mountain, Heightmap.Biome.Plains };
-
-            saveData.DebugMode = true;
-            var startInterval = saveData.TreasureMaps.Count == 0 ? -1 : saveData.TreasureMaps.Min(x => x.Interval) - 1;
-            for (var i = 0; i < count; ++i)
-            {
-                saveData.IntervalOverride = startInterval - (i + 1);
-                var selectedBiome = biome == Heightmap.Biome.None ? biomes[UnityEngine.Random.Range(0, biomes.Length)] : biome;
-                yield return AdventureDataManager.TreasureMaps.SpawnTreasureChest(selectedBiome, player, 0, OnTreasureChestSpawnComplete);
-            }
-            saveData.DebugMode = false;
-            AdventureDataManager.CheatNumberOfBounties = -1;
-        }
-
-        private static void OnTreasureChestSpawnComplete(int price, bool success, Vector3 spawnPoint)
-        {
-            var output = "> Failed to spawn treasure map chest";
-            if (success)
-            {
-                output = $"> Spawning Treasure Map Chest at <{spawnPoint.x:0.#}, {spawnPoint.z:0.#}> (height:{spawnPoint.y:0.#})";
-            }
-
-            Console.instance.AddString(output);
-            EpicLoot.LogWarning(output);
         }
 
         private static void ToggleAlwaysDrop(Terminal context)
