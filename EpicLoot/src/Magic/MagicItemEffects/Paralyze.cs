@@ -62,7 +62,7 @@ namespace EpicLoot.MagicItemEffects
                 if (Attack_Patch.ActiveAttack != null)
                 {
                     totalParalyzeTime = MagicEffectsHelper.GetTotalActiveMagicEffectValueForWeapon(
-                        player, Attack_Patch.ActiveAttack.m_weapon, MagicEffectType.Paralyze);
+                        player, Attack_Patch.ActiveAttack.m_weapon, MagicEffectType.Paralyze, 1.0f, true);
                 }
 
                 seParalyze.Setup(totalParalyzeTime);

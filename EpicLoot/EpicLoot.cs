@@ -180,7 +180,7 @@ namespace EpicLoot
             { "Indigo", "#709bba" },
             { "Purple", "#d078ff" },
             { "Pink",   "#ff63d6" },
-            { "Gray",   "#dbcadb" },
+            { "Gray",   "#dbcadb" }
         };
 
         public static readonly Assets Assets = new Assets();

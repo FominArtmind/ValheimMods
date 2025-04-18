@@ -10,7 +10,7 @@ namespace EpicLoot.MagicItemEffects
             if (__instance.m_character is Player player)
             {
                 float modifier = MagicEffectsHelper.GetTotalActiveMagicEffectValueForWeapon(
-                    player, __instance.m_weapon, MagicEffectType.ModifyAttackHealthUse, 0.01f);
+                    player, __instance.m_weapon, MagicEffectType.ModifyAttackHealthUse, 0.01f, true);
                 __instance.m_attackHealthPercentage *= 1.0f - modifier;
             }
         }

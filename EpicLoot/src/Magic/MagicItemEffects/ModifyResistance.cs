@@ -54,7 +54,7 @@ namespace EpicLoot.MagicItemEffects
                 {
                     player.GetTotalActiveMagicEffectValue(eff1, 0.01f),
                     player.GetTotalActiveMagicEffectValue(eff2, 0.01f)
-                });
+                }, eff1);
 
                 return 1.0f - totalSum;
             }
