@@ -939,6 +939,14 @@ namespace EpicLoot.CraftingV2
                 if (!float.IsNaN(featureValues.Item1))
                     bonusItemChance = (int)featureValues.Item1;
 
+                // TO DO: not only for Torch
+                var prefabName = Raido.Raido.GetPrefabName(item);
+                if (prefabName == "Torch")
+                {
+                    var basicItem = ObjectDB.instance.GetItemPrefab(prefabName).GetComponent<ItemDrop>().m_itemData;
+                    item.m_durability = basicItem.m_durability;
+                }
+
                 if (Random.Range(0, 99) < bonusItemChance)
                 {
                     EnchantingTableUI.instance.PlayEnchantBonusSFX();
