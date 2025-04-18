@@ -37,6 +37,7 @@ namespace EpicLoot_UnityLib
 
         private ToggleGroup _toggleGroup;
         private string _itemClass;
+        private Dictionary<string, string> _itemLastSelectedClass = new Dictionary<string, string>();
         private MagicRarityUnity _rarity;
         private GameObject _successDialog;
 
@@ -65,23 +66,7 @@ namespace EpicLoot_UnityLib
                 var item = selectedItem?.Item1?.GetItem();
                 if (item != null)
                 {
-                    var itemClasses = GetAvailableItemClasses(item);
-                    if (itemClasses.Count == 0)
-                    {
-                        SetItemClass("Forgotten");
-                    }
-                    else
-                    {
-                        var index = itemClasses.FindIndex((value) => value == _itemClass);
-                        if (index == -1)
-                        {
-                            SetItemClass(itemClasses[0]);
-                        }
-                        else
-                        {
-                            SetItemClass(itemClasses[(index + 1) % itemClasses.Count()]);
-                        }
-                    }
+                    ChangeItemClass(item);
 
                     ItemRarityOrClassChanged();
                 }
@@ -91,7 +76,9 @@ namespace EpicLoot_UnityLib
         [UsedImplicitly]
         public void OnEnable()
         {
-            SetItemClass("Forgotten");
+            var selectedItem = AvailableItems.GetSingleSelectedItem<InventoryItemListElement>();
+            var item = selectedItem?.Item1?.GetItem();
+            RestoreItemClass(item);
             _rarity = MagicRarityUnity.Magic;
             ItemRarityOrClassChanged();
             RarityButtons[0].isOn = true;
@@ -147,7 +134,8 @@ namespace EpicLoot_UnityLib
         public void ItemRarityOrClassChanged()
         {
             var selectedItem = AvailableItems.GetSingleSelectedItem<InventoryItemListElement>();
-            if (selectedItem?.Item1.GetItem() == null)
+            var item = selectedItem?.Item1?.GetItem();
+            if (item == null)
             {
                 MainButton.interactable = false;
                 EnchantInfo.text = "";
@@ -156,21 +144,7 @@ namespace EpicLoot_UnityLib
                 return;
             }
 
-            var item = selectedItem.Item1.GetItem();
-
-            var itemClasses = GetAvailableItemClasses(item);
-            if (itemClasses.Count == 0)
-            {
-                SetItemClass("Forgotten");
-            }
-            else
-            {
-                var index = itemClasses.FindIndex((value) => value == _itemClass);
-                if (index == -1)
-                {
-                    SetItemClass(itemClasses[0]);
-                }
-            }
+            RestoreItemClass(item);
 
             var info = GetEnchantInfo(item, _itemClass, _rarity);
 
@@ -296,12 +270,72 @@ namespace EpicLoot_UnityLib
             AvailableItems.DeselectAll();
         }
 
-        public void SetItemClass(string itemClass)
+        public void ChangeItemClass(ItemDrop.ItemData item)
         {
-            _itemClass = itemClass;
+            var itemClasses = GetAvailableItemClasses(item);
+            if (itemClasses.Count == 0)
+            {
+                _itemClass = "Forgotten";
+            }
+            else
+            {
+                var index = itemClasses.FindIndex((value) => value == _itemClass);
+                if (index == -1)
+                {
+                    _itemClass = itemClasses[0];
+                    _itemLastSelectedClass[item.m_shared.m_name] = _itemClass;
+                }
+                else
+                {
+                    _itemClass = itemClasses[(index + 1) % itemClasses.Count()];
+                    _itemLastSelectedClass[item.m_shared.m_name] = _itemClass;
+                }
+            }
 
             var name = GetItemClassName(_itemClass);
-            if(name != null)
+            if (name != null)
+            {
+                ClassSelectionText.text = name;
+            }
+        }
+
+        public void RestoreItemClass(ItemDrop.ItemData item)
+        {
+            if (item == null)
+            {
+                _itemClass = "Forgotten";
+            }
+            else
+            {
+                var itemClasses = GetAvailableItemClasses(item);
+                if (itemClasses.Count == 0)
+                {
+                    _itemClass = "Forgotten";
+                }
+                else
+                {
+                    if (_itemLastSelectedClass.TryGetValue(item.m_shared.m_name, out string lastClass))
+                    {
+                        if (itemClasses.Contains(lastClass))
+                        {
+                            _itemClass = lastClass;
+                        }
+                        else
+                        {
+                            _itemClass = itemClasses[0];
+                            _itemLastSelectedClass[item.m_shared.m_name] = _itemClass;
+                        }
+                    }
+                    else
+                    {
+                        _itemClass = itemClasses[0];
+                        _itemLastSelectedClass[item.m_shared.m_name] = _itemClass;
+                    }
+                }
+            }
+
+            var name = GetItemClassName(_itemClass);
+            if (name != null)
             {
                 ClassSelectionText.text = name;
             }
