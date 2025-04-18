@@ -34,7 +34,7 @@ namespace EpicLoot
                             var magicItemComponent = itemData.Data().GetOrCreate<MagicItemComponent>();
                             magicItemComponent.SetMagicItem(magicItem);
 
-                            float durability = itemData.GetMaxDurability() * 2.7f;
+                            float durability = itemData.GetMaxDurability(); // * 2.7f;
                             itemData.m_shared.m_maxDurability = durability;
                             itemData.m_durability = durability;
 
